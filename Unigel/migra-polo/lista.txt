@@ -1,0 +1,592 @@
+ O volume na unidade C ‚ Windows
+ O N£mero de S‚rie do Volume ‚ F63B-54E7
+
+ Pasta de C:\damgra\unigel\migra-polo\orig
+
+11/03/2017  18:28    <DIR>          .
+11/03/2017  18:28    <DIR>          ..
+11/03/2017  18:18    <DIR>          adapters
+11/03/2017  18:23    <DIR>          aud
+11/03/2017  18:23    <DIR>          ccp
+11/03/2017  18:23    <DIR>          cdp
+11/03/2017  18:23    <DIR>          cep
+11/03/2017  18:23    <DIR>          cnp
+11/03/2017  18:24    <DIR>          cpp
+11/03/2017  18:24    <DIR>          cqp
+11/03/2017  18:24    <DIR>          crp
+11/03/2017  18:24    <DIR>          database
+11/03/2017  18:24    <DIR>          dibo
+11/03/2017  18:24    <DIR>          eqp
+11/03/2017  18:24    <DIR>          ftp
+11/03/2017  18:24    <DIR>          inp
+11/03/2017  18:28                 0 lista.txt
+11/03/2017  18:24    <DIR>          mip
+11/03/2017  18:24    <DIR>          ofp
+11/03/2017  18:24    <DIR>          pdp
+11/03/2017  18:24    <DIR>          polo
+11/03/2017  18:24    <DIR>          prgfin
+11/03/2017  18:24    <DIR>          prghur
+11/03/2017  18:24    <DIR>          receiver
+11/03/2017  18:24    <DIR>          rep
+11/03/2017  18:25    <DIR>          sfc
+11/03/2017  18:25    <DIR>          spumapac
+11/03/2017  18:25    <DIR>          ungws
+11/03/2017  18:25    <DIR>          upc
+11/03/2017  18:25    <DIR>          wsp
+               1 arquivo(s)              0 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\adapters
+
+11/03/2017  18:18    <DIR>          .
+11/03/2017  18:18    <DIR>          ..
+11/03/2017  18:23    <DIR>          upc
+               0 arquivo(s)              0 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\adapters\upc
+
+11/03/2017  18:23    <DIR>          .
+11/03/2017  18:23    <DIR>          ..
+13/01/2017  11:32            29.221 upc-axsep027-u03.p
+               1 arquivo(s)         29.221 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\aud
+
+11/03/2017  18:23    <DIR>          .
+11/03/2017  18:23    <DIR>          ..
+10/09/2014  23:09            14.739 esaud0002rp.p
+10/09/2014  23:09            22.705 esaud0003rp.p
+10/09/2014  23:09            23.148 esaud0006rp.p
+10/09/2014  23:09            26.001 esaud0009rp.p
+               4 arquivo(s)         86.593 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\ccp
+
+11/03/2017  18:23    <DIR>          .
+11/03/2017  18:23    <DIR>          ..
+04/10/2014  20:45            31.655 escc0011.w
+04/10/2014  20:47            21.599 escc0011rp.p
+11/09/2014  11:41           111.262 escc0014.w
+10/09/2014  23:24            18.710 escc0014rp.p
+07/09/2014  17:58            32.387 escc0026.w
+07/09/2014  17:59            38.557 escc0026rp.p
+01/04/2016  09:56            93.265 escc0027.w
+10/09/2014  23:24            19.831 escc0027rp.p
+               8 arquivo(s)        367.266 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\cdp
+
+11/03/2017  18:23    <DIR>          .
+11/03/2017  18:23    <DIR>          ..
+10/09/2014  23:24            12.316 escd0005rp.p
+10/09/2014  23:24            13.112 escd0006rp.p
+28/05/2015  12:26             8.194 escd0006rpa.p
+19/08/2014  00:03             2.781 escd0006rpb.p
+09/10/2014  22:28            51.506 escd0010.w
+19/06/2015  09:56            17.918 escd0027rp.p
+11/03/2017  18:23    <DIR>          upc
+               6 arquivo(s)        105.827 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\cdp\upc
+
+11/03/2017  18:23    <DIR>          .
+11/03/2017  18:23    <DIR>          ..
+11/08/2014  02:01             2.757 upc-cd0922-u01a.p
+               1 arquivo(s)          2.757 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\cep
+
+11/03/2017  18:23    <DIR>          .
+11/03/2017  18:23    <DIR>          ..
+11/09/2014  12:14            49.272 esce0009.w
+10/09/2014  23:24            34.499 esce0009rp.p
+11/09/2014  12:15            50.827 esce0010.w
+10/09/2014  23:24            37.920 esce0010rp.p
+20/01/2015  14:21            47.913 esce0011rp.p
+11/09/2014  12:01            52.679 esce0013.w
+10/09/2014  23:24            27.106 esce0013rp.p
+25/08/2015  10:29            63.327 esce0014.w
+25/08/2015  10:31            64.242 esce0015.w
+03/09/2014  20:32            31.621 esce0016.w
+10/09/2014  23:24            45.184 esce0016rp.p
+11/09/2014  12:15            53.707 esce0023.w
+10/09/2014  23:24            23.696 esce0023rp.p
+11/09/2014  13:31            49.165 esce0025.w
+11/09/2014  13:50            52.185 esce0040.w
+27/10/2014  15:42            48.146 esce0042.w
+24/05/2016  16:37            21.396 esce0043-b01.w
+15/01/2017  09:54            32.943 esce0105rp.p
+11/03/2017  18:23    <DIR>          upc
+              18 arquivo(s)        785.828 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\cep\upc
+
+11/03/2017  18:23    <DIR>          .
+11/03/2017  18:23    <DIR>          ..
+16/06/2016  16:52            13.908 upc-ce0919rp.p
+16/02/2015  14:51             8.104 upc-ceapi001-u03.p
+               2 arquivo(s)         22.012 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\cnp
+
+11/03/2017  18:23    <DIR>          .
+11/03/2017  18:23    <DIR>          ..
+05/10/2014  01:16            32.387 escn0003.w
+31/08/2015  16:13            42.336 escn0003rp.p
+               2 arquivo(s)         74.723 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\cpp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/11/2014  14:51            49.810 escp0007.w
+14/08/2015  11:08            52.907 escp0030.w
+14/08/2015  11:08            82.312 escp0030rp.p
+10/09/2014  23:24            40.338 escp0031rp.p
+10/09/2014  23:24            37.395 escp0032rp.p
+15/11/2011  19:30            22.929 escp0036-b01.w
+22/12/2016  10:52            60.664 escp0039.w
+22/12/2016  10:09            39.084 escp0039rp.p
+11/09/2014  12:12            49.259 escp0051.w
+11/09/2014  12:13            49.535 escp0056.w
+10/09/2014  23:24            31.558 escp0056rp.p
+11/09/2014  12:13            48.367 escp0057.w
+10/09/2014  23:24            22.331 escp0057rp.p
+11/09/2014  12:13            69.616 escp0059.w
+11/09/2014  12:14            50.427 escp0063.w
+10/09/2014  23:24           111.912 escp0063rp.p
+11/09/2014  12:14            96.364 escp0064.w
+26/11/2014  16:21            56.121 escp0602-1.p
+03/09/2014  21:21           170.397 escp0602.w
+11/03/2017  18:24    <DIR>          upc
+              19 arquivo(s)      1.141.326 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\cpp\upc
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+03/12/2014  08:19             9.382 upc-cp0301d1.p
+03/09/2014  21:32             5.221 upc-cp0313.p
+               2 arquivo(s)         14.603 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\cqp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+10/09/2014  23:24            41.430 escq0002rp.p
+11/09/2014  13:33            49.215 escq0006.w
+10/09/2014  23:24            33.729 escq0006rp.p
+11/09/2014  13:37            45.971 escq0010.w
+11/09/2014  13:39            45.784 escq0014.w
+11/09/2014  13:39            50.746 escq0017.w
+10/09/2014  23:24            23.603 escq0017rp.p
+10/09/2014  23:24            66.739 escq0019rp.p
+04/09/2014  01:13            68.754 escq0022.w
+21/12/2011  03:17            27.827 escq0050-3-v01.w
+19/02/2015  14:08            64.696 escq0051.w
+02/08/2015  01:26           169.785 escq0051rp.p
+04/09/2014  01:17            48.502 escq0052.w
+11/09/2014  13:40            53.418 escq0055.w
+10/09/2014  23:24            24.032 escq0055rp.p
+19/02/2015  13:05            64.214 escq0056.w
+19/02/2015  13:05           147.966 escq0056rp.p
+10/12/2014  14:15           166.337 escq051rp.p
+11/03/2017  18:24    <DIR>          upc
+              18 arquivo(s)      1.192.748 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\cqp\upc
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/11/2016  06:02             8.062 cq0210e-u01.p
+16/01/2015  13:50             7.462 polcq0210upc.p
+26/11/2014  17:28             7.460 upc-cq0210.p
+02/01/2012  15:20             1.552 upc-cq0210d-a.p
+               4 arquivo(s)         24.536 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\crp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+07/10/2014  10:47            49.932 escr007.w
+07/10/2014  10:49            55.977 escr007rp.p
+               2 arquivo(s)        105.909 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\database
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/03/2017  18:24    <DIR>          twp
+               0 arquivo(s)              0 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\database\twp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+14/07/2016  09:28             2.446 tw-funcionario.p
+               1 arquivo(s)          2.446 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\dibo
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/03/2017  18:24    <DIR>          upc
+               0 arquivo(s)              0 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\dibo\upc
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+04/09/2014  01:41             4.530 esbodi317pr-u00.p
+30/08/2016  12:26            14.390 esbodi317pr-u01.p
+26/08/2014  16:27             5.804 ifbodi159can.p
+09/12/2014  16:23            10.508 ifbodi317ef.p
+07/10/2014  18:41             5.725 upc-bodi159.p
+               5 arquivo(s)         40.957 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\eqp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/03/2017  18:24    <DIR>          upc
+               0 arquivo(s)              0 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\eqp\upc
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+28/02/2017  10:47             4.311 upc-eqapi300-u01.p
+               1 arquivo(s)          4.311 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\ftp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+24/11/2014  09:07            55.616 esft0006.w
+20/06/2016  15:02           158.818 esft0011rp.p
+10/11/2016  13:17           159.018 esft0012rp.p
+25/08/2015  10:31            48.650 esft0014.w
+25/08/2015  10:32            42.988 esft0014rp.p
+04/09/2014  02:09            51.952 esft0017.w
+04/09/2014  02:10            80.606 esft0018.w
+11/09/2014  13:43            50.685 esft0025.w
+10/09/2014  23:24            35.336 esft0025rp.p
+10/09/2014  23:24            19.413 esft0028rp.p
+11/09/2014  13:43            50.404 esft0030.w
+04/09/2014  02:17            52.998 esft0031.w
+04/09/2014  02:18            72.680 esft0032.w
+25/08/2015  10:32            32.457 esft0034.w
+25/08/2015  10:35            38.419 esft0034rp.p
+10/12/2014  14:15            23.536 esft0036rp.p
+10/12/2014  14:15            36.278 esft0037.w
+04/09/2014  02:22            61.321 esft0038.w
+10/09/2014  23:24            19.302 esft0038rp.p
+16/12/2015  10:26            29.587 esft0039rp.p
+10/06/2016  11:29           184.282 esft0056rpa.p
+06/01/2015  17:03           100.589 esft4003NFT.w
+02/03/2017  16:28            80.508 ft0518f.p
+05/09/2016  12:04            48.762 ft0518f1.p
+              24 arquivo(s)      1.534.205 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\inp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/09/2014  13:46            52.251 esin0005.w
+               1 arquivo(s)         52.251 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\mip
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+14/11/2014  12:59            49.502 esmi0007.w
+10/09/2014  23:24            22.845 esmi0007rp.p
+02/09/2016  15:13               796 esmiapi0001g.i
+               3 arquivo(s)         73.143 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\ofp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/03/2017  18:24    <DIR>          upc
+               0 arquivo(s)              0 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\ofp\upc
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+03/11/2011  14:49             2.091 upc-of0717-1.p
+03/11/2011  14:51             2.098 upc-of0721-1.p
+               2 arquivo(s)          4.189 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\pdp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+26/11/2015  10:37            70.339 espd0008rp.p
+11/09/2014  13:52            46.879 espd0014.w
+11/09/2014  00:37            44.781 espd0014rp.p
+09/09/2014  09:50            55.156 espd0018.w
+11/09/2014  18:22            56.938 espd0020.w
+23/01/2017  09:29            83.514 espd0020rp.p
+18/02/2015  16:05            83.824 espd0021.w
+04/05/2016  18:18           102.556 espd0022.w
+09/06/2015  20:09            86.350 espd0023.w
+06/07/2016  08:42           118.220 espd0025.w
+28/07/2015  12:09            34.353 espd0034.w
+25/07/2015  09:33            59.351 espd0034rp.p
+09/09/2014  08:59            12.820 espd0034var.i
+11/11/2014  15:12            33.967 espd0039.w
+21/12/2016  18:40            17.063 espd0043rp.p
+04/05/2016  17:20           158.169 espd0061.w
+11/09/2014  13:55            48.807 espd0062.w
+27/10/2016  18:00           122.153 espd0063.w
+15/09/2016  18:32           124.649 espd0065.w
+13/02/2017  13:45           129.604 espd0067rp.p
+11/03/2017  18:24    <DIR>          upc
+              20 arquivo(s)      1.489.493 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\pdp\upc
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+12/01/2017  14:10             9.305 upc-pd4000cpy.p
+               1 arquivo(s)          9.305 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\polo
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/03/2017  18:24    <DIR>          sfcdb
+               0 arquivo(s)              0 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\polo\sfcdb
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/03/2017  18:24    <DIR>          twp
+               0 arquivo(s)              0 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\polo\sfcdb\twp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/04/2014  18:26             6.444 wri-polo_off_ord_prod.p
+               1 arquivo(s)          6.444 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prgfin
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/03/2017  18:24    <DIR>          acr
+11/03/2017  18:24    <DIR>          fas
+               0 arquivo(s)              0 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prgfin\acr
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+13/11/2014  18:56            50.093 esacr0007.w
+14/11/2014  09:07            55.992 esacr0007rp.p
+               2 arquivo(s)        106.085 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prgfin\fas
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+19/12/2016  15:44           111.049 esfas0007.w
+               1 arquivo(s)        111.049 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prghur
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+11/03/2017  18:24    <DIR>          atp
+11/03/2017  18:24    <DIR>          bsp
+11/03/2017  18:24    <DIR>          dsp
+11/03/2017  18:24    <DIR>          esp
+11/03/2017  18:24    <DIR>          fbp
+11/03/2017  18:24    <DIR>          fpp
+11/03/2017  18:24    <DIR>          pep
+               0 arquivo(s)              0 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prghur\atp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+07/04/2015  08:25            26.551 esat0005rp.p
+07/04/2015  08:23            23.057 esat0006rp.p
+07/04/2015  01:38            33.003 esat0007rp.p
+22/06/2015  00:59            46.717 esat0008rp.p
+               4 arquivo(s)        129.328 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prghur\bsp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+26/08/2013  16:08            62.414 esbs0007.w
+26/11/2014  08:09           288.107 esbs0007a.w
+19/08/2015  16:33            83.240 esbs0009.w
+22/07/2015  11:29           305.204 esbs0011.w
+21/07/2015  00:36            50.741 esbs0012.w
+04/09/2015  16:16            82.823 esbs0013.w
+               6 arquivo(s)        872.529 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prghur\dsp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+08/02/2015  23:19            69.609 esds106rp.p
+               1 arquivo(s)         69.609 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prghur\esp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+16/12/2014  17:52            16.194 po0004rp.p
+17/12/2014  09:04            11.218 po0034rp.p
+02/06/2013  23:05            35.304 Po021.w
+               3 arquivo(s)         62.716 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prghur\fbp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+24/11/2016  11:08             3.453 fb000292.p
+24/11/2016  11:08             3.455 fb000293.p
+24/11/2016  11:09             3.455 fb000294.p
+24/11/2016  11:10             3.455 fb000295.p
+24/11/2016  11:09             3.455 fb000297.p
+19/11/2015  08:50             4.209 fb000500.p
+25/09/2015  11:45             4.199 fb000501.p
+               7 arquivo(s)         25.681 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prghur\fpp
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+25/04/2016  10:20            27.867 esfp0007rp.p
+11/06/2015  19:05            23.324 esfp0016rp.p
+16/02/2017  17:11            18.057 rh002027.p
+11/03/2017  18:24    <DIR>          upc
+               3 arquivo(s)         69.248 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prghur\fpp\upc
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+05/07/2016  10:37            11.340 upc-fp0903-u01.p
+26/11/2014  08:29            15.124 upc-fp1500-u02.p
+               2 arquivo(s)         26.464 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prghur\pep
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+19/01/2017  14:22            43.907 espe0013.w
+11/03/2017  18:24    <DIR>          upc
+               1 arquivo(s)         43.907 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\prghur\pep\upc
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+17/02/2017  11:03            51.432 upc-pe2200-U01.p
+               1 arquivo(s)         51.432 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\receiver
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+22/10/2013  14:18             7.400 paramdfe.ini
+               1 arquivo(s)          7.400 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\rep
+
+11/03/2017  18:24    <DIR>          .
+11/03/2017  18:24    <DIR>          ..
+16/10/2014  00:16            26.972 esre0010.w
+03/03/2017  11:35            30.713 esre0190.w
+23/10/2014  13:48            30.617 esre0192.w
+14/01/2015  11:09            58.576 esre0193.w
+               4 arquivo(s)        146.878 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\sfc
+
+11/03/2017  18:25    <DIR>          .
+11/03/2017  18:25    <DIR>          ..
+16/03/2015  10:07           251.366 essf0001.w
+18/02/2015  10:53           267.226 essf0002.w
+05/09/2014  03:08           123.061 essf0002a.w
+04/09/2014  23:48            14.794 essf0002d-a1.w
+06/07/2016  08:39           252.062 essf0003v02.w
+05/09/2014  02:36           120.497 essf0004.w
+05/09/2014  02:37           150.207 essf0009a.w
+05/09/2014  02:38           115.014 essf0009b.w
+04/09/2014  15:45           187.642 essf0011B.W
+04/09/2014  15:50           124.909 essf0011c.w
+04/09/2014  15:55            50.724 essf0011f.p
+04/09/2014  15:58            21.108 essf0011j.p
+15/12/2016  09:13           166.079 essf0013b01.w
+23/02/2015  09:01            78.873 essf0021.w
+14/12/2016  10:37           223.242 essf0022.w
+23/02/2015  08:59           212.781 essf0022peso.w
+07/10/2014  01:08            69.378 essf0025rp.p
+08/12/2016  14:57           228.145 essf0303.w
+04/09/2014  16:09           131.765 essf0903.w
+04/09/2014  16:10           110.697 essf0903a.w
+04/09/2014  16:14           182.035 essf0903c.w
+04/09/2014  16:17            72.230 essf0903q01.w
+04/09/2014  16:18           217.304 essf0903v01.w
+04/09/2014  16:20           236.543 essf0903v02.w
+31/01/2014  09:45           221.419 polsf022.w
+11/11/2012  15:38           217.548 polsf022peso.w
+              26 arquivo(s)      4.046.649 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\spumapac
+
+11/03/2017  18:25    <DIR>          .
+11/03/2017  18:25    <DIR>          ..
+02/10/2016  00:59            26.913 escd0011.p
+24/11/2016  10:17            27.842 escd0011rp.p
+               2 arquivo(s)         54.755 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\ungws
+
+11/03/2017  18:25    <DIR>          .
+11/03/2017  18:25    <DIR>          ..
+11/12/2016  23:19            16.000 wscrm0100.p
+11/12/2016  23:20            52.643 wscrm0100a.p
+02/09/2016  16:23             5.623 wscrm0100e.i
+10/08/2016  10:40             1.458 wscrm0100f.i
+11/12/2016  23:23            50.098 wscrm0105a.p
+13/05/2016  18:29            28.198 zoomInfProdtotvs12.p
+               6 arquivo(s)        154.020 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\upc
+
+11/03/2017  18:25    <DIR>          .
+11/03/2017  18:25    <DIR>          ..
+22/02/2017  18:45           226.291 ifbodi135.p
+28/11/2016  10:37            30.685 ifbodi135cancel.p
+04/08/2016  15:41            15.354 ifbodi154.p
+07/10/2014  18:39             9.750 ifbodi154can.p
+13/12/2016  12:05            17.885 ifbodi159.p
+13/10/2014  14:52             5.809 ifbodi159can.p
+22/08/2016  15:07           115.069 ifbodi159com.p
+14/09/2016  22:26            12.372 ifbodi317ef.p
+04/01/2017  14:01             8.731 ifeq0506b-u01.p
+15/09/2015  20:50            63.617 pdu4000-u01.p
+              10 arquivo(s)        505.563 bytes
+
+ Pasta de C:\damgra\unigel\migra-polo\orig\wsp
+
+11/03/2017  18:25    <DIR>          .
+11/03/2017  18:25    <DIR>          ..
+02/04/2015  15:37            56.400 WS002A.p
+04/02/2015  14:00             4.086 WS002E.i
+18/07/2014  15:04             1.938 WS002F.i
+               3 arquivo(s)         62.424 bytes
+
+     Total de Arquivos na Lista:
+             230 arquivo(s)     13.715.830 bytes
+             152 pasta(s)   864.903.946.240 bytes dispon¡veis
