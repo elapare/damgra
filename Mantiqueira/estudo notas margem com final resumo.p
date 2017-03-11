@@ -52,6 +52,7 @@ DEF TEMP-TABLE tt-param NO-UNDO
     FIELD l-estado              AS LOG
     FIELD l-cidade              AS LOG
     FIELD l-documento           AS LOG  /* Fim - Folder Par */
+    FIELD l-fat-dupl           AS LOG
     FIELD l-gera-duplicata      AS LOG
     field l-medio               as log.
 
@@ -125,7 +126,8 @@ DEFINE TEMP-TABLE tt-notas
                no-ab-reppri /* l-representante   */
                estado       /* l-estado          */
                cidade       /* l-cidade          */
-                            /* l-documento       */
+               fat-dup      /* l-fat-dup         */
+                  /* l-documento       */
             
          .
             
@@ -179,6 +181,9 @@ DEF VAR v-impostos-dev              as dec format "->>>,>>>,>>9.99" NO-UNDO INIT
 DEF VAR v-receita-bruta              as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
 DEF VAR v-receita-liquida            as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
 DEF VAR v-margem-bruta               as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
+DEF VAR v-margem-liquida             as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
+DEF VAR v-perc-margem-bruta          as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
+DEF VAR v-perc-margem-liquida        as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
 
 
 DEFINE VARIABLE dt-atu AS DATE        NO-UNDO.
@@ -226,7 +231,8 @@ tt-param.tip-natoper = 3
     tt-param.l-representante       = no
     tt-param.l-estado              = no
     tt-param.l-cidade              = no
-    tt-param.l-documento           = no .
+    tt-param.l-documento           = no
+    tt-param.l-fat-dupl            = yes .
 define temp-table tt-custo
     field it-codigo        like movto-estoq.it-codigo
     field cod-estabel      like movto-estoq.cod-estabel
@@ -442,7 +448,7 @@ for each tt-despesas.
     find first tt-vendas where
         tt-vendas.cod-estabel = tt-despesas.cod-estabel no-error.
 
-    if tt-despesas.tipo = 123 then do:
+    if tt-despesas.tipo = 1 then do:
         tt-despesas.vl-unit = (if not avail tt-vendas or  tt-vendas.vl-saidas-frete = 0 then 0 else (tt-despesas.vl-debito  - tt-despesas.vl-credito) /  tt-vendas.vl-saidas-frete).  
     end.
     else do:
@@ -524,9 +530,7 @@ DO dt-atu = tt-param.dt-emisdoc-ini TO tt-param.dt-emisdoc-fim:
                            tt-notas.identific = 9
                            tt-notas.motivo     = (if avail motivo-devol and avail motivo-esp then motivo-esp.descricao else "").
                 END.
-            /*
-            add linha
-            */
+            
             END. 
         end.
     END.
@@ -765,7 +769,8 @@ FOR EACH tt-notas
                                tt-dados.cod-emitente   = (if not l-emitente      then 0  else nota-fiscal.cod-emitente)  and
                                tt-dados.no-ab-reppri   = (if not l-representante then "" else nota-fiscal.no-ab-reppri)  and
                                tt-dados.estado         = (if not l-estado        then "" else nota-fiscal.estado      )  and
-                               tt-dados.cidade         = (if not l-cidade        then "" else nota-fiscal.cidade)  no-error.
+                               tt-dados.cidade         = (if not l-cidade        then "" else nota-fiscal.cidade)        and
+                               tt-dados.fat-dup        = (if not tt-param.l-fat-dupl then "" else (if it-nota-fisc.emite-duplic then "Sim" else "NÆo") no-error.
                            
 
                          if not avail tt-dados then do:                 
@@ -779,7 +784,8 @@ FOR EACH tt-notas
                                  tt-dados.cod-emitente   = if not l-emitente      then 0  else nota-fiscal.cod-emitente 
                                  tt-dados.no-ab-reppri   = if not l-representante then "" else nota-fiscal.no-ab-reppri 
                                  tt-dados.estado         = if not l-estado        then "" else nota-fiscal.estado       
-                                 tt-dados.cidade         = if not l-cidade        then "" else nota-fiscal.cidade .
+                                 tt-dados.cidade         = if not l-cidade        then "" else nota-fiscal.cidade 
+                                 tt-dados.fat-dup        = (if not tt-param.l-fat-dupl then "" else (if it-nota-fisc.emite-duplic then "Sim" else "NÆo").
                          end.
 
                          assign
@@ -788,8 +794,7 @@ FOR EACH tt-notas
                               tt-dados.nome-transp          =   if not l-emitente then "" else nota-fiscal.nome-transp        
                               tt-dados.cod-oper             =   ""
                               tt-dados.nat-operacao         =   "" 
-                              tt-dados.cod-cfop             =   "" 
-                              tt-dados.fat-dup              =   "" 
+                              tt-dados.cod-cfop             =   ""                             
                               tt-dados.un                   =   if not l-item     then "" else it-nota-fisc.un-fatur[1]
                               tt-dados.serie-docto          =   ""
                               tt-dados.nro-docto            =   ""
@@ -1006,7 +1011,9 @@ FOR EACH tt-notas
                         tt-dados.cod-emitente   = (if not l-emitente      then 0  else nota-fiscal.cod-emitente) and
                         tt-dados.no-ab-reppri   = (if not l-representante then "" else nota-fiscal.no-ab-reppri) and
                         tt-dados.estado         = (if not l-estado        then "" else nota-fiscal.estado      )  and
-                        tt-dados.cidade         = (if not l-cidade        then "" else nota-fiscal.cidade) no-error.
+                        tt-dados.cidade         = (if not l-cidade        then "" else nota-fiscal.cidade)       and
+                        tt-dados.fat-dup        = (if not tt-param.l-fat-dupl then "" else (if it-nota-fisc.emite-duplic then "Sim" else "NÆo")
+                        no-error.
                    
 
                   if not avail tt-dados then do:                 
@@ -1020,7 +1027,8 @@ FOR EACH tt-notas
                           tt-dados.cod-emitente   = if not l-emitente      then 0  else nota-fiscal.cod-emitente 
                           tt-dados.no-ab-reppri   = if not l-representante then "" else nota-fiscal.no-ab-reppri 
                           tt-dados.estado         = if not l-estado        then "" else nota-fiscal.estado       
-                          tt-dados.cidade         = if not l-cidade        then "" else nota-fiscal.cidade .
+                          tt-dados.cidade         = if not l-cidade        then "" else nota-fiscal.cidade 
+                          tt-dados.fat-dup        = (if not tt-param.l-fat-dupl then "" else (if it-nota-fisc.emite-duplic then "Sim" else "NÆo").
                   end.
       
                   assign
@@ -1029,8 +1037,7 @@ FOR EACH tt-notas
                        tt-dados.nome-transp          =   if not l-emitente then "" else nota-fiscal.nome-transp        
                        tt-dados.cod-oper             =   ""
                        tt-dados.nat-operacao         =   "" 
-                       tt-dados.cod-cfop             =   "" 
-                       tt-dados.fat-dup              =   "" 
+                       tt-dados.cod-cfop             =   ""                        
                        tt-dados.un                   =   if not l-item     then "" else it-nota-fisc.un-fatur[1]
                        tt-dados.serie-docto          =   ""
                        tt-dados.nro-docto            =   ""
