@@ -3,7 +3,7 @@
 &Scoped-define WINDOW-NAME w-relat
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _CUSTOM _DEFINITIONS w-relat 
 /*******************************************************************************
-**
+** tem essa opção
 **    PROGRAMA: esp/ftp/ESFT0808.w
 **        DATA: Mar‡o de 2017
 **
