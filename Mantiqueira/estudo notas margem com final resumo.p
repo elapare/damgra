@@ -183,7 +183,11 @@ DEF VAR v-receita-liquida            as dec format "->>>,>>>,>>9.99" NO-UNDO INI
 DEF VAR v-margem-bruta               as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
 DEF VAR v-margem-liquida             as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
 DEF VAR v-perc-margem-bruta          as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
+<<<<<<< HEAD
+DEF VAR v-perc-margem-liquida        as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
+=======
 DEF VAR v-perc-margem-liquida        as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0. /*  asdf */
+>>>>>>> refs/remotes/origin/master
 
 
 DEFINE VARIABLE dt-atu AS DATE        NO-UNDO.
