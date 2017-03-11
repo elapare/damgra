@@ -179,9 +179,6 @@ DEF VAR v-impostos-dev              as dec format "->>>,>>>,>>9.99" NO-UNDO INIT
 DEF VAR v-receita-bruta              as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
 DEF VAR v-receita-liquida            as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
 DEF VAR v-margem-bruta               as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
-DEF VAR v-margem-liquida             as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
-DEF VAR v-perc-margem-bruta          as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
-DEF VAR v-perc-margem-liquida        as dec format "->>>,>>>,>>9.99" NO-UNDO INIT 0.
 
 
 DEFINE VARIABLE dt-atu AS DATE        NO-UNDO.
@@ -445,7 +442,7 @@ for each tt-despesas.
     find first tt-vendas where
         tt-vendas.cod-estabel = tt-despesas.cod-estabel no-error.
 
-    if tt-despesas.tipo = 1 then do:
+    if tt-despesas.tipo = 123 then do:
         tt-despesas.vl-unit = (if not avail tt-vendas or  tt-vendas.vl-saidas-frete = 0 then 0 else (tt-despesas.vl-debito  - tt-despesas.vl-credito) /  tt-vendas.vl-saidas-frete).  
     end.
     else do:
@@ -527,7 +524,9 @@ DO dt-atu = tt-param.dt-emisdoc-ini TO tt-param.dt-emisdoc-fim:
                            tt-notas.identific = 9
                            tt-notas.motivo     = (if avail motivo-devol and avail motivo-esp then motivo-esp.descricao else "").
                 END.
-            
+            /*
+            add linha
+            */
             END. 
         end.
     END.
