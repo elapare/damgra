@@ -7,7 +7,7 @@
 **    PROGRAMA: esp/ftp/ESFT0808.w
 **        DATA: Mar‡o de 2017
 **
-**    OBJETIVO: Relat¢rio de Faturamento e Margem de Contribui‡Æo em Excel
+**    OBJETIVO: Relat¢rio de Faturamento / Margem de Contribui‡Æo em Excel
 **
 **       AUTOR: Edson-Damgra
 **
