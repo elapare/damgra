@@ -10,8 +10,10 @@ def buffer b-estabelec              for estabelec.
 
 DEFINE INPUT PARAM  p-ind-event  AS CHAR NO-UNDO.
 DEFINE INPUT-OUTPUT PARAM TABLE  FOR tt-epc.
+ 
 
-DEFINE NEW GLOBAL SHARED VAR l-grava-log-axsep027 AS LOGICAL NO-UNDO.
+DEFINE NEW GLOBAL SHARED VAR l-grava-log-axsep027 AS LOGICAL NO-UNDO. /*solic-318*/
+DEFINE VARIABLE c-log-axsep027    AS CHARACTER   NO-UNDO.             /*solic-318*/
 DEFINE VARIABLE i-time AS INTEGER     NO-UNDO.
 DEFINE VARIABLE dt-time AS DATE        NO-UNDO.
 DEFINE VARIABLE hQ_ttdet          AS WIDGET-HANDLE        NO-UNDO.
@@ -61,12 +63,13 @@ DEFINE VARIABLE h_ttIde           AS WIDGET-HANDLE        NO-UNDO.
 DEFINE VARIABLE c-time AS CHARACTER   NO-UNDO.
 DEFINE VARIABLE c-data AS CHARACTER   NO-UNDO.
 
+c-log-axsep027 = SESSION:TEMP-DIRECTORY +    "log-axsep027.txt".
 
 function f-limpa returns char (input pcampo as char) forward.
 
     IF l-grava-log-axsep027 THEN DO:
    
-        OUTPUT TO v:\temp\log-axsep027.txt NO-CONVERT APPEND.
+        OUTPUT TO value(c-log-axsep027) NO-CONVERT APPEND.
           FOR EACH  tt-epc NO-LOCK.
              PUT UNFORMATTED  "p-ind-event " p-ind-event SKIP
                               "tt-epc.cod-event " tt-epc.cod-event  SKIP                 
@@ -340,7 +343,7 @@ IF p-ind-event = "AtualizaDadosNFe" THEN DO:
     
         IF l-grava-log-axsep027 THEN DO:
 
-    OUTPUT TO v:\temp\log-axsep027.txt NO-CONVERT APPEND.
+    OUTPUT TO value(c-log-axsep027) NO-CONVERT APPEND.
       PUT UNFORMATTED
        "VALID-HANDLE(h_ttIde)"  VALID-HANDLE(h_ttIde) skip
                 
@@ -362,7 +365,7 @@ END.
     
 IF l-grava-log-axsep027 THEN DO:
 
-    OUTPUT TO v:\temp\log-axsep027.txt NO-CONVERT APPEND.
+    OUTPUT TO value(c-log-axsep027) NO-CONVERT APPEND.
       PUT UNFORMATTED
        "VALID-HANDLE(wh_CodEstabelNF)"  VALID-HANDLE(wh_CodEstabelNF) skip
        "VALID-HANDLE(wh_SerieNF     )"  VALID-HANDLE(wh_SerieNF     ) skip
@@ -431,7 +434,7 @@ END.
 
                     IF l-grava-log-axsep027 THEN DO:
                    
-                        OUTPUT TO v:\temp\log-axsep027.txt NO-CONVERT APPEND.
+                        OUTPUT TO value(c-log-axsep027) NO-CONVERT APPEND.
                           PUT UNFORMATTED
                               "nota-fiscal.cod-estabel " nota-fiscal.cod-estabel skip
                               "nota-fiscal.serie       " nota-fiscal.serie       skip
