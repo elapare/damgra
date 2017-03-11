@@ -1,0 +1,292 @@
+seria bom identificarmos onde foi alterado com algum marcador no final da linha  /*solic-318*/
+verificar estabelecimentos e empresas , deve funcionar para ambos, em caso de definição sugerir o novo establecimento
+
+se for para comparação.
+if estab = "422" then ....
+if estab = "422" or estab = "412" then 
+
+para where pensar em performance, se ficar complicado deixa para ajustar performance depois, mas anotar /*@performance@*/
+
+where estab >= "421" and estab <= "424" ...
+where ((estab >= "421" and estab <= "424") or ( estab >= "411" and estab <= "414") ) ...
+
+o mesmo para empresa:
+
+if empresa = "420" then ....
+if empresa = "420" or empresa = "420" then 
+
+where empresa = "420"   ...
+where (empresa = "420" or empresa =  "410") ..
+
+REGRAS DE EQUIVALENCIA
+420-410
+421-411
+422-412
+423-413
+
+a 430 para alguns vira 440, tem que entender bem a implicação pois a 430 continua a existir para outros estabelecimentos, 
+a mudança é somente nos estabelecimetnos abaixo.
+431-441
+432-443
+434-442
+
+se for para atribuição, tipo alguma coisa acontece e sugere 422, aí não tem jeito, teremos que analisar e condicionar 
+ou a data de virada ou criar uma include inteligente de conversão de estavelecimento e empresa onde colocaremos {422} e na virada eles mudam a include para 412
+
+if ge-codigo > 41 or ge-codigo < 49 then c-empresa = "420".
+if ge-codigo > 41 or ge-codigo < 49 then c-empresa = "{cdp\poloestab.i 420}".
+
+if ge-maquina > 32 then ge-cod-maq = "422-atlas"
+if ge-maquina > 32 then ge-cod-maq = "{cdp\poloestab.i 422}-atlas"
+
+
+a include teria algo como:
+
+&IF "{1}" = "420" &THEN
+      410
+&ENDIF
+&IF "{1}" = "421" &THEN
+      411
+&ENDIF
+&IF "{1}" = "422" &THEN
+      412
+&ENDIF
+&IF "{1}" = "423" &THEN
+      413
+&ENDIF
+
+
+coloque uma letra antes dos programas ajustados
+TA-Tales
+ED-Edson
+
+ED\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\adapters\upc\upc-axsep027-u03.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0002rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0003rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0006rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0009rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0011.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0011rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0014.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0014rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0026.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0026rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0027.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0027rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0005rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0006rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0006rpa.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0006rpb.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0010.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0027rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\upc\upc-cd0922-u01a.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0009.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0009rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0010.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0010rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0011rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0013.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0013rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0014.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0015.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0016.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0016rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0023.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0023rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0025.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0040.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0042.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0043-b01.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0105rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\upc\upc-ce0919rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\upc\upc-ceapi001-u03.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cnp\escn0003.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cnp\escn0003rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0007.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0030.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0030rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0031rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0032rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0036-b01.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0039.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0039rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0051.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0056.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0056rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0057.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0057rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0059.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0063.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0063rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0064.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0602.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\escp0602-1.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\upc\upc-cp0301d1.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cpp\upc\upc-cp0313.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0002rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0006.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0006rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0010.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0014.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0017.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0017rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0019rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0022.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0050-3-v01.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0051.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0051rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0052.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0055.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0055rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0056.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq0056rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\escq051rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\upc\cq0210e-u01.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\upc\polcq0210upc.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\upc\upc-cq0210.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cqp\upc\upc-cq0210d-a.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\crp\escr007.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\crp\escr007rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\database\twp\tw-funcionario.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\dibo\upc\esbodi317pr-u00.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\dibo\upc\esbodi317pr-u01.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\dibo\upc\ifbodi159can.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\dibo\upc\ifbodi317ef.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\dibo\upc\upc-bodi159.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\eqp\upc\upc-eqapi300-u01.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\esft0056rpa.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0006.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0011rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0012rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0014.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0014rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0017.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0018.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0025.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0025rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0028rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0030.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0031.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0032.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0034.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0034rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0036rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0037.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0038.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0038rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0039rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft0056rpa.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\esft4003NFT.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\ft0518f.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ftp\ft0518f1.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\inp\esin0005.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\mip\esmi0007.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\mip\esmi0007rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\mip\esmiapi0001g.i
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ofp\upc\upc-of0717-1.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ofp\upc\upc-of0721-1.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0008rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0014.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0014rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0018.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0020.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0020rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0021.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0022.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0023.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0025.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0034.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0034rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0034var.i
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0039.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0043rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0061.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0062.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0063.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0065.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\espd0067rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\pdp\upc\upc-pd4000cpy.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\polo\sfcdb\twp\wri-polo_off_ord_prod.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prgfin\acr\esacr0007.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prgfin\acr\esacr0007rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prgfin\fas\esfas0007.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\atp\esat0005rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\atp\esat0006rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\atp\esat0007rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\atp\esat0008rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\bsp\esbs0007.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\bsp\esbs0007a.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\bsp\esbs0009.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\bsp\esbs0011.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\bsp\esbs0012.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\bsp\esbs0013.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\dsp\esds106rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\esp\po0004rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\esp\po0034rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\esp\Po021.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fbp\fb000292.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fbp\fb000293.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fbp\fb000294.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fbp\fb000295.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fbp\fb000297.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fbp\fb000500.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fbp\fb000501.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fpp\esfp0007rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fpp\esfp0016rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fpp\rh002027.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fpp\upc\upc-fp0903-u01.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\fpp\upc\upc-fp1500-u02.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\pep\espe0013.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\prghur\pep\upc\upc-pe2200-U01.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\receiver\paramdfe.ini
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\rep\esre0010.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\rep\esre0190.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\rep\esre0192.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\rep\esre0193.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0001.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0002.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0002a.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0002d-a1.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0003v02.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0004.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0009a.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0009b.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0011B.W
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0011c.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0011f.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0011j.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0013b01.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0021.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0022.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0022peso.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0025rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0303.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0903.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0903a.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0903c.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0903q01.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0903v01.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\essf0903v02.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\polsf022.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\sfc\polsf022peso.w
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\spumapac\escd0011.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\spumapac\escd0011rp.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ungws\wscrm0100.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ungws\wscrm0100a.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ungws\wscrm0100e.i
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ungws\wscrm0100f.i
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ungws\wscrm0105a.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ungws\zoomInfProdtotvs12.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\upc\ifbodi135.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\upc\ifbodi135cancel.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\upc\ifbodi154.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\upc\ifbodi154can.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\upc\ifbodi159.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\upc\ifbodi159can.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\upc\ifbodi159com.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\upc\ifbodi317ef.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\upc\ifeq0506b-u01.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\upc\pdu4000-u01.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\wsp\WS002A.p
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\wsp\WS002E.i
+\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\wsp\WS002F.i
