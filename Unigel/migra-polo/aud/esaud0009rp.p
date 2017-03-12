@@ -18,8 +18,8 @@ def new global shared var c-prg-vrs as char no-undo.
 def new global shared var c-prg-obj as char no-undo.
 
  
-DEFINE input param c-estab-ini AS CHARACTER  INITIAL "422" NO-UNDO.
-DEFINE input param c-estab-fim AS CHARACTER  INITIAL "422"  NO-UNDO.
+DEFINE input param c-estab-ini AS CHARACTER  NO-UNDO. /*solic-318*/
+DEFINE input param c-estab-fim AS CHARACTER  NO-UNDO. /*solic-318*/
 DEFINE input param i-cod-emitente-ini as integer initial "0" no-undo.  
 DEFINE input param i-cod-emitente-fim as integer initial "9999999" no-undo.  
 DEFINE input param dt-emis-nota-ini  AS DATE   INITIAL 05/01/2012    NO-UNDO.

@@ -61,7 +61,7 @@ DEF NEW GLOBAL SHARED VAR h-fi-cod-estabel        AS WIDGET-HANDLE NO-UNDO.
 
 IF valid-handle(h-fi-cod-estabel) and 
    p-ind-event  = "assign"    AND 
-   p-ind-object = "VIEWER"  and  substring(h-fi-cod-estabel:screen-value,1,2) = "42"  THEN DO:
+   p-ind-object = "VIEWER"  and  (substring(h-fi-cod-estabel:screen-value,1,2) = "42" OR substring(h-fi-cod-estabel:screen-value,1,2) = "41") THEN DO: /*solic-318*/
 
     IF NOT CAN-FIND(usuar_grp_usuar WHERE
                           usuar_grp_usuar.cod_grp     = "UIO" AND

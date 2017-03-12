@@ -191,7 +191,7 @@ FORM
 
 
 FIND FIRST param-global NO-LOCK NO-ERROR.
-FIND FIRST empresa NO-LOCK WHERE empresa.ep-codigo = "420".
+FIND FIRST empresa NO-LOCK WHERE (empresa.ep-codigo = "420" or empresa.ep-codigo = "410").
 
 assign c-programa     = "esft0036RP"
        c-versao       = "2.04"

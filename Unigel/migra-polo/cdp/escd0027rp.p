@@ -112,7 +112,6 @@ OUTPUT TO value(c-arquivo).
         WHERE b-item-uni-estab.it-codigo    = ITEM.it-codigo
         and   b-item-uni-estab.cod-estabel >= tt-param.ini-cod-estabel
         and   b-item-uni-estab.cod-estabel <= tt-param.fim-cod-estabel
-/*         AND   b-item-uni-estab.cod-estabel = "433"  */
         :
 
         FIND tt-item-estab
