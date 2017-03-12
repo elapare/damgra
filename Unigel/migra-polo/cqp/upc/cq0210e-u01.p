@@ -157,7 +157,7 @@ IF p-ind-event  = "INITIALIZE":U AND
    end.
    
                                                                                                                           
-      IF AVAIL ITEM AND wh-cq0210e-lote:SCREEN-VALUE <> "" and wh-cq0210e-cod-estabel:SCREEN-VALUE = "422" AND i-emitente = 0 THEN DO:
+      IF AVAIL ITEM AND wh-cq0210e-lote:SCREEN-VALUE <> "" and wh-cq0210e-cod-estabel:SCREEN-VALUE = "{cdp\poloestab.i 422}" AND i-emitente = 0 THEN DO:/*solic-318*/
          ASSIGN wh-cq0210e-un:SCREEN-VALUE = ITEM.un.
          wh-cq0210e-un:SENSITIVE = NO.
    
@@ -182,7 +182,7 @@ IF p-ind-event  = "INITIALIZE":U AND
         END.
    END.     
 
-   IF AVAIL ITEM AND wh-cq0210e-lote:SCREEN-VALUE <> "" and wh-cq0210e-cod-estabel:SCREEN-VALUE = "422" AND i-emitente > 0 THEN DO:
+   IF AVAIL ITEM AND wh-cq0210e-lote:SCREEN-VALUE <> "" and wh-cq0210e-cod-estabel:SCREEN-VALUE = "{cdp\poloestab.i 422}" AND i-emitente > 0 THEN DO:/*solic-318*/
          ASSIGN wh-cq0210e-un:SCREEN-VALUE = ITEM.un.
          wh-cq0210e-un:SENSITIVE = NO.
          IF DEC(wh-cq0210e-quantidade:SCREEN-VALUE ) > 0 THEN

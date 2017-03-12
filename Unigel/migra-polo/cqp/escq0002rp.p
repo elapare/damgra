@@ -504,7 +504,7 @@ for each ped-venda no-lock
     ASSIGN diex-jr1 = 0.
     ASSIGN espes-jr1 = 0.
 
-    IF movto-estoq.cod-estabel = "423" THEN DO:
+    IF movto-estoq.cod-estabel = "{cdp\poloestab.i 423}" THEN DO: /*solic-318*/
     
        FIND lote-carac-tec WHERE
                  lote-carac-tec.it-codigo = movto-estoq.it-codigo AND
@@ -526,7 +526,7 @@ for each ped-venda no-lock
     
     END.
 
-    IF movto-estoq.cod-estabel <> "423" THEN DO:
+    IF movto-estoq.cod-estabel <> "{cdp\poloestab.i 423}" THEN DO: /*solic-318*/
     
        FIND lote-carac-tec WHERE
                  lote-carac-tec.it-codigo = movto-estoq.it-codigo AND
@@ -756,7 +756,7 @@ IF v-num-reg-lidos > 0 THEN DO:
      ASSIGN espes-jr  = 0
             gramat-jr = 0.
      
-     IF c-cod-estabel-ini = "423" THEN DO: 
+     IF c-cod-estabel-ini = "{cdp\poloestab.i 423}" THEN DO: /*solic-318*/
 
        IF (INDEX (ttbob2-it-codigo,"MR",1) <> 0) THEN DO:
                         

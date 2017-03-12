@@ -61,10 +61,10 @@ TA-Tales
 ED-Edson
 
 ED\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\adapters\upc\upc-axsep027-u03.p
-\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0002rp.p
-\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0003rp.p
-\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0006rp.p
-\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0009rp.p
+TA\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0002rp.p
+TA\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0003rp.p
+TA\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0006rp.p
+TA\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\aud\esaud0009rp.p
 \\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0011.w
 \\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0011rp.p
 \\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0014.w
@@ -74,12 +74,12 @@ ED\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\adapters\upc\upc-axsep027-u03.p
 \\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0027.w
 \\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\ccp\escc0027rp.p
 \\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0005rp.p
-\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0006rp.p
-\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0006rpa.p
-\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0006rpb.p
+TA\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0006rp.p
+TA\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0006rpa.p
+TA\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0006rpb.p
 \\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0010.w
-\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0027rp.p
-\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\upc\upc-cd0922-u01a.p
+TA\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\escd0027rp.p
+TA\\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cdp\upc\upc-cd0922-u01a.p
 \\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0009.w
 \\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0009rp.p
 \\ungusb-vap11\DTS12\CUSTOMIZADOS\Fontes\cep\esce0010.w

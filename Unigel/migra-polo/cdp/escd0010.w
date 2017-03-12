@@ -1619,7 +1619,7 @@ END PROCEDURE.
 
 PROCEDURE pi-limpa-campos.
 
-    ASSIGN c-cod-estabel:SCREEN-VALUE IN FRAME f-relat     = "422" 
+    ASSIGN c-cod-estabel:SCREEN-VALUE IN FRAME f-relat     = "422" /*solic-318*/
            i-cod-funcionario:SCREEN-VALUE IN FRAME f-relat = ""
            c-it-codigo-ini:SCREEN-VALUE IN FRAME f-relat = ""
            c-it-codigo-fim:SCREEN-VALUE IN FRAME f-relat = "ZZZZZZZZZZZZ".

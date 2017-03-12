@@ -108,7 +108,7 @@ DEFINE VARIABLE ano-jr  AS INTEGER    NO-UNDO.
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel        like movto-estoq.cod-estabel   format "x(3)" initial "422" no-undo.
+def new shared var c-cod-estabel        like movto-estoq.cod-estabel   format "x(3)" initial "412" no-undo./*solic-318*/
 def new shared var c-ano-ini            AS INTEGER                     format 9999 INITIAL 2005. 
 def new shared var c-mes-ini            AS INTEGER                     format 99 INITIAL 1.
 def new shared var c-ano-fim            AS INTEGER                     format 9999 INITIAL 2005. 

@@ -1958,7 +1958,7 @@ PROCEDURE pi-gera-laudo:
     
     
     /* Monta gramatura e espessura calculadas dos mill rolls de origem
-       para o estabelecimento 421. */
+       para o estabelecimento 421 ou 411. */
     
     
          ASSIGN tot-peso-jr1  = 0
@@ -1968,7 +1968,7 @@ PROCEDURE pi-gera-laudo:
                 gra-min-jr = 99999999
                 gra-max-jr = 0.
     
-         IF c-cod-estabel-ini = "421" THEN DO:
+         IF c-cod-estabel-ini = "{cdp\poloestab.i 421}" THEN DO:/*solic-318*/
     
           FOR EACH tt-bobinas2 NO-LOCK:
     
@@ -2440,11 +2440,7 @@ PROCEDURE pi-gera-laudo:
                  sai-laudo      = yes.
       
       IF sai-laudo = no THEN DO:
-    
-       /*   IF c-cod-estabel-ini = "421" THEN
-              ASSIGN nome-estabel-jr = "POLO - VGA".
-            ELSE  */
-              ASSIGN nome-estabel-jr = "POLO - MTN".
+        ASSIGN nome-estabel-jr = "POLO - MTN".
     
     
         FIND FIRST polo-esp-cliente-cq WHERE
@@ -2750,7 +2746,7 @@ PROCEDURE pi-gera-laudo:
            END.
     END.
    
-    IF c-cod-estabel-ini = "421" THEN
+    IF c-cod-estabel-ini = "{cdp\poloestab.i 421}" THEN/*solic-318*/
        ASSIGN nome-estabel-jr = "POLO - VGA".
          ELSE
            ASSIGN nome-estabel-jr = "POLO - MTN".  

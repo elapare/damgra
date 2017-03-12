@@ -230,7 +230,7 @@ def var l-req as logical no-undo.
  DEFINE BUFFER bo-lote-rastreab FOR lote-rastreab.
  DEFINE VARIABLE l-log AS LOGICAL     NO-UNDO.
 
- DEFINE VARIABLE c-cod-estabel-fim like movto-estoq.cod-estabel INITIAL 422.
+ DEFINE VARIABLE c-cod-estabel-fim like movto-estoq.cod-estabel INITIAL 412./*solic-318*/
  DEFINE VARIABLE da-dt-trans-ini   like movto-estoq.dt-trans      INITIAL 04/01/2007.
  DEFINE VARIABLE da-dt-trans-fim   like movto-estoq.dt-trans      INITIAL 04/30/2007.
  DEFINE VARIABLE i-linha-ini AS INTEGER    NO-UNDO.
@@ -268,7 +268,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 /****************** Defini‡ao de Parƒmetros do Relat¢rio *********************/ 
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
-def new shared var c-cod-estabel-ini    like movto-estoq.cod-estabel FORMAT "x(3)"       INITIAL "422" NO-UNDO.
+def new shared var c-cod-estabel-ini    like movto-estoq.cod-estabel FORMAT "x(3)"       INITIAL "412" NO-UNDO./*solic-318*/
 def new shared var c-dt-trans-ini       like movto-estoq.dt-trans    FORMAT "99/99/9999" INITIAL today NO-UNDO. 
 def new shared var c-dt-trans-fim       like movto-estoq.dt-trans    FORMAT "99/99/9999" INITIAL today NO-UNDO. 
 def new shared var c-it-codigo-ini      like movto-estoq.it-codigo   FORMAT "x(15)"      INITIAL "" NO-UNDO. 

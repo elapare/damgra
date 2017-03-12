@@ -49,7 +49,7 @@ IF p-ind-event = "antes-validar-nota" THEN DO:
             END.
 
             /* N∆o embarca o pedido sen∆o tiver na unigel comercial - POLO */
-            IF ped-venda.cod-estabel = "422" AND natur-oper.emite-duplic and ped-venda.nat-operacao < "7"  AND NOT l-libera THEN DO:
+            IF (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412") AND natur-oper.emite-duplic and ped-venda.nat-operacao < "7"  AND NOT l-libera THEN DO:/*solic-318*/
 
                 FIND FIRST if-ped-venda
                      WHERE if-ped-venda.nr-pedido = ped-venda.nr-pedido NO-LOCK NO-ERROR.
@@ -85,7 +85,7 @@ IF p-ind-event = "antes-validar-nota" THEN DO:
             IF i-nr-pedido > 0 THEN DO:
                 FIND FIRST b-ped-venda
                      WHERE b-ped-venda.nr-pedido = i-nr-pedido NO-LOCK NO-ERROR.
-                IF AVAIL b-ped-venda AND b-ped-venda.cod-sit-aval <> 3 AND b-ped-venda.cod-sit-aval <> 2 AND b-ped-venda.cod-estabel <> "432" THEN DO:
+                IF AVAIL b-ped-venda AND b-ped-venda.cod-sit-aval <> 3 AND b-ped-venda.cod-sit-aval <> 2 AND b-ped-venda.cod-estabel <> "443" AND b-ped-venda.cod-estabel <> "432" THEN DO: /*solic-318*/
 
                     RUN utp/ut-msgs.p (INPUT "Show",
                                        INPUT  17006,

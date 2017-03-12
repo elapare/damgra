@@ -17,7 +17,7 @@ FIND FIRST ficha-cq
     
   /*SO FUNCIONA PARAPOLO*/  
 
-IF SUBSTRING(ficha-cq.cod-estab,1,2) <> "42" THEN APPLY "choose":U TO wgh-btok-cq0210d.
+IF SUBSTRING(ficha-cq.cod-estab,1,2) <> "42" AND SUBSTRING(ficha-cq.cod-estab,1,2) <> "41" THEN APPLY "choose":U TO wgh-btok-cq0210d./*solic-318*/
 
  
 FIND FIRST pol-param-estab
@@ -29,7 +29,7 @@ if not avail pol-param-estab then do:
     return "NOK":U.
 end.
 ELSE DO:
-    IF date(h-de-inspecao-1:SCREEN-VALUE) > pol-param-estab.data-cq and substring(pol-param-estab.cod-estabel,1,2) = "42" THEN DO:
+    IF date(h-de-inspecao-1:SCREEN-VALUE) > pol-param-estab.data-cq and (substring(pol-param-estab.cod-estabel,1,2) = "42" OR substring(pol-param-estab.cod-estabel,1,2) = "41") THEN DO:/*solic-318*/
         RUN utp/ut-msgs.p (INPUT "show",
                            INPUT 25997,
                            INPUT "Transaá∆o n∆o permitida!" + "~~" +

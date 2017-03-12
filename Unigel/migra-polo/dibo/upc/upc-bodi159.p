@@ -61,7 +61,7 @@ IF p-ind-event = "AfterValidateRecord"
 
           FIND FIRST estabelec WHERE estabelec.cod-estabel = tt-ped-venda.cod-estabel NO-LOCK NO-ERROR.
 
-          IF estabelec.ep-codigo <> "420" /* and estabelec.ep-codigo <> 700 */ THEN RETURN "ok".
+          IF estabelec.ep-codigo <> "420" AND estabelec.ep-codigo <> "410" /* and estabelec.ep-codigo <> 700 */ THEN RETURN "ok"./*solic-318*/
           
           IF NOT(INDEX("POREADQFXZ",trim(c-tipo)) <> 0) THEN l-erro = YES.
           
@@ -83,23 +83,6 @@ IF p-ind-event = "AfterValidateRecord"
                     
           IF INDEX("AD",trim(c-tipo)) <> 0 AND 
               SUBSTRING(tt-ped-venda.nat-operacao,2,1) <> "9" THEN l-erro = YES.
-          
-         /* IF c-tipo = "X"  
-              tt-ped-venda.cod-emitente <> 421 AND
-              tt-ped-venda.cod-emitente <> 422 AND
-              tt-ped-venda.cod-emitente <> 423 AND
-              tt-ped-venda.cod-emitente <> 424 THEN l-erro = YES.
-
-          IF c-tipo = "Z" AND   
-              tt-ped-venda.cod-emitente <> 421 AND
-              tt-ped-venda.cod-emitente <> 422 AND
-              tt-ped-venda.cod-emitente <> 423 AND
-              tt-ped-venda.cod-emitente <> 424 AND
-              tt-ped-venda.cod-emitente <> 16779 THEN l-erro = YES.
-           */
-       /*   IF tt-ped-venda.cod-canal-venda <> 1 AND 
-             tt-ped-venda.cod-canal-venda <> 2 THEN l-erro-canal = YES.
-             */
 
         END.
             

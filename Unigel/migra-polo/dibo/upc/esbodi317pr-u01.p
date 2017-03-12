@@ -63,7 +63,7 @@ IF AVAIL tt-epc THEN DO:
 
         FIND FIRST estabelec WHERE estabelec.cod-estabel = wt-docto.cod-estabel NO-LOCK NO-ERROR.
     
-        IF AVAIL estabelec AND (estabelec.ep-codigo <> "420" and estabelec.ep-codigo <> "700" and estabelec.ep-codigo <> "430") THEN DO:
+        IF AVAIL estabelec AND (estabelec.ep-codigo <> "420" and estabelec.ep-codigo <> "410" and estabelec.ep-codigo <> "700" and estabelec.ep-codigo <> "430") THEN DO:/*solic-318*/
             RUN limpa-handle.
             RETURN.
         END.
@@ -150,7 +150,7 @@ IF AVAIL tt-epc THEN DO:
     /*para nÆo deixar faturar lote parcial*/
                 FIND ITEM WHERE ITEM.IT-CODIGO = wt-fat-ser-lote.it-codigo NO-LOCK NO-ERROR.
                 IF AVAIL ITEM AND ITEM.TIPO-CON-EST > 2 AND ITEM.ge-codigo >= 40 AND ITEM.ge-codigo < 50 THEN DO:
-                    IF  wt-fat-ser-lote.quantidade[1] <> pallet.peso-liquido  AND (wt-docto.cod-estabel = "422" OR wt-docto.cod-estabel = "432" OR wt-docto.cod-estabel = "434") THEN DO:  /*NAO PODE MOSTRAR MENSAGEM PARA UNIGEL COMERCIAL*/
+                    IF  wt-fat-ser-lote.quantidade[1] <> pallet.peso-liquido  AND (wt-docto.cod-estabel = "422" OR wt-docto.cod-estabel = "412" OR wt-docto.cod-estabel = "432" OR wt-docto.cod-estabel = "443" OR wt-docto.cod-estabel = "434" OR wt-docto.cod-estabel = "442") THEN DO:/*solic-318*/  /*NAO PODE MOSTRAR MENSAGEM PARA UNIGEL COMERCIAL*/
                         MESSAGE "Erro na quandidade do pallet:" wt-fat-ser-lote.lote SKIP
                             "VOLTE NO EQ0506 E VERIFIQUE A QUANTIDADE" SKIP
                             "ALOCADA. NÇO PODE HAVER EMBARQUE PARCIAL" SKIP
