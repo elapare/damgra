@@ -46,7 +46,7 @@ IF p-ind-event = "AfterValidateCancelation" THEN DO:
                             
                 if avail if-ped-venda then do:
                     l-filho = yes.
-                    find first bf-ped-venda where bf-ped-venda.nr-pedido = if-ped-venda.nr-pedido and bf-ped-venda.cod-estabel = "422" no-lock no-error.
+                    find first bf-ped-venda where bf-ped-venda.nr-pedido = if-ped-venda.nr-pedido and (bf-ped-venda.cod-estabel = "422" or bf-ped-venda.cod-estabel = "412") no-lock no-error. /*solic-318*/
                     
                     if avail bf-ped-venda then do:
                     

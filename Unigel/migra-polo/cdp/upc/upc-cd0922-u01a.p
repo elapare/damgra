@@ -11,7 +11,7 @@ def new global shared var wgh-btGeraProduto   as widget-handle no-undo.
 /*Gera‡Æo de produto MPS para os itens MILL ROLL de Montenegro*/
 for each item no-lock use-index grupo where
          item.ge-codigo    = 41 and
-         item.cod-estabel  = '422' and
+         (item.cod-estabel  = '422' OR item.cod-estabel  = '412') and /*solic-318*/
          item.tipo-con-est < 4:  /*Mill Roll nÆo ‚ controlado por referˆncia*/
     
     /*O Mill Roll deve ser utilizado em estrutura do configurado.*/

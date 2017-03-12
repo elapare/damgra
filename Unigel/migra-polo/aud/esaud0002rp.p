@@ -20,8 +20,8 @@ def new global shared var c-prg-obj as char no-undo.
 
  
  
-def input param c-cod-estabel-ini as char initial "422" no-undo.
-def input param c-cod-estabel-fim as char initial "422" no-undo.
+def input param c-cod-estabel-ini as char  no-undo. /*solic-318*/
+def input param c-cod-estabel-fim as char  no-undo. /*solic-318*/
 def input param i-ge-codigo-ini as integer initial 82 no-undo.
 def input param i-ge-codigo-fim as integer initial 82 no-undo.
 def input param c-fm-codigo-ini as char initial "" no-undo.
