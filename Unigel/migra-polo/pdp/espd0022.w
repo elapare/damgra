@@ -184,7 +184,7 @@ ASSIGN l-split = NO.
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel     like ped-venda.cod-estabel   format "x(03)"        initial "422"   no-undo.
+def new shared var c-cod-estabel     like ped-venda.cod-estabel   format "x(03)"        initial "{cdp\poloestab.i 422}"   no-undo./*solic-318*/
 def new shared var c-it-codigo       AS CHAR                      format "x(16)"        initial ""      no-undo.
 def new shared var i-pd-origem       AS INT                       format ">>>>>>>>9"    initial 0       no-undo.
 def new shared var i-sq-origem       AS INT                       format ">>>>9"        initial 10      no-undo.

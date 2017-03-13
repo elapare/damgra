@@ -25,7 +25,7 @@ IF  valid-handle(wh-c-cod-estabel-amg) and
         valid-handle(wh-dt-emissao-fim ) 
     THEN DO:
 
-       IF substring(wh-c-cod-estabel-amg:screen-value,1,2) <> "42" THEN RETURN.
+       IF (substring(wh-c-cod-estabel-amg:screen-value,1,2) <> "42" AND substring(wh-c-cod-estabel-amg:screen-value,1,2) <> "41") THEN RETURN. /*solic-318*/
 
        find first nota-fiscal where 
                nota-fiscal.cod-estabel    = wh-c-cod-estabel-amg:screen-value and

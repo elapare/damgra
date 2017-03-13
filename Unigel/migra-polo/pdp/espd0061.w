@@ -161,9 +161,6 @@ def var v-num-reg-lidos    as int    no-undo.
 
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
-/*
-def new shared var c-cod-estabel     like am-cc-tab-preco.cod-estabel   format "x(03)"    initial "422"   no-undo.
-*/
 
 /* Chave unica do registro */
 DEFINE VARIABLE i-ep-codigo-jr       AS CHAR                                NO-UNDO.

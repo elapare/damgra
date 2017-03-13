@@ -134,8 +134,8 @@ def new global shared var c-excel            as com-handle                  NO-U
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini like ped-venda.cod-estabel format "x(3)" initial "422" no-undo.
-def new shared var c-cod-estabel-fim like ped-venda.cod-estabel format "x(3)" initial "422" no-undo.
+def new shared var c-cod-estabel-ini like ped-venda.cod-estabel format "x(3)" initial "{cdp\poloestab.i 422}" no-undo./*solic-318*/
+def new shared var c-cod-estabel-fim like ped-venda.cod-estabel format "x(3)" initial "{cdp\poloestab.i 422}" no-undo./*solic-318*/
 def new shared var da-dt-entorig-ini like ped-item.dt-entorig format "99/99/9999" initial TODAY no-undo.
 def new shared var da-dt-entorig-fim like ped-item.dt-entorig format "99/99/9999" initial TODAY no-undo.
 def new shared var c-tp-pedido-ini like ped-venda.tp-pedido format "x(2)" initial "" no-undo.

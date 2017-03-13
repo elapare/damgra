@@ -100,7 +100,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 /****************** Defini‡ao de Parƒmetros do Relat¢rio *********************/ 
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
-def new shared var c-cod-estabel-ini      AS CHAR   FORMAT "x(3)"       INITIAL "422"           NO-UNDO. 
+def new shared var c-cod-estabel-ini      AS CHAR   FORMAT "x(3)"       INITIAL "{cdp\poloestab.i 422}"           NO-UNDO. /*solic-318*/
 def new shared var i-num-projeto-ini      AS INT    FORMAT ">>>>>>>9"   INITIAL 0               NO-UNDO. 
 def new shared var i-num-projeto-fim      AS INT    FORMAT ">>>>>>>9"   INITIAL 99999999        NO-UNDO. 
 def new shared var i-num-ord-magnus-ini   AS INT    FORMAT ">>>>>>>9"   INITIAL 0               NO-UNDO.    

@@ -1421,13 +1421,6 @@ empty temp-table tt-digita.
              EACH ITEM OF ped-item NO-LOCK : 
 
              IF ITEM.ge-codigo < 40 OR ITEM.ge-codigo > 50 THEN NEXT.
-             
-             /*
-             IF (ped-venda.cod-estabel < "420"  OR 
-                 ped-venda.cod-estabel > "429") AND  
-                 ped-venda.cod-estabel <> "702" THEN NEXT.
-             */
-
 
              FIND FIRST if-ped-venda WHERE
                  if-ped-venda.nr-pedido = ped-venda.nr-pedido

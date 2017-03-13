@@ -160,7 +160,7 @@ DEFINE VARIABLE tg-turma AS LOGICAL INITIAL yes
                   
 
 
-DEFINE VARIABLE c-cod-estabel-ini AS CHARACTER FORMAT "X(03)":U INITIAL "422" 
+DEFINE VARIABLE c-cod-estabel-ini AS CHARACTER FORMAT "X(03)":U INITIAL "{cdp\poloestab.i 422}" 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 6 BY .88 NO-UNDO.
