@@ -247,7 +247,7 @@ DEFINE RECTANGLE RECT-9
      EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL 
      SIZE 46.29 BY 1.71.
 
-DEFINE VARIABLE c-cod-estabel-ini AS CHAR label "Estab." INITIAL "422" FORMAT "x(3)":U 
+DEFINE VARIABLE c-cod-estabel-ini AS CHAR label "Estab." INITIAL "{cdp\poloestab.i 422}" FORMAT "x(3)":U/*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 4 BY .88
      TOOLTIP "Informe C¢digo do Estabelecimento " NO-UNDO.

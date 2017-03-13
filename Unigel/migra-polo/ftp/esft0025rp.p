@@ -110,7 +110,7 @@ def new global shared var rw-log-exec            as rowid                    no-
 /****************** FIM INCLUDE COM VARIµVEIS GLOBAIS *********************/
 /****************** Defini‡ao de Parƒmetros do Relat¢rio *********************/
 
-def new shared var c-cod-estabel        like nota-fiscal.cod-estabel    FORMAT "x(3)"       INITIAL "422"      NO-UNDO. 
+def new shared var c-cod-estabel        like nota-fiscal.cod-estabel    FORMAT "x(3)"       INITIAL "{cdp\poloestab.i 422}"      NO-UNDO. /*solic-318*/
 def new shared var dt-emis-nota-ini     like nota-fiscal.dt-emis-nota   FORMAT "99/99/9999" INITIAL today      NO-UNDO. 
 def new shared var dt-emis-nota-fim     like nota-fiscal.dt-emis-nota   FORMAT "99/99/9999" INITIAL today      NO-UNDO. 
 def new shared var c-nr-nota-fis-ini    like nota-fiscal.nr-nota-fis    FORMAT "x(10)"      INITIAL ""         NO-UNDO. 
@@ -612,7 +612,7 @@ procedure pi-gera-planilha.
     
        /* Rotina Cabe‡alho no Excel */
     
-        IF c-cod-estabel <> "421" THEN DO:
+        IF c-cod-estabel <> "421" AND c-cod-estabel <> "411" THEN DO:/*solic-318*/
             ASSIGN i-linha = 3
                    c-relatorio:range("B" + STRING(i-linha)):VALUE = 
                      "BR 386 - Km 423 - Via 1 - Nr.280 - / Distrito Industrial / Montenegro-RS / Brasil".

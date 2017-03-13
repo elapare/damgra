@@ -375,7 +375,7 @@ for each tt-digita NO-LOCK :
              'q800'    skip
              'Q639,24+0'   skip
              'S2' skip
-             if tt-param.c-cod-estabel-ini = '422' then ('D7') else 'D1' skip
+             if (tt-param.c-cod-estabel-ini = '422' OR tt-param.c-cod-estabel-ini = '412') then ('D7') else 'D1' skip/*solic-318*/
              'ZT' skip
              'GG16,35,"LOGOPOL3"' SKIP
              'A100,567,3,4,3,2,N,"' TRIM(tt-digita.it-codigo) '"' skip

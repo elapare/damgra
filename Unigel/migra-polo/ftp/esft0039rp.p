@@ -198,7 +198,7 @@ IF  i-ep-codigo-usuario = 400 THEN
     ASSIGN c-grup-estoques = '11,13'.
 *******************************************************/
 
-IF  SUBSTRING(STRING(tt-param.estab-ini,'999'),1,2) = '38'  OR SUBSTRING(STRING(tt-param.estab-ini,'999'),1,3) = '435' OR SUBSTRING(STRING(tt-param.estab-ini,'999'),1,3) = '432' or SUBSTRING(STRING(tt-param.estab-ini,'999'),1,3) = '412' THEN /*solic-318*/
+IF  SUBSTRING(STRING(tt-param.estab-ini,'999'),1,2) = '38'  OR SUBSTRING(STRING(tt-param.estab-ini,'999'),1,3) = '435' OR SUBSTRING(STRING(tt-param.estab-ini,'999'),1,3) = '443' OR SUBSTRING(STRING(tt-param.estab-ini,'999'),1,3) = '432' THEN /*solic-318*/
     ASSIGN c-grup-estoques = '11,12'.       /*coloque aqui as respectivas grup-estoques*/
 IF  SUBSTRING(STRING(tt-param.estab-ini,'999'),1,2) = '39' THEN
     ASSIGN c-grup-estoques = '12,22,31,32'. /*coloque aqui as respectivas grup-estoques*/

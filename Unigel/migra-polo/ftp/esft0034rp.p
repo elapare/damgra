@@ -83,22 +83,11 @@ DEFINE TEMP-TABLE tt-digita no-undo
 
 
 /*paramentros*/
-  /*
-DEFINE VARIABLE c-lote-tela AS CHARACTER  INITIAL "" FORMAT "X(10)" NO-UNDO.
-DEFINE VARIABLE c-nr-nota-fis-i AS CHARACTER  INITIAL "0034715" NO-UNDO.
-DEFINE VARIABLE c-nr-nota-fis-f AS CHARACTER  INITIAL "0034715" NO-UNDO.
-
-DEFINE VARIABLE i-cod-emitente AS INTEGER   initial 15126  NO-UNDO.
-DEFINE VARIABLE c-cod-estabel AS CHARACTER  INITIAL "422" NO-UNDO.
-DEFINE VARIABLE c-serie AS CHARACTER  INITIAL "20" NO-UNDO.
-DEFINE VARIABLE c-it-codigo AS CHARACTER  INITIAL "" FORMAT "X(16)" NO-UNDO.
-def var     l-imprime as logical no-undo.   
-  */
 
 DEFINE input param c-nr-nota-fis-i  AS CHARACTER initial "0032477"  NO-UNDO.
 DEFINE input param c-nr-nota-fis-f  AS CHARACTER initial "0032477"  NO-UNDO.
 DEFINE input param i-cod-emitente AS INTEGER   initial 17470  NO-UNDO.
-DEFINE input param c-cod-estabel  AS CHARACTER  initial "422"  NO-UNDO.
+DEFINE input param c-cod-estabel  AS CHARACTER  initial "{cdp\poloestab.i 422}"  NO-UNDO./*solic-318*/
 DEFINE input param c-serie        AS CHARACTER initial "20" NO-UNDO.
   
 /*
@@ -792,7 +781,6 @@ c-anexo = arquivo-jr.
                soma-pbruto   = soma-pbruto + pal-peso-bru. 
 
         IF tt-digita.pal-nr-pedido <> pedido-ant AND 
-       /*    c-cod-estabel-ini = "423" AND */
            pedido-ant <> 0   THEN DO:
 
 

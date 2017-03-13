@@ -248,7 +248,7 @@ DEFINE RECTANGLE RECT-20
 DEFINE VARIABLE c-cod-estabel-ini AS CHAR label "Estab." FORMAT "x(3)":U 
      VIEW-AS FILL-IN 
      SIZE 4 BY .88
-     TOOLTIP "Informe C¢digo do Estabelecimento " INITIAL "434" NO-UNDO.
+     TOOLTIP "Informe C¢digo do Estabelecimento " INITIAL "{cdp\poloestab.i 434}" NO-UNDO./*solic-318*/
 
 
 DEFINE VARIABLE c-lg-plt-1 AS DECIMAL FORMAT "9.999" 
@@ -1158,7 +1158,7 @@ run GetEnv in h-prog(input "CLIENTNAME", output c-clientname).
 DELETE PROCEDURE h-prog.
 
 
-ASSIGN c-cod-estabel-ini = "434"
+ASSIGN c-cod-estabel-ini = "{cdp\poloestab.i 434}"/*solic-318*/
        c-serie           = "20".
 
 
