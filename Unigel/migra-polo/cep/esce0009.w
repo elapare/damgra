@@ -97,7 +97,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel        like movto-estoq.cod-estabel   format "x(3)" initial "423" no-undo.
+def new shared var c-cod-estabel        like movto-estoq.cod-estabel   format "x(3)" initial "413" no-undo./*solic-318*/
 def new shared var c-ano                AS INTEGER                     format 9999 INITIAL 2005. 
 def new shared var c-mes                AS INTEGER                     format 99 INITIAL 1.
 def new shared var c-fm-codigo-ini      LIKE item.fm-codigo            format "x(10)" INITIAL "" no-undo.

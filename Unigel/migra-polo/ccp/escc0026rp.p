@@ -100,7 +100,7 @@ define temp-table tt-item-contrato no-undo
 define buffer b-item-contrat for item-contrat.
 define buffer b-contrato-for  for contrato-for.
 
-def shared var c-cod-estabel   like contrato-for.cod-estabel   format "x(03)"    initial "422"   no-undo.
+def shared var c-cod-estabel   like contrato-for.cod-estabel   format "x(03)"    initial "412"   no-undo./*solic-318*/
 def shared var c-cod-emitente  like contrato-for.cod-emitente  format ">>>>>>>9" initial 0       no-undo.
 def shared var i-nr-contrato   like contrato-for.nr-contrato  format ">>>>>>>9" initial 0      no-undo.
 def shared var c-arquivo-import as char       no-undo.

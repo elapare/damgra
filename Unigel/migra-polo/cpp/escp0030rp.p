@@ -700,7 +700,7 @@ FOR EACH movto-estoq NO-LOCK USE-INDEX esp-data
 
     ASSIGN maq-jr = 1.
 
-    IF movto-estoq.cod-estabel = "422" THEN DO: 
+    IF (movto-estoq.cod-estabel = "422" OR movto-estoq.cod-estabel = "412") THEN DO: /*solic-318*/
         FIND FIRST lote-carac-tec NO-LOCK use-index codigo 
             WHERE lote-carac-tec.it-codigo = movto-estoq.it-codigo
               AND lote-carac-tec.lote = movto-estoq.lote
@@ -710,7 +710,7 @@ FOR EACH movto-estoq NO-LOCK USE-INDEX esp-data
           ASSIGN maq-jr = lote-carac-tec.vl-resul. 
     END.
 
-    IF movto-estoq.cod-estabel <> "422" THEN DO: 
+    IF (movto-estoq.cod-estabel <> "422" AND movto-estoq.cod-estabel <> "412") THEN DO: /*solic-318*/
        FIND FIRST lote-carac-tec NO-LOCK use-index codigo 
            WHERE lote-carac-tec.it-codigo = movto-estoq.it-codigo
              and lote-carac-tec.lote = movto-estoq.lote

@@ -102,16 +102,16 @@ DEFINE TEMP-TABLE tt-dados
     FIELD reprov-ln-3          AS DECIMAL
     FIELD reserv-ped-ln-3      AS DECIMAL
 
-    FIELD est-prime-pedido-421 AS DECIMAL EXTENT 2 
-    FIELD est-prime-pedido-422 AS DECIMAL EXTENT 2 
+    FIELD est-prime-pedido-421_411 AS DECIMAL EXTENT 2 /*solic-318*/
+    FIELD est-prime-pedido-422_412 AS DECIMAL EXTENT 2 /*solic-318*/
     FIELD est-prime-pedido-426 AS DECIMAL EXTENT 2 
     FIELD est-prime-pedido-tsg AS DECIMAL EXTENT 2 
     FIELD est-prime-pedido-rds AS DECIMAL EXTENT 2 
     FIELD est-prime-pedido-gre AS DECIMAL EXTENT 2 
     FIELD est-prime-pedido-out AS DECIMAL EXTENT 2 
 
-    FIELD est-prime-sem-pd-421 AS DECIMAL EXTENT 2 
-    FIELD est-prime-sem-pd-422 AS DECIMAL EXTENT 2 
+    FIELD est-prime-sem-pd-421_411 AS DECIMAL EXTENT 2 /*solic-318*/
+    FIELD est-prime-sem-pd-422_412 AS DECIMAL EXTENT 2 /*solic-318*/
     FIELD est-prime-sem-pd-426 AS DECIMAL EXTENT 2 
     FIELD est-prime-sem-pd-tsg AS DECIMAL EXTENT 2 
     FIELD est-prime-sem-pd-rds AS DECIMAL EXTENT 2 
@@ -128,16 +128,16 @@ DEFINE TEMP-TABLE tt-dados
 
 
 
-    FIELD est-offsp-pedido-421 AS DECIMAL EXTENT 2 
-    FIELD est-offsp-pedido-422 AS DECIMAL EXTENT 2 
+    FIELD est-offsp-pedido-421_411 AS DECIMAL EXTENT 2 /*solic-318*/
+    FIELD est-offsp-pedido-422_412 AS DECIMAL EXTENT 2 /*solic-318*/
     FIELD est-offsp-pedido-426 AS DECIMAL EXTENT 2 
     FIELD est-offsp-pedido-tsg AS DECIMAL EXTENT 2 
     FIELD est-offsp-pedido-rds AS DECIMAL EXTENT 2 
     FIELD est-offsp-pedido-gre AS DECIMAL EXTENT 2 
     FIELD est-offsp-pedido-out AS DECIMAL EXTENT 2 
 
-    FIELD est-offsp-sem-pd-421 AS DECIMAL EXTENT 2 
-    FIELD est-offsp-sem-pd-422 AS DECIMAL EXTENT 2 
+    FIELD est-offsp-sem-pd-421_411 AS DECIMAL EXTENT 2 /*solic-318*/
+    FIELD est-offsp-sem-pd-422_412 AS DECIMAL EXTENT 2 /*solic-318*/
     FIELD est-offsp-sem-pd-426 AS DECIMAL EXTENT 2 
     FIELD est-offsp-sem-pd-tsg AS DECIMAL EXTENT 2 
     FIELD est-offsp-sem-pd-rds AS DECIMAL EXTENT 2 
@@ -152,13 +152,13 @@ DEFINE TEMP-TABLE tt-dados
     FIELD est-offsp-cliente    AS DECIMAL EXTENT 2 
     FIELD est-offsp-ep         AS DECIMAL EXTENT 2 
 
-    FIELD fat-prime-int-421    AS DECIMAL EXTENT 4 
-    FIELD fat-prime-int-422    AS DECIMAL EXTENT 4 
+    FIELD fat-prime-int-421_411    AS DECIMAL EXTENT 4 /*solic-318*/
+    FIELD fat-prime-int-422_412    AS DECIMAL EXTENT 4 /*solic-318*/
     FIELD fat-prime-int-426    AS DECIMAL EXTENT 4 
     FIELD fat-prime-int-out    AS DECIMAL EXTENT 4 
 
-    FIELD fat-prime-ext-421    AS DECIMAL EXTENT 4 
-    FIELD fat-prime-ext-422    AS DECIMAL EXTENT 4 
+    FIELD fat-prime-ext-421_411    AS DECIMAL EXTENT 4 /*solic-318*/
+    FIELD fat-prime-ext-422_412    AS DECIMAL EXTENT 4 /*solic-318*/
     FIELD fat-prime-ext-426    AS DECIMAL EXTENT 4 
     FIELD fat-prime-ext-out    AS DECIMAL EXTENT 4 
 
@@ -275,7 +275,7 @@ def new global shared var rw-log-exec            as rowid                    no-
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini  like nota-fiscal.cod-estabel     format "X(3)" initial "422" no-undo.
+def new shared var c-cod-estabel-ini  like nota-fiscal.cod-estabel     format "X(3)" initial "{cdp\poloestab.i 422}" no-undo. /*solic-318*/
 def new shared var c-canal-venda-ini  like nota-fiscal.cod-canal-venda format ">>9" initial 0 no-undo.
 def new shared var dt-data-hoje       like nota-fiscal.dt-emis-nota    format "99/99/9999" initial today no-undo.
 def new shared var dt-data-ontem      like nota-fiscal.dt-emis-nota    format "99/99/9999" initial today no-undo.
@@ -1286,17 +1286,17 @@ FOR EACH ITEM NO-LOCK WHERE
         
              IF ped-venda.tp-pedido <> "E" THEN DO:
         
-                IF saldo-estoq.cod-estabel = "422" THEN
-                    ASSIGN tt-dados.est-prime-pedido-422 [1] = tt-dados.est-prime-pedido-422 [1] 
+                IF saldo-estoq.cod-estabel = "{cdp\poloestab.i 422}" THEN /*solic-318*/
+                    ASSIGN tt-dados.est-prime-pedido-422_412 [1] = tt-dados.est-prime-pedido-422_412 [1] 
                            + saldo-atu-jr
-                           tt-dados.est-prime-pedido-422 [2] = tt-dados.est-prime-pedido-422 [2] 
+                           tt-dados.est-prime-pedido-422_412 [2] = tt-dados.est-prime-pedido-422_412 [2] 
                            + saldo-atu-ontem.
             
                 ELSE
-                 IF saldo-estoq.cod-estabel = "421" THEN
-                     ASSIGN tt-dados.est-prime-pedido-421 [1] = tt-dados.est-prime-pedido-421 [1] 
+                 IF saldo-estoq.cod-estabel = "{cdp\poloestab.i 421}" THEN /*solic-318*/
+                     ASSIGN tt-dados.est-prime-pedido-421_411 [1] = tt-dados.est-prime-pedido-421_411 [1] 
                             + saldo-atu-jr
-                            tt-dados.est-prime-pedido-421 [2] = tt-dados.est-prime-pedido-421 [2] 
+                            tt-dados.est-prime-pedido-421_411 [2] = tt-dados.est-prime-pedido-421_411 [2] 
                             + saldo-atu-ontem.
 
             
@@ -1331,18 +1331,18 @@ FOR EACH ITEM NO-LOCK WHERE
         
              IF ped-venda.tp-pedido <> "E" THEN DO:
         
-                IF saldo-estoq.cod-estabel = "422" THEN
-                    ASSIGN tt-dados.est-offsp-pedido-422 [1] = tt-dados.est-offsp-pedido-422 [1] 
+                IF saldo-estoq.cod-estabel = "{cdp\poloestab.i 422}" THEN /*solic-318*/
+                    ASSIGN tt-dados.est-offsp-pedido-422_412 [1] = tt-dados.est-offsp-pedido-422_412 [1] 
                            + saldo-atu-jr
-                           tt-dados.est-offsp-pedido-422 [2] = tt-dados.est-offsp-pedido-422 [2] 
+                           tt-dados.est-offsp-pedido-422_412 [2] = tt-dados.est-offsp-pedido-422_412 [2] 
                            + saldo-atu-ontem.
 
             
                 ELSE
-                 IF saldo-estoq.cod-estabel = "421" THEN
-                     ASSIGN tt-dados.est-offsp-pedido-421 [1] = tt-dados.est-offsp-pedido-421 [1] 
+                 IF saldo-estoq.cod-estabel = "{cdp\poloestab.i 421}" THEN /*solic-318*/
+                     ASSIGN tt-dados.est-offsp-pedido-421_411 [1] = tt-dados.est-offsp-pedido-421_411 [1] 
                             + saldo-atu-jr
-                            tt-dados.est-offsp-pedido-421 [2] = tt-dados.est-offsp-pedido-421 [2] 
+                            tt-dados.est-offsp-pedido-421_411 [2] = tt-dados.est-offsp-pedido-421_411 [2] 
                             + saldo-atu-ontem.
 
             
@@ -1381,18 +1381,18 @@ FOR EACH ITEM NO-LOCK WHERE
 
           IF ITEM.ge-codigo = 46 AND INDEX(ITEM.it-codigo,"EP",1) = 0 THEN DO:  /* Prime */ 
         
-             IF saldo-estoq.cod-estabel = "422" THEN
-                 ASSIGN tt-dados.est-prime-sem-pd-422 [1] = tt-dados.est-prime-sem-pd-422 [1] 
+             IF saldo-estoq.cod-estabel = "{cdp\poloestab.i 422}" THEN /*solic-318*/
+                 ASSIGN tt-dados.est-prime-sem-pd-422_412 [1] = tt-dados.est-prime-sem-pd-422_412 [1] 
                         + saldo-atu-jr
-                        tt-dados.est-prime-sem-pd-422 [2] = tt-dados.est-prime-sem-pd-422 [2] 
+                        tt-dados.est-prime-sem-pd-422_412 [2] = tt-dados.est-prime-sem-pd-422_412 [2] 
                         + saldo-atu-ontem.
                  
             
              ELSE
-              IF saldo-estoq.cod-estabel = "421" THEN
-                  ASSIGN tt-dados.est-prime-sem-pd-421 [1] = tt-dados.est-prime-sem-pd-421 [1] 
+              IF saldo-estoq.cod-estabel = "{cdp\poloestab.i 421}" THEN /*solic-318*/
+                  ASSIGN tt-dados.est-prime-sem-pd-421_411 [1] = tt-dados.est-prime-sem-pd-421_411 [1] 
                          + saldo-atu-jr
-                         tt-dados.est-prime-sem-pd-421 [2] = tt-dados.est-prime-sem-pd-421 [2] 
+                         tt-dados.est-prime-sem-pd-421_411 [2] = tt-dados.est-prime-sem-pd-421_411 [2] 
                          + saldo-atu-ontem.
 
             
@@ -1424,18 +1424,18 @@ FOR EACH ITEM NO-LOCK WHERE
         
           IF ITEM.ge-codigo <> 46 AND INDEX(ITEM.it-codigo,"EP",1) = 0 THEN DO:  /* Off-Specs */
         
-            IF saldo-estoq.cod-estabel = "422" THEN
-                ASSIGN tt-dados.est-offsp-sem-pd-422 [1] = tt-dados.est-offsp-sem-pd-422 [1] 
+            IF saldo-estoq.cod-estabel = "{cdp\poloestab.i 422}" THEN /*solic-318*/
+                ASSIGN tt-dados.est-offsp-sem-pd-422_412 [1] = tt-dados.est-offsp-sem-pd-422_412 [1] 
                        + saldo-atu-jr
-                       tt-dados.est-offsp-sem-pd-422 [2] = tt-dados.est-offsp-sem-pd-422 [2] 
+                       tt-dados.est-offsp-sem-pd-422_412 [2] = tt-dados.est-offsp-sem-pd-422_412 [2] 
                        + saldo-atu-ontem.
 
             
             ELSE
-             IF saldo-estoq.cod-estabel = "421" THEN
-                 ASSIGN tt-dados.est-offsp-sem-pd-421 [1] = tt-dados.est-offsp-sem-pd-421 [1] 
+             IF saldo-estoq.cod-estabel = "{cdp\poloestab.i 421}" THEN /*solic-318*/
+                 ASSIGN tt-dados.est-offsp-sem-pd-421_411 [1] = tt-dados.est-offsp-sem-pd-421_411 [1] 
                         + saldo-atu-jr
-                        tt-dados.est-offsp-sem-pd-421 [2] = tt-dados.est-offsp-sem-pd-421 [2] 
+                        tt-dados.est-offsp-sem-pd-421_411 [2] = tt-dados.est-offsp-sem-pd-421_411 [2] 
                         + saldo-atu-ontem.
 
             
@@ -1957,13 +1957,13 @@ for each nota-fiscal no-lock
 
         IF tp-produto-jr = "prime" THEN DO:
 
-           IF nota-fiscal.cod-estabel = "421" THEN
-            ASSIGN tt-dados.fat-prime-int-421 [1] = tt-dados.fat-prime-int-421 [1] + qt-faturada-jr
-                   tt-dados.fat-prime-int-421 [2] = tt-dados.fat-prime-int-421 [2] + var-vl-liq.
+           IF nota-fiscal.cod-estabel = "{cdp\poloestab.i 421}" THEN /*solic-318*/
+            ASSIGN tt-dados.fat-prime-int-421_411 [1] = tt-dados.fat-prime-int-421_411 [1] + qt-faturada-jr
+                   tt-dados.fat-prime-int-421_411 [2] = tt-dados.fat-prime-int-421_411 [2] + var-vl-liq.
             ELSE
-               IF nota-fiscal.cod-estabel = "422" THEN
-                ASSIGN tt-dados.fat-prime-int-422 [1] = tt-dados.fat-prime-int-422 [1] + qt-faturada-jr
-                       tt-dados.fat-prime-int-422 [2] = tt-dados.fat-prime-int-422 [2] + var-vl-liq.
+               IF nota-fiscal.cod-estabel = "{cdp\poloestab.i 422}" THEN /*solic-318*/
+                ASSIGN tt-dados.fat-prime-int-422_412 [1] = tt-dados.fat-prime-int-422_412 [1] + qt-faturada-jr
+                       tt-dados.fat-prime-int-422_412 [2] = tt-dados.fat-prime-int-422_412 [2] + var-vl-liq.
                ELSE
                    IF nota-fiscal.cod-estabel = "426" THEN
                     ASSIGN tt-dados.fat-prime-int-426 [1] = tt-dados.fat-prime-int-426 [1] + qt-faturada-jr
@@ -1992,13 +1992,13 @@ for each nota-fiscal no-lock
 
         IF tp-produto-jr = "prime" THEN DO:
 
-           IF nota-fiscal.cod-estabel = "421" THEN
-            ASSIGN tt-dados.fat-prime-ext-421 [1] = tt-dados.fat-prime-ext-421 [1] + qt-faturada-jr
-                   tt-dados.fat-prime-ext-421 [2] = tt-dados.fat-prime-ext-421 [2] + var-vl-liq.
+           IF nota-fiscal.cod-estabel = "{cdp\poloestab.i 421}" THEN /*solic-318*/
+            ASSIGN tt-dados.fat-prime-ext-421_411 [1] = tt-dados.fat-prime-ext-421_411 [1] + qt-faturada-jr
+                   tt-dados.fat-prime-ext-421_411 [2] = tt-dados.fat-prime-ext-421_411 [2] + var-vl-liq.
             ELSE
-               IF nota-fiscal.cod-estabel = "422" THEN
-                ASSIGN tt-dados.fat-prime-ext-422 [1] = tt-dados.fat-prime-ext-422 [1] + qt-faturada-jr
-                       tt-dados.fat-prime-ext-422 [2] = tt-dados.fat-prime-ext-422 [2] + var-vl-liq.
+               IF nota-fiscal.cod-estabel = "{cdp\poloestab.i 422}" THEN /*solic-318*/
+                ASSIGN tt-dados.fat-prime-ext-422_412 [1] = tt-dados.fat-prime-ext-422_412 [1] + qt-faturada-jr
+                       tt-dados.fat-prime-ext-422_412 [2] = tt-dados.fat-prime-ext-422_412 [2] + var-vl-liq.
                ELSE
                    IF nota-fiscal.cod-estabel = "426" THEN
                     ASSIGN tt-dados.fat-prime-ext-426 [1] = tt-dados.fat-prime-ext-426 [1] + qt-faturada-jr
@@ -2043,13 +2043,13 @@ for each nota-fiscal no-lock
 
         IF tp-produto-jr = "prime" THEN DO:
 
-           IF nota-fiscal.cod-estabel = "421" THEN
-            ASSIGN tt-dados.fat-prime-int-421 [3] = tt-dados.fat-prime-int-421 [3] + qt-faturada-jr
-                   tt-dados.fat-prime-int-421 [4] = tt-dados.fat-prime-int-421 [4] + var-vl-liq.
+           IF nota-fiscal.cod-estabel = "{cdp\poloestab.i 421}" THEN /*solic-318*/
+            ASSIGN tt-dados.fat-prime-int-421_411 [3] = tt-dados.fat-prime-int-421_411 [3] + qt-faturada-jr
+                   tt-dados.fat-prime-int-421_411 [4] = tt-dados.fat-prime-int-421_411 [4] + var-vl-liq.
             ELSE
-               IF nota-fiscal.cod-estabel = "422" THEN
-                ASSIGN tt-dados.fat-prime-int-422 [3] = tt-dados.fat-prime-int-422 [3] + qt-faturada-jr
-                       tt-dados.fat-prime-int-422 [4] = tt-dados.fat-prime-int-422 [4] + var-vl-liq.
+               IF nota-fiscal.cod-estabel = "{cdp\poloestab.i 422}" THEN /*solic-318*/
+                ASSIGN tt-dados.fat-prime-int-422_412 [3] = tt-dados.fat-prime-int-422_412 [3] + qt-faturada-jr
+                       tt-dados.fat-prime-int-422_412 [4] = tt-dados.fat-prime-int-422_412 [4] + var-vl-liq.
                ELSE
                    IF nota-fiscal.cod-estabel = "426" THEN
                     ASSIGN tt-dados.fat-prime-int-426 [3] = tt-dados.fat-prime-int-426 [3] + qt-faturada-jr
@@ -2078,13 +2078,13 @@ for each nota-fiscal no-lock
 
         IF tp-produto-jr = "prime" THEN DO:
 
-           IF nota-fiscal.cod-estabel = "421" THEN
-            ASSIGN tt-dados.fat-prime-ext-421 [3] = tt-dados.fat-prime-ext-421 [3] + qt-faturada-jr
-                   tt-dados.fat-prime-ext-421 [4] = tt-dados.fat-prime-ext-421 [4] + var-vl-liq.
+           IF nota-fiscal.cod-estabel = "{cdp\poloestab.i 421}" THEN /*solic-318*/
+            ASSIGN tt-dados.fat-prime-ext-421_411 [3] = tt-dados.fat-prime-ext-421_411 [3] + qt-faturada-jr
+                   tt-dados.fat-prime-ext-421_411 [4] = tt-dados.fat-prime-ext-421_411 [4] + var-vl-liq.
             ELSE
-               IF nota-fiscal.cod-estabel = "422" THEN
-                ASSIGN tt-dados.fat-prime-ext-422 [3] = tt-dados.fat-prime-ext-422 [3] + qt-faturada-jr
-                       tt-dados.fat-prime-ext-422 [4] = tt-dados.fat-prime-ext-422 [4] + var-vl-liq.
+               IF nota-fiscal.cod-estabel = "{cdp\poloestab.i 422}" THEN /*solic-318*/
+                ASSIGN tt-dados.fat-prime-ext-422_412 [3] = tt-dados.fat-prime-ext-422_412 [3] + qt-faturada-jr
+                       tt-dados.fat-prime-ext-422_412 [4] = tt-dados.fat-prime-ext-422_412 [4] + var-vl-liq.
                ELSE
                    IF nota-fiscal.cod-estabel = "426" THEN
                     ASSIGN tt-dados.fat-prime-ext-426 [3] = tt-dados.fat-prime-ext-426 [3] + qt-faturada-jr
@@ -2250,10 +2250,10 @@ IF AVAIL tt-dados THEN DO:
            c-relatorio:range ("F89"):VALUE   = (tt-dados.est-offsp-aloc-restr [1] -  tt-dados.est-offsp-aloc-restr [2]) / 1000.
 
 
-    ASSIGN c-relatorio:range ("D42"):VALUE   = tt-dados.est-prime-pedido-421 [1] / 1000
-           c-relatorio:range ("F42"):VALUE   = (tt-dados.est-prime-pedido-421 [1] - tt-dados.est-prime-pedido-421 [2]) / 1000
-           c-relatorio:range ("D43"):VALUE   = tt-dados.est-prime-pedido-422 [1] / 1000
-           c-relatorio:range ("F43"):VALUE   = (tt-dados.est-prime-pedido-422 [1] - tt-dados.est-prime-pedido-422 [2]) / 1000
+    ASSIGN c-relatorio:range ("D42"):VALUE   = tt-dados.est-prime-pedido-421_411 [1] / 1000
+           c-relatorio:range ("F42"):VALUE   = (tt-dados.est-prime-pedido-421_411 [1] - tt-dados.est-prime-pedido-421_411 [2]) / 1000
+           c-relatorio:range ("D43"):VALUE   = tt-dados.est-prime-pedido-422_412 [1] / 1000
+           c-relatorio:range ("F43"):VALUE   = (tt-dados.est-prime-pedido-422_412 [1] - tt-dados.est-prime-pedido-422_412 [2]) / 1000
            c-relatorio:range ("D44"):VALUE   = tt-dados.est-prime-pedido-426 [1] / 1000
            c-relatorio:range ("F44"):VALUE   = (tt-dados.est-prime-pedido-426 [1] - tt-dados.est-prime-pedido-426 [2]) / 1000
            c-relatorio:range ("D45"):VALUE   = tt-dados.est-prime-pedido-tsg [1] / 1000
@@ -2267,10 +2267,10 @@ IF AVAIL tt-dados THEN DO:
 
 
 
-    ASSIGN c-relatorio:range ("D50"):VALUE   = tt-dados.est-prime-sem-pd-421 [1] / 1000
-           c-relatorio:range ("F50"):VALUE   = (tt-dados.est-prime-sem-pd-421 [1] - tt-dados.est-prime-sem-pd-421 [2]) / 1000
-           c-relatorio:range ("D51"):VALUE   = tt-dados.est-prime-sem-pd-422 [1] / 1000
-           c-relatorio:range ("F51"):VALUE   = (tt-dados.est-prime-sem-pd-422 [1] - tt-dados.est-prime-sem-pd-422 [2]) / 1000
+    ASSIGN c-relatorio:range ("D50"):VALUE   = tt-dados.est-prime-sem-pd-421_411 [1] / 1000
+           c-relatorio:range ("F50"):VALUE   = (tt-dados.est-prime-sem-pd-421_411 [1] - tt-dados.est-prime-sem-pd-421_411 [2]) / 1000
+           c-relatorio:range ("D51"):VALUE   = tt-dados.est-prime-sem-pd-422_412 [1] / 1000
+           c-relatorio:range ("F51"):VALUE   = (tt-dados.est-prime-sem-pd-422_412 [1] - tt-dados.est-prime-sem-pd-422_412 [2]) / 1000
            c-relatorio:range ("D52"):VALUE   = tt-dados.est-prime-sem-pd-426 [1] / 1000
            c-relatorio:range ("F52"):VALUE   = (tt-dados.est-prime-sem-pd-426 [1] - tt-dados.est-prime-sem-pd-426 [2]) / 1000
            c-relatorio:range ("D53"):VALUE   = tt-dados.est-prime-sem-pd-tsg [1] / 1000
@@ -2288,10 +2288,10 @@ IF AVAIL tt-dados THEN DO:
            c-relatorio:range ("D64"):VALUE   = tt-dados.est-prime-ep [1] / 1000                                    
            c-relatorio:range ("F64"):VALUE   = (tt-dados.est-prime-ep [1] - tt-dados.est-prime-ep [2]) / 1000.
 
-    ASSIGN c-relatorio:range ("D70"):VALUE   = tt-dados.est-offsp-pedido-421 [1] / 1000
-           c-relatorio:range ("F70"):VALUE   = (tt-dados.est-offsp-pedido-421 [1] - tt-dados.est-offsp-pedido-421 [2]) / 1000
-           c-relatorio:range ("D71"):VALUE   = tt-dados.est-offsp-pedido-422 [1] / 1000
-           c-relatorio:range ("F71"):VALUE   = (tt-dados.est-offsp-pedido-422 [1] - tt-dados.est-offsp-pedido-422 [2]) / 1000
+    ASSIGN c-relatorio:range ("D70"):VALUE   = tt-dados.est-offsp-pedido-421_411 [1] / 1000
+           c-relatorio:range ("F70"):VALUE   = (tt-dados.est-offsp-pedido-421_411 [1] - tt-dados.est-offsp-pedido-421_411 [2]) / 1000
+           c-relatorio:range ("D71"):VALUE   = tt-dados.est-offsp-pedido-422_412 [1] / 1000
+           c-relatorio:range ("F71"):VALUE   = (tt-dados.est-offsp-pedido-422_412 [1] - tt-dados.est-offsp-pedido-422_412 [2]) / 1000
            c-relatorio:range ("D72"):VALUE   = tt-dados.est-offsp-pedido-426 [1] / 1000
            c-relatorio:range ("F72"):VALUE   = (tt-dados.est-offsp-pedido-426 [1] - tt-dados.est-offsp-pedido-426 [2]) / 1000
            c-relatorio:range ("D73"):VALUE   = tt-dados.est-offsp-pedido-tsg [1] / 1000
@@ -2305,10 +2305,10 @@ IF AVAIL tt-dados THEN DO:
 
 
 
-    ASSIGN c-relatorio:range ("D78"):VALUE   = tt-dados.est-offsp-sem-pd-421 [1] / 1000
-           c-relatorio:range ("F78"):VALUE   = (tt-dados.est-offsp-sem-pd-421 [1] - tt-dados.est-offsp-sem-pd-421 [2]) / 1000
-           c-relatorio:range ("D79"):VALUE   = tt-dados.est-offsp-sem-pd-422 [1] / 1000
-           c-relatorio:range ("F79"):VALUE   = (tt-dados.est-offsp-sem-pd-422 [1] - tt-dados.est-offsp-sem-pd-422 [2]) / 1000
+    ASSIGN c-relatorio:range ("D78"):VALUE   = tt-dados.est-offsp-sem-pd-421_411 [1] / 1000
+           c-relatorio:range ("F78"):VALUE   = (tt-dados.est-offsp-sem-pd-421_411 [1] - tt-dados.est-offsp-sem-pd-421_411 [2]) / 1000
+           c-relatorio:range ("D79"):VALUE   = tt-dados.est-offsp-sem-pd-422_412 [1] / 1000
+           c-relatorio:range ("F79"):VALUE   = (tt-dados.est-offsp-sem-pd-422_412 [1] - tt-dados.est-offsp-sem-pd-422_412 [2]) / 1000
            c-relatorio:range ("D80"):VALUE   = tt-dados.est-offsp-sem-pd-426 [1] / 1000
            c-relatorio:range ("F80"):VALUE   = (tt-dados.est-offsp-sem-pd-426 [1] - tt-dados.est-offsp-sem-pd-426 [2]) / 1000
            c-relatorio:range ("D81"):VALUE   = tt-dados.est-offsp-sem-pd-tsg [1] / 1000
@@ -2344,11 +2344,11 @@ IF AVAIL tt-dados THEN DO:
            c-relatorio:range ("E106"):VALUE   = tt-dados.fat-int-off-specs [1] / 1000
            c-relatorio:range ("G106"):VALUE   = tt-dados.fat-int-off-specs [2]      
            
-           c-relatorio:range ("E100"):VALUE   = tt-dados.fat-prime-ext-422 [1] / 1000
-           c-relatorio:range ("G100"):VALUE   = tt-dados.fat-prime-ext-422 [2]      
+           c-relatorio:range ("E100"):VALUE   = tt-dados.fat-prime-ext-422_412 [1] / 1000
+           c-relatorio:range ("G100"):VALUE   = tt-dados.fat-prime-ext-422_412 [2]      
 
-           c-relatorio:range ("E101"):VALUE   = tt-dados.fat-prime-ext-421 [1] / 1000
-           c-relatorio:range ("G101"):VALUE   = tt-dados.fat-prime-ext-421 [2]      
+           c-relatorio:range ("E101"):VALUE   = tt-dados.fat-prime-ext-421_411 [1] / 1000
+           c-relatorio:range ("G101"):VALUE   = tt-dados.fat-prime-ext-421_411 [2]      
            
            c-relatorio:range ("E102"):VALUE   = tt-dados.fat-prime-ext-426 [1] / 1000
            c-relatorio:range ("G102"):VALUE   = tt-dados.fat-prime-ext-426 [2]      
@@ -2356,11 +2356,11 @@ IF AVAIL tt-dados THEN DO:
            c-relatorio:range ("E103"):VALUE   = tt-dados.fat-prime-ext-out [1] / 1000
            c-relatorio:range ("G103"):VALUE   = tt-dados.fat-prime-ext-out [2]      
            
-           c-relatorio:range ("E107"):VALUE   = tt-dados.fat-prime-int-422 [1] / 1000
-           c-relatorio:range ("G107"):VALUE   = tt-dados.fat-prime-int-422 [2]      
+           c-relatorio:range ("E107"):VALUE   = tt-dados.fat-prime-int-422_412 [1] / 1000
+           c-relatorio:range ("G107"):VALUE   = tt-dados.fat-prime-int-422_412 [2]      
 
-           c-relatorio:range ("E108"):VALUE   = tt-dados.fat-prime-int-421 [1] / 1000
-           c-relatorio:range ("G108"):VALUE   = tt-dados.fat-prime-int-421 [2]      
+           c-relatorio:range ("E108"):VALUE   = tt-dados.fat-prime-int-421_411 [1] / 1000
+           c-relatorio:range ("G108"):VALUE   = tt-dados.fat-prime-int-421_411 [2]      
            
            c-relatorio:range ("E109"):VALUE   = tt-dados.fat-prime-int-426 [1] / 1000
            c-relatorio:range ("G109"):VALUE   = tt-dados.fat-prime-int-426 [2]      
@@ -2373,27 +2373,27 @@ IF AVAIL tt-dados THEN DO:
            c-relatorio:range ("E127"):VALUE   = (tt-dados.qt-devolucao-mi + tt-dados.qt-devolucao-me) / 1000.
 
 
-    ASSIGN soma-fat-ext = tt-dados.fat-prime-ext-422 [1] +
-                          tt-dados.fat-prime-ext-421 [1] +
+    ASSIGN soma-fat-ext = tt-dados.fat-prime-ext-422_412 [1] +
+                          tt-dados.fat-prime-ext-421_411 [1] +
                           tt-dados.fat-prime-ext-426 [1] +
                           tt-dados.fat-prime-ext-out [1]. 
 
     ASSIGN soma-fat-ext = soma-fat-ext -
-                         (tt-dados.fat-prime-ext-422 [3] +
-                          tt-dados.fat-prime-ext-421 [3] +
+                         (tt-dados.fat-prime-ext-422_412 [3] +
+                          tt-dados.fat-prime-ext-421_411 [3] +
                           tt-dados.fat-prime-ext-426 [3] +
                           tt-dados.fat-prime-ext-out [3]). 
 
 
-    ASSIGN soma-fat-int = tt-dados.fat-prime-int-422 [1] +
-                          tt-dados.fat-prime-int-421 [1] +
+    ASSIGN soma-fat-int = tt-dados.fat-prime-int-422_412 [1] +
+                          tt-dados.fat-prime-int-421_411 [1] +
                           tt-dados.fat-prime-int-426 [1] +
                           tt-dados.fat-prime-int-out [1]. 
 
 
     ASSIGN soma-fat-int = soma-fat-int -
-                         (tt-dados.fat-prime-int-422 [3] +
-                          tt-dados.fat-prime-int-421 [3] +
+                         (tt-dados.fat-prime-int-422_412 [3] +
+                          tt-dados.fat-prime-int-421_411 [3] +
                           tt-dados.fat-prime-int-426 [3] +
                           tt-dados.fat-prime-int-out [3]). 
 

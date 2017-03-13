@@ -127,9 +127,7 @@ IF SEARCH(c-arq-jr) <> ? THEN DO:
             ASSIGN data-jr = string (SUBSTRING(c-linha,75,10))
                    c-relatorio:range("I" + string(2)):VALUE = data-jr.
 
-        /*IF STRING (SUBSTRING(c-linha,51,3)) < "420" OR 
-           STRING (SUBSTRING(c-linha,51,3)) > "429" THEN NEXT.
-          */
+        /*solic-318*/
 
         FIND estabelec WHERE estabelec.cod-estabel = SUBSTRING(c-linha,49,3) NO-LOCK NO-ERROR.
 

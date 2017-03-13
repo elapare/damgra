@@ -316,13 +316,13 @@ DEFINE VARIABLE c-vali-fim AS date FORMAT "99/99/9999"
      TOOLTIP "Informe a Data de Validade" NO-UNDO.  
 
 DEFINE VARIABLE c-cod-estabel-ini AS CHAR label "Estabelecimento" FORMAT "x(3)":U 
-     INITIAL "422"
+     INITIAL "{cdp\poloestab.i 422}"/*solic-318*/
      VIEW-AS FILL-IN 
      SIZE 4 BY .88
      TOOLTIP "Informe C¢digo do Estabelecimento " NO-UNDO.
 
 DEFINE VARIABLE c-cod-estabel-fim AS char FORMAT "x(3)"
-     INITIAL "422"
+     INITIAL "{cdp\poloestab.i 422}"/*solic-318*/
      VIEW-AS FILL-IN 
      SIZE 17 BY .88
      TOOLTIP "Informe o Cod. do Estabelecimento " NO-UNDO.
@@ -1643,9 +1643,9 @@ Do:
                          tt-digita.lot-it-codigo      = saldo-estoq.it-codigo   
                          tt-digita.lot-cod-refer      = saldo-estoq.cod-refer.
 
-                  IF saldo-estoq.cod-estabel = "423" THEN ASSIGN tt-digita.lot-nome-abrev = "VGA".
-                  IF saldo-estoq.cod-estabel = "422" THEN ASSIGN tt-digita.lot-nome-abrev = "MTN".
-                  IF saldo-estoq.cod-estabel > "422" THEN ASSIGN tt-digita.lot-nome-abrev = "SP".
+                  IF saldo-estoq.cod-estabel = "{cdp\poloestab.i 423}" THEN ASSIGN tt-digita.lot-nome-abrev = "VGA". /*solic-318*/
+                  IF saldo-estoq.cod-estabel = "{cdp\poloestab.i 422}" THEN ASSIGN tt-digita.lot-nome-abrev = "MTN". /*solic-318*/
+                  IF saldo-estoq.cod-estabel > "{cdp\poloestab.i 422}" THEN ASSIGN tt-digita.lot-nome-abrev = "SP".  /*solic-318*/
 
              END.
 

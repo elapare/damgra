@@ -110,7 +110,7 @@ def new global shared var rw-log-exec            as rowid                    no-
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
 
-def new shared var c-cod-estabel        AS CHAR     format "x(3)"       initial "422"              no-undo.
+def new shared var c-cod-estabel        AS CHAR     format "x(3)"       initial "412"              no-undo./*solic-318*/
 def new shared var c-fm-codigo-ini      AS CHAR     format "x(8)"       initial ""                 no-undo.
 def new shared var c-fm-codigo-fim      AS CHAR     format "x(8)"       initial "ZZZZZZZZ"         no-undo.
 def new shared var i-ge-codigo-ini      AS INTEGER  format ">>9"        initial 0                  no-undo.

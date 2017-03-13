@@ -58,9 +58,9 @@ DEFINE TEMP-TABLE tt-custo
                                            cc-codigo. 
 
 */
+ 
 
-
-def new shared var c-cod-estabel   like am-cc-tab-preco.cod-estabel   format "x(03)"    initial "422"   no-undo.
+def new shared var c-cod-estabel   like am-cc-tab-preco.cod-estabel   format "x(03)"    initial "412"   no-undo. /*solic-318*/
 def new shared var c-cod-emitente  like am-cc-tab-preco.cod-emitente  format ">>>>>>>9" initial 0       no-undo.
 def new shared var c-nr-tab-preco  like am-cc-tab-preco.nr-tab-preco  format ">>>>>>>9" initial 0       no-undo.
 

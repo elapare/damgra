@@ -90,7 +90,7 @@ def new global shared var rw-log-exec            as rowid                    no-
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
 
-def new shared var c-cod-estabel-ini    AS CHAR format "x(3)"          initial "422"              no-undo.
+def new shared var c-cod-estabel-ini    AS CHAR format "x(3)"          initial "412"              no-undo./*solic-318*/
 def new shared var c-dt-data-ini        AS DATE format "99/99/9999"    initial TODAY              no-undo.
 def new shared var c-dt-data-fim        AS DATE format "99/99/9999"    initial TODAY              no-undo.
 def new shared var c-it-codigo-ini      AS CHAR format "x(16)"         initial ""                 no-undo.

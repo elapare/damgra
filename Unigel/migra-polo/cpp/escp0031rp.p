@@ -902,32 +902,35 @@ FOR EACH tt-filmes NO-LOCK:
 
         IF AVAIL c-tab-res THEN
            DESC-def = c-tab-res.descricao.
-           ELSE
-               DESC-def = "".
+        ELSE
+           DESC-def = "".
 
-        IF ttfil-cod-estabel = "423" AND ttdef-cod-def = 1 THEN
-            DESC-def = "PROCESSOS".
+        IF (ttfil-cod-estabel = "423" OR ttfil-cod-estabel = "413") THEN DO: /*solic-318*/
+            IF ttdef-cod-def = 1 THEN
+                DESC-def = "PROCESSOS".
 
-        IF ttfil-cod-estabel = "423" AND ttdef-cod-def = 2 THEN
-            DESC-def = "DIMENSIONAL".
+            ELSE IF ttdef-cod-def = 2 THEN
+                DESC-def = "DIMENSIONAL".
 
-        IF ttfil-cod-estabel = "423" AND ttdef-cod-def = 3 THEN
-            DESC-def = "BOBINAMENTO".
+            ELSE IF ttdef-cod-def = 3 THEN
+                DESC-def = "BOBINAMENTO".
 
-        IF ttfil-cod-estabel = "423" AND ttdef-cod-def = 4 THEN
-            DESC-def = "GEOMETRIA".
+            ELSE IF ttdef-cod-def = 4 THEN
+                DESC-def = "GEOMETRIA".
 
-        IF ttfil-cod-estabel = "423" AND ttdef-cod-def = 5 THEN
-            DESC-def = "APARÒNCIA/OTICOS".
+            ELSE IF ttdef-cod-def = 5 THEN
+                DESC-def = "APARÒNCIA/OTICOS".
 
-        IF ttfil-cod-estabel = "423" AND ttdef-cod-def = 6 THEN
-            DESC-def = "PLANURA".
+            ELSE IF ttdef-cod-def = 6 THEN
+                DESC-def = "PLANURA".
 
-        IF ttfil-cod-estabel = "423" AND ttdef-cod-def = 7 THEN
-            DESC-def = "SUPERFÖCIE".
+            ELSE IF ttdef-cod-def = 7 THEN
+                DESC-def = "SUPERFÖCIE".
 
-        IF ttfil-cod-estabel = "423" AND ttdef-cod-def = 8 THEN
-            DESC-def = "OUTROS".
+            ELSE IF ttdef-cod-def = 8 THEN
+                DESC-def = "OUTROS".
+        END.
+         
 
         view stream str-rp frame f-cabec.
         view stream str-rp frame f-rodape.
