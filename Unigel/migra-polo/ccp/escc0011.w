@@ -668,6 +668,7 @@ ASSIGN DIR-jr = REPLACE(dir-jr, "/", "\").
 
 ASSIGN c-arquivo-entrada = dir-jr + "\escc0011" + ".xls". 
 
+    c-cod-estabel =  STRING({cdp\poloestab.i 422}).
 
 /* NÆo Permite Usu rios com Flag = No na tabela am-usuario */  
 

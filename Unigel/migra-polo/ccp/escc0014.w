@@ -210,7 +210,7 @@ ASSIGN l-split = NO.
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel     AS CHAR  format "x(03)"    initial "412"   no-undo.
+def new shared var c-cod-estabel     AS CHAR  format "x(03)"    initial ""   no-undo.
 def new shared var i-cod-emitente-jr AS INT   format ">>>>>>>9" initial 0       no-undo.
 
 DEFINE VARIABLE c-nome-abrev         AS CHAR  FORMAT "x(12)"    INITIAL ""      NO-UNDO.
@@ -2500,6 +2500,9 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+
+    c-cod-estabel =  STRING({cdp\poloestab.i 422}).
+
     RUN enable_UI.
 
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

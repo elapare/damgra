@@ -102,7 +102,7 @@ def new global shared var rw-log-exec            as rowid                    no-
 /****************** Defini‡ao de Parƒmetros do Relat¢rio *********************/ 
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
-def new shared var c-cod-estabel     like am-cc-tab-preco.cod-estabel   format "x(03)"    initial "412"   no-undo./*solic-318*/
+def new shared var c-cod-estabel     like am-cc-tab-preco.cod-estabel   format "x(03)"    initial ""   no-undo. /*solic-318*/
 
 /****************** Defini‡ao de Vari veis p/ Campos Virtuais do Relat¢rio *******************/ 
 

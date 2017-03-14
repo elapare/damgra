@@ -211,7 +211,7 @@ ASSIGN l-split = NO.
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel     AS CHAR  format "x(03)"    initial "412"   no-undo./*solic-318*/
+def new shared var c-cod-estabel     AS CHAR  format "x(03)"    initial ""   no-undo. /*solic-318*/
 def new shared var i-cod-emitente-jr AS INT   format ">>>>>>>9" initial 0       no-undo.
 
 DEFINE VARIABLE c-nome-abrev         AS CHAR  FORMAT "x(12)"    INITIAL ""      NO-UNDO.
@@ -1847,6 +1847,8 @@ MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
+    c-cod-estabel =  STRING({cdp\poloestab.i 422}).
+
     IF SESSION:SET-WAIT-STATE("":U) THEN.
     RUN enable_UI.
 
@@ -1859,6 +1861,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
 
     assign rs-formato:radio-buttons in frame f-pg-imp = {varinc/var00176.i 07}
            rs-formato:screen-value  in frame f-pg-imp = "2":U.
+
 
 
     assign v-cod-pg-mouse-selec = "im-pg-sel".
