@@ -23,7 +23,7 @@ DEF BUFFER b-item FOR ITEM.
 DEFINE BUFFER bf-reservas FOR reservas.
 
 define var c-emenda-ant as char no-undo.
-
+DEFINE BUFFER operacao FOR mgemp.operacao.
 
 CREATE WIDGET-POOL. 
 
@@ -770,7 +770,7 @@ def var v-num-reg-lidos    as int    no-undo.
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-DEFINE VARIABLE c-cod-estabel       AS CHAR      FORMAT "x(3)"   initial "422"           NO-UNDO. /*solic-318*/ 
+DEFINE VARIABLE c-cod-estabel       AS CHAR      FORMAT "x(3)"   initial ""           NO-UNDO. /*solic-318*/ 
 DEFINE VARIABLE c-cod-ctrab         AS CHAR      FORMAT "x(16)"             NO-UNDO.
 DEFINE VARIABLE c-cod-operador      AS CHAR      FORMAT "x(07)"             NO-UNDO.
 DEFINE VARIABLE c-lote-cons         AS CHAR      FORMAT "x(10)"             NO-UNDO.
@@ -3341,6 +3341,8 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     RUN enable_UI.
 c-temp-jr = session:temp-directory.
 
+
+c-cod-estabel  = STRING({cdp\poloestab.i 422}).
 
 FOR EACH tt-estacao.
         DELETE tt-estacao.

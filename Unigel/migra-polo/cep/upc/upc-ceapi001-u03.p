@@ -109,7 +109,7 @@ procedure pi-valida-conteudo:
                     FIND estabelec WHERE estabelec.cod-estabel = movto-mat.cod-estabel NO-LOCK NO-ERROR.
                          IF NOT AVAIL estabelec THEN RETURN.
         
-                         IF estabelec.ep-codigo <> "420" THEN RETURN.
+                         IF (estabelec.ep-codigo <> "420" AND estabelec.ep-codigo <> "410")  THEN RETURN.  /*solic-318*/ 
 
                     if not can-find(first b-movto-mat
                                     where b-movto-mat.nr-reporte = movto-mat.nr-reporte

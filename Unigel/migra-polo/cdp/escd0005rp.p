@@ -269,7 +269,7 @@ INPUT FROM VALUE(SEARCH("v:\temp\itens.csv")).
      END.
 
      FIND FIRST am-cd-item-vida-util WHERE
-         am-cd-item-vida-util.cod-estabel = "412" AND  /*solic-318*/ 
+         am-cd-item-vida-util.cod-estabel = STRING({cdp\poloestab.i 422}) AND  /*solic-318*/ 
          am-cd-item-vida-util.it-codigo = c-item-codigo
          NO-ERROR.
 
@@ -277,7 +277,7 @@ INPUT FROM VALUE(SEARCH("v:\temp\itens.csv")).
      
          CREATE am-cd-item-vida-util.
            
-         ASSIGN am-cd-item-vida-util.cod-estabel = "412"  /*solic-318*/ 
+         ASSIGN am-cd-item-vida-util.cod-estabel = STRING({cdp\poloestab.i 422})  /*solic-318*/ 
                 am-cd-item-vida-util.it-codigo   = c-item-codigo.
             
      end.
