@@ -4341,7 +4341,7 @@ run btb/btb918zb.p (input c-programa-mg97,
   RUN dispatch IN THIS-PROCEDURE ( INPUT 'initialize':U ) .
 
   FIND estabelec
-      WHERE estabelec.cod-estabel = '422'
+      WHERE estabelec.cod-estabel = '412' OR estabelec.cod-estabel = '422'
       NO-LOCK NO-ERROR.
   IF AVAIL estabelec THEN
       ASSIGN c-cod-estabel:SCREEN-VALUE IN FRAME F-Main = estabelec.cod-estabel

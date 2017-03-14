@@ -877,7 +877,7 @@ def var v-num-reg-lidos    as int    no-undo.
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-DEFINE VARIABLE c-cod-estabel       AS CHAR      FORMAT "x(3)"   INITIAL "422"           NO-UNDO.
+DEFINE VARIABLE c-cod-estabel       AS CHAR      FORMAT "x(3)"   INITIAL "{cdp\poloestab.i 422}"           NO-UNDO.
 DEFINE VARIABLE c-cod-ctrab         AS CHAR      FORMAT "x(16)"             NO-UNDO.
 DEFINE VARIABLE c-cod-operador      AS CHAR      FORMAT "x(07)"             NO-UNDO.
 DEFINE VARIABLE c-lote-cons         AS CHAR      FORMAT "x(10)"             NO-UNDO.
@@ -1857,7 +1857,7 @@ DO:
                   saldo-estoq.lote        = self:screen-value and
                   saldo-estoq.qtidade-atu <> 0 AND
                   saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat AND
-                     NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422"):
+                     NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422") /*solic-318*/):
         end.
 
         IF NOT AVAIL saldo-estoq THEN DO:
@@ -1865,7 +1865,7 @@ DO:
              FOR first saldo-estoq fields (it-codigo) use-index lote no-lock where
                   saldo-estoq.lote        = self:screen-value and
                   saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat AND
-                  NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422"): 
+                  NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422") /*solic-318*/): 
              end.
 
         END.
@@ -2002,7 +2002,7 @@ DO:
             FOR first saldo-estoq fields (it-codigo) use-index lote no-lock where
                  saldo-estoq.lote        = self:screen-value and
                  saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat AND
-                 NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422"): 
+                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422") /*solic-318*/): 
             end.
 
             if avail saldo-estoq then do:
@@ -2082,7 +2082,7 @@ DO:
             FOR first saldo-estoq fields (it-codigo) use-index lote no-lock where
                  saldo-estoq.lote        = self:screen-value and
                  saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat AND
-                 NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422"): 
+                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422") /*solic-318*/): 
             end.
 
             if avail saldo-estoq then do:
@@ -3972,7 +3972,7 @@ PROCEDURE CalculaQuantSaldo :
                                      qt-aloc-prod) use-index lote no-lock where
                  saldo-estoq.lote        = c-lote-cons:screen-value in frame f-relat       and
                  saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat     AND
-                 NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422") and
+                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422") /*solic-318*/) and
                  saldo-estoq.cod-depos  <> substring(param-cp.char-2,1,3) AND
                  saldo-estoq.qtidade-atu > 0,
         
@@ -4025,7 +4025,7 @@ PROCEDURE CalculaQuantSaldo :
                                      qt-aloc-prod) use-index lote no-lock where
                  saldo-estoq.lote        = c-emenda-1:screen-value in frame f-relat        and
                  saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat     AND
-                 NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422") and
+                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422") /*solic-318*/) and
                  saldo-estoq.cod-depos  <> substring(param-cp.char-2,1,3) AND
                  saldo-estoq.qtidade-atu > 0,
         
@@ -4078,7 +4078,7 @@ PROCEDURE CalculaQuantSaldo :
                                      qt-aloc-prod) use-index lote no-lock where
                  saldo-estoq.lote        = c-emenda-2:screen-value in frame f-relat        and
                  saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat     AND
-                 NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422") and
+                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422") /*solic-318*/) and
                  saldo-estoq.cod-depos  <> substring(param-cp.char-2,1,3) AND
                  saldo-estoq.qtidade-atu > 0,
         

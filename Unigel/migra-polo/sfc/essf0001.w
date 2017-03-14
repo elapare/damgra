@@ -3146,7 +3146,7 @@ DO:
           bt-conv 
        with frame f-cad.
 
-  assign fi-cod-estabel:screen-value   = "422" 
+  assign fi-cod-estabel:screen-value   = "{cdp\poloestab.i 422}" /*solic-318*/
          fi-dt-trans-i:screen-value    = string(today, "99/99/9999")
          fi-hr-trans-i:screen-value    = string(time, "HH:MM")
          fi-dt-trans-f:screen-value    = string(today, "99/99/9999")

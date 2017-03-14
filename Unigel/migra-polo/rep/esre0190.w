@@ -241,7 +241,7 @@ DEFINE VARIABLE ed-cod-emitente AS INTEGER FORMAT ">>>>>>9":U INITIAL 17261
      VIEW-AS FILL-IN NATIVE 
      SIZE 9 BY .88 NO-UNDO.
 
-DEFINE VARIABLE ed-cod-estabel AS CHARACTER FORMAT "x(03)":U INITIAL "422" 
+DEFINE VARIABLE ed-cod-estabel AS CHARACTER FORMAT "x(03)":U INITIAL "{cdp\poloestab.i 422}" /*solic-318*/
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN NATIVE 
      SIZE 4 BY .88 NO-UNDO.

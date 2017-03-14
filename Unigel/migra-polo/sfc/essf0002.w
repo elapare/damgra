@@ -3683,7 +3683,7 @@ DO:
         run pi-sec-to-formatted-time (input time,
                                       output cTime).
             
-        assign fiCodEstabel:screen-value = "422" /*param-cp.cod-estabel*/
+        assign fiCodEstabel:screen-value = "{cdp\poloestab.i 422}" /*solic-318*//*param-cp.cod-estabel*/
                fiDtInicio:screen-value   = string(today)
                fiDtTermino:screen-value  = string(today)
                fiHrInicio:screen-value   = cTime
@@ -3808,7 +3808,7 @@ DO:
 
             
         ASSIGN h-paizao = CURRENT-WINDOW. 
-        IF (fiCodCtrab:SCREEN-VALUE = "gal1" OR fiCodCtrab:SCREEN-VALUE = "applied") OR l-peso-bal OR (AVAIL ord-prod AND ord-prod.cod-estabel <> "422") THEN 
+        IF (fiCodCtrab:SCREEN-VALUE = "gal1" OR fiCodCtrab:SCREEN-VALUE = "applied") OR l-peso-bal OR (AVAIL ord-prod AND ord-prod.cod-estabel <> "412" AND ord-prod.cod-estabel <> "422") THEN /*solic-318*/
             run sfc/essf0002d.w (input rRaw,
                                   input-output table tt-lote-reporte,
                                   input deSaldo,
@@ -4500,7 +4500,7 @@ DO:
                      saldo-estoq.lote        = self:screen-value and
                      saldo-estoq.cod-estabel = fiCodEstabel:screen-value in frame fPage0 and
                      saldo-estoq.cod-depos  <> substring(param-cp.char-2,1,3) AND
-                     NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422"): 
+                     NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422") ): /*solic-318*/
 
                 IF (saldo-estoq.qtidade-atu - 
                                           saldo-estoq.qt-alocada  - 
@@ -4561,7 +4561,7 @@ DO:
                      saldo-estoq.lote        = self:screen-value and
                      saldo-estoq.cod-estabel = fiCodEstabel:screen-value in frame fPage0 and
                      saldo-estoq.cod-depos  <> substring(param-cp.char-2,1,3) AND
-                     NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422"):
+                     NOT (saldo-estoq.cod-depos  = "EXP" AND (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422")):/*solic-318*/
 
                 IF (saldo-estoq.qtidade-atu - 
                                           saldo-estoq.qt-alocada  - 
@@ -4605,12 +4605,12 @@ DO:
                   saldo-estoq.lote        = self:screen-value and
                   saldo-estoq.qtidade-atu <> 0 AND
                   saldo-estoq.cod-estabel = fiCodEstabel:screen-value in frame fPage0 AND
-                     NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422"): end.
+                     NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422")): end./*solic-318*/
          IF NOT AVAIL saldo-estoq THEN DO:
              FOR first saldo-estoq fields (it-codigo) use-index lote no-lock where
                   saldo-estoq.lote        = self:screen-value and
                   saldo-estoq.cod-estabel = fiCodEstabel:screen-value in frame fPage0 AND
-                     NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422"): end.
+                     NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422")): end./*solic-318*/
          END.
         if avail saldo-estoq then do:
         
@@ -4624,7 +4624,7 @@ DO:
                      saldo-estoq.it-codigo   = item.it-codigo    and
                      saldo-estoq.lote        = self:screen-value and
                      saldo-estoq.cod-estabel = fiCodEstabel:screen-value in frame fPage0 AND
-                     NOT (saldo-estoq.cod-depos  = "EXP" AND  saldo-estoq.cod-estabel = "422") and
+                     NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422")) and/*solic-318*/
                      saldo-estoq.cod-depos  <> substring(param-cp.char-2,1,3),
                 FIRST deposito  FIELDS (cod-depos ind-dep-cq)
                     WHERE deposito.cod-depos = saldo-estoq.cod-depos
@@ -6848,7 +6848,7 @@ do trans on error undo, leave:
             if tt-rep-prod.qt-refugo > 0 then do:
                create tt-refugo.
                assign tt-refugo.nr-ord-produ = tt-rep-prod.nr-ord-produ
-                      tt-refugo.codigo-rejei = if ord-prod.cod-estabel = "423" then 2 else 1
+                      tt-refugo.codigo-rejei = if ord-prod.cod-estabel = "413" OR ord-prod.cod-estabel = "423" then 2 else 1/*solic-318*/
                       tt-refugo.qt-refugo    = tt-rep-prod.qt-refugo.
 
                run pi-recebe-tt-refugo in hReporte (input table tt-refugo).
@@ -7176,7 +7176,7 @@ DEFINE BUFFER b-ord-rep FOR ord-prod.
             if tt-rep-prod.qt-refugo > 0 then do:
                create tt-refugo.
                assign tt-refugo.nr-ord-produ = tt-rep-prod.nr-ord-produ
-                      tt-refugo.codigo-rejei = if ord-prod.cod-estabel = "423" then 2 else 1
+                      tt-refugo.codigo-rejei = if ord-prod.cod-estabel = "413" OR ord-prod.cod-estabel = "423" then 2 else 1/*solic-318*/
                       tt-refugo.qt-refugo    = tt-rep-prod.qt-refugo.
                run pi-recebe-tt-refugo in hReporte (input table tt-refugo).
             end.

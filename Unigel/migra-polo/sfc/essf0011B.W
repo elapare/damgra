@@ -190,7 +190,7 @@ DEF TEMP-TABLE tt-ped-campanha
 DEF VAR r-campanha   AS ROWID NO-UNDO.
 DEF VAR r-rowid-camp AS ROWID NO-UNDO.
 
-DEF VAR p-cod-estabel   LIKE estabelec.cod-estabel  INITIAL '422'. 
+DEF VAR p-cod-estabel   LIKE estabelec.cod-estabel  INITIAL '{cdp\poloestab.i 422}'. /*solic-318*/ 
 DEF VAR p-nr-pedido-ini LIKE ped-venda.nr-pedido    INITIAL 0.   
 DEF VAR p-nr-pedido-fim LIKE ped-venda.nr-pedido    INITIAL 999999999.   
 DEF VAR p-nome-ini      LIKE ped-venda.nome-abrev   INITIAL "".  
@@ -2948,9 +2948,9 @@ DO:
                      
                      
                                  /*provisorio c-folha-esp  ext-grup-maq.cd-folh-maq*/   
-                if ctrab-linha.cod-ctrab = "422-bms1" then   c-folha-esp = "corte 1".                   
-                if ctrab-linha.cod-ctrab = "422-bms2" then   c-folha-esp = "corte 2".
-                if ctrab-linha.cod-ctrab = "422-bms3" then   c-folha-esp = "corte 3".
+                if ctrab-linha.cod-ctrab = "412-bms1" OR ctrab-linha.cod-ctrab = "422-bms1" then   c-folha-esp = "corte 1"./*solic-318*/                   
+                if ctrab-linha.cod-ctrab = "412-bms2" OR ctrab-linha.cod-ctrab = "422-bms2" then   c-folha-esp = "corte 2"./*solic-318*/
+                if ctrab-linha.cod-ctrab = "412-bms3" OR ctrab-linha.cod-ctrab = "422-bms3" then   c-folha-esp = "corte 3"./*solic-318*/
    
                      
     

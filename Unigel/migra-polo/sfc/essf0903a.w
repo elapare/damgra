@@ -10,7 +10,7 @@
 *******************************************************************************/
 /************************************************************************
 **
-**  i-prgvrs.i - Programa para cria»’o do log de todos os programas 
+**  i-prgvrs.i - Programa para cria‡Æo do log de todos os programas 
 **               e objetos do EMS 2.0 para objetos
 **  {1} = objeto   provido pelo Roundtable
 **  {2} = versao   provido pelo Roundtable
@@ -703,7 +703,7 @@ PROCEDURE adm-initialize :
       Parameters:  <none>
       Notes:       
    -------------------------------------------------------------*/   
-   /* altera»’o feita para atender ao WebEnabler - Marcilene Oliveira - 18/12/2003 */
+   /* altera‡Æo feita para atender ao WebEnabler - Marcilene Oliveira - 18/12/2003 */
    /*{include/i-wenreg.i}*/
    /* fim da alatera‡Æo */
    /* EPC Before Initialize do Container */ 
@@ -765,7 +765,7 @@ end.
    
                                                                /*
     Nome :  C-PAGE.i       J.Carlos - 21/Fev/97
-    Fun»’o : Guardar a pagina e o container-source da VIEWER.
+    Fun‡Æo : Guardar a pagina e o container-source da VIEWER.
 */
    def var c_Aux-var as char no-undo.
    RUN get-link-handle IN adm-broker-hdl (INPUT  THIS-PROCEDURE,
@@ -1421,9 +1421,9 @@ PROCEDURE view-page :
 */
 /*--------------------------------------------------------------------------
     Library     : w-cadcom.i
-    Purpose     : Permitir customiza»’o para as window de cadastro complexo
+    Purpose     : Permitir customiza‡Æo para as window de cadastro complexo
     Syntax      : {include/w-cadcom.i}
-    Description : Library utilizada para customiza»’o da window de cadastro
+    Description : Library utilizada para customiza‡Æo da window de cadastro
                   complexo
     Author(s)   : Vanei
     Created     : 14/01/1997
@@ -1496,9 +1496,9 @@ END PROCEDURE.
 /* _UIB-CODE-BLOCK-END */
 PROCEDURE pi-trata-state :
 /*------------------------------------------------------------------------------
-  Purpose:     Trata as mudan»as de estado (State-Changed)
+  Purpose:     Trata as mudan‡as de estado (State-Changed)
   Parameters:  INPUT Handle da procedure pai
-               INPUT C½digo do Estado
+               INPUT C¢digo do Estado
   Notes:       
 ------------------------------------------------------------------------------*/
   DEFINE INPUT PARAMETER p-issuer-hdl   AS HANDLE NO-UNDO.
@@ -1669,13 +1669,13 @@ DO:
 **
 **    Include: {include/cancepai.i}
 **
-**    Fun»’o : L½gica do bt-cancela para o cadastro de pai, do template w-incmdp.w
+**    Fun‡Æo : L¢gica do bt-cancela para o cadastro de pai, do template w-incmdp.w
 **
 **    Data   : 26/09/1997
 **
 **    Autor  : Sergio Weber Jr.
 **
-**    Par³metros : {1} - handle da viewer principal.
+**    Parƒmetros : {1} - handle da viewer principal.
 **
 ***********************************************************************************/
   RUN notify ('cancel-record':U).
@@ -1689,13 +1689,13 @@ DO:
 **
 **    Include: {include/okpai.i}
 **
-**    Fun»’o : L½gica do bt-ok para o cadastro de pai, do template w-incmdp.w
+**    Fun‡Æo : L¢gica do bt-ok para o cadastro de pai, do template w-incmdp.w
 **
 **    Data   : 26/09/1997
 **
 **    Autor  : Sergio Weber Jr.
 **
-**    Par³metros : {1} - handle da viewer principal.
+**    Parƒmetros : {1} - handle da viewer principal.
 **
 ***********************************************************************************/
 do  on error undo, return no-apply:
@@ -1705,16 +1705,7 @@ do  on error undo, return no-apply:
   RUN dispatch IN wh-query ('open-query':U).
   RUN get-rowid IN h_essf0903v02
       (OUTPUT v-row-table).
-/*FIND FIRST polo_off_it_pallet WHERE ROWID(polo_off_it_pallet) = v-row-table NO-LOCK NO-ERROR.
-IF AVAIL polo_off_it_pallet THEN
-FIND FIRST pallet WHERE  
-            pallet.cod-estabel  = "422" AND
-            pallet.nr-pallet    =  polo_off_it_pallet.nr_pallet AND
-            pallet.it-codigo    =  polo_off_it_pallet.it_codigo NO-LOCK NO-ERROR.
 
-IF AVAIL pallet THEN
-    v-row-table = ROWID(pallet).
-*/
   RUN pi-reposiciona-query IN wh-query
       (INPUT v-row-table).
   apply "close":U to this-procedure.
@@ -1728,13 +1719,13 @@ DO:
 **
 **    Include: {include/salvapai.i}
 **
-**    Fun»’o : L½gica do bt-salva para o cadastro de pai, do template w-incmdp.w
+**    Fun‡Æo : L¢gica do bt-salva para o cadastro de pai, do template w-incmdp.w
 **
 **    Data   : 26/09/1997
 **
 **    Autor  : Sergio Weber Jr.
 **
-**    Par³metros : {1} - handle da viewer principal.
+**    Parƒmetros : {1} - handle da viewer principal.
 **
 ***********************************************************************************/
 do  on error undo, return no-apply:
@@ -1759,8 +1750,8 @@ ON CHOOSE OF MENU-ITEM mi-sobre /* Sobre... */
 DO:
   /*************************************************************************
 **
-** SOBRE.I - Include padr’o para chamada do Sobre
-** Data Cria»’o: 22/07/97
+** SOBRE.I - Include padrÆo para chamada do Sobre
+** Data Cria‡Æo: 22/07/97
 ** Criado por..: Fabiano
 **
 **************************************************************************/
@@ -1956,7 +1947,7 @@ PROCEDURE local-destroy :
   RUN dispatch IN THIS-PROCEDURE ( INPUT 'destroy':U ) .
   /*************************************************************************
 **
-** I-LOGFIN.I - Encerra o Log de Execu»’o
+** I-LOGFIN.I - Encerra o Log de Execu‡Æo
 **
 **************************************************************************/
 /*************************************************************************
@@ -1983,8 +1974,8 @@ if session:window-system <> "TTY":U then do:
     end case.
 end.  
 /* Transformacao Window */
-/* Elimina»’o de arquivos temporÿrios */
-/* Fim da elimina»’o de arquivos temporÿrios */
+/* Elimina‡Æo de arquivos temporÿrios */
+/* Fim da elimina‡Æo de arquivos temporÿrios */
 /* i-logfin */
  
   

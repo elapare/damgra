@@ -4023,9 +4023,9 @@ PROCEDURE pi-add-record :
       end.
   end.
   
-  if pallet.cod-estabel = "423":U then 
+  if pallet.cod-estabel = "413":U OR pallet.cod-estabel = "423":U then /*solic-318*/
      assign c-conta-contabil = "44589944113".
-  if pallet.cod-estabel = "422":U then 
+  if pallet.cod-estabel = "412":U OR pallet.cod-estabel = "422":U then /*solic-318*/
      assign c-conta-contabil = "44589944113".
   assign fi-nro-docto = pallet.nr-pallet.
   disp fi-nro-docto c-conta-contabil with frame F-Main.

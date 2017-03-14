@@ -2402,8 +2402,8 @@ def var c-estado as char  EXTENT 9  format "x(14)" label "Estado" INITIAL ["NÆo 
          SIZE 6.14 BY 1.
 
 
-    DEFINE VARIABLE pesq-cod-estabel-ini AS CHAR FORMAT "x(3)"      INITIAL "422"     NO-UNDO.
-    DEFINE VARIABLE pesq-cod-estabel-fim AS CHAR FORMAT "x(3)"      INITIAL "422"     NO-UNDO.
+    DEFINE VARIABLE pesq-cod-estabel-ini AS CHAR FORMAT "x(3)"      INITIAL "{cdp\poloestab.i 422}" /*solic-318*/     NO-UNDO.
+    DEFINE VARIABLE pesq-cod-estabel-fim AS CHAR FORMAT "x(3)"      INITIAL "{cdp\poloestab.i 422}" /*solic-318*/     NO-UNDO.
     DEFINE VARIABLE pesq-dt-inicio-ini   AS DATE FORMAT 99/99/9999  INITIAL TODAY     NO-UNDO.
     DEFINE VARIABLE pesq-dt-inicio-fim   AS DATE FORMAT 99/99/9999  INITIAL TODAY     NO-UNDO.
     DEFINE VARIABLE pesq-it-codigo-ini   AS CHAR FORMAT "x(16)"     INITIAL ""        NO-UNDO.

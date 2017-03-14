@@ -1954,7 +1954,7 @@ do trans on error undo, leave:
 
    FOR EACH  polo_off_pallet WHERE  NOT polo_off_pallet.log_ems .
         FIND FIRST pallet WHERE  
-            pallet.cod-estabel  = "422" AND
+            pallet.cod-estabel  = "{cdp\poloestab.i 422}" AND/*solic-318*/
             pallet.nr-pallet    =  polo_off_pallet.nr_pallet AND
             pallet.it-codigo    =  polo_off_pallet.it_codigo NO-ERROR.
 
@@ -1963,7 +1963,7 @@ do trans on error undo, leave:
             CREATE  pallet.
             i-paletes-integrados = i-paletes-integrados + 1.
             ASSIGN
-                pallet.cod-estabel  = "422"
+                pallet.cod-estabel  = "{cdp\poloestab.i 422}"
                 pallet.nr-pallet    =  polo_off_pallet.nr_pallet 
                 pallet.it-codigo    =  polo_off_pallet.it_codigo               
                 pallet.nr-pedido    =  int(polo_off_pallet.nr_pedido )
@@ -1988,7 +1988,7 @@ do trans on error undo, leave:
          .
 
          FIND FIRST pallet WHERE  
-            pallet.cod-estabel  = "422" AND
+            pallet.cod-estabel  = "{cdp\poloestab.i 422}" AND/*solic-318*/
             pallet.nr-pallet    =  polo_off_it_pallet.nr_pallet AND
             pallet.it-codigo    =  polo_off_it_pallet.it_codigo NO-ERROR.
 
@@ -1997,7 +1997,7 @@ do trans on error undo, leave:
          ASSIGN 
                  pallet.cod-refer = polo_off_it_pallet.cod_refer. 
          FIND FIRST it-pallet WHERE  
-            it-pallet.cod-estabel  = "422" AND
+            it-pallet.cod-estabel  = "{cdp\poloestab.i 422}" AND/*solic-318*/
             it-pallet.nr-pallet    =  polo_off_it_pallet.nr_pallet AND
             it-pallet.it-codigo    =  polo_off_it_pallet.it_codigo and
             it-pallet.lote-bobina  =  polo_off_it_pallet.nr_bobina NO-ERROR.
@@ -2008,7 +2008,7 @@ do trans on error undo, leave:
 
          i-bobinas-integrados = i-bobinas-integrados + 1.
          ASSIGN
-           it-pallet.cod-estabel  = "422" 
+           it-pallet.cod-estabel  = "{cdp\poloestab.i 422}" /*solic-318*/
            it-pallet.nr-pallet    =  polo_off_it_pallet.nr_pallet 
            it-pallet.it-codigo    =  polo_off_it_pallet.it_codigo 
            it-pallet.lote-bobina  =  polo_off_it_pallet.nr_bobina 

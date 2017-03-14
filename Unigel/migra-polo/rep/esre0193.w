@@ -379,7 +379,7 @@ DEFINE VARIABLE ed-dt-trans AS DATE FORMAT "99/99/9999":U INITIAL ?
      VIEW-AS FILL-IN NATIVE 
      SIZE 12.86 BY .88 NO-UNDO.
 
-DEFINE VARIABLE ed-cod-estabel AS char FORMAT "x(03)":U INITIAL "422" 
+DEFINE VARIABLE ed-cod-estabel AS char FORMAT "x(03)":U INITIAL "{cdp\poloestab.i 422}" /*solic-318*/
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN NATIVE 
      SIZE 4 BY .88 NO-UNDO.

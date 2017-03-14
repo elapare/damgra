@@ -4784,7 +4784,7 @@ PROCEDURE pi-valores :
                 FIND FIRST pallet WHERE pallet.nr-pallet = lote-carac-tec.lote AND
                      
                                         pallet.it-codigo = lote-carac-tec.it-codigo AND
-                                        pallet.cod-estabel = "422" NO-LOCK NO-ERROR.
+                                        pallet.cod-estabel = "{cdp\poloestab.i 422}" NO-LOCK NO-ERROR./*solic-318*/
 
                 IF AVAIL pallet THEN DO:
                     FIND FIRST it-pallet OF pallet NO-LOCK NO-ERROR.

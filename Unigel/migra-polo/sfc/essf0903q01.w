@@ -900,14 +900,6 @@ PROCEDURE adm-open-query :
 /* EPC - Before Open Query do Browser */
   
         OPEN QUERY Query-Main FOR EACH  pallet WHERE pallet.int-1 = 98 AND pallet.situacao = 1  NO-LOCK INDEXED-REPOSITION.
-
-
-         /*  NO-LOCK
-                   polo_off_pallet WHERE polo_off_pallet.log_ems NO-LOCK, 
-           EACH pallet  WHERE
-            pallet.cod-estabel = "422" AND
-               pallet.nr-pallet = polo_off_pallet.nr_pallet   AND
-               pallet.it-codigo = polo_off_pallet.it_codigo OPEN QUERY Query-Main FOR EACH pallet  WHERE pallet.int-1 = 98 NO-LOCK INDEXED-REPOSITION.*/
         
         ASSIGN adm-query-opened = YES 
                adm-last-rowid = ?.      /* we don't know the last record yet */

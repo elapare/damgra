@@ -33,8 +33,8 @@ a mudança é somente nos estabelecimetnos abaixo.
 se for para atribuição, tipo alguma coisa acontece e sugere 422, aí não tem jeito, teremos que analisar e condicionar 
 ou a data de virada ou criar uma include inteligente de conversão de estavelecimento e empresa onde colocaremos {422} e na virada eles mudam a include para 412
 
-if ge-codigo > 41 or ge-codigo < 49 then c-empresa = "420".
-if ge-codigo > 41 or ge-codigo < 49 then c-empresa = "{cdp\poloestab.i 420}".
+if ge-codigo > 41 or ge-codigo < 49 then c-empresa = "422".
+if ge-codigo > 41 or ge-codigo < 49 then c-empresa = "{cdp\poloestab.i 422}".
 
 if ge-maquina > 32 then ge-cod-maq = "422-atlas"
 if ge-maquina > 32 then ge-cod-maq = "{cdp\poloestab.i 422}-atlas"

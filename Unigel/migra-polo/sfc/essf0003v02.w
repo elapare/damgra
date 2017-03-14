@@ -6612,7 +6612,7 @@ PROCEDURE local-add-record :
 
   /* Code placed here will execute AFTER standard behavior.    */
   find first param-cp no-lock no-error.
-  assign pallet.cod-estabel:screen-value in frame f-main = "422" /*param-cp.cod-estabel*/
+  assign pallet.cod-estabel:screen-value in frame f-main = "{cdp\poloestab.i 422}"/*solic-318*/ /*param-cp.cod-estabel*/
          pallet.data-pallet:screen-value in frame f-main = string(today, "99/99/9999")
          pallet.cod-operador:screen-value in frame f-main = "000000".
 

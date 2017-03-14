@@ -873,7 +873,7 @@ FOR EACH  ord-prod
                      ASSIGN obs-mercado =
                       "Mercado: Externo  - Considerar atendimento, o numero de bobinas e diametro externo solicitado".
 
-                 IF ord-prod.cod-estabel = "423" THEN
+                 IF ord-prod.cod-estabel = "413" OR ord-prod.cod-estabel = "423" THEN /*solic-318*/
                      ASSIGN obs-mercado = "".
 
                  ASSIGN tt-dados.obs-pcp-cq = tt-dados.obs-pcp-cq + " " + obs-mercado.
@@ -896,7 +896,7 @@ FOR EACH  ord-prod
                  IF AVAIL var-result then
                      ASSIGN tt-Dados.mxembob = var-result.des-result.
 
-                 IF tt-Dados.cod-estabel = "423" THEN
+                 IF tt-Dados.cod-estabel = "413" OR tt-Dados.cod-estabel = "423" THEN /*solic-318*/
                      ASSIGN tt-Dados.mxembob = "  ".
     
                  /*Quantidade de Emenda */
@@ -908,7 +908,7 @@ FOR EACH  ord-prod
                  IF AVAIL var-result then
                      ASSIGN tt-Dados.qtdemen = var-result.des-result.
                  
-                 IF tt-Dados.cod-estabel = "423" THEN
+                 IF tt-Dados.cod-estabel = "413" OR tt-Dados.cod-estabel = "423" THEN /*solic-318*/
                      ASSIGN tt-Dados.qtdemen = "  ".
     
 
@@ -1304,7 +1304,7 @@ FOR EACH tt-dados:
             tt-dados.tp-pedido
             tt-dados.nr-pedido
             tt-dados.cod-cliente
-            IF (tt-dados.cod-estabel = "423" AND AVAIL b-emitente) THEN b-emitente.nome-emit  
+            IF ((tt-dados.cod-estabel = "423" OR tt-dados.cod-estabel = "413") AND AVAIL b-emitente) THEN b-emitente.nome-emit  /*solic-318*/
                     ELSE tt-dados.nome-abrev + " - " + tt-dados.nome-abrev-fim @ tt-dados.nome-abrev-fim FORMAT "x(60)"
             tt-dados.largura
             tt-dados.diamin
