@@ -150,7 +150,7 @@ End Procedure.
              func_ccusto.dat_fim_lotac_func >= tt-param.qt-dias And func_ccusto.dat_fim_lotac_func < 12/31/2999:
         run pi-acompanhar in h-acomp(input "Exporta FuncCusto: " + String( func_ccusto.cdn_funcionario)).
 
-           PUT if func_ccusto.cdn_empresa = 420 
+           PUT if func_ccusto.cdn_empresa = 420 /*solic-318*/
            then 120 else func_ccusto.cdn_empresa     AT 1   FORM "9999"
                1                                     AT 5   FORM "9"
                func_ccusto.cdn_funcionario           AT 6   FORM "999999999"
@@ -172,7 +172,7 @@ Procedure pi_gera_historico_presente_cc:
               func_ccusto.dat_ult_atualiz <= tt-param.qt-dias)*/:
         run pi-acompanhar in h-acomp(input "Exporta Funcionario Custo: " + String( func_ccusto.cdn_funcionario)).
 
-           PUT if int(func_ccusto.cdn_empresa) = 420 
+           PUT if int(func_ccusto.cdn_empresa) = 420 OR int(func_ccusto.cdn_empresa) = 410 
            then 120 else int(func_ccusto.cdn_empresa)     AT 1   FORM "9999"
                1                                     AT 5   FORM "9"
                func_ccusto.cdn_funcionario           AT 6   FORM "999999999"
@@ -189,7 +189,7 @@ Procedure pi-exporta-ccusto:
                                      rh_ccusto.cdn_empresa >= string(tt-param.i-ep-ini)  And 
                                      rh_ccusto.cdn_empresa <= string(tt-param.i-ep-fim)  :
         run pi-acompanhar in h-acomp(input "Exporta CCusto: " + String( rh_ccusto.des_rh_ccusto)).
-        PUT if int(rh_ccusto.cdn_empresa) = 420 
+        PUT if int(rh_ccusto.cdn_empresa) = 420 OR int(rh_ccusto.cdn_empresa) = 410 /*solic-318*/
            then 120 else int(rh_ccusto.cdn_empresa)       AT 1   FORM "9999"
             rh_ccusto.cod_rh_ccusto                  AT 5  FORM "x(09)"
             fn-free-accent(rh_ccusto.des_rh_ccusto)
@@ -227,7 +227,7 @@ Procedure pi_gera_historico_desligado:
         FIND sit_afast OF sit_afast_func NO-LOCK NO-ERROR. 
         IF sit_afast.idi_signif_sit <> 6 THEN NEXT.
         
-        PUT if int(sit_afast_func.cdn_empresa) = 420 
+        PUT if int(sit_afast_func.cdn_empresa) = 420 OR int(sit_afast_func.cdn_empresa) = 410 /*solic-318*/
             then 120 else int(sit_afast_func.cdn_empresa)    AT 1   FORM "9999"
             1                                           AT 5   FORM "9"
             sit_afast_func.cdn_funcionario              AT 6   FORM "999999999"
@@ -266,7 +266,7 @@ Procedure pi_gera_historico_retorno_afastado:
 
          run pi-acompanhar in h-acomp(input "Exporta Historico Afastamento: " + String( sit_afast_func.cdn_funcionario)).
         PUT /*1                                        AT 1   FORM "99"*/
-            if int(sit_afast_func.cdn_empresa) = 420 
+            if int(sit_afast_func.cdn_empresa) = 420 OR int(sit_afast_func.cdn_empresa) = 410 /*solic-318*/
             then 120 else int(sit_afast_func.cdn_empresa)    AT 1   FORM "9999"
             1                                           AT 5   FORM "9"
             sit_afast_func.cdn_funcionario              AT 6   FORM "999999999"
@@ -309,7 +309,7 @@ Procedure pi_gera_historico_retorno_afastado:
 
           run pi-acompanhar in h-acomp(input "Exporta Historico Afastamento: " + String( sit_afast_func.cdn_funcionario)).
          PUT /*1                                        AT 1   FORM "99"*/
-             if int(sit_afast_func.cdn_empresa) = 420 
+             if int(sit_afast_func.cdn_empresa) = 420 OR int(sit_afast_func.cdn_empresa) = 410 /*solic-318*/
              then 120 else int(sit_afast_func.cdn_empresa)    AT 1   FORM "9999"
              1                                           AT 5   FORM "9"
              sit_afast_func.cdn_funcionario              AT 6   FORM "999999999"
@@ -363,7 +363,7 @@ Procedure pi_gera_historico_presente:
        /* IF LOOKUP(STRING(sit_afast.idi_signif_sit),"2,4,5") > 0 THEN */
         run pi-acompanhar in h-acomp(input "Exporta Colaborador Endere‡o: " + String (sit_afast_func.cdn_funcionario)).
         PUT /*1                                        AT 1   FORM "99"*/
-            if int(sit_afast_func.cdn_empresa) = 420 
+            if int(sit_afast_func.cdn_empresa) = 420 OR int(sit_afast_func.cdn_empresa) = 410 /*solic-318*/
             then 120 else int(sit_afast_func.cdn_empresa)    AT 1   FORM "9999"
             1                                           AT 5   FORM "9"
             sit_afast_func.cdn_funcionario              AT 6   FORM "999999999"
@@ -398,7 +398,7 @@ Procedure pi-exporta-colaborador-endereco:
              funcionario.dat_admis_transf_func >= TODAY - tt-param.qt-dias ): 
        run pi-acompanhar in h-acomp(input "Exporta Colaborador Endere‡o: " + funcionario.nom_pessoa_fisic).
        FIND rh_pessoa_fisic OF funcionario NO-LOCK NO-ERROR.
-       PUT if int(funcionario.cdn_empresa) = 420 
+       PUT if int(funcionario.cdn_empresa) = 420 OR int(funcionario.cdn_empresa) = 410 /*solic-318*/
             then 120 else int(funcionario.cdn_empresa)    AT 1   FORM "9999"
            1                                         AT 5  FORM "9"
            funcionario.cdn_funcionario               AT 6  FORM "999999999"
@@ -425,7 +425,7 @@ Procedure pi-exporta-colaborador-compl-ficha:
                                              funcionario.dat_admis_transf_func >= TODAY - tt-param.qt-dias ):
         run pi-acompanhar in h-acomp(input "Exporta Colaborador Ficha: " + funcionario.nom_pessoa_fisic).
        FIND rh_pessoa_fisic OF funcionario NO-LOCK NO-ERROR.
-       PUT if int(funcionario.cdn_empresa) = 420 
+       PUT if int(funcionario.cdn_empresa) = 420 OR int(funcionario.cdn_empresa) = 410 /*solic-318*/
             then 120 else int(funcionario.cdn_empresa)    AT 1   FORM "9999"
            1                                     AT 5  FORM "9"
            funcionario.cdn_funcionario           AT 6  FORM "999999999"
@@ -448,7 +448,7 @@ Procedure pi-exporta-colaborador:
     run pi-acompanhar in h-acomp(input "Exporta Colaborador: " + funcionario.nom_pessoa_fisic).
     ASSIGN nivcargo = funcionario.cdn_niv_cargo.
        PUT 1                                     AT 1   FORM "99"
-           if int(funcionario.cdn_empresa) = 420 
+           if int(funcionario.cdn_empresa) = 420 OR int(funcionario.cdn_empresa) = 410 /*solic-318*/
             then 120 else int(funcionario.cdn_empresa)    AT 3   FORM "9999"
            1                                     AT 7   FORM "9"
            funcionario.cdn_funcionario           AT 8   FORM "999999999"
@@ -464,15 +464,15 @@ Procedure pi-exporta-colaborador:
            fn-free-accent(string(funcionario.cdn_cargo_basic))
                         + string(nivcargo,"999") AT 99 FORM "x(24)"
            1                                     AT 123 FORM "9999"
-           if int(funcionario.cdn_estab) = 421 then 121
-           else if int(funcionario.cdn_estab) = 422 then 123
-           else if int(funcionario.cdn_estab) = 423 then 122
+           if int(funcionario.cdn_estab) = 421 OR int(funcionario.cdn_estab) = 411 /*solic-318*/then 121
+           else if int(funcionario.cdn_estab) = 422 OR int(funcionario.cdn_estab) = 412 /*solic-318*/then 123
+           else if int(funcionario.cdn_estab) = 423 OR int(funcionario.cdn_estab) = 413 /*solic-318*/then 122
            else if int(funcionario.cdn_estab) = 424 then 125
            else int(funcionario.cdn_estab)            AT 127   FORM "9999"
            funcionario.cdn_plano_lotac           AT 131 FORM "999"
-           if int(funcionario.cdn_estab) = 421 then "121"
-           else if int(funcionario.cdn_estab) = 422 then "123"
-           else if int(funcionario.cdn_estab) = 423 then "122"
+           if int(funcionario.cdn_estab) = 421 OR int(funcionario.cdn_estab) = 411 /*solic-318*/then "121"
+           else if int(funcionario.cdn_estab) = 422 OR int(funcionario.cdn_estab) = 412 /*solic-318*/then "123"
+           else if int(funcionario.cdn_estab) = 423 OR int(funcionario.cdn_estab) = 413 /*solic-318*/then "122"
            else if int(funcionario.cdn_estab) = 424 then "125"
            else string(int(funcionario.cdn_estab),"999")   AT 134 FORM "x(32)"
            1                                     AT 166 FORM "9"
@@ -528,7 +528,7 @@ DEFINE BUFFER btr-funcionario FOR funcionario.
                        (IF func_turno_trab.cdn_turno_trab     = 51 THEN 4 ELSE 1))
                turma = IF func_turno_trab.cdn_turno_trab      = 50 THEN func_turno_trab.cdn_turma_trab ELSE
                        (IF func_turno_trab.cdn_turno_trab     = 51 THEN func_turno_trab.cdn_turma_trab ELSE 1)
-               empresa = IF int(func_turno_trab.cdn_empresa)       = 420 THEN 120 ELSE int(func_turno_trab.cdn_empresa).
+               empresa = IF int(func_turno_trab.cdn_empresa) = 420 OR int(func_turno_trab.cdn_empresa) = 410 /*solic-318*/ THEN 120 ELSE int(func_turno_trab.cdn_empresa).
 
 
 

@@ -2085,7 +2085,7 @@ do on error undo, return error on stop  undo, return error:
             ASSIGN c-cod_cta_pat = (IF item_docto_entr.cod_empresa = "380"
                                     OR item_docto_entr.cod_empresa = "390"
                                     OR item_docto_entr.cod_empresa = "400" THEN "132570.146"
-                                    ELSE IF item_docto_entr.cod_empresa = "420" THEN "132570.000"
+                                    ELSE IF (item_docto_entr.cod_empresa = "420" OR item_docto_entr.cod_empresa = "410") THEN "132570.000"/*solic-318*/
                                     ELSE "132570.00").
 
             ASSIGN i-i4 = i-i4 + 1.

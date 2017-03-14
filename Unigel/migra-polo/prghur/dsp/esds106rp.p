@@ -1225,7 +1225,7 @@ else do:
 end.    
   
      c-logo = search("images\logo" + string(rh_estab.cdn_empresa) + ".jpg").
-IF rh_estab.cdn_empresa = "420" THEN DO:
+IF rh_estab.cdn_empresa = "420" OR rh_estab.cdn_empresa = "410" THEN DO:
     if c-logo <> ? then 
       ws:Shapes:AddPicture (c-logo,1,1,0,0,85,55).
 
@@ -1534,7 +1534,7 @@ procedure pi-formata-102.
    
      c-logo = search("images\logo" + string(rh_estab.cdn_empresa) + ".jpg").
 
-    IF rh_estab.cdn_empresa = "420" THEN DO:
+    IF rh_estab.cdn_empresa = "420" OR rh_estab.cdn_empresa = "410" THEN DO:/*solic-318*/
         if c-logo <> ? then 
               ws:Shapes:AddPicture (c-logo,1,1,0,0,85,55).
         

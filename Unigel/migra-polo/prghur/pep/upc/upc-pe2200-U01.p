@@ -214,9 +214,9 @@ if p-ind-event = "initialize" and
 END.
 
 /*---------------------------------------------------------- A T E N C A O ---------------------------------------------------------------------------------------*/
-/* daqui para baixo s¢ funciona para polo empresa 420, se precisar tratar o bot∆o executar precisa gerencia por empresa */
+/* daqui para baixo s¢ funciona para polo empresa 410 e 420, se precisar tratar o bot∆o executar precisa gerencia por empresa */
 
-IF v_cdn_empres_usuar <> "420" THEN RETURN "ok".
+IF v_cdn_empres_usuar <> "420" AND v_cdn_empres_usuar <> "410" THEN RETURN "ok".
 
    if p-ind-event = "choose-bt" THEN DO: 
        Run pi-busca-widget (Input  "i-ind-selec", Input  p-wgh-frame:PARENT , Output h-i-ind-selec-pe2200).
@@ -861,7 +861,7 @@ PROCEDURE pi-verifica-func-bh10.
             rh_estab.cdn_empresa = v_cdn_empres_usuar AND
             rh_estab.cdn_estab   >= i-es-ini  AND
             rh_estab.cdn_estab   <= i-es-fim  and
-            (rh_estab.cdn_estab = "422" OR rh_estab.cdn_estab = "412")   NO-LOCK,
+            (rh_estab.cdn_estab = "422" OR rh_estab.cdn_estab = "412")   NO-LOCK,/*solic-318*/
            EACH funcionario WHERE      
                  funcionario.cdn_empresa       = rh_estab.cdn_empresa   AND
                  funcionario.cdn_estab         = rh_estab.cdn_estab     AND           

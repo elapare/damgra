@@ -47,7 +47,7 @@ DEFINE VARIABLE ict AS INTEGER     NO-UNDO.
 DEFINE VARIABLE c_trab AS CHARACTER   NO-UNDO.
 DEFINE VARIABLE c_estab 
 as CHARACTER  INITIAL "*" LABEL "Estab/Empr. P/ Enviar Email " 
-    view-as editor  SCROLLBAR-VERTICAL TOOLTIP "Favor digite * p/ Todos ou Estabs ou Emprs. Ex: 321,422,380,.. (separados por v¡rgulas)."
+    view-as editor  SCROLLBAR-VERTICAL TOOLTIP "Favor digite * p/ Todos ou Estabs ou Emprs. Ex: 321,412,422,380,.. (separados por v¡rgulas)."/*solic-318*/
     size 60 by 2
     bgcolor 15 FONT 1 
     no-undo.
@@ -178,7 +178,7 @@ with 1 down side-labels no-validate keep-tab-order three-d
                             LABEL       = "Est/Emp.Destino"
                             ROW         = wh-fp0903-bt-formar:ROW
                             COLUMN      = wh-fp0903-bt-formar:COLUMN + 12
-                            TOOLTIP     =  "* p/ todos, ou digite Estb/Empr ex: 321,322,422,380 para v rios."
+                            TOOLTIP     =  "* p/ todos, ou digite Estb/Empr ex: 321,322,412,422,380 para v rios."/*solic-318*/
                             NAME        = 'bt-estab-esp'
                             SENSITIVE   = YES
                             VISIBLE     = YES

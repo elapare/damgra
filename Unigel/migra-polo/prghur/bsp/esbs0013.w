@@ -1349,8 +1349,8 @@ FOR EACH tt-plano,
                                       benefic_func.dat_term_benefic >= d_dt_ref_ini AND
                                       CAN-FIND (FIRST beneficio   WHERE 
                                               beneficio.cdn_beneficio   = benefic_func.cdn_beneficio AND
-                                                ( IF benefic_func.cdn_empresa = "420" THEN  beneficio.cdn_grp_benefic = 202 ELSE TRUE)  AND
-                                             ( IF benefic_func.cdn_empresa <> "420" THEN  beneficio.cdn_grp_benefic = 200 ELSE TRUE)  )
+                                                ( IF benefic_func.cdn_empresa = "420" OR benefic_func.cdn_empresa = "410" THEN  beneficio.cdn_grp_benefic = 202 ELSE TRUE)  AND/*solic-318*/
+                                             ( IF benefic_func.cdn_empresa <> "420" AND benefic_func.cdn_empresa <> "410" THEN  beneficio.cdn_grp_benefic = 200 ELSE TRUE)  )
                                       NO-LOCK BREAK BY benefic_func.cdn_depend_func .
 
                                                IF FIRST-OF(benefic_func.cdn_depend_func) THEN

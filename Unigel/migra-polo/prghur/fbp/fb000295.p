@@ -54,7 +54,7 @@ END.
 
 d-perc-func = 0.
 
-IF INDEX ("321, 322, 351, 352, 353, 354, 383, 392, 421, 422, 423", bfunciona.cdn_estab) > 0  THEN DO:
+IF INDEX ("321, 322, 351, 352, 353, 354, 383, 392, 411, 412, 413, 421, 422, 423", bfunciona.cdn_estab) > 0  THEN DO:/*solic-318*/
     IF d-remun <= 2206.60 THEN
         ASSIGN d-perc-func = 5.
     ELSE

@@ -227,7 +227,7 @@ FOR EACH
      movto_benefic.cdn_prestdor_serv           = IF AVAIL conven_benefic THEN
                                                     conven_benefic.cdn_prestdor_serv
                                                ELSE 
-                                                  IF tt-imp.cdn_empresa = "420" THEN 122
+                                                  IF tt-imp.cdn_empresa = "420" or tt-imp.cdn_empresa = "410" THEN 122 /*solic-318*/
                                                   ELSE 22
      movto_benefic.cod_docto_movto_benefic     = tt-imp.nr-docto
      movto_benefic.qtd_unid_acordo_efp         = tt-imp.seq-cons

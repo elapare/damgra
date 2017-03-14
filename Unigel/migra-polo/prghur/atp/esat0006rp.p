@@ -79,22 +79,6 @@ def input param table for tt-raw-digita.
 
 create tt-param.
 raw-transfer raw-param to tt-param.
-  
-  /*
-CREATE tt-param.
-
-ASSIGN
-    
-      tt-param.cdn_empresa_ini          = "420"   
-      tt-param.cdn_empresa_fim              = "420"
-      tt-param.cdn_estab_ini            = "421"
-      tt-param.cdn_estab_fim            = "426"
-      tt-param.cdn_funcionario_ini      = 0
-      tt-param.cdn_funcionario_fim      = 370000
-      tt-param.log_lista_demitidos  = NO 
-      tt-param.tg-abre-tela = NO
-      .    
-    */
  
     
 /****************** Defini‡ao de Vari veis de Processamento do Relat¢rio *********************/

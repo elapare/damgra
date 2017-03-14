@@ -111,7 +111,7 @@ def new shared var dt-vencto-fim        AS DATE                        format "9
 def new shared var c-cod-esp-ini        AS CHAR                        format "X(02)"           initial ""                 no-undo.
 def new shared var c-cod-esp-fim        AS CHAR                        format "X(02)"           initial "ZZ"               no-undo.
 def new shared var c-mercado            AS CHAR                        format "X(3)"            initial "A"                no-undo.
-def new shared var c-cod-estabel-ini        AS CHAR                        format "X(100)"           initial "422,432,434"                 no-undo.
+def new shared var c-cod-estabel-ini        AS CHAR                        format "X(100)"           initial "412,422,432,434,442,443"                 no-undo./*solic-318*/
 def new shared var c-cod-estabel-fim        AS CHAR                        format "X(03)"           initial "424"               no-undo.
 
 /* ********************  Preprocessor Definitions  ******************** */ 

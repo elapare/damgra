@@ -43,7 +43,7 @@ end.
    
 d-remun_polo = d-remun.
    
-FOR EACH remun_var_func OF bfunciona  where bfunciona.cdn_empresa <> "420" NO-LOCK,
+FOR EACH remun_var_func OF bfunciona  where bfunciona.cdn_empresa <> "420" AND bfunciona.cdn_empresa <> "410" NO-LOCK,/*solic-318*/
 
     each remun_var of remun_var_func  where substring(remun_var.des_remun_va,1,2) <> "VP" no-lock.
 
@@ -70,7 +70,7 @@ FOR  first val_unit_form_fp where
 end.
 
 FOR  first val_unit_form_fp where 
-                val_unit_form_fp.cdn_val_unit_fp = (IF bfunciona.cdn_empresa = "420" THEN 517 ELSE  516) and
+                val_unit_form_fp.cdn_val_unit_fp = (IF bfunciona.cdn_empresa = "420" OR bfunciona.cdn_empresa = "410" THEN 517 ELSE  516) and/*solic-318*/
                 val_unit_form_fp.cdn_empresa     =  bfunciona.cdn_empresa no-lock.
 
     ASSIGN d-perc-func = val_unit_form_fp.val_calcul_efp / 100.
@@ -96,21 +96,9 @@ ASSIGN d-remun = d-remun * d-mult-sal.
 IF d-remun > d-lim-max-cap THEN 
         ASSIGN d-remun = d-lim-max-cap.
 
-/* 
-iF bfunciona.cdn_empresa = "420" then do:
-    ASSIGN d-vl-benefic = truncate(d-remun * d-taxa,2)
-           d-vl-func    = truncate(d-remun_polo *  d-perc-func,2)
-           d-vl-emp     = d-vl-benefic - d-vl-func.
-end.
-else
-do:
-    ASSIGN d-vl-benefic = truncate(d-remun * d-taxa,2)
-           d-vl-func    = truncate(d-vl-benefic *  d-perc-func,2)
-           d-vl-emp     = d-vl-benefic - d-vl-func.
-end.
-*/
 
-iF bfunciona.cdn_empresa = "420" then do:
+
+iF bfunciona.cdn_empresa = "420" OR bfunciona.cdn_empresa = "410" then do:/*solic-318*/
     ASSIGN d-vl-benefic = truncate(d-remun * d-taxa + 0.005,2)
            d-vl-func    = truncate(d-vl-benefic *  d-perc-func ,2)
            d-vl-emp     = d-vl-benefic - d-vl-func.
