@@ -65,8 +65,8 @@ c-it-codigo-ini   = ""
 c-it-codigo-fim   = "ZZZZZZZ"
 dt-nota-ini       =  01/01/2013
 dt-nota-fim       =  today
-c-cod-estabel-ini = "422"
-c-cod-estabel-fim = "434"
+c-cod-estabel-ini = "411"  /*solic-318*/
+c-cod-estabel-fim = "449"
     qcli = "".
 
   if num-entries(c_param_funcao,"|") = 2 then do:

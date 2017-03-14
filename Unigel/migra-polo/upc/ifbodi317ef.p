@@ -191,7 +191,7 @@ IF p-ind-event = "EndEfetivaNota" THEN DO:
                      WHERE if-ped-venda.nr-pedido = ped-venda.nr-pedido NO-ERROR.
                 IF AVAIL if-ped-venda THEN DO:
     
-                    IF nota-fiscal.nome-transp <> "" AND nota-fiscal.cod-estabel <> "422" THEN /* COLOCADO A REGRA DO 434 CONFORME SOLICITADO PELO RICARDO POLIMENO 09-10 */
+                    IF nota-fiscal.nome-transp <> "" AND nota-fiscal.cod-estabel <> "422" AND nota-fiscal.cod-estabel <> "412" THEN /*solic-318*/ /* COLOCADO A REGRA DO 434 CONFORME SOLICITADO PELO RICARDO POLIMENO 09-10 */
                         ASSIGN nota-fiscal.nome-transp  = "Destinario".
 
 

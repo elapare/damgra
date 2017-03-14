@@ -173,6 +173,8 @@ FOR EACH tt-ws-ped-venda:
 
     IF ws-ped-venda.cod-estabel = "422" THEN
         ASSIGN ws-ped-venda.cod-estab-atend = "434".
+    IF ws-ped-venda.cod-estabel = "412" THEN
+        ASSIGN ws-ped-venda.cod-estab-atend = "442". /*solic-318*/
 
     /* Carrega informa‡äes padräes */
     run dibo/bodi159sdf.p persistent set bo-ped-venda-sdf.

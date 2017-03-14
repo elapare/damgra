@@ -1107,10 +1107,14 @@ FOR EACH tt-notas
                                         l-item THEN aux-qt-faturada-dev ELSE aux-peso-liq-fat-dev))) ELSE (-1 * ((valor-liquido-dev / (IF l-item THEN aux-qt-faturada-dev ELSE 
                                         aux-peso-liq-fat-dev)) / de-cotacao)))) ELSE 0).
         
+                                     
+                            FIND FIRST fam-comerc NO-LOCK
+                                WHERE fam-comerc.fm-cod-com = ITEM.fm-cod-com NO-ERROR.
+                    
                             hExcel:Range(trim(entry(iColimp + 2,aCel) + string(ilin))):value = nota-fiscal.cod-estabel. 
                             hExcel:Range(trim(entry(iColimp + 3,aCel) + string(ilin))):value = it-nota-fisc.nr-pedcli.
-                            hExcel:Range(trim(entry(iColimp + 4,aCel) + string(ilin))):value = item.fm-codigo.
-                            hExcel:Range(trim(entry(iColimp + 5,aCel) + string(ilin))):value = item.fm-cod-com.
+                            hExcel:Range(trim(entry(iColimp + 4,aCel) + string(ilin))):value = item.fm-codigo   + (IF AVAIL familia THEN "/" + familia.descricao ELSE "") .
+                            hExcel:Range(trim(entry(iColimp + 5,aCel) + string(ilin))):value = item.fm-cod-com  + (IF AVAIL fam-comerc THEN "/" + fam-comerc.descricao ELSE "").
                             
                             hExcel:Range(trim(entry(iColimp + 6,aCel) + string(ilin))):value = it-nota-fisc.nr-nota-fis. 
                             hExcel:Range(trim(entry(iColimp + 7,aCel) + string(ilin))):value = IF nota-fiscal.cidade-cif <> "" THEN "CIF" ELSE "FOB". 
@@ -1499,11 +1503,13 @@ FOR EACH tt-notas
                                                                                                                        aux-qt-faturada 
                                                                                                                     ELSE aux-peso-liq-fat)) /
                                                                                                                          de-cotacao)).
-
+                     
+                    FIND FIRST fam-comerc NO-LOCK
+                        WHERE fam-comerc.fm-cod-com = ITEM.fm-cod-com NO-ERROR.
                     ASSIGN hExcel:Range(trim(entry(iColimp + 2,aCel) + string(ilin))):value = nota-fiscal.cod-estabel
                            hExcel:Range(trim(entry(iColimp + 3,aCel) + string(ilin))):value = it-nota-fisc.nr-pedcli
-                           hExcel:Range(trim(entry(iColimp + 4,aCel) + string(ilin))):value = item.fm-codigo
-                           hExcel:Range(trim(entry(iColimp + 5,aCel) + string(ilin))):value = item.fm-cod-com
+                           hExcel:Range(trim(entry(iColimp + 4,aCel) + string(ilin))):value = item.fm-codigo   + (IF AVAIL familia THEN "/" + familia.descricao ELSE "") 
+                           hExcel:Range(trim(entry(iColimp + 5,aCel) + string(ilin))):value = item.fm-cod-com  + (IF AVAIL fam-comerc THEN "/" + fam-comerc.descricao ELSE "") 
                            
                            hExcel:Range(trim(entry(iColimp + 6,aCel) + string(ilin))):value = it-nota-fisc.nr-docum
                            hExcel:Range(trim(entry(iColimp + 7,aCel) + string(ilin))):value = IF nota-fiscal.cidade-cif <> "" THEN "CIF" 
@@ -2620,20 +2626,7 @@ def var c-notas as char no-undo.
 PROCEDURE pi-conta-receita.
 
 
-    /*  
-      FOR EACH  nota-fiscal WHERE nota-fiscal.cod-estabel = "422" AND
-           nota-fiscal.serie = "20" AND
-           nota-fiscal.nr-nota-fis >= "0050013"
-    AND
-           nota-fiscal.nr-nota-fis <= "0050063"  NO-LOCK ,
-
-          EACH estabelec WHERE estabelec.cod-estabel = nota-fiscal.cod-estabel NO-LOCK,
-
-       FIRST emitente OF nota-fiscal NO-LOCK ,
-       EACH  it-nota-fisc OF nota-fiscal NO-LOCK .        
-         find item where item.it-codigo = it-nota-fisc.it-codigo
-                       no-lock no-error.
-      */
+    
           c-conta-receita =  "".
           FOR FIRST sumar-ft WHERE
               sumar-ft.ct-conta >= "31" and
@@ -2678,28 +2671,13 @@ END PROCEDURE.
 PROCEDURE pi-conta-receita-DEV.
 
 
-    /*  
-      FOR EACH  nota-fiscal WHERE nota-fiscal.cod-estabel = "422" AND
-           nota-fiscal.serie = "20" AND
-           nota-fiscal.nr-nota-fis >= "0050013"
-    AND
-           nota-fiscal.nr-nota-fis <= "0050063"  NO-LOCK ,
-
-          EACH estabelec WHERE estabelec.cod-estabel = nota-fiscal.cod-estabel NO-LOCK,
-
-       FIRST emitente OF nota-fiscal NO-LOCK ,
-       EACH  it-nota-fisc OF nota-fiscal NO-LOCK .        
-         find item where item.it-codigo = it-nota-fisc.it-codigo
-                       no-lock no-error.
-      */
+     
           c-conta-receita =  "".
           c-sc-receita    =  "".
 
 
         FOR   FIRST estabelec WHERE estabelec.cod-estabel = NOTA-FISCAL.cod-estabel NO-LOCK,
-       /* EACH item-doc-est OF docum-est WHERE
-             item-doc-est.it-codigo = devol-cli.it-codigo and
-             item-doc-est.sequencia = devol-cli.sequencia  NO-LOCK,*/
+       
     FIRST  tit_acr WHERE 
           tit_acr.cdn_cliente  = NOTA-FISCAL.cod-emitente AND
           tit_acr.cod_empresa  = STRING(estabelec.ep-codigo) AND
@@ -2709,12 +2687,11 @@ PROCEDURE pi-conta-receita-DEV.
           tit_acr.cod_ser_docto =  devol-cli.serie  AND
           tit_acr.cod_tit_acr   = devol-cli.nr-nota-fis AND
         NOT tit_acr.log_tit_acr_estordo NO-LOCK ,
-       EACH movto_tit_acr OF tit_acr /*WHERE index(movto_tit_acr.ind_trans_acr,"implant") > 0*/
+       EACH movto_tit_acr OF tit_acr 
                              NO-LOCK ,
 
        
-        each aprop_ctbl_acr OF movto_tit_acr WHERE /*aprop_ctbl_acr.cod_cta_ctbl >= "32" AND 
-        aprop_ctbl_acr.cod_cta_ctbl <= "32Z" AND*/
+        each aprop_ctbl_acr OF movto_tit_acr WHERE  
          aprop_ctbl_acr.cod_unid_negoc = it-NOTA-FISC.cod-unid-negoc
         NO-LOCK,
              FIRST conta-contab WHERE conta-contab.ep-codigo = estabelec.ep-codigo and

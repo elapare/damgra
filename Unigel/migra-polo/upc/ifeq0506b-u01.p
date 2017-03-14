@@ -204,7 +204,7 @@ PROCEDURE pi-verifica-if-nor :
            ASSIGN tt-valid-ped.mod-frete = IF b-ped-venda.cidade-cif <> "" THEN "CIF" ELSE "FOB".
 
     END.
-    ELSE IF ped-venda.cond-redespa BEGINS "Pedido original relacionado" and ped-venda.cod-estabel <> "432" THEN DO: /*permite embarcar pedido do 432*/
+    ELSE IF ped-venda.cond-redespa BEGINS "Pedido original relacionado" and ped-venda.cod-estabel <> "432" AND and ped-venda.cod-estabel <> "443" THEN DO: /*solic-318*/ /*permite embarcar pedido do 432*/
 
         CREATE tt-valid-ped.
         ASSIGN tt-valid-ped.cdd-embarq = embarque.cdd-embarq

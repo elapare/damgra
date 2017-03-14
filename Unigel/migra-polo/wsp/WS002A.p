@@ -1,7 +1,8 @@
 /*#####################################################################################
  ## WS002A.p - GERA PEDIDO DE VENDA
 ######################################################################################*/
-{include/buffers.i}
+/*{include/buffers.i}*/
+{bf/buffersUni2.i}
 
 DEF INPUT PARAMETER p-nomeAbrev AS CHAR NO-UNDO.
 DEF INPUT PARAMETER p-nrPedcli  AS CHAR NO-UNDO.
@@ -811,7 +812,7 @@ PROCEDURE pi-valid-campos :
 DEFINE VARIABLE cListaEmb AS CHARACTER   NO-UNDO.
 DEFINE VARIABLE l-parcial as logical     no-undo.
 
-if ttPedVenda.cod-estabel = "422" and 
+if (ttPedVenda.cod-estabel = "422" OR ttPedVenda.cod-estabel = "412")  and  /*solic-318*/
     c-cod-unid-atend = "" then do:
     FOR FIRST ped-venda EXCLUSIVE-LOCK
         WHERE ped-venda.nome-abrev = ttPedVenda.nome-abrev
@@ -837,7 +838,7 @@ FOR FIRST ped-venda EXCLUSIVE-LOCK
     FIRST if-ped-venda NO-LOCK
     WHERE if-ped-venda.nr-pedido = ped-venda.nr-pedido:
 
-    if ped-venda.cod-estabel = "422" then do:
+    if ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412" then do:  /*solic-318*/
         IF if-ped-venda.cod-estab-atend <> c-cod-unid-atend
             and c-cod-unid-atend = "" THEN DO:
             RUN pi-cria-rowerrors (INPUT 15825,
@@ -889,7 +890,7 @@ FOR FIRST ped-venda EXCLUSIVE-LOCK
                                                 b2-ped-venda.nome-trans   = ttPedVenda.nome-transp.
         END.
     END.
-    if ped-venda.cod-estabel <> "422" then do:
+    if ped-venda.cod-estabel <> "422" AND ped-venda.cod-estabel <> "412" then do:  /*solic-318*/
         FOR FIRST b2-ped-venda EXCLUSIVE-LOCK
             WHERE b2-ped-venda.nome-abrev = ttPedVenda.nome-abrev
               AND b2-ped-venda.nr-pedcli  = ttPedVenda.nr-pedcli,

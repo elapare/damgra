@@ -270,7 +270,7 @@ IF p-ind-event = "Fim_CancelaNotaFiscal" THEN DO:
         FIND FIRST nota-fiscal NO-LOCK
              WHERE ROWID(nota-fiscal) = TO-ROWID(tt-epc.val-parameter) NO-ERROR.
 
-        IF AVAIL nota-fiscal AND nota-fiscal.cod-estabel <> "432" THEN DO:
+        IF AVAIL nota-fiscal AND nota-fiscal.cod-estabel <> "432" AND nota-fiscal.cod-estabel <> "443" THEN DO: /*solic-318*/
 
             FIND FIRST if-relac-nota
                  WHERE if-relac-nota.cod-estabel  = nota-fiscal.cod-estabel

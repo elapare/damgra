@@ -9,7 +9,7 @@
 ASSIGN c-cod-unid-atend = IF AVAIL b-ws-ped-venda THEN b-ws-ped-venda.cod-estab-atend ELSE "". 
 IF c-cod-unid-atend = ? THEN ASSIGN c-cod-unid-atend = "".
 
-IF c-cod-unid-atend = "" AND ped-venda.cod-estabel = "422" THEN DO:
+IF c-cod-unid-atend = "" AND (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412")  THEN DO:  /*solic-318*/
     RUN pi-cria-rowerrors (INPUT 15825,
                            INPUT "Unidade de Atendimento ‚ obrigat¢rio informar.",
                            INPUT "Informar Unidade de Atendimento valida.").

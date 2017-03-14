@@ -677,7 +677,7 @@ IF  p-ind-event   = "choose"                     AND
         fIND FIRST if-ped-venda NO-LOCK
              WHERE if-ped-venda.nr-pedido = ped-venda.nr-pedido AND if-ped-venda.nr-pedido-relac <> 0 NO-ERROR.
         IF  AVAIL if-ped-venda THEN DO:
-            IF ped-venda.cod-estabel <> "422"  AND wh-pd4000-cod-estabel:SCREEN-VALUE <> "422" THEN DO:
+            IF (ped-venda.cod-estabel <> "422"  AND wh-pd4000-cod-estabel:SCREEN-VALUE <> "422") OR (ped-venda.cod-estabel <> "412"  AND wh-pd4000-cod-estabel:SCREEN-VALUE <> "412")   THEN DO: /*solic-318*/
 
 
                FIND FIRST if-estabelec NO-LOCK

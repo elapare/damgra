@@ -107,7 +107,7 @@ def buffer b-ped-venda     for ped-venda.
 def buffer bf-if-ped-venda for if-ped-venda.
 
 /****************** Defini‡ao de Vari veis p/ Campos Virtuais do Relat¢rio *******************/ 
-def var c-est as char initial "422,424,434,432,702" no-undo.
+ 
 def var i-estab as integer no-undo.
 
 DEFINE VARIABLE nome-ab-rep-jr     AS CHARACTER NO-UNDO.
