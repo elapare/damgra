@@ -18,7 +18,7 @@
 **  {1} = objeto   provido pelo Roundtable
 **  {2} = versao   provido pelo Roundtable
 ************************************************************************/
-
+DEF BUFFER operacao FOR mgemp.operacao.
 def new global shared var c-arquivo-log    as char  format "x(60)" no-undo.
 def var c-prg-vrs as char init "[[[2.00.00.000[[[" no-undo.
 def var c-prg-obj as char no-undo.
@@ -7640,6 +7640,7 @@ PROCEDURE ValidaCampos :
 END PROCEDURE.
 
 /* _UIB-CODE-BLOCK-END */
+
 
 
 
