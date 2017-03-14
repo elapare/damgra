@@ -91,9 +91,9 @@ DEFINE VARIABLE idx               AS int     NO-UNDO.
 DEFINE VARIABLE dt-entrega-ini    AS DATE    initial 12/01/2016 format "99/99/9999"   NO-UNDO.
 DEFINE VARIABLE dt-entrega-fim    AS DATE    initial 12/10/2016 format "99/99/9999"   NO-UNDO.
 DEFINE VARIABLE c-ep-codigo-ini   AS CHARACTER initial "422"  NO-UNDO.
-DEFINE VARIABLE c-ep-codigo-fim   AS CHARACTER initial STRING({cdp\poloestab.i 434})  NO-UNDO.
+DEFINE VARIABLE c-ep-codigo-fim   AS CHARACTER INITIAL "434"  NO-UNDO.
 DEFINE VARIABLE c-cod-estabel-ini AS CHARACTER initial "422"  NO-UNDO.
-DEFINE VARIABLE c-cod-estabel-fim AS CHARACTER initial STRING({cdp\poloestab.i 434})  NO-UNDO.
+DEFINE VARIABLE c-cod-estabel-fim AS CHARACTER INITIAL "434"  NO-UNDO.
 DEFINE VARIABLE c-nome-abrev-ini  AS CHARACTER initial ""  NO-UNDO.
 DEFINE VARIABLE c-nome-abrev-fim  AS CHARACTER initial "zzzz"  NO-UNDO.
 DEFINE VARIABLE c-it-codigo-ini   AS CHARACTER initial ""  NO-UNDO.

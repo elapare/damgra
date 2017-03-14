@@ -506,16 +506,12 @@ for each tt-ordem no-lock
 
 END.
 
-
-
-
-
 RUN pi-finalizar IN h-acomp.
 RUN pi-finaliza-impressao.
 
-   RETURN 'OK'.
-
 RETURN 'OK'.
+/* fim do programa */
+
 
 procedure pi-print-editor:
 
@@ -592,8 +588,6 @@ DEF VAR c-arquivo AS CHAR NO-UNDO.
     /*c-excel:QUIT().*/
     RELEASE OBJECT c-excel.
 
-END PROCEDURE.                  
+END PROCEDURE.
 
-return 'OK'.
 
-/* fim do programa */

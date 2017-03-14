@@ -358,7 +358,7 @@ DEFINE VARIABLE ed-obs AS CHARACTER
      SIZE 46 BY 1.6 NO-UNDO.
 
 DEFINE VARIABLE c-cod-estabel-nf AS CHARACTER FORMAT "X(15)":U 
-     initial STRING({cdp\poloestab.i 434}) /*solic-318*/ 
+     INITIAL "434" /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 5 BY .88 NO-UNDO.

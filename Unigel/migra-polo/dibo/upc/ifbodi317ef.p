@@ -113,10 +113,10 @@ IF p-ind-event = "EndEfetivaNota" THEN DO:
                 IF nota-fiscal.cdd-embarq <> 0 THEN DO:
                     ASSIGN l-enc-pesagem = NO.
         
-                    FOR FIRST pesagem NO-LOCK
-                        WHERE pesagem.cod-estabel = nota-fiscal.cod-estabel
-                          AND pesagem.serie       = nota-fiscal.serie
-                          AND pesagem.cdd-embarq = nota-fiscal.cdd-embarq:
+                    FOR FIRST mgesp.pesagem NO-LOCK
+                        WHERE mgesp.pesagem.cod-estabel = nota-fiscal.cod-estabel
+                          AND mgesp.pesagem.serie       = nota-fiscal.serie
+                          AND mgesp.pesagem.cdd-embarq = nota-fiscal.cdd-embarq:
         
                         ASSIGN l-enc-pesagem = YES.
     
