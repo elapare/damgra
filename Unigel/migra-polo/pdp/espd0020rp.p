@@ -156,7 +156,7 @@ def new shared var da-canal-venda-fim like ped-venda.cod-canal-venda format ">>9
 def new shared var c-perc-atend       AS DEC FORMAT ">>9.99%" initial 0 no-undo.
 
 /****************** Defini‡ao de Vari veis p/ Campos Virtuais do Relat¢rio *******************/ 
-def var c-est as char initial "422,424,434,432,702" no-undo.
+def var c-est as char initial "412,422,424,434,442,432,443,702" no-undo./*solic-318*/
 def var i-estab as integer no-undo.
 
 DEFINE VARIABLE nome-ab-rep-jr     AS CHARACTER                 NO-UNDO.
@@ -1181,7 +1181,7 @@ for each ped-item where
 
 
 
-            IF tt-fat.cod-estabel-fat = "432" AND tt-fat.liber-fat = "sim" AND
+            IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat = "sim" AND /*solic-318*/
                tt-fat.dt-entrega <= tt-param.dt-embarque AND
                  tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque  THEN
 
@@ -1190,7 +1190,7 @@ for each ped-item where
 
 
 
-            IF tt-fat.cod-estabel-fat = "432" AND tt-fat.liber-fat = "sim" AND
+            IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat = "sim" AND /*solic-318*/
                 tt-fat.dt-entrega <= tt-param.dt-embarque AND 
                 tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque AND
                ( tt-fat.var-ung-sbc + tt-fat.var-sbc + d-saldo-terc-sp) > 0 THEN
@@ -1198,7 +1198,7 @@ for each ped-item where
                 ASSIGN tt-fat.embarque = "OK"
                        tt-fat.desc-embarque = "FAT".  
 
-            IF tt-fat.cod-estabel-fat = "432" AND tt-fat.liber-fat = "sim" AND
+            IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat = "sim" AND /*solic-318*/
                 tt-fat.dt-entrega <= tt-param.dt-embarque AND 
                 tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque AND
                 d-saldo-terc-rs > 0 THEN
@@ -1208,7 +1208,7 @@ for each ped-item where
 
 
 
-            IF  tt-fat.cod-estabel-fat = "434" AND 
+            IF  (tt-fat.cod-estabel-fat = "434" OR tt-fat.cod-estabel-fat = "442") AND  /*solic-318*/
                 tt-fat.liber-fat = "sim"       AND
                 tt-fat.dt-entrega <= tt-param.dt-embarque  AND 
                 tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque  THEN
@@ -1220,20 +1220,20 @@ for each ped-item where
             d-perc-atend = (( tt-fat.qt-atendida + d-saldo-terc-sp) / tt-fat.qt-pedida ) * 100.
             
 
-            IF tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422" AND
+            IF ((tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422") OR (tt-fat.cod-estabel-fat = "443" AND tt-fat.cod-estabel = "412")) AND /*solic-318*/
                tt-fat.tp-pedido = "E" AND d-saldo-terc-rs > 0 THEN
 
                 ASSIGN tt-fat.embarque = "OK"
                        tt-fat.desc-embarque = "ARMAZENA CD". 
 
-             IF tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422" AND
+             IF ((tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422") OR (tt-fat.cod-estabel-fat = "443" AND tt-fat.cod-estabel = "412")) AND /*solic-318*/
                tt-fat.liber-fat <> "sim" AND d-saldo-terc-rs > 0 AND d-perc-atend <= 90 THEN
 
                 ASSIGN tt-fat.embarque = "OK"
                        tt-fat.desc-embarque = "ARMAZENA CD". 
 
 
-             IF tt-fat.cod-estabel-fat = "432" AND tt-fat.liber-fat <> "sim" AND d-perc-atend <= 90 AND
+             IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat <> "sim" AND d-perc-atend <= 90 AND /*solic-318*/
                 tt-fat.dt-entrega = tt-param.dt-embarque  AND d-saldo-terc-rs = 0 and
                 (d-saldo-terc-sp / (tt-fat.qt-pedida - tt-fat.qt-atendida)) * 100 < 90 
                  THEN
@@ -1241,7 +1241,7 @@ for each ped-item where
                         tt-fat.desc-embarque = "ARMAZENA CD".  
 
 
-              IF tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422" AND d-perc-atend <= 90 AND
+              IF ((tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422") OR (tt-fat.cod-estabel-fat = "443" AND tt-fat.cod-estabel = "412")) AND d-perc-atend <= 90 AND /*solic-318*/
                tt-fat.liber-fat = "sim" AND d-saldo-terc-rs > 0 and
                   tt-fat.dt-entrega >=  tt-param.dt-embarque  + 9 - WEEKDAY(tt-param.dt-embarque)THEN
 
@@ -1870,19 +1870,19 @@ PROCEDURE pi-saldo-pallet.
             IF saldo-estoq.dt-vali-lote < dt-validade THEN
                 dt-validade = saldo-estoq.dt-vali-lote.
         
-            IF saldo-estoq.cod-estabel = "423" THEN
+            IF saldo-estoq.cod-estabel = "423" OR saldo-estoq.cod-estabel = "413" THEN   /*solic-318*/
                 ASSIGN var-outros = var-outros + saldo-estoq.qtidade-atu.
             ELSE
-             IF saldo-estoq.cod-estabel = "422" THEN
+             IF (saldo-estoq.cod-estabel = "422" OR saldo-estoq.cod-estabel = "412") THEN/*solic-318*/
                  ASSIGN var-mtn = var-mtn + saldo-estoq.qtidade-atu.
              ELSE
-              IF saldo-estoq.cod-estabel = "432" THEN
+              IF saldo-estoq.cod-estabel = "432" OR saldo-estoq.cod-estabel = "443" THEN /*solic-318*/
                  ASSIGN var-ung-sbc = var-ung-sbc + saldo-estoq.qtidade-atu.
               ELSE
-              IF saldo-estoq.cod-estabel = "434" THEN
+              IF saldo-estoq.cod-estabel = "434" OR saldo-estoq.cod-estabel = "442" THEN /*solic-318*/
                  ASSIGN var-ung-rs = var-ung-rs + saldo-estoq.qtidade-atu.
               ELSE
-              IF saldo-estoq.cod-estabel = "421" THEN
+              IF saldo-estoq.cod-estabel = "421" OR saldo-estoq.cod-estabel = "411" THEN /*solic-318*/
                   ASSIGN var-outros = var-outros + saldo-estoq.qtidade-atu.
               ELSE
                IF saldo-estoq.cod-estabel = "424" THEN

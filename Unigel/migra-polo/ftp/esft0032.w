@@ -347,7 +347,7 @@ RADIO-BUTTONS
 SIZE 25 BY 1 NO-UNDO. 
 
 DEFINE VARIABLE c-cod-estabel-ini AS CHAR label "Estab." FORMAT "x(3)"
-     INITIAL "422":U 
+     INITIAL "{cdp\poloestab.i 422}":U /*solic-318*/
      VIEW-AS FILL-IN 
      SIZE 4 BY .66
      TOOLTIP "Informe C¢digo do Estabelecimento " NO-UNDO.

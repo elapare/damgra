@@ -121,7 +121,7 @@ def buffer b-ped-venda     for ped-venda.
 def buffer bf-if-ped-venda for if-ped-venda.
 
 /****************** Defini‡ao de Vari veis p/ Campos Virtuais do Relat¢rio *******************/ 
-def var c-est as char initial "422,424,434,432,702" no-undo.
+def var c-est as char initial "412,422,424,434,432,442,443,702" no-undo.
 def var i-estab as integer no-undo.
 
 DEFINE VARIABLE nome-ab-rep-jr     AS CHARACTER NO-UNDO.
@@ -1136,7 +1136,7 @@ PROCEDURE pi-tt-fat.
     
     
     
-                IF tt-fat.cod-estabel-fat = "432" AND tt-fat.liber-fat = "sim" AND
+                IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat = "sim" AND/*solic-318*/
                    tt-fat.dt-entrega <= tt-param.dt-embarque AND
                      tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque  THEN
     
@@ -1145,7 +1145,7 @@ PROCEDURE pi-tt-fat.
     
     
     
-                IF tt-fat.cod-estabel-fat = "432" AND tt-fat.liber-fat = "sim" AND
+                IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat = "sim" AND/*solic-318*/
                     tt-fat.dt-entrega <= tt-param.dt-embarque AND 
                     tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque AND
                    ( tt-fat.var-ung-sbc + tt-fat.var-sbc + d-saldo-terc-sp) > 0 THEN
@@ -1153,7 +1153,7 @@ PROCEDURE pi-tt-fat.
                     ASSIGN tt-fat.embarque = "OK"
                            tt-fat.desc-embarque = "FAT".  
     
-                IF tt-fat.cod-estabel-fat = "432" AND tt-fat.liber-fat = "sim" AND
+                IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat = "sim" AND/*solic-318*/
                     tt-fat.dt-entrega <= tt-param.dt-embarque AND 
                     tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque AND
                     d-saldo-terc-rs > 0 THEN
@@ -1163,7 +1163,7 @@ PROCEDURE pi-tt-fat.
     
     
     
-                IF  tt-fat.cod-estabel-fat = "434" AND 
+                IF  (tt-fat.cod-estabel-fat = "434" OR tt-fat.cod-estabel-fat = "442") AND /*solic-318*/
                     tt-fat.liber-fat = "sim"       AND
                     tt-fat.dt-entrega <= tt-param.dt-embarque  AND 
                     tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque  THEN
@@ -1175,20 +1175,20 @@ PROCEDURE pi-tt-fat.
                 d-perc-atend = (( tt-fat.qt-atendida + d-saldo-terc-sp) / tt-fat.qt-pedida ) * 100.
                 
     
-                IF tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422" AND
+                IF ((tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422") OR (tt-fat.cod-estabel-fat = "443" AND tt-fat.cod-estabel = "412")) AND/*solic-318*/
                    tt-fat.tp-pedido = "E" AND d-saldo-terc-rs > 0 THEN
     
                     ASSIGN tt-fat.embarque = "OK"
                            tt-fat.desc-embarque = "ARMAZENA CD". 
     
-                 IF tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422" AND
+                 IF ((tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422") OR (tt-fat.cod-estabel-fat = "443" AND tt-fat.cod-estabel = "412")) AND/*solic-318*/
                    tt-fat.liber-fat <> "sim" AND d-saldo-terc-rs > 0 AND d-perc-atend <= 90 THEN
     
                     ASSIGN tt-fat.embarque = "OK"
                            tt-fat.desc-embarque = "ARMAZENA CD". 
     
     
-                 IF tt-fat.cod-estabel-fat = "432" AND tt-fat.liber-fat <> "sim" AND d-perc-atend <= 90 AND
+                 IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat <> "sim" AND d-perc-atend <= 90 AND/*solic-318*/
                     tt-fat.dt-entrega = tt-param.dt-embarque  AND d-saldo-terc-rs = 0 and
                     (d-saldo-terc-sp / (tt-fat.qt-pedida - tt-fat.qt-atendida)) * 100 < 90 
                      THEN
@@ -1196,7 +1196,7 @@ PROCEDURE pi-tt-fat.
                             tt-fat.desc-embarque = "ARMAZENA CD".  
     
     
-                  IF tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422" AND d-perc-atend <= 90 AND
+                  IF ((tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422") OR (tt-fat.cod-estabel-fat = "443" AND tt-fat.cod-estabel = "412")) AND d-perc-atend <= 90 AND/*solic-318*/
                    tt-fat.liber-fat = "sim" AND d-saldo-terc-rs > 0 and
                       tt-fat.dt-entrega >=  tt-param.dt-embarque  + 9 - WEEKDAY(tt-param.dt-embarque)THEN
     
@@ -1263,10 +1263,15 @@ PROCEDURE pi-saldo-pallet.
 
             CASE saldo-estoq.cod-estabel:
                 WHEN "423" THEN ASSIGN var-outros  = var-outros  + saldo-estoq.qtidade-atu.
+                WHEN "413" THEN ASSIGN var-outros  = var-outros  + saldo-estoq.qtidade-atu./*solic-318*/
                 WHEN "422" THEN ASSIGN var-mtn     = var-mtn     + saldo-estoq.qtidade-atu.
+                WHEN "412" THEN ASSIGN var-mtn     = var-mtn     + saldo-estoq.qtidade-atu./*solic-318*/
                 WHEN "432" THEN ASSIGN var-ung-sbc = var-ung-sbc + saldo-estoq.qtidade-atu.
+                WHEN "443" THEN ASSIGN var-ung-sbc = var-ung-sbc + saldo-estoq.qtidade-atu./*solic-318*/
                 WHEN "434" THEN ASSIGN var-ung-rs  = var-ung-rs  + saldo-estoq.qtidade-atu.
+                WHEN "442" THEN ASSIGN var-ung-rs  = var-ung-rs  + saldo-estoq.qtidade-atu./*solic-318*/
                 WHEN "421" THEN ASSIGN var-outros  = var-outros  + saldo-estoq.qtidade-atu.
+                WHEN "411" THEN ASSIGN var-outros  = var-outros  + saldo-estoq.qtidade-atu./*solic-318*/
                 WHEN "424" THEN ASSIGN var-sbc     = var-sbc     + saldo-estoq.qtidade-atu.
                 OTHERWISE       ASSIGN var-outros  = var-outros  + saldo-estoq.qtidade-atu.
             END CASE.

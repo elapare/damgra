@@ -634,7 +634,7 @@ FOR EACH temp-item NO-LOCK
 
     /** Verifica se existe saldo em transito de outro estabelecimeto   **/
 
-    IF  temp-item.cod-estabel = '382' OR temp-item.cod-estabel = '432' OR temp-item.cod-estabel = '436' THEN DO:
+    IF  temp-item.cod-estabel = '382' OR temp-item.cod-estabel = '432' OR temp-item.cod-estabel = '443' OR temp-item.cod-estabel = '436' THEN DO:/*solic-318*/
 
 /*         FOR EACH tt-transfer                                                    */
 /*             WHERE tt-transfer.cod-estabel  <> temp-item.cod-estabel             */
@@ -966,7 +966,7 @@ FOR EACH temp-item NO-LOCK
         if avail ped-venda-ext           and
            ped-venda-ext.Bloqueado = yes then .
         else do:   
-           IF  (temp-item.cod-estabel = "382" OR temp-item.cod-estabel = '384' OR temp-item.cod-estabel = '432' OR temp-item.cod-estabel = '436') THEN DO:
+           IF  (temp-item.cod-estabel = "382" OR temp-item.cod-estabel = '384' OR temp-item.cod-estabel = '432' OR temp-item.cod-estabel = '443' OR temp-item.cod-estabel = '436') THEN DO:/*solic-318*/
                if  saldo-ped > (temp-item.qtd-estoq + temp-item.qtd-transito ) then do:
                    create tt-dados.
                    assign tt-dados.arquivo-num        = 1
@@ -1209,7 +1209,7 @@ FOR EACH temp-item NO-LOCK
 /*                                             string(temp-item.qtd-transito,"->>,>>>,>>9.99") /* Qtd em transito */ */
 /*                                          else                                                                     */
 /*                                             ' '                                                                   */
-           tt-dados.celula-valor       = IF  (temp-item.cod-estabel = '382' OR temp-item.cod-estabel = '432' OR temp-item.cod-estabel = '436') THEN 
+           tt-dados.celula-valor       = IF  (temp-item.cod-estabel = '382' OR temp-item.cod-estabel = '432' OR temp-item.cod-estabel = '443' OR temp-item.cod-estabel = '436') THEN /*solic-318*/
                                              string(temp-item.qtd-transito,"->>,>>>,>>9.99") /* Qtd em transito */
                                          else
                                              ' '

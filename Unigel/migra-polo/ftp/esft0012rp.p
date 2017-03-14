@@ -2622,22 +2622,6 @@ def var c-notas as char no-undo.
 
 
 PROCEDURE pi-conta-receita.
-
-
-    /*  
-      FOR EACH  nota-fiscal WHERE nota-fiscal.cod-estabel = "422" AND
-           nota-fiscal.serie = "20" AND
-           nota-fiscal.nr-nota-fis >= "0050013"
-    AND
-           nota-fiscal.nr-nota-fis <= "0050063"  NO-LOCK ,
-
-          EACH estabelec WHERE estabelec.cod-estabel = nota-fiscal.cod-estabel NO-LOCK,
-
-       FIRST emitente OF nota-fiscal NO-LOCK ,
-       EACH  it-nota-fisc OF nota-fiscal NO-LOCK .        
-         find item where item.it-codigo = it-nota-fisc.it-codigo
-                       no-lock no-error.
-      */
           c-conta-receita =  "".
           FOR FIRST sumar-ft WHERE
               sumar-ft.ct-conta >= "31" and
@@ -2680,22 +2664,6 @@ PROCEDURE pi-conta-receita.
 END PROCEDURE.
 
 PROCEDURE pi-conta-receita-DEV.
-
-
-    /*  
-      FOR EACH  nota-fiscal WHERE nota-fiscal.cod-estabel = "422" AND
-           nota-fiscal.serie = "20" AND
-           nota-fiscal.nr-nota-fis >= "0050013"
-    AND
-           nota-fiscal.nr-nota-fis <= "0050063"  NO-LOCK ,
-
-          EACH estabelec WHERE estabelec.cod-estabel = nota-fiscal.cod-estabel NO-LOCK,
-
-       FIRST emitente OF nota-fiscal NO-LOCK ,
-       EACH  it-nota-fisc OF nota-fiscal NO-LOCK .        
-         find item where item.it-codigo = it-nota-fisc.it-codigo
-                       no-lock no-error.
-      */
           c-conta-receita =  "".
           c-sc-receita    =  "".
 

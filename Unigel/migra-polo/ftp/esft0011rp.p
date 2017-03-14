@@ -2624,9 +2624,12 @@ def var c-notas as char no-undo.
 
 
 PROCEDURE pi-conta-receita.
+<<<<<<< HEAD
 
 
     
+=======
+>>>>>>> f6b325491d44d766fc2090f48b61d2e00d8a1bcd
           c-conta-receita =  "".
           FOR FIRST sumar-ft WHERE
               sumar-ft.ct-conta >= "31" and
@@ -2669,9 +2672,12 @@ PROCEDURE pi-conta-receita.
 END PROCEDURE.
 
 PROCEDURE pi-conta-receita-DEV.
+<<<<<<< HEAD
 
 
      
+=======
+>>>>>>> f6b325491d44d766fc2090f48b61d2e00d8a1bcd
           c-conta-receita =  "".
           c-sc-receita    =  "".
 

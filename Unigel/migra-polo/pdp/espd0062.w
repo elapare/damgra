@@ -98,7 +98,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 
 def new shared var i-ep-codigo-ini    AS INT         format ">>9"        initial 120      no-undo.
 
-def new shared var c-cod-estabel-prod AS CHAR        format "x(3)"       initial "422"    no-undo.
+def new shared var c-cod-estabel-prod AS CHAR        format "x(3)"       initial "{cdp\poloestab.i 422}"    no-undo.
 def new shared var c-cod-estabel-fat  AS CHAR        format "x(3)"       initial "424"    no-undo.
 
 def new shared var i-cod-emitente-ini AS INT         format ">>>>>>>>9"  initial 0        no-undo.

@@ -1133,7 +1133,7 @@ end procedure.
                         
             END.
             
-                  if tt-nome-abrev = "" and pallet.cod-estabel = "432" then do:
+                  if tt-nome-abrev = "" and (pallet.cod-estabel = "432" OR pallet.cod-estabel = "443") then do:/*solic-318*/
                      
                        FOR EACH movto-estoq WHERE
                             movto-estoq.cod-estabel = "424" AND

@@ -376,8 +376,8 @@ def new global shared var c-it-codigo-fim-20     AS CHARACTER NO-UNDO.
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
 
-DEFINE VARIABLE c-cod-estabel-ini   AS CHARACTER FORMAT "X(3)"          INITIAL "422"          NO-UNDO.
-DEFINE VARIABLE c-cod-estabel-fim   AS CHARACTER FORMAT "X(3)"          INITIAL "422"          NO-UNDO.
+DEFINE VARIABLE c-cod-estabel-ini   AS CHARACTER FORMAT "X(3)"          INITIAL "{cdp\poloestab.i 422}"          NO-UNDO./*solic-318*/
+DEFINE VARIABLE c-cod-estabel-fim   AS CHARACTER FORMAT "X(3)"          INITIAL "{cdp\poloestab.i 422}"          NO-UNDO./*solic-318*/
 
 DEFINE VARIABLE c-tp-pedido-ini     AS CHARACTER FORMAT "X(1)"          INITIAL ""             NO-UNDO.
 DEFINE VARIABLE c-tp-pedido-fim     AS CHARACTER FORMAT "X(1)"          INITIAL "Z"            NO-UNDO.
@@ -3297,11 +3297,11 @@ c-est-plan = "".
                c-relatorio:range("R" + STRING(i-linha)):VALUE  = DEC(SUBSTRING(pd-compl-pedido.char-1,31,10)).  
 
 
-        ASSIGN c-relatorio:range("S" + STRING(i-linha)):VALUE  = IF tt-pedido.cod-estabel-fat = "422" THEN "MTN" ELSE
+        ASSIGN c-relatorio:range("S" + STRING(i-linha)):VALUE  = IF tt-pedido.cod-estabel-fat = "422" OR tt-pedido.cod-estabel-fat = "412" THEN "MTN" ELSE
                                                                  IF tt-pedido.cod-estabel-fat = "424" THEN "SBC" ELSE
-                                                                 IF tt-pedido.cod-estabel-fat = "434" THEN "MTN" ELSE
-                                                                 IF tt-pedido.cod-estabel-fat = "432" THEN "SBC" ELSE 
-                                                                 "UNG".
+                                                                 IF tt-pedido.cod-estabel-fat = "434" OR tt-pedido.cod-estabel-fat = "442" THEN "MTN" ELSE
+                                                                 IF tt-pedido.cod-estabel-fat = "432" OR tt-pedido.cod-estabel-fat = "443" THEN "SBC" ELSE 
+                                                                 "UNG"./*solic-318*/
         
         
            if index(c-est-plan, tt-pedido.cod-estabel-fat) = 0 then 
@@ -3360,13 +3360,13 @@ c-est-plan = "".
     
     i-linha = 1.
     
-        if INDEX( c-est-plan,"432") > 0 then do:
+        if INDEX( c-est-plan,"432") > 0 OR INDEX( c-est-plan,"443") > 0 then do:/*solic-318*/
                     ASSIGN c-relatorio:range("A" + STRING(i-linha)):VALUE  = 
                     "POLO (UNIGEL COMERCIAL-SBC) - Pedido faturado po SP".
            i-linha = i-linha + 1.
         end.
         
-         if INDEX( c-est-plan,"434") > 0 then do:
+         if INDEX( c-est-plan,"434") > 0 OR INDEX( c-est-plan,"442") > 0 then do:/*solic-318*/
                     ASSIGN c-relatorio:range("A" + STRING(i-linha)):VALUE  = 
                     "POLO (UNIGEL COMERCIAL-CANOAS) - Pedido faturado po RS".
            i-linha = i-linha + 1.

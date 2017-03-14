@@ -1266,7 +1266,7 @@ run GetEnv in h-prog(input "CLIENTNAME", output c-clientname).
 DELETE PROCEDURE h-prog.
 
 
-ASSIGN c-cod-estabel = "422"
+ASSIGN c-cod-estabel = "{cdp\poloestab.i 422}"/*solic-318*/
        c-serie       = "20".
 
 

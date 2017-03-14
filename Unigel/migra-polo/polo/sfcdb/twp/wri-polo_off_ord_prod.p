@@ -32,7 +32,7 @@ TRIGGER PROCEDURE FOR WRITE OF polo_off_ord_prod OLD BUFFER oldpolo_off_ord_prod
     ord-prod.tipo                             =        1 
     ord-prod.usuario-alt                      =        ?  
     ord-prod.data-alt                         =        04/13/2014 
-    ord-prod.cod-estabel                      =       "422"
+    ord-prod.cod-estabel                      =       "{cdp\poloestab.i 422}"/*solic-318*/
     ord-prod.nome-abrev                       =       ""
     ord-prod.nr-pedido                        =       ""
     ord-prod.dt-orig                          =       04/13/2014 

@@ -2803,7 +2803,7 @@ define buffer b1-ped-venda for ped-venda.
                      d-perc-desc-db:SENSITIVE       = no  .  
                      
                   l-432-polo = no.   
-                  for first b1-ped-venda where  b1-ped-venda.nr-pedido = if-ped-venda.nr-pedido and b1-ped-venda.cod-estabel = "422" no-lock.
+                  for first b1-ped-venda where  b1-ped-venda.nr-pedido = if-ped-venda.nr-pedido and (b1-ped-venda.cod-estabel = "422" OR b1-ped-venda.cod-estabel = "412") no-lock./*solic-318*/
                       l-432-polo = yes.                     
                   end.
                      

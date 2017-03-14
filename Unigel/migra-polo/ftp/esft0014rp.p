@@ -460,7 +460,7 @@ PROCEDURE pi-gera-embarque.
 
    /* Rotina Cabe‡alho no Excel */
 
-    IF tt-param.c-cod-estabel-ini <> "423" THEN DO:
+    IF tt-param.c-cod-estabel-ini <> "423" AND tt-param.c-cod-estabel-ini <> "413" THEN DO:/*solic-318*/
         ASSIGN i-linha = 3
                c-relatorio:range("B" + STRING(i-linha)):VALUE = 
                  "BR 386 - Km 423 - Via 1 - Nr.280 - / Distrito Industrial / Montenegro-RS / Brasil".

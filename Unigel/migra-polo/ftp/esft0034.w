@@ -194,7 +194,7 @@ DEFINE VARIABLE tg-imprime AS LOGICAL INITIAL no
      VIEW-AS TOGGLE-BOX
      SIZE 54 BY .83 NO-UNDO.
 
-DEFINE VARIABLE c-cod-estabel-ini AS CHARACTER FORMAT "X(03)":U INITIAL "422" 
+DEFINE VARIABLE c-cod-estabel-ini AS CHARACTER FORMAT "X(03)":U INITIAL "{cdp\poloestab.i 422}" /*solic-318*/
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 5 BY .88 NO-UNDO.
