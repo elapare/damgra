@@ -172,7 +172,7 @@ DEFINE RECTANGLE rtToolBar
      SIZE 90 BY 1.42
      BGCOLOR 7 .
 
-DEFINE VARIABLE cCodEstabel AS CHARACTER FORMAT "x(3)" INITIAL "{cdp\poloestab.i 422}" /*solic-318*/
+DEFINE VARIABLE cCodEstabel AS CHARACTER FORMAT "x(3)" initial "422"  /*solic-318*/ 
      LABEL "Estabelecimento":R18 
      VIEW-AS FILL-IN 
      SIZE 7 BY .88.

@@ -113,8 +113,8 @@ def new shared var txt-pis-cofins as decimal format ">>9.99" label "Pis / Cofins
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini like nota-fiscal.cod-estabel format "X(3)" initial "{cdp\poloestab.i 422}" no-undo. /*solic-318*/
-def new shared var c-cod-estabel-fim like nota-fiscal.cod-estabel format "X(3)" initial "{cdp\poloestab.i 422}" no-undo. /*solic-318*/
+def new shared var c-cod-estabel-ini like nota-fiscal.cod-estabel format "X(3)" initial "422" no-undo.  /*solic-318*/ 
+def new shared var c-cod-estabel-fim like nota-fiscal.cod-estabel format "X(3)" initial "422" no-undo.  /*solic-318*/ 
 def new shared var c-cliente-ini AS CHAR format "X(5)" initial "" no-undo.
 def new shared var c-cliente-fim AS CHAR format "X(5)" initial "ZZZZZ" no-undo.
 def new shared var transportador-ini AS CHAR format "X(5)" initial "" no-undo.

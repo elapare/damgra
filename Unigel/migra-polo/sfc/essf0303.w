@@ -5843,7 +5843,7 @@ PROCEDURE pi-processa-reporte-sfc :
     /*Speto - 22/01/2004*/
     create tt-refugo.
     assign tt-refugo.nr-ord-produ = tt-rep-prod.nr-ord-produ
-           tt-refugo.codigo-rejei = if ord-prod.cod-estabel = "413" OR ord-prod.cod-estabel = "423" then 2 else 1 /*solic-318*/
+           tt-refugo.codigo-rejei = if ord-prod.cod-estabel = "413" OR ord-prod.cod-estabel = "423" then 2 else 1  /*solic-318*/ 
            tt-refugo.qt-refugo    = tt-rep-prod.qt-refugo.
     /*Speto - 22/01/2004*/                                                      
 

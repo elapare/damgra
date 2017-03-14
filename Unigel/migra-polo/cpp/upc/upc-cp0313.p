@@ -67,7 +67,7 @@ IF VALID-HANDLE(h-nr-ord-produ-amg) THEN DO:
         FIND FIRST estabelec WHERE estabelec.cod-estabel = ord-prod.cod-estabel NO-LOCK NO-ERROR.
         
 
-       IF  AVAIL estabelec AND estabelec.ep-codigo <> "{cdp\poloestab.i 420}" THEN RETURN. /*solic-318*/
+       IF  AVAIL estabelec AND estabelec.ep-codigo <> "{cdp\poloestab.i 420}" THEN RETURN.  /*solic-318*/ 
    end.
 
 END.
@@ -136,7 +136,7 @@ IF  p-ind-event = "depois-estorno" AND p-ind-object = "bt-ok" THEN DO:
                  lin-prod.cod-estabel = ord-prod.cod-estabel AND
                  lin-prod.sum-requis = 2 NO-LOCK no-error. /* ordem de servi‡o*/
                  
-            IF AVAIL lin-prod AND AVAIL estabelec AND estabelec.ep-codigo = "{cdp\poloestab.i 420}" THEN DO: /*solic-318*/
+            IF AVAIL lin-prod AND AVAIL estabelec AND estabelec.ep-codigo = "{cdp\poloestab.i 420}" THEN DO:  /*solic-318*/ 
                 
                 RUN cpp\upc\upc-cp0313-rrq.p.
             END.

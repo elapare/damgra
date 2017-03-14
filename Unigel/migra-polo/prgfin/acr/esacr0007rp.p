@@ -688,7 +688,7 @@ ASSIGN v-num-reg-lidos = 0.
                 
                     FOR FIRST it-nota-fisc WHERE it-nota-fisc.nr-nota-fis  = tit_acr.cod_tit_acr AND
                                          it-nota-fisc.serie        = "20"  AND
-                                         (it-nota-fisc.cod-estabel  = "434" OR it-nota-fisc.cod-estabel  = "442") AND/*solic-318*/
+                                         (it-nota-fisc.cod-estabel  = "434" OR it-nota-fisc.cod-estabel  = "442") AND /*solic-318*/ 
                                          it-nota-fisc.nome-ab-cli   = emitente.nome-abrev NO-LOCK,
                         FIRST ITEM FIELDS (ge-codigo) WHERE ITEM.it-codigo = it-nota-fisc.it-codigo NO-LOCK.
                         i-ge = item.ge-codigo.
@@ -710,7 +710,7 @@ ASSIGN v-num-reg-lidos = 0.
                 
                     FOR FIRST it-nota-fisc WHERE it-nota-fisc.nr-nota-fis  = tit_acr.cod_tit_acr AND
                                          it-nota-fisc.serie        = "20"  AND
-                                         (it-nota-fisc.cod-estabel  = "422" OR it-nota-fisc.cod-estabel  = "412") AND /*solic-318*/
+                                         (it-nota-fisc.cod-estabel  = "422" OR it-nota-fisc.cod-estabel  = "412") AND  /*solic-318*/ 
                                          it-nota-fisc.nome-ab-cli   = emitente.nome-abrev NO-LOCK,
                         FIRST ITEM FIELDS (ge-codigo) WHERE ITEM.it-codigo = it-nota-fisc.it-codigo NO-LOCK.
                         i-ge = item.ge-codigo.
@@ -729,7 +729,7 @@ ASSIGN v-num-reg-lidos = 0.
                 END.
         
                  IF i-ge = 0 THEN DO: 
-                    IF tit_acr.cod_estab = "422" OR tit_acr.cod_estab = "434"  OR tit_acr.cod_estab = "412" OR tit_acr.cod_estab = "442"  OR tit_acr.cod_estab = "424" THEN /*solic-318*/
+                    IF tit_acr.cod_estab = "422" OR tit_acr.cod_estab = "434"  OR tit_acr.cod_estab = "412" OR tit_acr.cod_estab = "442"  OR tit_acr.cod_estab = "424" THEN  /*solic-318*/ 
                         i-ge = 49.
         
                 END.

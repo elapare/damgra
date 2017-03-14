@@ -96,7 +96,7 @@ DEFINE VARIABLE pesq-jr AS INTEGER INITIAL 1
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var da-cod-estabel like ped-venda.cod-estabel format "999" INITIAL "{cdp\poloestab.i 422}" no-undo. /*solic-318*/
+def new shared var da-cod-estabel like ped-venda.cod-estabel format "999" initial "422" no-undo.  /*solic-318*/ 
 
 
 /* ********************  Preprocessor Definitions  ******************** */ 

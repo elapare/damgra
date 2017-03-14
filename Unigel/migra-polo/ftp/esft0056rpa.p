@@ -279,7 +279,7 @@ DEFINE VARIABLE l-gera-transf AS LOGICAL  INITIAL NO  NO-UNDO. /*transferencia s
           AND if-natur-oper.nat-oper-pedido = if-ped-venda.nat-oper-orig 
           AND if-natur-oper.nat-oper-transf <> "" no-error.
             
-        IF AVAIL if-natur-oper and (nota-fiscal.cod-estabel = "422" OR nota-fiscal.cod-estabel = "412") THEN DO:/*solic-318*/
+        IF AVAIL if-natur-oper and (nota-fiscal.cod-estabel = "422" OR nota-fiscal.cod-estabel = "412") THEN DO: /*solic-318*/ 
             RUN pi-gera-transferencia-sem-pedido.   /* notas de tranferencia sem pedido POLO*/
         end.    
         ELSE DO:
@@ -1829,7 +1829,7 @@ PROCEDURE pi-verifica-qtd-emb-transf :
     END.
 
     /* Quantidade ja transferida */
-    FOR FIRST wt-docto WHERE (wt-docto.cod-estabel  = "434" OR wt-docto.cod-estabel  = "442")  and/*solic-318*/
+    FOR FIRST wt-docto WHERE (wt-docto.cod-estabel  = "434" OR wt-docto.cod-estabel  = "442")  and /*solic-318*/ 
              wt-docto.cod-emitente  = 432 and
              INDEX (wt-docto.observ-nota,STRING(nota-fiscal.cdd-embarq)) > 0 NO-LOCK,
         EACH  wt-it-docto OF wt-docto NO-LOCK.

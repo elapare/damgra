@@ -156,7 +156,7 @@ IF p-ind-event = "beforeCompleteOrder" THEN DO:
                     UNDO,LEAVE.
                 END.
                 
-                IF (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412") and    /*solic-318*/ /*forcei mas precisa ver para outras empresa quando faz opia de pedido relecioando para comecar  processo*/
+                IF (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412") and     /*solic-318*/  /*forcei mas precisa ver para outras empresa quando faz opia de pedido relecioando para comecar  processo*/
                    ped-venda.cond-redespa BEGINS "Pedido original relacionado:" THEN
                    ped-venda.cond-redespa = "".
                     
@@ -167,7 +167,7 @@ IF p-ind-event = "beforeCompleteOrder" THEN DO:
                      
                          if-ped-venda.cod-estab-atend = ped-venda.cod-estabel.
                          
-                      find first b-ped-venda where b-ped-venda.nr-pedido = if-ped-venda.nr-pedido and (b-ped-venda.cod-estabel = "422" OR b-ped-venda.cod-estabel = "412" ) AND  /*solic-318*/
+                      find first b-ped-venda where b-ped-venda.nr-pedido = if-ped-venda.nr-pedido and (b-ped-venda.cod-estabel = "422" OR b-ped-venda.cod-estabel = "412" ) AND   /*solic-318*/ 
                                                    b-ped-venda.cod-sit-ped < 3 exclusive-lock no-error.
                                                    
                                                  
@@ -193,7 +193,7 @@ IF p-ind-event = "beforeCompleteOrder" THEN DO:
                        NO-ERROR.
        
          
-                IF not AVAIL if-ped-venda and (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412") THEN do:  /*solic-318*/
+                IF not AVAIL if-ped-venda and (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412") THEN do:   /*solic-318*/ 
  
                   leave.  /* nÆo cria relacionamento para 422 com unidade atendimento branca*/
                 end.
@@ -216,7 +216,7 @@ IF p-ind-event = "beforeCompleteOrder" THEN DO:
            
      
                         
-                        if avail buf-emitente and ped-venda.cod-estabel <> "422" AND ped-venda.cod-estabel <> "412" and (buf-emitente.nome-abrev <> ped-venda.nome-abrev or   /*solic-318*/
+                        if avail buf-emitente and ped-venda.cod-estabel <> "422" AND ped-venda.cod-estabel <> "412" and (buf-emitente.nome-abrev <> ped-venda.nome-abrev or    /*solic-318*/ 
                                                                                       buf-emitente.cod-emitente <> ped-venda.cod-emitente )  then do:
                               run pi-ajusta-nome-abrev.
                         end.   
@@ -311,7 +311,7 @@ IF p-ind-event = "beforeCompleteOrder" THEN DO:
         
                             /* Altera cliente pedido origem */
                             IF if-estabelec.cod-estab-inter = "" THEN DO:
-                                c-cod-estab-dest = if if-estabelec.cod-estab-orig = "412" then "442" else if if-estabelec.cod-estab-orig = "422" then "434" else  if-estabelec.cod-estab-dest. /*solic-318*/ /* regra fixa porque para 422 TUDO tem de passar pela UNG-RS */
+                                c-cod-estab-dest = if if-estabelec.cod-estab-orig = "412" then "442" else if if-estabelec.cod-estab-orig = "422" then "434" else  if-estabelec.cod-estab-dest.  /*solic-318*/  /* regra fixa porque para 422 TUDO tem de passar pela UNG-RS */
                                 
                                 RUN pi-alt-cliente (INPUT c-cod-estab-dest, INPUT NO).
                             END.
@@ -1988,7 +1988,7 @@ PROCEDURE pi-atualiz-ped-relac :
         END.
     END.
 
-    if ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412" then do:   /*solic-318*/
+    if ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412" then do:    /*solic-318*/ 
     
             BUFFER-COPY ped-venda EXCEPT 
                                      nr-pedido 
@@ -2126,7 +2126,7 @@ PROCEDURE pi-atualiz-ped-relac :
                AND b-ped-item.cod-refer    = ped-item.cod-refer NO-ERROR.
         IF AVAIL b-ped-item THEN DO:
         
-           if ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412" then /*solic-318*/
+           if ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412" then  /*solic-318*/ 
                        BUFFER-COPY ped-item EXCEPT nome-abrev nr-pedcli nat-operacao ind-icm-ret per-des-icms
                        
                         qt-alocada qt-atendida qt-devolvida 
@@ -2160,7 +2160,7 @@ PROCEDURE pi-atualiz-ped-relac :
                    AND b-ped-ent.nr-entrega   = ped-ent.nr-entrega   NO-ERROR.
             IF AVAIL b-ped-ent THEN DO:
             
-              if ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412" THEN  /*solic-318*/
+              if ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412" THEN   /*solic-318*/ 
                 BUFFER-COPY ped-ent EXCEPT nome-abrev nr-pedcli 
                                            cod-sit-ent cod-sit-pre dt-canent qt-alocada qt-atendida 
                                            qt-devolvida qt-fatenf qt-log-aloca qt-pendente qt-trans-mp 

@@ -861,7 +861,7 @@ PROCEDURE pi-verifica-func-bh10.
             rh_estab.cdn_empresa = v_cdn_empres_usuar AND
             rh_estab.cdn_estab   >= i-es-ini  AND
             rh_estab.cdn_estab   <= i-es-fim  and
-            (rh_estab.cdn_estab = "422" OR rh_estab.cdn_estab = "412")   NO-LOCK,/*solic-318*/
+            (rh_estab.cdn_estab = "422" OR rh_estab.cdn_estab = "412")   NO-LOCK, /*solic-318*/ 
            EACH funcionario WHERE      
                  funcionario.cdn_empresa       = rh_estab.cdn_empresa   AND
                  funcionario.cdn_estab         = rh_estab.cdn_estab     AND           

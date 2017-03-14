@@ -22,7 +22,7 @@ def new global shared var rw-log-exec            as rowid                    no-
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel     like movto-estoq.cod-estabel  format "X(3)"        initial "{cdp\poloestab.i 422}"             no-undo./*solic-318*/
+def new shared var c-cod-estabel     like movto-estoq.cod-estabel  format "X(3)"        initial "422"             no-undo. /*solic-318*/ 
 def new shared var c-it-codigo-ini   like item.it-codigo           format "x(16)"       initial ""                no-undo.
 def new shared var c-it-codigo-fim   like item.it-codigo           format "x(16)"       initial "ZZZZZZZZZZZZZ"   no-undo.
 def new shared var c-fm-codigo-ini   like item.fm-codigo           format "x(10)"       initial ""                no-undo.

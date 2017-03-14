@@ -92,7 +92,7 @@ IF p-ind-event = "afterupdateRecord" THEN DO:
             IF AVAIL if-ped-venda THEN DO:
                 find first b-ped-venda 
                      where b-ped-venda.nr-pedido =  if-ped-venda.nr-pedido no-lock no-error.
-                if avail b-ped-venda AND (b-ped-venda.cod-estabel = "422" OR b-ped-venda.cod-estabel = "412") then do:  /*solic-318*/
+                if avail b-ped-venda AND (b-ped-venda.cod-estabel = "422" OR b-ped-venda.cod-estabel = "412") then do:   /*solic-318*/ 
                     assign if-ped-venda.cod-estab-atend = ped-venda.cod-estabel.
                     run pi-replica-data-tipo-filho.
                 END.
@@ -102,7 +102,7 @@ IF p-ind-event = "afterupdateRecord" THEN DO:
                      WHERE if-ped-venda.nr-pedido = ped-venda.nr-pedido 
                        AND if-ped-venda.nr-pedido-relac <> 0 NO-ERROR.
                 IF AVAIL if-ped-venda THEN DO:
-                    IF (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412") THEN   /*solic-318*/
+                    IF (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412") THEN    /*solic-318*/ 
                         run pi-replica-data-tipo.
                     
                     find first b-ped-venda 
@@ -191,7 +191,7 @@ IF p-ind-event = "AfterValidateRecord" THEN DO:
  
                 if avail if-ped-venda then do:
                     find first bf-ped-venda where bf-ped-venda.nr-pedido = if-ped-venda.nr-pedido no-lock no-error.
-                    if   (bf-ped-venda.cod-estabel = "422"  OR bf-ped-venda.cod-estabel = "412") then l-432-polo = yes.   /*solic-318*/
+                    if   (bf-ped-venda.cod-estabel = "422"  OR bf-ped-venda.cod-estabel = "412") then l-432-polo = yes.    /*solic-318*/ 
                     
                 end.
                 

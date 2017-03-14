@@ -813,7 +813,7 @@ FOR EACH tt-filmes NO-LOCK:
         ELSE
            DESC-def = "".
 
-        IF ttfil-cod-estabel = "423" OR ttfil-cod-estabel = "413" THEN DO: /*solic-318*/
+        IF ttfil-cod-estabel = "423" OR ttfil-cod-estabel = "413" THEN DO:  /*solic-318*/ 
             IF ttdef-cod-def = 1 THEN
                 DESC-def = "PROCESSOS".
 

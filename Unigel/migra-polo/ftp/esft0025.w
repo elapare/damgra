@@ -96,7 +96,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel        like nota-fiscal.cod-estabel    FORMAT "x(3)"       INITIAL "{cdp\poloestab.i 422}"      NO-UNDO. /*solic-318*/
+def new shared var c-cod-estabel        like nota-fiscal.cod-estabel    FORMAT "x(3)"       initial "422"      NO-UNDO.  /*solic-318*/ 
 def new shared var dt-emis-nota-ini     like nota-fiscal.dt-emis-nota   FORMAT "99/99/9999" INITIAL today      NO-UNDO. 
 def new shared var dt-emis-nota-fim     like nota-fiscal.dt-emis-nota   FORMAT "99/99/9999" INITIAL today      NO-UNDO. 
 def new shared var c-nr-nota-fis-ini    like nota-fiscal.nr-nota-fis    FORMAT "x(07)"      INITIAL ""         NO-UNDO. 
@@ -734,13 +734,13 @@ run GetEnv in h-prog(input "CLIENTNAME", output c-clientname).
 DELETE PROCEDURE h-prog.
 
 
-ASSIGN c-cod-estabel = "{cdp\poloestab.i 422}"/*solic-318*/
+ASSIGN c-cod-estabel = STRING({cdp\poloestab.i 422}) /*solic-318*/ 
        c-serie       = "20".
 
 IF  substring(c-computador,7,2) = "-s"  THEN DO:
 
     IF SUBSTRING(c-clientname,1,6) = "POLVGA" THEN 
-         ASSIGN c-cod-estabel = "{cdp\poloestab.i 421}"./*solic-318*/
+         ASSIGN c-cod-estabel = STRING({cdp\poloestab.i 421}). /*solic-318*/ 
     ELSE
          ASSIGN c-cod-estabel = "426".
 

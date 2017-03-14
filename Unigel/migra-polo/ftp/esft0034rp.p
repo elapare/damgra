@@ -87,7 +87,7 @@ DEFINE TEMP-TABLE tt-digita no-undo
 DEFINE input param c-nr-nota-fis-i  AS CHARACTER initial "0032477"  NO-UNDO.
 DEFINE input param c-nr-nota-fis-f  AS CHARACTER initial "0032477"  NO-UNDO.
 DEFINE input param i-cod-emitente AS INTEGER   initial 17470  NO-UNDO.
-DEFINE input param c-cod-estabel  AS CHARACTER  initial "{cdp\poloestab.i 422}"  NO-UNDO./*solic-318*/
+DEFINE input param c-cod-estabel  AS CHARACTER  initial "422"  NO-UNDO. /*solic-318*/ 
 DEFINE input param c-serie        AS CHARACTER initial "20" NO-UNDO.
   
 /*

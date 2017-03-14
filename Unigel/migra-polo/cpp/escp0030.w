@@ -1191,7 +1191,7 @@ end.
        com problemas e colocar o focus no campo com problemas             */ 
 
      IF NOT ((input frame "421" <= f-pg-sel c-cod-estabel-ini AND input frame f-pg-sel c-cod-estabel-ini <= "424") OR 
-             (input frame "411" <= f-pg-sel c-cod-estabel-ini AND input frame f-pg-sel c-cod-estabel-ini <= "414"))  THEN DO: /*solic-318*/
+             (input frame "411" <= f-pg-sel c-cod-estabel-ini AND input frame f-pg-sel c-cod-estabel-ini <= "414"))  THEN DO:  /*solic-318*/ 
 
          run utp/ut-msgs.p (input "show", input 56,                  
                             input "Estabelecimento").                

@@ -600,13 +600,13 @@ PROCEDURE pi-cria-op-pedido:
        FIND FIRST tt-componente NO-LOCK NO-ERROR.
     
        IF AVAIL tt-componente then do: 
-          /*solic-318*/
+           /*solic-318*/ 
                             
            run pi-acompanhar in h-acomp (input "Pedido item : " + tt-abre-ordem.it-codigo + " - " + " Fase:" + STRING(tt-abre-ordem.fase)).
                            
            run sfc/essf0011fb.p (input rCotEstMast,
                                  input r-ped-item,
-                                 input '{cdp\poloestab.i 422}',/*solic-318*/
+                                 input '{cdp\poloestab.i 422}', /*solic-318*/ 
                                  input-output table tt-componente,
                                  INPUT r-ped-ent,
                                  input TABLE tt-rowid-ped-ent,
@@ -684,13 +684,13 @@ PROCEDURE pi-cria-op-estoque:
         find first tt-componente where tt-componente.seleciona = yes 
         no-lock no-error.
         if avail tt-componente then do:
-            /*solic-318*/
+             /*solic-318*/ 
                              
                run pi-acompanhar in h-acomp (input "Estoque item : " + tt-abre-ordem.it-codigo + " - " + " Fase:" + STRING(tt-abre-ordem.fase)).                             
                             
             run sfc/essf0011fa.p(input rCotEstMast,
                                  input ?,
-                                 input '{cdp\poloestab.i 422}',/*solic-318*/
+                                 input '{cdp\poloestab.i 422}', /*solic-318*/ 
                                  input-output table tt-componente,
                                  output table tt-digita).
 
@@ -845,7 +845,7 @@ PROCEDURE pi-altera-linha-op:
     FIND FIRST ord-prod
          WHERE ord-prod.nr-ord-produ = tt-abre-ordem.nr-ord-produ NO-LOCK NO-ERROR.
     IF AVAIL ord-prod THEN DO:
-     /*solic-318*/
+      /*solic-318*/ 
             CREATE tt-ord-prod.
             BUFFER-COPY ord-prod TO tt-ord-prod.
             ASSIGN tt-ord-prod.cod-versao-integracao = 003

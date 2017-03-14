@@ -512,7 +512,7 @@ DEF VAR c-coluna          AS char                NO-UNDO.
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
 
-DEFINE VARIABLE c-cod-estabel-amg   AS CHARACTER FORMAT "X(3)"          INITIAL "412"          NO-UNDO./*solic-318*/
+DEFINE VARIABLE c-cod-estabel-amg   AS CHARACTER FORMAT "X(3)"          INITIAL "412"          NO-UNDO. /*solic-318*/ 
 
 DEFINE VARIABLE dt-entrega-ini      AS DATE      FORMAT "99/99/9999"    INITIAL TODAY          NO-UNDO.
 DEFINE VARIABLE dt-entrega-fim      AS DATE      FORMAT "99/99/9999"    INITIAL TODAY          NO-UNDO.

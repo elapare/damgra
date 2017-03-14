@@ -358,7 +358,7 @@ DEFINE VARIABLE ed-obs AS CHARACTER
      SIZE 46 BY 1.6 NO-UNDO.
 
 DEFINE VARIABLE c-cod-estabel-nf AS CHARACTER FORMAT "X(15)":U 
-     initial "{cdp\poloestab.i 434}"/*solic-318*/
+     initial STRING({cdp\poloestab.i 434}) /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 5 BY .88 NO-UNDO.
@@ -1684,7 +1684,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
 
       ASSIGN 
           c-serie-nf     = "20"
-          c-cod-estabel-nf  = "{cdp\poloestab.i 434}"/*solic-318*/
+          c-cod-estabel-nf  = STRING({cdp\poloestab.i 434}) /*solic-318*/ 
           i-cod-emitente = 432 
           c-nome-transp = "" 
           c-natur-oper   = ""

@@ -43,7 +43,7 @@ end.
    
 d-remun_polo = d-remun.
    
-FOR EACH remun_var_func OF bfunciona  where bfunciona.cdn_empresa <> "420" AND bfunciona.cdn_empresa <> "410" NO-LOCK,/*solic-318*/
+FOR EACH remun_var_func OF bfunciona  where bfunciona.cdn_empresa <> "420" AND bfunciona.cdn_empresa <> "410" NO-LOCK, /*solic-318*/ 
     each remun_var of remun_var_func  where substring(remun_var.des_remun_va,1,2) <> "VP" no-lock.
 
     IF remun_var_func.log_remun_var_func_suspen THEN
@@ -89,7 +89,7 @@ ASSIGN d-remun = d-remun * d-mult-sal.
 IF d-remun > d-lim-max-cap THEN 
         ASSIGN d-remun = d-lim-max-cap.
 
-iF bfunciona.cdn_empresa = "420" OR bfunciona.cdn_empresa = "410" then do:/*solic-318*/
+iF bfunciona.cdn_empresa = "420" OR bfunciona.cdn_empresa = "410" then do: /*solic-318*/ 
     ASSIGN d-vl-benefic = truncate(d-remun * d-taxa + 0.005,2)
            d-vl-func    = truncate(d-vl-benefic *  d-perc-func ,2)
            d-vl-emp     = d-vl-benefic - d-vl-func.

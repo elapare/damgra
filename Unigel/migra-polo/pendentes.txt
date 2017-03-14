@@ -1,4 +1,4 @@
-seria bom identificarmos onde foi alterado com algum marcador no final da linha  /*solic-318*/
+seria bom identificarmos onde foi alterado com algum marcador no final da linha   /*solic-318*/ 
 verificar estabelecimentos e empresas , deve funcionar para ambos, em caso de definição sugerir o novo establecimento
 
 se for para comparação.
@@ -34,7 +34,7 @@ se for para atribuição, tipo alguma coisa acontece e sugere 422, aí não tem jeit
 ou a data de virada ou criar uma include inteligente de conversão de estavelecimento e empresa onde colocaremos {422} e na virada eles mudam a include para 412
 
 if ge-codigo > 41 or ge-codigo < 49 then c-empresa = "422".
-if ge-codigo > 41 or ge-codigo < 49 then c-empresa = "{cdp\poloestab.i 422}".
+if ge-codigo > 41 or ge-codigo < 49 then c-empresa = STRING({cdp\poloestab.i 422}).
 
 if ge-maquina > 32 then ge-cod-maq = "422-atlas"
 if ge-maquina > 32 then ge-cod-maq = "{cdp\poloestab.i 422}-atlas"

@@ -106,7 +106,7 @@ DEFINE  NEW GLOBAL SHARED TEMP-TABLE tt-rastrear
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini like ped-venda.cod-estabel format "x(3)" initial "{cdp\poloestab.i 422}" no-undo. /*solic-318*/
+def new shared var c-cod-estabel-ini like ped-venda.cod-estabel format "x(3)" initial "422" no-undo.  /*solic-318*/ 
 
 
 /****************** Defini‡ao de Vari veis p/ Campos Virtuais do Relat¢rio *******************/ 

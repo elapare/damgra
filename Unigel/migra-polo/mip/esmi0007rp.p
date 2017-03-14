@@ -95,7 +95,7 @@ def new global shared var rw-log-exec            as rowid                    no-
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel        AS CHAR    format "X(3)"        initial "{cdp\poloestab.i 422}"             no-undo./*solic-318*/
+def new shared var c-cod-estabel        AS CHAR    format "X(3)"        initial "422"             no-undo. /*solic-318*/ 
 def new shared var i-nr-ord-produ-ini   AS INT     format ">>>>>>>>>9"  initial 0                 no-undo.
 def new shared var i-nr-ord-produ-fim   AS INT     format ">>>>>>>>>9"  initial 999999999         no-undo.
 def new shared var dt-emissao-ini       as DATE    format 99/99/9999    initial today             no-undo.

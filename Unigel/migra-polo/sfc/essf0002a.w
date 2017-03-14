@@ -3006,10 +3006,10 @@ for each tt-ord-prod where
            
     
     /* JOSE ROBERTO PARA ESTABELECIMENTO 423 O DEFAULT  NAO PALETIZA 06/01/05*/
-    IF ord-prod.cod-estabel = "413" OR ord-prod.cod-estabel = "423" THEN /*solic-318*/
+    IF ord-prod.cod-estabel = "413" OR ord-prod.cod-estabel = "423" THEN  /*solic-318*/ 
           ASSIGN  tt-reporta.gera-pallet =  "".
 
-    IF (ord-prod.cod-estabel = "412" OR ord-prod.cod-estabel = "422") AND NOT/*solic-318*/
+    IF (ord-prod.cod-estabel = "412" OR ord-prod.cod-estabel = "422") AND NOT /*solic-318*/ 
          ((ord-prod.nr-linha >= 200 AND ord-prod.nr-linha <= 299) OR
           (ord-prod.nr-linha >= 400 AND ord-prod.nr-linha <= 499))
         THEN 

@@ -34,7 +34,7 @@ define temp-table tt-func
 
 assign
    i-empresa-ini = "320"
-   i-empresa-fim = "{cdp\poloestab.i 420}"./*solic-318*/
+   i-empresa-fim = "{cdp\poloestab.i 420}". /*solic-318*/ 
 
      
 run pi-digita.

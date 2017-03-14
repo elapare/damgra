@@ -118,8 +118,8 @@ CREATE tt-param.
  ASSIGN 
       /*  tt-param.cdn_curso_trein  = 51 
         tt-param.cdn_turma_trein  = 1*/
-        tt-param.cod_emp          = "{cdp\poloestab.i 420}"   /*solic-318*/
-        tt-param.cdn_estab_ini    = "{cdp\poloestab.i 421}" /*solic-318*/
+        tt-param.cod_emp          = "{cdp\poloestab.i 420}"    /*solic-318*/ 
+        tt-param.cdn_estab_ini    = STRING({cdp\poloestab.i 421})  /*solic-318*/ 
         tt-param.cdn_estab_fim    = "426"
         tt-param.dt_periodo_ini   = 01/01/2015
         tt-param.dt_periodo_fim   = 12/31/2015

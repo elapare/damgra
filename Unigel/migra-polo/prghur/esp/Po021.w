@@ -238,11 +238,11 @@ DEFINE VARIABLE c-cod_rh_ccusto-ini AS CHARACTER FORMAT "x(08)"
      SIZE 8 BY .88
      FONT 1.
 
-DEFINE VARIABLE fi-est-fim AS INTEGER FORMAT ">>9":U INITIAL {cdp\poloestab.i 422} /*solic-318*/
+DEFINE VARIABLE fi-est-fim AS INTEGER FORMAT ">>9":U INITIAL {cdp\poloestab.i 422}  /*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 4 BY .88 NO-UNDO.
 
-DEFINE VARIABLE fi-est-ini AS INTEGER FORMAT ">>9" INITIAL {cdp\poloestab.i 422} /*solic-318*/
+DEFINE VARIABLE fi-est-ini AS INTEGER FORMAT ">>9" INITIAL {cdp\poloestab.i 422}  /*solic-318*/ 
      LABEL "Estabelecimento":R18 
      VIEW-AS FILL-IN 
      SIZE 4 BY .88.

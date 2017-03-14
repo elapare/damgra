@@ -31,7 +31,7 @@ IF AVAIL ped-venda THEN DO:
         WHERE if-ped-venda.nr-pedido = ped-venda.nr-pedido AND 
               if-ped-venda.nr-pedido-relac <> 0 NO-ERROR.
    IF AVAIL if-ped-venda THEN DO:
-      IF ped-venda.cod-estabel <> "422"  AND ttPedVenda.cod-estabel <> "412" THEN DO:  /*solic-318*/
+      IF ped-venda.cod-estabel <> "422"  AND ttPedVenda.cod-estabel <> "412" THEN DO:   /*solic-318*/ 
 
           FIND FIRST if-estabelec NO-LOCK
                WHERE if-estabelec.cod-estab-orig  = ttPedVenda.cod-estabel

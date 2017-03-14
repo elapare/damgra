@@ -108,7 +108,7 @@ DO:
             FIND FIRST if-ped-venda WHERE if-ped-venda.nr-pedido-relac = b-ped-venda.nr-pedido NO-LOCK NO-ERROR.
             IF AVAIL if-ped-venda THEN DO:
                  c-cfop-uc        = if-ped-venda.nat-oper-orig.
-                 c-cod-estabel-uc = "{cdp\poloestab.i 422}"./*solic-318*/
+                 c-cod-estabel-uc = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
                  
                  FIND FIRST bb-ped-venda WHERE bb-ped-venda.nr-pedido = if-ped-venda.nr-pedido NO-LOCK NO-ERROR.
                  IF AVAIL bb-ped-venda THEN

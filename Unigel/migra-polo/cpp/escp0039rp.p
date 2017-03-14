@@ -104,7 +104,7 @@ def new global shared var rw-log-exec            as rowid                    no-
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
 
-def new shared var da-cod-estabel         like ped-venda.cod-estabel format "999" INITIAL "412" no-undo./*solic-318*/
+def new shared var da-cod-estabel         like ped-venda.cod-estabel format "999" INITIAL "412" no-undo. /*solic-318*/ 
 def new shared var da-cod-canal-venda-ini like ped-venda.cod-canal-venda format ">9" INITIAL 0 no-undo.
 def new shared var da-cod-canal-venda-fim like ped-venda.cod-canal-venda format ">9" INITIAL "99" no-undo.
 def new shared var da-it-codigo-ini       like ped-item.it-codigo format "x(16)" no-undo.

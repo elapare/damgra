@@ -384,7 +384,7 @@ PUT  UNFORMATTED
          movto_calcul_func.num_ano_refer_fp          = i-ano-ref AND
          movto_calcul_func.num_mes_refer_fp          = i-mes-ref NO-LOCK:
          Do idx = 1 To movto_calcul_func.qti_efp:
-            IF movto_calcul_func.cdn_event_fp[idx] = "423" or/*solic-318*/  
+            IF movto_calcul_func.cdn_event_fp[idx] = "423" or /*solic-318*/   
                movto_calcul_func.cdn_event_fp[idx] = "786" THEN
                ASSIGN valor-seguro = valor-seguro + movto_calcul_func.val_calcul_efp[idx].
          END.
@@ -409,7 +409,7 @@ PUT  UNFORMATTED
      end.
 
 
-     FOR EACH remun_var_func OF funcionario  where funcionario.cdn_empresa <> "420" AND funcionario.cdn_empresa <> "410" NO-LOCK,/*solic-318*/
+     FOR EACH remun_var_func OF funcionario  where funcionario.cdn_empresa <> "420" AND funcionario.cdn_empresa <> "410" NO-LOCK, /*solic-318*/ 
 
         each remun_var of remun_var_func  where substring(remun_var.des_remun_va,1,2) <> "VP" no-lock.
     

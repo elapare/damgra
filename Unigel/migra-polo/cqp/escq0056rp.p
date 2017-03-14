@@ -1968,7 +1968,7 @@ PROCEDURE pi-gera-laudo:
                 gra-min-jr = 99999999
                 gra-max-jr = 0.
     
-         IF c-cod-estabel-ini = "{cdp\poloestab.i 421}" THEN DO:/*solic-318*/
+         IF c-cod-estabel-ini = STRING({cdp\poloestab.i 421}) THEN DO: /*solic-318*/ 
     
           FOR EACH tt-bobinas2 NO-LOCK:
     
@@ -2746,7 +2746,7 @@ PROCEDURE pi-gera-laudo:
            END.
     END.
    
-    IF c-cod-estabel-ini = "{cdp\poloestab.i 421}" THEN/*solic-318*/
+    IF c-cod-estabel-ini = STRING({cdp\poloestab.i 421}) THEN /*solic-318*/ 
        ASSIGN nome-estabel-jr = "POLO - VGA".
          ELSE
            ASSIGN nome-estabel-jr = "POLO - MTN".  

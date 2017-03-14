@@ -101,7 +101,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini like ped-venda.cod-estabel format "x(3)" initial "{cdp\poloestab.i 422}" no-undo. /*solic-318*/
+def new shared var c-cod-estabel-ini like ped-venda.cod-estabel format "x(3)" initial "422" no-undo.  /*solic-318*/ 
 def new shared var c-cod-estabel-fim like ped-venda.cod-estabel format "x(3)" initial "ZZZ" no-undo.
 def new shared var c-nr-data-ini     like movto-estoq.dt-trans  format "99/99/9999" initial "01/01/2004" no-undo.
 def new shared var c-nr-data-fim     like movto-estoq.dt-trans  format "99/99/9999" initial "12/31/9999" no-undo.

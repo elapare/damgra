@@ -18,8 +18,8 @@ def new global shared var c-prg-vrs as char no-undo.
 def new global shared var c-prg-obj as char no-undo.
 
 
-DEFINE input param c-estab-ini AS CHARACTER  NO-UNDO. /*solic-318*/
-DEFINE input param c-estab-fim AS CHARACTER  NO-UNDO. /*solic-318*/
+DEFINE input param c-estab-ini AS CHARACTER  NO-UNDO.  /*solic-318*/ 
+DEFINE input param c-estab-fim AS CHARACTER  NO-UNDO.  /*solic-318*/ 
 DEFINE input param data-emissao-ini  AS DATE   INITIAL 05/01/2012    NO-UNDO.
 DEFINE input param data-emissao-fim AS DATE    INITIAL 05/15/2012   NO-UNDO.
 define input param tg-imprime as logical no-undo.

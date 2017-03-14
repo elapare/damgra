@@ -256,7 +256,7 @@ DEFINE BUTTON bt-ok AUTO-GO
      LABEL "OK" 
      SIZE 10 BY 1.
 
-DEFINE VARIABLE c-cod-estabel AS CHARACTER FORMAT "X(03)":U INITIAL "{cdp\poloestab.i 422}" /*solic-318*/
+DEFINE VARIABLE c-cod-estabel AS CHARACTER FORMAT "X(03)":U initial "422"  /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 6 BY .88 NO-UNDO.

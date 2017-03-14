@@ -222,7 +222,7 @@ IF AVAIL tt-erros THEN DO:*/
         return NO-APPLY.
 END.
  
-FIND FIRST estabelec WHERE estabelec.cod-estabel = "412" OR estabelec.cod-estabel = "422" NO-LOCK NO-ERROR./*solic-318*/
+FIND FIRST estabelec WHERE estabelec.cod-estabel = "412" OR estabelec.cod-estabel = "422" NO-LOCK NO-ERROR. /*solic-318*/ 
 
 
 

@@ -470,10 +470,10 @@ PROCEDURE piCriaOPCampanha:
     
     FIND FIRST item-uni-estab
          WHERE item-uni-estab.it-codigo = c-cd-produto
-           AND (item-uni-estab.cod-estabel = "412" OR item-uni-estab.cod-estabel = "422") NO-LOCK NO-ERROR./*solic-318*/
+           AND (item-uni-estab.cod-estabel = "412" OR item-uni-estab.cod-estabel = "422") NO-LOCK NO-ERROR. /*solic-318*/ 
 
     FIND FIRST ctrab-linha WHERE
-               (ctrab-linha.cod-estabel = '412' OR ctrab-linha.cod-estabel = '422') AND/*solic-318*/
+               (ctrab-linha.cod-estabel = '412' OR ctrab-linha.cod-estabel = '422') AND /*solic-318*/ 
                ctrab-linha.cod-ctrab = c-gm-codigo NO-LOCK NO-ERROR.
 
     IF NOT AVAIL ctrab-linha THEN DO:
@@ -487,7 +487,7 @@ PROCEDURE piCriaOPCampanha:
     END.
     
     FIND FIRST lin-prod
-         WHERE (lin-prod.cod-estabel = "412" OR lin-prod.cod-estabel = "422")/*solic-318*/
+         WHERE (lin-prod.cod-estabel = "412" OR lin-prod.cod-estabel = "422") /*solic-318*/ 
            AND lin-prod.nr-linha    = ctrab-linha.nr-linha NO-LOCK NO-ERROR.
 
     FOR EACH tt-ord-prod: DELETE tt-ord-prod. END.
@@ -503,7 +503,7 @@ PROCEDURE piCriaOPCampanha:
            tt-ord-prod.cod-refer             = ""
            tt-ord-prod.qt-ordem              = de-total-op
            tt-ord-prod.tipo                  = 1 /*Interna*/
-           tt-ord-prod.cod-estabel           = "{cdp\poloestab.i 422}"/*solic-318*/
+           tt-ord-prod.cod-estabel           = STRING({cdp\poloestab.i 422}) /*solic-318*/ 
            tt-ord-prod.estado                = 1
            tt-ord-prod.nr-linha              = lin-prod.nr-linha 
            tt-ord-prod.un                    = ITEM.un

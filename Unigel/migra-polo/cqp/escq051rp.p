@@ -2179,7 +2179,7 @@ PROCEDURE pi-gera-laudo:
                 gra-min-jr = 99999999
                 gra-max-jr = 0.
     
-         IF c-cod-estabel-ini = "{cdp\poloestab.i 423}" THEN DO:/*solic-318*/
+         IF c-cod-estabel-ini = STRING({cdp\poloestab.i 423}) THEN DO: /*solic-318*/ 
     
           FOR EACH tt-bobinas2 NO-LOCK:
     
@@ -2351,7 +2351,7 @@ PROCEDURE pi-gera-laudo:
                    ficha-cq.situacao < 5 AND 
                    ficha-cq.it-codigo = tt-bobinas2.ttbob2-it-codigo AND  
                    ficha-cq.lote      = tt-bobinas2.ttbob2-lote AND
-                   ficha-cq.cod-estabel = "{cdp\poloestab.i 422}"                 AND/*solic-318*/
+                   ficha-cq.cod-estabel = STRING({cdp\poloestab.i 422})                 AND /*solic-318*/ 
                    ficha-cq.cod-depos   = "CQ"  AND
                    ficha-cq.cod-localiz = ""
                   USE-INDEX it-lote :
@@ -3174,7 +3174,7 @@ PROCEDURE pi-gera-laudo:
     END.
    
     
-    IF c-cod-estabel-ini = "{cdp\poloestab.i 423}" THEN/*solic-318*/
+    IF c-cod-estabel-ini = STRING({cdp\poloestab.i 423}) THEN /*solic-318*/ 
        ASSIGN nome-estabel-jr = "POLO MG".
          ELSE
            ASSIGN nome-estabel-jr = "POLO RS".  

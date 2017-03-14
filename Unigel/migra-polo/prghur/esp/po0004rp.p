@@ -146,7 +146,7 @@ else
       ASSIGN v-num-reg-lidos = v-num-reg-lidos + 1.
       run pi-acompanhar in h-acomp(input string(v-num-reg-lidos) ).
       FIND FIRST benefic_func NO-LOCK WHERE 
-                 (benefic_func.cdn_empresa   = "420" OR benefic_func.cdn_empresa   = "410" )AND/*solic-318*/
+                 (benefic_func.cdn_empresa   = "420" OR benefic_func.cdn_empresa   = "410" )AND /*solic-318*/ 
                  benefic_func.cdn_beneficio = tt-param.i-benef AND
                  benefic_func.nom_ident_benefic_func  = substr(c-set,20,6) NO-ERROR.
 

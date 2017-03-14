@@ -61,7 +61,7 @@ IF p-ind-event = "AfterValidateRecord"
 
           FIND FIRST estabelec WHERE estabelec.cod-estabel = tt-ped-venda.cod-estabel NO-LOCK NO-ERROR.
 
-          IF estabelec.ep-codigo <> "420" AND estabelec.ep-codigo <> "410" /* and estabelec.ep-codigo <> 700 */ THEN RETURN "ok"./*solic-318*/
+          IF estabelec.ep-codigo <> "420" AND estabelec.ep-codigo <> "410" /* and estabelec.ep-codigo <> 700 */ THEN RETURN "ok". /*solic-318*/ 
           
           IF NOT(INDEX("POREADQFXZ",trim(c-tipo)) <> 0) THEN l-erro = YES.
           

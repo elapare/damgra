@@ -168,10 +168,10 @@ DEFINE VARIABLE i-qt-exames-func     AS DECIMAL     NO-UNDO.
 DEFINE VARIABLE i-qt-hospitalar-func  AS DECIMAL     NO-UNDO.
 
 
-DEFINE VARIABLE i-empresa-ini   AS char    INITIAL "{cdp\poloestab.i 420}" NO-UNDO. /*solic-318*/
-DEFINE VARIABLE i-empresa-fim   AS char    INITIAL "{cdp\poloestab.i 420}" NO-UNDO. /*solic-318*/
-DEFINE VARIABLE i-estab-ini     AS char    INITIAL "{cdp\poloestab.i 422}" NO-UNDO. /*solic-318*/
-DEFINE VARIABLE i-estab-fim     AS char    INITIAL "{cdp\poloestab.i 422}" NO-UNDO. /*solic-318*/
+DEFINE VARIABLE i-empresa-ini   AS char    INITIAL "{cdp\poloestab.i 420}" NO-UNDO.  /*solic-318*/ 
+DEFINE VARIABLE i-empresa-fim   AS char    INITIAL "{cdp\poloestab.i 420}" NO-UNDO.  /*solic-318*/ 
+DEFINE VARIABLE i-estab-ini     AS char    initial "422" NO-UNDO.  /*solic-318*/ 
+DEFINE VARIABLE i-estab-fim     AS char    initial "422" NO-UNDO.  /*solic-318*/ 
 DEFINE VARIABLE dt-admissao-ini AS DATE   INITIAL 01/01/2011     NO-UNDO.
 DEFINE VARIABLE dt-admissao-fim AS DATE   INITIAL 05/31/2099     NO-UNDO.
 DEFINE VARIABLE i-cdn_funcionario-ini AS INTEGER   INITIAL 0  NO-UNDO.
@@ -445,11 +445,11 @@ DEFINE VARIABLE i-ano-ref AS INTEGER FORMAT "9999":U INITIAL 0
      VIEW-AS FILL-IN 
      SIZE 7 BY .88 TOOLTIP "Ano Competˆncia Folha" NO-UNDO.
 
-DEFINE VARIABLE i-cod-empresa-fim AS CHAR FORMAT "x(03)":U INITIAL "{cdp\poloestab.i 420}" /*solic-318*/
+DEFINE VARIABLE i-cod-empresa-fim AS CHAR FORMAT "x(03)":U INITIAL "{cdp\poloestab.i 420}"  /*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 15 BY .88 NO-UNDO.
 
-DEFINE VARIABLE i-cod-empresa-ini AS CHAR FORMAT "x(03)":U INITIAL "{cdp\poloestab.i 420}" /*solic-318*/
+DEFINE VARIABLE i-cod-empresa-ini AS CHAR FORMAT "x(03)":U INITIAL "{cdp\poloestab.i 420}"  /*solic-318*/ 
      LABEL "Empresa" 
      VIEW-AS FILL-IN 
      SIZE 15 BY .88 NO-UNDO.
@@ -458,7 +458,7 @@ DEFINE VARIABLE i-cod-estab-fim AS CHAR FORMAT "x(05)":U INITIAL "424"
      VIEW-AS FILL-IN 
      SIZE 15 BY .88 NO-UNDO.
 
-DEFINE VARIABLE i-cod-estab-ini AS CHAR FORMAT "x(05)":U INITIAL "{cdp\poloestab.i 421}" /*solic-318*/
+DEFINE VARIABLE i-cod-estab-ini AS CHAR FORMAT "x(05)":U initial "421"  /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 15 BY .88 NO-UNDO.

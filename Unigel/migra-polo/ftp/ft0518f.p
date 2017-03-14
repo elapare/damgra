@@ -223,7 +223,7 @@ ASSIGN c-pedido = ""
       END.
       
       IF c-estab-uc = "" AND not(ITEM.ge-codigo >= 41 AND ITEM.ge-codigo <= 49) THEN do:
-         if index("435,433,432,443,436",estabelec.cod-estabel) > 0 then /*solic-318*/
+         if index("435,433,432,443,436",estabelec.cod-estabel) > 0 then  /*solic-318*/ 
          ASSIGN   c-estab-uc = "381"
                   i-emp-uc   = "380".
 
@@ -1157,7 +1157,7 @@ IF l-imprime-lote = NO THEN DO:
        /*Customizacao para imprimir lotes na descrica para empresa 380*/    
        
                c-desc-lotes = "".           
-               if  i-emp-uc = "380" OR estabelec.cod-estabel = "342" OR l-lotes-desc then do:  /*solic-318*//*05092016 - Ricardo pediu para sair para 342 tambem - Edson */
+               if  i-emp-uc = "380" OR estabelec.cod-estabel = "342" OR l-lotes-desc then do:   /*solic-318*/ /*05092016 - Ricardo pediu para sair para 342 tambem - Edson */
                                         
                     FOR first it-nota-fisc WHERE 
                         it-nota-fisc.cod-estabel = ttDet.CodEstabelNF AND
@@ -1312,7 +1312,7 @@ IF l-imprime-lote = NO THEN DO:
                 /* ver se vai manter isto para todas empresas*/
 
             
-            IF (substring(c-estab-uc,1,2) = "42" OR substring(c-estab-uc,1,2) = "41") OR  c-estab-uc = "702" OR l-item-polo THEN  /*solic-318*/ /*mudado para unigel comercial 16-11-2012 Edson*/
+            IF (substring(c-estab-uc,1,2) = "42" OR substring(c-estab-uc,1,2) = "41") OR  c-estab-uc = "702" OR l-item-polo THEN   /*solic-318*/  /*mudado para unigel comercial 16-11-2012 Edson*/
             ASSIGN ttDanfe.informacoescomplementares = ttDanfe.informacoescomplementares + " " + c-nome-tr.
         
         
@@ -1465,7 +1465,7 @@ RUN ftp/ft0518f1.p(INPUT TABLE ttDanfe,
   mas confirmar com usuarios
   */
 
-  IF (substring(c-estab-uc,1,2) = "42" or substring(c-estab-uc,1,2) = "41" or c-estab-uc = "702" ) /*solic-318*//*mudado para unigel comercial em 16-11-2012 Edson*/
+  IF (substring(c-estab-uc,1,2) = "42" or substring(c-estab-uc,1,2) = "41" or c-estab-uc = "702" )  /*solic-318*/ /*mudado para unigel comercial em 16-11-2012 Edson*/
   and nota-fiscal.ind-sit-nota <> 2 then do:
   
          FOR first  cont-emit WHERE 

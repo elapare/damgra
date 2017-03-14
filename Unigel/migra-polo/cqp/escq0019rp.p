@@ -1076,7 +1076,7 @@ END.
             gra-min-jr = 99999999
             gra-max-jr = 0.
 
-     IF c-cod-estabel-ini = "{cdp\poloestab.i 423}" THEN DO: /*solic-318*/
+     IF c-cod-estabel-ini = STRING({cdp\poloestab.i 423}) THEN DO:  /*solic-318*/ 
 
       FOR EACH tt-bobinas2 NO-LOCK:
 
@@ -1210,7 +1210,7 @@ FOR EACH tt-analises NO-LOCK:
                  valor-tipico-jr = 0.
 
 
-          IF c-cod-estabel-ini = "{cdp\poloestab.i 423}" THEN /*solic-318*/
+          IF c-cod-estabel-ini = STRING({cdp\poloestab.i 423}) THEN  /*solic-318*/ 
               ASSIGN nome-estabel-jr = "POLO MG".
             ELSE
               ASSIGN nome-estabel-jr = "POLO RS".
@@ -1271,7 +1271,7 @@ FOR EACH tt-analises NO-LOCK:
            END.  
 END.
 
-IF c-cod-estabel-ini = "{cdp\poloestab.i 423}" THEN /*solic-318*/
+IF c-cod-estabel-ini = STRING({cdp\poloestab.i 423}) THEN  /*solic-318*/ 
    ASSIGN nome-estabel-jr = "POLO MG".
      ELSE
        ASSIGN nome-estabel-jr = "POLO RS".  

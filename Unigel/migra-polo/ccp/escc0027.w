@@ -211,7 +211,7 @@ ASSIGN l-split = NO.
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel     AS CHAR  format "x(03)"    initial ""   no-undo. /*solic-318*/
+def new shared var c-cod-estabel     AS CHAR  format "x(03)"    initial ""   no-undo.  /*solic-318*/ 
 def new shared var i-cod-emitente-jr AS INT   format ">>>>>>>9" initial 0       no-undo.
 
 DEFINE VARIABLE c-nome-abrev         AS CHAR  FORMAT "x(12)"    INITIAL ""      NO-UNDO.

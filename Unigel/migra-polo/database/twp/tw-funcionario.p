@@ -23,7 +23,7 @@ END.
 
 IF l-calc-func = NO THEN DO:
 
-    IF  (p-table.cdn_estab = "422" OR p-table.cdn_estab = "412") THEN RUN pi-gera-func-epi. /*solic-318*/
+    IF  (p-table.cdn_estab = "422" OR p-table.cdn_estab = "412") THEN RUN pi-gera-func-epi.  /*solic-318*/ 
 
     /* Integra‡Æo SIS */
     /* DESATIVADO FOI CRIADO O PROGRAMA ESFP0037 PARA INTEGRACAO

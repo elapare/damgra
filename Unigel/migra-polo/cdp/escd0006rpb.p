@@ -17,7 +17,7 @@ if connected ("hcm") then do:
      put UNFORMATTED "----------------------------------------------" SKIP "usuario:"c-seg-usuario " Dia:" string(today,"99/99/9999") " Hora:" string(time,"HH:MM:SS")
          skip.
          
-    for each funcionario where (funcionario.cdn_estab = "422" OR funcionario.cdn_estab = "412)" no-lock. /*solic-318*/
+    for each funcionario where (funcionario.cdn_estab = "422" OR funcionario.cdn_estab = "412)" no-lock.  /*solic-318*/ 
     
       find first am-cd-funcionario-req where 
         am-cd-funcionario-req.cod-funcionario = funcionario.cdn_funcionario no-error.

@@ -66,7 +66,7 @@ IF  grw-exam-ficha <> ? and
     FIND ficha-cq WHERE ROWID(ficha-cq) = grw-exam-ficha NO-LOCK NO-ERROR.
     IF AVAIL ficha-cq  THEN DO:
         FIND estabelec WHERE estabelec.cod-estabel = ficha-cq.cod-estabel NO-LOCK NO-ERROR.
-        IF AVAIL estabelec AND (estabelec.ep-codigo = "420" OR estabelec.ep-codigo = "410") THEN /*solic-318*/
+        IF AVAIL estabelec AND (estabelec.ep-codigo = "420" OR estabelec.ep-codigo = "410") THEN  /*solic-318*/ 
              assign h-button:sensitive = no.
 
     END.

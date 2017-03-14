@@ -107,7 +107,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel        AS CHAR     format "x(3)"       initial "412"              no-undo./*solic-318*/
+def new shared var c-cod-estabel        AS CHAR     format "x(3)"       initial "412"              no-undo. /*solic-318*/ 
 def new shared var c-fm-codigo-ini      AS CHAR     format "x(8)"       initial ""                 no-undo.
 def new shared var c-fm-codigo-fim      AS CHAR     format "x(8)"       initial "ZZZZZZZZ"         no-undo.
 def new shared var i-ge-codigo-ini      AS INTEGER  format ">>9"        initial 40                 no-undo.
