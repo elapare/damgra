@@ -728,7 +728,7 @@ PROCEDURE pi-altera-linha-op:
          WHERE ord-prod.nr-ord-produ = ped-campanha.nr-ord-produ NO-LOCK NO-ERROR.
     IF AVAIL ord-prod THEN DO:
         FIND FIRST ctrab-linha
-             WHERE ctrab-linha.cod-estabel = '412' OR ctrab-linha.cod-estabel = '422' /*solic-318*/ 
+             WHERE ctrab-linha.cod-estabel = STRING({cdp\poloestab.i 422}) /*solic-318*/ 
                AND ctrab-linha.cod-ctrab   = campanha-polo.gm-codigo NO-LOCK NO-ERROR.
         IF AVAIL ctrab-linha THEN DO:
             CREATE tt-ord-prod.
@@ -919,13 +919,13 @@ PROCEDURE pi-cria-op-pedido:
        IF AVAIL tt-componente then do: 
           /*run cdp/cd9088.p (input rCotEstMast,
                             input r-ped-item,
-                            input '{cdp\poloestab.i 422}' ,
+                            input STRING({cdp\poloestab.i 422}) ,
                             input-output table tt-componente,
                             INPUT r-ped-ent,
                             input TABLE tt-rowid-ped-ent).*/ /*solic-318*/ 
            run sfc/essf0011fb.p (input rCotEstMast,
                                       input r-ped-item,
-                                      input '{cdp\poloestab.i 422}'  /*solic-318*/ ,
+                                      input STRING({cdp\poloestab.i 422})  /*solic-318*/ ,
                                       input-output table tt-componente,
                                       INPUT r-ped-ent,
                                       input TABLE tt-rowid-ped-ent,
@@ -1002,11 +1002,11 @@ PROCEDURE pi-cria-op-estoque:
             /*Substitu°do pois n∆o retorna erros da api de produá∆o*/
            /*run cdp/cd9080.p (input rCotEstMast,
                              input ?,
-                             input '{cdp\poloestab.i 422}' ,
+                             input STRING({cdp\poloestab.i 422}) ,
                              input-output table tt-componente).*/ /*solic-318*/ 
             run sfc/essf0011fa.p(input rCotEstMast,
                                       input ?,
-                                      input '{cdp\poloestab.i 422}'  /*solic-318*/ ,
+                                      input STRING({cdp\poloestab.i 422})  /*solic-318*/ ,
                                       input-output table tt-componente,
                                       output table tt-digita).
 

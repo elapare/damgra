@@ -1,7 +1,15 @@
 DEF NEW GLOBAL SHARED VAR c-gsv-mip-lista-especialid AS CHAR NO-UNDO.
 
 PROCEDURE pi-param-espec:
-    ASSIGN  c-gsv-mip-lista-especialid = STRING({cdp\poloestab.i 422}) + "-ELE," + STRING({cdp\poloestab.i 422}) +  "-ELET," + STRING({cdp\poloestab.i 422}) +  "-EXT," + STRING({cdp\poloestab.i 422}) +  "-MEC," + STRING({cdp\poloestab.i 422}) +  "-OPE,SEM-ESP".
+
+    IF CAN-FIND(FIRST usuar_espec WHERE usuar_espec.tp-especial = "412-MEC" THEN DO:  /*solic-318*/
+        ASSIGN  c-gsv-mip-lista-especialid = "412-ELE,412-ELET,412-EXT,412-MEC,412-OPE,SEM-ESP".
+    END.
+    ELSE DO:
+        ASSIGN  c-gsv-mip-lista-especialid = "422-ELE,422-ELET,422-EXT,422-MEC,422-OPE,SEM-ESP".
+    END.
+
+    
     IF CAN-FIND(FIRST usuar_espec NO-LOCK
                 WHERE usuar_espec.cod_usuario = c-seg-usuario) THEN DO:
         ASSIGN c-gsv-mip-lista-especialid = "".

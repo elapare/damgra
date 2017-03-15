@@ -379,7 +379,7 @@ DEFINE VARIABLE ed-dt-trans AS DATE FORMAT "99/99/9999":U INITIAL ?
      VIEW-AS FILL-IN NATIVE 
      SIZE 12.86 BY .88 NO-UNDO.
 
-DEFINE VARIABLE ed-cod-estabel AS char FORMAT "x(03)":U initial "422"  /*solic-318*/ 
+DEFINE VARIABLE ed-cod-estabel AS char FORMAT "x(03)":U   /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN NATIVE 
      SIZE 4 BY .88 NO-UNDO.
@@ -1110,6 +1110,7 @@ PAUSE 0 BEFORE-HIDE.
 MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
+    ed-cod-estabel =  STRING({cdp\poloestab.i 422}). /*solic-318*/ 
 
     ASSIGN ed-dt-trans   = TODAY.
    /* FIND  FIRST param-estoq NO-LOCK no-error.

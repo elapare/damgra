@@ -111,8 +111,8 @@ def new shared var dt-vencto-fim        AS DATE                        format "9
 def new shared var c-cod-esp-ini        AS CHAR                        format "X(02)"           initial ""                 no-undo.
 def new shared var c-cod-esp-fim        AS CHAR                        format "X(02)"           initial "ZZ"               no-undo.
 def new shared var c-mercado            AS CHAR                        format "X(3)"            initial "A"                no-undo.
-def new shared var c-cod-estabel-ini        AS CHAR                        format "X(100)"           initial "412,422,432,434,442,443"                 no-undo. /*solic-318*/ 
-def new shared var c-cod-estabel-fim        AS CHAR                        format "X(03)"           initial "424"               no-undo.
+def new shared var c-cod-estabel-ini        AS CHAR                        format "X(100)"                     no-undo. /*solic-318*/ 
+def new shared var c-cod-estabel-fim        AS CHAR                        format "X(03)"           initial "zzz"               no-undo.
 
 /* ********************  Preprocessor Definitions  ******************** */ 
 
@@ -1034,6 +1034,9 @@ PAUSE 0 BEFORE-HIDE.
 MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
+
+    c-cod-estabel-ini = STRING({cdp\poloestab.i 422}) + "," + STRING({cdp\poloestab.i 434}) + "," + STRING({cdp\poloestab.i 432}). 
+    
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
     RUN enable_UI.

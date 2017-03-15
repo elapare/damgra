@@ -268,20 +268,20 @@ DEFINE VARIABLE i-ano-ref AS INTEGER FORMAT "9999":U INITIAL 0
      VIEW-AS FILL-IN 
      SIZE 7 BY .88 TOOLTIP "Ano Competˆncia" NO-UNDO.
 
-DEFINE VARIABLE i-empresa-fim AS CHAR FORMAT "x(03)":U INITIAL "{cdp\poloestab.i 420}" /*solic-318*/ 
+DEFINE VARIABLE i-empresa-fim AS CHAR FORMAT "x(03)":U  /*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 4.86 BY .88 NO-UNDO.
 
-DEFINE VARIABLE i-empresa-ini AS CHAR FORMAT "x(03)":U INITIAL "{cdp\poloestab.i 420}" /*solic-318*/ 
+DEFINE VARIABLE i-empresa-ini AS CHAR FORMAT "x(03)":U  /*solic-318*/ 
      LABEL "Empresa" 
      VIEW-AS FILL-IN 
      SIZE 4.86 BY .88 NO-UNDO.
 
-DEFINE VARIABLE i-estab-fim AS CHAr FORMAT "x(05)":U INITIAL "424" 
+DEFINE VARIABLE i-estab-fim AS CHAr FORMAT "x(05)":U 
      VIEW-AS FILL-IN 
      SIZE 4.86 BY .88 NO-UNDO.
 
-DEFINE VARIABLE i-estab-ini AS CHAR FORMAT "x(05)":U initial "421"  /*solic-318*/ 
+DEFINE VARIABLE i-estab-ini AS CHAR FORMAT "x(05)":U  /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 4.86 BY .88 NO-UNDO.
@@ -785,6 +785,11 @@ PAUSE 0 BEFORE-HIDE.
 MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
+    i-empresa-ini = STRING({cdp\poloestab.i 420}). /*solic-318*/ 
+    i-empresa-fim = STRING({cdp\poloestab.i 420}). /*solic-318*/ 
+    i-estab-ini   = STRING({cdp\poloestab.i 421}). /*solic-318*/ 
+    i-estab-fim   = STRING({cdp\poloestab.i 421}). /*solic-318*/
+   
 
     
         

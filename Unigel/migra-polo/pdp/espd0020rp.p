@@ -156,7 +156,7 @@ def new shared var da-canal-venda-fim like ped-venda.cod-canal-venda format ">>9
 def new shared var c-perc-atend       AS DEC FORMAT ">>9.99%" initial 0 no-undo.
 
 /****************** Defini‡ao de Vari veis p/ Campos Virtuais do Relat¢rio *******************/ 
-def var c-est as char initial "412,422,424,434,442,432,443,702" no-undo. /*solic-318*/ 
+def var c-est as char initial "412,422,434,442,432,443" no-undo. /*solic-318*/ 
 def var i-estab as integer no-undo.
 
 DEFINE VARIABLE nome-ab-rep-jr     AS CHARACTER                 NO-UNDO.
@@ -531,7 +531,7 @@ end.
 /*cria saldo de terceiros em lote*/
     EMPTY TEMP-TABLE tt-lotes.
     EMPTY TEMP-TABLE tt-notas.
-  do i-estab = 1 to 5.
+  do i-estab = 1 to 6.
 
     for each   saldo-terc WHERE /*saldo-terc.cod-emitente = 17261 and*/
      saldo-terc.cod-estabel = entry(i-estab,c-est) and

@@ -99,7 +99,7 @@ def new shared var txt-pis-cofins as decimal format ">>9.99" label "Pis / Cofins
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel        AS CHAR    format "X(3)"        initial "422"             no-undo. /*solic-318*/ 
+def new shared var c-cod-estabel        AS CHAR    format "X(3)"                     no-undo. /*solic-318*/ 
 def new shared var i-nr-ord-produ-ini   AS INT     format ">>>>>>>>>9"  initial 0                 no-undo.
 def new shared var i-nr-ord-produ-fim   AS INT     format ">>>>>>>>>9"  initial 999999999         no-undo.
 def new shared var dt-emissao-ini       as DATE    format 99/99/9999    initial 01/01/0001        no-undo.
@@ -1014,6 +1014,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    c-cod-estabel = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
     RUN enable_UI.
 
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

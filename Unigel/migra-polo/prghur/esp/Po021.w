@@ -164,7 +164,7 @@ DEFINE VARIABLE fi-ano-ref AS INTEGER FORMAT "9999":U INITIAL 2012
      VIEW-AS FILL-IN 
      SIZE 5.57 BY .88 TOOLTIP "Ano" NO-UNDO.
 
-DEFINE VARIABLE fi-empresa AS INTEGER FORMAT ">>9":U INITIAL 420 
+DEFINE VARIABLE fi-empresa AS INTEGER FORMAT ">>9":U 
      LABEL "Empresa" 
      VIEW-AS FILL-IN 
      SIZE 4 BY .88 TOOLTIP "Informe codigo da Empresa" NO-UNDO.
@@ -238,11 +238,11 @@ DEFINE VARIABLE c-cod_rh_ccusto-ini AS CHARACTER FORMAT "x(08)"
      SIZE 8 BY .88
      FONT 1.
 
-DEFINE VARIABLE fi-est-fim AS INTEGER FORMAT ">>9":U INITIAL {cdp\poloestab.i 422}  /*solic-318*/ 
+DEFINE VARIABLE fi-est-fim AS INTEGER FORMAT ">>9":U   /*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 4 BY .88 NO-UNDO.
 
-DEFINE VARIABLE fi-est-ini AS INTEGER FORMAT ">>9" INITIAL {cdp\poloestab.i 422}  /*solic-318*/ 
+DEFINE VARIABLE fi-est-ini AS INTEGER FORMAT ">>9"    /*solic-318*/ 
      LABEL "Estabelecimento":R18 
      VIEW-AS FILL-IN 
      SIZE 4 BY .88.
@@ -782,6 +782,9 @@ PAUSE 0 BEFORE-HIDE.
 MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
+    fi-empresa   = ({cdp\poloestab.i 420}). /*solic-318*/ 
+    fi-est-ini   = ({cdp\poloestab.i 422}). /*solic-318*/ 
+    fi-est-fim   = ({cdp\poloestab.i 422}). /*solic-318*/ 
 
     RUN enable_UI.
   

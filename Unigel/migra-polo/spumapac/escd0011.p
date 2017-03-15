@@ -15,7 +15,7 @@
 **
 **       Autor...: DATASUL S.A.
 **
-**       Objetivo: Relat¢rio de Pedidos a Embarcar
+**       Objetivo: Relat�rio de Pedidos a Embarcar
 **
 **       VersÆo..: 1.00.003 - Rodrigo
 **

@@ -113,32 +113,7 @@ create tt-param.
 raw-transfer raw-param to tt-param.
 
 
-/*
-CREATE tt-param.
- ASSIGN 
-      /*  tt-param.cdn_curso_trein  = 51 
-        tt-param.cdn_turma_trein  = 1*/
-        tt-param.cod_emp          = "{cdp\poloestab.i 420}"    /*solic-318*/ 
-        tt-param.cdn_estab_ini    = STRING({cdp\poloestab.i 421})  /*solic-318*/ 
-        tt-param.cdn_estab_fim    = "426"
-        tt-param.dt_periodo_ini   = 01/01/2015
-        tt-param.dt_periodo_fim   = 12/31/2015
-    tt-param.c_area_ini    = 0
-    tt-param.c_area_fim    = 999999 
-    tt-param.c_ccusto_ini    = ""
-    tt-param.c_ccusto_fim    = "ZZZZZZ"
-        tt-param.rs-head-count = 1        
-        tt-param.tg-pendente      = yes 
-        tt-param.tg-industrial    = yes
-        tt-param.tg-confirmado    = yes 
-        tt-param.tg-grafico       = yes 
-        tt-param.tg-cursando      = yes 
-        tt-param.tg-habilitado    = yes 
-        tt-param.tg-desabilitado  = yes 
-        tt-param.tg-cancelado     = yes
-        .
-  
-*/
+
 /****************** Defini‡ao de Vari veis de Processamento do Relat¢rio *********************/
 def var h-acomp              as handle no-undo.
 Def Var dat-trab As Date.

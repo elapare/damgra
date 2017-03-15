@@ -223,7 +223,7 @@ ASSIGN c-pedido = ""
       END.
       
       IF c-estab-uc = "" AND not(ITEM.ge-codigo >= 41 AND ITEM.ge-codigo <= 49) THEN do:
-         if index("435,433,432,443,436",estabelec.cod-estabel) > 0 then  /*solic-318*/ 
+         if index("435,433,432,443,436",estabelec.cod-estabel) > 0 then  /*solic-318*/  
          ASSIGN   c-estab-uc = "381"
                   i-emp-uc   = "380".
 
@@ -1157,7 +1157,7 @@ IF l-imprime-lote = NO THEN DO:
        /*Customizacao para imprimir lotes na descrica para empresa 380*/    
        
                c-desc-lotes = "".           
-               if  i-emp-uc = "380" OR estabelec.cod-estabel = "342" OR l-lotes-desc then do:   /*solic-318*/ /*05092016 - Ricardo pediu para sair para 342 tambem - Edson */
+               if  i-emp-uc = "380" OR estabelec.cod-estabel = "342" OR l-lotes-desc then do:  /*05092016 - Ricardo pediu para sair para 342 tambem - Edson */
                                         
                     FOR first it-nota-fisc WHERE 
                         it-nota-fisc.cod-estabel = ttDet.CodEstabelNF AND

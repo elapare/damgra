@@ -90,16 +90,16 @@ def var c-arq-modelo         as char extent 2 no-undo.
 DEFINE VARIABLE idx               AS int     NO-UNDO.
 DEFINE VARIABLE dt-entrega-ini    AS DATE    initial 12/01/2016 format "99/99/9999"   NO-UNDO.
 DEFINE VARIABLE dt-entrega-fim    AS DATE    initial 12/10/2016 format "99/99/9999"   NO-UNDO.
-DEFINE VARIABLE c-ep-codigo-ini   AS CHARACTER initial "422"  NO-UNDO.
-DEFINE VARIABLE c-ep-codigo-fim   AS CHARACTER INITIAL "434"  NO-UNDO.
-DEFINE VARIABLE c-cod-estabel-ini AS CHARACTER initial "422"  NO-UNDO.
-DEFINE VARIABLE c-cod-estabel-fim AS CHARACTER INITIAL "434"  NO-UNDO.
+DEFINE VARIABLE c-ep-codigo-ini   AS CHARACTER initial ""  NO-UNDO.
+DEFINE VARIABLE c-ep-codigo-fim   AS CHARACTER INITIAL "zzz"  NO-UNDO.
+DEFINE VARIABLE c-cod-estabel-ini AS CHARACTER initial ""  NO-UNDO.
+DEFINE VARIABLE c-cod-estabel-fim AS CHARACTER INITIAL "zzz"  NO-UNDO.
 DEFINE VARIABLE c-nome-abrev-ini  AS CHARACTER initial ""  NO-UNDO.
 DEFINE VARIABLE c-nome-abrev-fim  AS CHARACTER initial "zzzz"  NO-UNDO.
 DEFINE VARIABLE c-it-codigo-ini   AS CHARACTER initial ""  NO-UNDO.
 DEFINE VARIABLE c-it-codigo-fim   AS CHARACTER initial "zzzz"  NO-UNDO.
-DEFINE VARIABLE i-ge-codigo-ini   AS INTEGER   initial 41  NO-UNDO.
-DEFINE VARIABLE i-ge-codigo-fim   AS INTEGER   initial 49  NO-UNDO.
+DEFINE VARIABLE i-ge-codigo-ini   AS INTEGER   initial   NO-UNDO.
+DEFINE VARIABLE i-ge-codigo-fim   AS INTEGER   initial 99  NO-UNDO.
 DEFINE VARIABLE p-perc-ini        AS DECIMAL  FORMAT "->>>,>>9.9999" initial 10 NO-UNDO.
 DEFINE VARIABLE p-perc-fim        AS DECIMAL  FORMAT "->>>,>>9.9999" initial 13  NO-UNDO.
 DEFINE VARIABLE p-perc-atu        AS DECIMAL  FORMAT "->>>,>>9.9999" INITIAL 3  NO-UNDO.

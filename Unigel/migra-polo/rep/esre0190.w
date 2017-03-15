@@ -241,7 +241,7 @@ DEFINE VARIABLE ed-cod-emitente AS INTEGER FORMAT ">>>>>>9":U INITIAL 17261
      VIEW-AS FILL-IN NATIVE 
      SIZE 9 BY .88 NO-UNDO.
 
-DEFINE VARIABLE ed-cod-estabel AS CHARACTER FORMAT "x(03)":U initial "422"  /*solic-318*/ 
+DEFINE VARIABLE ed-cod-estabel AS CHARACTER FORMAT "x(03)":U   /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN NATIVE 
      SIZE 4 BY .88 NO-UNDO.
@@ -682,6 +682,7 @@ PAUSE 0 BEFORE-HIDE.
 MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
+    ed-cod-estabel =  STRING({cdp\poloestab.i 422}). /*solic-318*/ 
 
     ASSIGN ed-dt-trans   = TODAY.
    /* FIND  estab-mat 

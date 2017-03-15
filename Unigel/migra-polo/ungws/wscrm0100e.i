@@ -58,33 +58,7 @@ ELSE IF c-cod-unid-atend <> "" AND AVAIL ped-venda THEN DO:
     END.
 END.
 
-/*
-IF AVAIL ped-venda THEN DO:
 
-   FIND FIRST if-ped-venda NO-LOCK
-        WHERE if-ped-venda.nr-pedido = ped-venda.nr-pedido AND 
-              if-ped-venda.nr-pedido-relac <> 0 NO-ERROR.
-   IF AVAIL if-ped-venda THEN DO:
-       
-       IF ped-venda.cod-estabel <> "422"  AND 
-          ttPedVenda.cod-estabel <> "422" THEN DO:
-
-          FIND FIRST if-estabelec NO-LOCK
-               WHERE if-estabelec.cod-estab-orig  = ttPedVenda.cod-estabel
-                 AND if-estabelec.cod-estab-inter = "" NO-ERROR.
-
-          IF AVAIL if-estabelec THEN DO:
-             c-cod-unid-atend = if-estabelec.cod-estab-dest.
-                
-             FIND FIRST if-natur-oper OF if-estabelec
-                  WHERE if-natur-oper.nat-oper-pedido = if-ped-venda.nat-oper-orig NO-LOCK NO-ERROR.
-                
-             if avail if-natur-oper then  ASSIGN ttPedVenda.nat-operacao  = if-natur-oper.nat-oper-v-ung.
-
-          END.
-      END.
-   END.
-END.*/
 
 IF c-cod-unid-atend  <> "" AND AVAIL if-ped-venda THEN DO:
     FIND FIRST estabelec NO-LOCK

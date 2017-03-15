@@ -121,7 +121,7 @@ def buffer b-ped-venda     for ped-venda.
 def buffer bf-if-ped-venda for if-ped-venda.
 
 /****************** Defini‡ao de Vari veis p/ Campos Virtuais do Relat¢rio *******************/ 
-def var c-est as char initial "412,422,424,434,432,442,443,702" no-undo.
+def var c-est as char initial "412,422,434,432,442,443" no-undo.
 def var i-estab as integer no-undo.
 
 DEFINE VARIABLE nome-ab-rep-jr     AS CHARACTER NO-UNDO.
@@ -553,7 +553,7 @@ PROCEDURE pi-carrega-pedido.
     EMPTY TEMP-TABLE tt-lotes.
     EMPTY TEMP-TABLE tt-notas.
     
-    DO i-estab = 1 TO 5:
+    DO i-estab = 1 TO 6:
         FOR EACH saldo-terc 
            WHERE saldo-terc.cod-estabel  = entry(i-estab,c-est) 
              AND saldo-terc.quantidade   > 0 

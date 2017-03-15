@@ -1881,6 +1881,10 @@ MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
+    
+
+    
+
     FOR EACH tt-estacao.
         DELETE tt-estacao.
     END.
@@ -2402,8 +2406,8 @@ def var c-estado as char  EXTENT 9  format "x(14)" label "Estado" INITIAL ["NÆo 
          SIZE 6.14 BY 1.
 
 
-    DEFINE VARIABLE pesq-cod-estabel-ini AS CHAR FORMAT "x(3)"      initial "422"  /*solic-318*/      NO-UNDO.
-    DEFINE VARIABLE pesq-cod-estabel-fim AS CHAR FORMAT "x(3)"      initial "422"  /*solic-318*/      NO-UNDO.
+    DEFINE VARIABLE pesq-cod-estabel-ini AS CHAR FORMAT "x(3)"        /*solic-318*/      NO-UNDO.
+    DEFINE VARIABLE pesq-cod-estabel-fim AS CHAR FORMAT "x(3)"        /*solic-318*/      NO-UNDO.
     DEFINE VARIABLE pesq-dt-inicio-ini   AS DATE FORMAT 99/99/9999  INITIAL TODAY     NO-UNDO.
     DEFINE VARIABLE pesq-dt-inicio-fim   AS DATE FORMAT 99/99/9999  INITIAL TODAY     NO-UNDO.
     DEFINE VARIABLE pesq-it-codigo-ini   AS CHAR FORMAT "x(16)"     INITIAL ""        NO-UNDO.
@@ -2415,6 +2419,8 @@ def var c-estado as char  EXTENT 9  format "x(14)" label "Estado" INITIAL ["NÆo 
     DEFINE VARIABLE pesq-nr-ord-fim      AS INT  FORMAT ">>>>>>>>9" INITIAL 999999999 NO-UNDO.
     
     ASSIGN pesq-dt-inicio-ini = pesq-dt-inicio-ini - 30.
+    pesq-cod-estabel-ini  = STRING({cdp\poloestab.i 422}). /*solic-318*/  
+    pesq-cod-estabel-fim  = STRING({cdp\poloestab.i 422}). /*solic-318*/  
 
     DEFINE RECTANGLE pesq-rect-1
      EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL 

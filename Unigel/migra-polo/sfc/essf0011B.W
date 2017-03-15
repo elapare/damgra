@@ -190,7 +190,7 @@ DEF TEMP-TABLE tt-ped-campanha
 DEF VAR r-campanha   AS ROWID NO-UNDO.
 DEF VAR r-rowid-camp AS ROWID NO-UNDO.
 
-DEF VAR p-cod-estabel   LIKE estabelec.cod-estabel  INITIAL '{cdp\poloestab.i 422}'.  /*solic-318*/  
+DEF VAR p-cod-estabel   LIKE estabelec.cod-estabel  .  /*solic-318*/  
 DEF VAR p-nr-pedido-ini LIKE ped-venda.nr-pedido    INITIAL 0.   
 DEF VAR p-nr-pedido-fim LIKE ped-venda.nr-pedido    INITIAL 999999999.   
 DEF VAR p-nome-ini      LIKE ped-venda.nome-abrev   INITIAL "".  
@@ -3597,6 +3597,8 @@ ASSIGN c-data     = STRING(TODAY,"99/99/9999")
        da-data    = p-data-ini + 31
        c-data     = STRING(da-data,"99/99/9999")
        p-data-fim = DATE("01" + SUBSTRING(c-data,3,8)) - 1.
+
+p-cod-estabel = STRING({cdp\poloestab.i 422}). /*solic-318*/
 
 /* Include custom  Main Block code for SmartWindows. */
 /* windowmn.i - Main Block code for objects which create windows.*/

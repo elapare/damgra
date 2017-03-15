@@ -376,8 +376,8 @@ def new global shared var c-it-codigo-fim-20     AS CHARACTER NO-UNDO.
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
 
-DEFINE VARIABLE c-cod-estabel-ini   AS CHARACTER FORMAT "X(3)"          initial "422"          NO-UNDO. /*solic-318*/ 
-DEFINE VARIABLE c-cod-estabel-fim   AS CHARACTER FORMAT "X(3)"          initial "422"          NO-UNDO. /*solic-318*/ 
+DEFINE VARIABLE c-cod-estabel-ini   AS CHARACTER FORMAT "X(3)"                    NO-UNDO. /*solic-318*/ 
+DEFINE VARIABLE c-cod-estabel-fim   AS CHARACTER FORMAT "X(3)"                    NO-UNDO. /*solic-318*/ 
 
 DEFINE VARIABLE c-tp-pedido-ini     AS CHARACTER FORMAT "X(1)"          INITIAL ""             NO-UNDO.
 DEFINE VARIABLE c-tp-pedido-fim     AS CHARACTER FORMAT "X(1)"          INITIAL "Z"            NO-UNDO.
@@ -2080,6 +2080,9 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    c-cod-estabel-ini = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
+    c-cod-estabel-fim = STRING({cdp\poloestab.i 422}). /*solic-318*/
+
     RUN enable_UI.
 
     RUN pi-disable-bt-grava.   

@@ -94,7 +94,7 @@ def new global shared var c-excel            as com-handle                  NO-U
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var da-cod-estabel like ped-venda.cod-estabel format "999" initial "422" no-undo. /*solic-318*/ 
+def new shared var da-cod-estabel like ped-venda.cod-estabel format "999" no-undo. /*solic-318*/ 
 def new shared var da-nr-pedido   like ped-venda.nr-pedido   format ">>>>>>9" no-undo.
 def new shared var i-nr-sequencia like ped-item.nr-sequencia format ">>>>9" INITIAL 10  no-undo.
 
@@ -917,6 +917,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    da-cod-estabel =  STRING({cdp\poloestab.i 422}). /*solic-318*/ 
     RUN enable_UI.
 
     IF i-nr-pedido-indiv <> 0 THEN

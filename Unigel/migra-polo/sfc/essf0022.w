@@ -773,7 +773,7 @@ def var v-num-reg-lidos    as int    no-undo.
 
 /****************** Definiáao de Vari†veis de Seleá∆o do Relat¢rio *********************/ 
 
-DEFINE VARIABLE c-cod-estabel       AS CHAR      FORMAT "x(3)"   initial "422"           NO-UNDO. /*solic-318*/ 
+DEFINE VARIABLE c-cod-estabel       AS CHAR      FORMAT "x(3)"            NO-UNDO. /*solic-318*/ 
 DEFINE VARIABLE c-cod-ctrab         AS CHAR      FORMAT "x(16)"             NO-UNDO.
 DEFINE VARIABLE c-cod-operador      AS CHAR      FORMAT "x(07)"             NO-UNDO.
 DEFINE VARIABLE c-lote-cons         AS CHAR      FORMAT "x(10)"             NO-UNDO.
@@ -847,7 +847,7 @@ DEFINE VARIABLE nr-bobina-def       AS CHARACTER  NO-UNDO.
 DEFINE VARIABLE c-arquivo-jr AS CHARACTER FORMAT "x(100)" NO-UNDO.
 DEFINE VARIABLE c-temp-jr AS CHARACTER FORMAT "x(100)" NO-UNDO.
 c-temp-jr = session:temp-directory.
-
+c-cod-estabel = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
 
 /* ***********************  Control Definitions  ********************** */ 
 
@@ -1767,7 +1767,7 @@ DO:
                   saldo-estoq.lote        = self:screen-value and
                   saldo-estoq.qtidade-atu <> 0 AND
                   saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat AND
-                     NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422")  /*solic-318*/ ):
+                     NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 422}))  /*solic-318*/ ):
         end.
 
         IF NOT AVAIL saldo-estoq THEN DO:
@@ -1775,7 +1775,7 @@ DO:
              FOR first saldo-estoq fields (it-codigo) use-index lote no-lock where
                   saldo-estoq.lote        = self:screen-value and
                   saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat AND
-                  NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422")  /*solic-318*/ ): 
+                  NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 422}))  /*solic-318*/ ): 
              end.
 
         END.
@@ -1922,7 +1922,7 @@ DO:
             FOR first saldo-estoq fields (it-codigo) use-index lote no-lock where
                  saldo-estoq.lote        = self:screen-value and
                  saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat AND
-                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422")  /*solic-318*/ ): 
+                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 422}))  /*solic-318*/ ): 
             end.
 
             if avail saldo-estoq then do:
@@ -2011,7 +2011,7 @@ DO:
             FOR first saldo-estoq fields (it-codigo) use-index lote no-lock where
                  saldo-estoq.lote        = self:screen-value and
                  saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat AND
-                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422")  /*solic-318*/ ): 
+                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 422}))  /*solic-318*/ ): 
             end.
 
             if avail saldo-estoq then do:
@@ -2818,182 +2818,6 @@ ON ENDKEY OF FRAME f-relat DO:
   return no-apply.
 END.
 
-/*
-ON CHOOSE OF bt-primeiro IN FRAME f-relat
-DO:
-
-   RUN pi-le-primeiro.
-
-END.
-
-
-ON CHOOSE OF bt-proximo IN FRAME f-relat
-DO:
-
-   RUN pi-le-proximo.
-
-END.
-
-
-ON CHOOSE OF bt-anterior IN FRAME f-relat
-DO:
-
-   RUN pi-le-anterior.
-
-END.
-
-
-ON CHOOSE OF bt-final IN FRAME f-relat
-DO:
-
-   RUN pi-le-ultimo.
-
-END.
-
-ON CHOOSE OF bt-pesquisa IN FRAME f-relat
-DO:
-            
-
-END.
-
-*/
-
-
-/*
-ON CHOOSE OF bt-goto IN FRAME f-relat
-DO: 
-    
-    DEFINE BUTTON gt-bt-cancel AUTO-END-KEY 
-         LABEL "&Cancelar" 
-         SIZE 10 BY 1
-         BGCOLOR 8.
-    
-    DEFINE BUTTON gt-bt-ok AUTO-GO 
-         LABEL "&OK" 
-         SIZE 10 BY 1
-         BGCOLOR 8.
-    
-    DEFINE RECTANGLE gt-rt-botoes
-         EDGE-PIXELS 2 GRAPHIC-EDGE  
-         SIZE 58 BY 1.42
-         BGCOLOR 7.
-
-    DEFINE VARIABLE i-sequencia-gt AS INTEGER NO-UNDO.
-    
-    DEFINE RECTANGLE gt-rect-1
-     EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL 
-     SIZE 59 BY 4.50.
-    
-    DEFINE FRAME gt-frame-1
-
-        i-sequencia-gt LABEL "C¢digo do Usu†rio" AT ROW 2.5 COL 18 COLON-ALIGNED
-         VIEW-AS FILL-IN 
-         SIZE 16.14 BY .88
-        
-        gt-rect-1 AT ROW 1.9 COL 2
-
-        gt-bt-ok          AT ROW 7.3 COL 2.14
-        gt-bt-cancel      AT ROW 7.3 COL 13             
-        gt-rt-botoes      AT ROW 7.0 COL 1
-        SPACE(0.28)
-        WITH VIEW-AS DIALOG-BOX KEEP-TAB-ORDER SIDE-LABELS NO-UNDERLINE 
-             THREE-D SCROLLABLE TITLE "Chave do Registro" FONT 1
-             DEFAULT-BUTTON gt-bt-ok CANCEL-BUTTON gt-bt-cancel.
-
-    ON "CHOOSE":U OF gt-bt-ok IN FRAME gt-frame-1 DO:
-
-        ASSIGN i-empresa = int(i-sequencia-gt:SCREEN-VALUE IN FRAME gt-frame-1).
-
-     RETURN.
-
-    END.
-
-    ENABLE i-sequencia-gt gt-bt-ok gt-bt-cancel 
-        WITH FRAME gt-frame-1. 
-    
-    WAIT-FOR "GO":U OF FRAME gt-frame-1.
-
-    RUN le-registro-goto.
-
-END.
-*/
-
-/*
-
-ON CHOOSE OF bt-deleta IN FRAME f-relat
-DO: 
-    
-    DEFINE BUTTON ex-bt-cancel AUTO-END-KEY 
-         LABEL "&Cancelar" 
-         SIZE 10 BY 1
-         BGCOLOR 8.
-    
-    DEFINE BUTTON ex-bt-ok AUTO-GO 
-         LABEL "&OK" 
-         SIZE 10 BY 1
-         BGCOLOR 8.
-    
-    DEFINE RECTANGLE ex-rt-botoes
-         EDGE-PIXELS 2 GRAPHIC-EDGE  
-         SIZE 58 BY 1.42
-         BGCOLOR 7.
-
-    ASSIGN c-cod-estabel = "Exclui Este Registro? ".
-
-    DEFINE RECTANGLE ex-rect-1
-     EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL 
-     SIZE 59 BY 4.50.
-    
-    DEFINE FRAME ex-frame-1
-      
-        c-cod-estabel NO-LABEL 
-           at ROW 3 col 10 
-        
-        ex-rect-1 AT ROW 1.9 COL 2
-
-        ex-bt-cancel      AT ROW 7.3 COL 2.14             
-        ex-bt-ok          AT ROW 7.3 COL 13
-        ex-rt-botoes      AT ROW 7.0 COL 1
-        SPACE(0.28)
-        WITH VIEW-AS DIALOG-BOX KEEP-TAB-ORDER SIDE-LABELS NO-UNDERLINE 
-             THREE-D SCROLLABLE TITLE "Exclus∆o de Registro no Arquivo" FONT 1
-             DEFAULT-BUTTON ex-bt-ok CANCEL-BUTTON ex-bt-cancel.
-
-    ON "CHOOSE":U OF ex-bt-ok IN FRAME ex-frame-1 DO:
-
-        FIND CURRENT am-tp-texto-romaneio EXCLUSIVE-LOCK NO-ERROR.
-
-        IF AVAIL am-tp-texto-romaneio THEN
-            DELETE am-tp-texto-romaneio.
-
-
-        FIND NEXT am-tp-texto-romaneio NO-LOCK NO-ERROR.
-
-        IF AVAIL am-tp-texto-romaneio THEN 
-           RUN pi-mostra-registro. 
-
-        ELSE DO:
-            FIND PREV  am-tp-texto-romaneio NO-LOCK NO-ERROR.
-
-            IF AVAIL am-tp-texto-romaneio THEN 
-               RUN pi-mostra-registro. 
-
-        END.
-
-     RETURN.
-
-    END.
-
-    ENABLE ex-bt-cancel ex-bt-ok  
-        WITH FRAME ex-frame-1. 
-    
-    DISPLAY c-cod-estabel 
-        WITH FRAME ex-frame-1.
-
-    WAIT-FOR "GO":U OF FRAME ex-frame-1.
-
-END.
-*/
 
 ON CHOOSE OF bt-cancela IN FRAME f-relat
 DO:
@@ -3917,7 +3741,7 @@ PROCEDURE CalculaQuantSaldo :
                                      qt-aloc-prod) use-index lote no-lock where
                  saldo-estoq.lote        = c-lote-cons:screen-value in frame f-relat       and
                  saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat     AND
-                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422")  /*solic-318*/ ) and
+                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 422}))  /*solic-318*/ ) and
                  saldo-estoq.cod-depos  <> substring(param-cp.char-2,1,3) AND
                  saldo-estoq.qtidade-atu > 0,        
             FIRST deposito  FIELDS (cod-depos ind-dep-cq)
@@ -3978,7 +3802,7 @@ PROCEDURE CalculaQuantSaldo :
                                      qt-aloc-prod) use-index lote no-lock where
                  saldo-estoq.lote        = c-emenda-1:screen-value in frame f-relat        and
                  saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat     AND
-                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422")  /*solic-318*/ ) and
+                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 422}))  /*solic-318*/ ) and
                  saldo-estoq.cod-depos  <> substring(param-cp.char-2,1,3) AND
                  saldo-estoq.qtidade-atu > 0,
         
@@ -4034,7 +3858,7 @@ PROCEDURE CalculaQuantSaldo :
                                      qt-aloc-prod) use-index lote no-lock where
                  saldo-estoq.lote        = c-emenda-2:screen-value in frame f-relat        and
                  saldo-estoq.cod-estabel = c-cod-estabel:screen-value in frame f-relat     AND
-                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422")  /*solic-318*/ ) and
+                 NOT (saldo-estoq.cod-depos  = "EXP" AND  (saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 422}))  /*solic-318*/ ) and
                  saldo-estoq.cod-depos  <> substring(param-cp.char-2,1,3) AND
                  saldo-estoq.qtidade-atu > 0,
         

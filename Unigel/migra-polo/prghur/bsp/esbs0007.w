@@ -421,11 +421,11 @@ DEFINE VARIABLE c-arquivo-saida AS CHARACTER INITIAL "v:/temp/consiste.txt"
      SIZE 53.72 BY .88
      BGCOLOR 15  NO-UNDO.
 
-DEFINE VARIABLE c-estab-fim AS CHAR FORMAT "x(05)":U INITIAL "424" 
+DEFINE VARIABLE c-estab-fim AS CHAR FORMAT "x(05)":U  
      VIEW-AS FILL-IN 
      SIZE 15 BY .88 NO-UNDO.
 
-DEFINE VARIABLE c-estab-ini AS CHAR FORMAT "x(05)":U initial "422"  /*solic-318*/ 
+DEFINE VARIABLE c-estab-ini AS CHAR FORMAT "x(05)":U   /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 15 BY .88 NO-UNDO.
@@ -444,11 +444,11 @@ DEFINE VARIABLE i-cdn_funcionario-ini AS INTEGER FORMAT ">>,>>>,>>9":U INITIAL 0
      VIEW-AS FILL-IN 
      SIZE 15 BY .88 NO-UNDO.
 
-DEFINE VARIABLE i-empresa-fim AS CHAR FORMAT "x(03)":U INITIAL "{cdp\poloestab.i 420}"  /*solic-318*/ 
+DEFINE VARIABLE i-empresa-fim AS CHAR FORMAT "x(03)":U   /*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 15 BY .88 NO-UNDO.
 
-DEFINE VARIABLE i-empresa-ini AS CHAR FORMAT "x(03)":U INITIAL "{cdp\poloestab.i 420}"  /*solic-318*/ 
+DEFINE VARIABLE i-empresa-ini AS CHAR FORMAT "x(03)":U   /*solic-318*/ 
      LABEL "Empresa" 
      VIEW-AS FILL-IN 
      SIZE 15 BY .88 NO-UNDO.
@@ -1032,6 +1032,10 @@ PAUSE 0 BEFORE-HIDE.
 MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
+    i-empresa-ini = STRING({cdp\poloestab.i 420}). /*solic-318*/ 
+    i-empresa-fim = STRING({cdp\poloestab.i 420}). /*solic-318*/ 
+    c-estab-ini   = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
+    c-estab-fim   = STRING({cdp\poloestab.i 423}). /*solic-318*/ 
 
     RUN enable_UI.
 

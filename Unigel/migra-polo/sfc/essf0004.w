@@ -172,7 +172,7 @@ DEFINE RECTANGLE rtToolBar
      SIZE 90 BY 1.42
      BGCOLOR 7 .
 
-DEFINE VARIABLE cCodEstabel AS CHARACTER FORMAT "x(3)" initial "422"  /*solic-318*/ 
+DEFINE VARIABLE cCodEstabel AS CHARACTER FORMAT "x(3)"   /*solic-318*/ 
      LABEL "Estabelecimento":R18 
      VIEW-AS FILL-IN 
      SIZE 7 BY .88.
@@ -769,7 +769,7 @@ DEFINE VARIABLE i-prg-rpc     as integer no-undo.
 
 
 /* ***************************  Main Block  *************************** */
-
+cCodEstabel = STRING({cdp\poloestab.i 422}). /*solic-318*/ .
 /* _UIB-CODE-BLOCK-END */
 
 
@@ -2244,6 +2244,7 @@ END.
 /*--- Seta vari vel lCustomExecuted a fim de indicar se houve execu‡Æo de
       algum programa de customiza‡Æo ---*/
 ASSIGN lCustomExecuted = NO.
+
 
 IF c-nom-prog-dpc-mg97 <> "":U THEN DO:
     ASSIGN lCustomExecuted = YES.

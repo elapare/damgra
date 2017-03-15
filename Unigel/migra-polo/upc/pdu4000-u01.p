@@ -766,7 +766,7 @@ IF  p-ind-event   = "choose"                     AND
                    IF  AVAIL if-ped-venda THEN DO: 
                         find first b-ped-venda where b-ped-venda.nr-pedido =  if-ped-venda.nr-pedido no-lock no-error.
                        
-                        if avail if-ped-venda and avail b-ped-venda and b-ped-venda.cod-estabel = "422" then run pi-replica-data-tipo-filho.
+                        if avail if-ped-venda and avail b-ped-venda and (b-ped-venda.cod-estabel = "422" OR b-ped-venda.cod-estabel = "412") then run pi-replica-data-tipo-filho. /*solic-318*/ 
                                     
                    END.
                    else do:
@@ -774,7 +774,7 @@ IF  p-ind-event   = "choose"                     AND
                         fIND FIRST if-ped-venda no-LOCK
                              WHERE if-ped-venda.nr-pedido = ped-venda.nr-pedido and if-ped-venda.nr-pedido-relac <> 0 NO-ERROR.
                         IF  AVAIL if-ped-venda THEN DO:
-                             if avail if-ped-venda and ped-venda.cod-estabel = "422" then run pi-replica-data-tipo.
+                             if avail if-ped-venda and (ped-venda.cod-estabel = "422" OR  ped-venda.cod-estabel = "412") then run pi-replica-data-tipo. /*solic-318*/ 
                 
                         end.
            
@@ -791,13 +791,7 @@ IF  p-ind-event   = "choose"                     AND
             
                 IF wh-pd4000-bt-save-order:SENSITIVE = YES THEN do:
                     ASSIGN wh-pd4000-c-unid-atend:SENSITIVE = YES.
-                END.
-            
-                 /*if    wh-pd4000-cod-estabel:screen-value = "422" then 
-                       wh-pd4000-c-unid-atend:SENSITIVE = no.
-                         
-                   
-                end.*/
+                END.                            
            
 
                 FIND FIRST if-ped-venda EXCLUSIVE-LOCK
@@ -839,7 +833,7 @@ IF  p-ind-event   = "choose"                     AND
                    IF  AVAIL if-ped-venda THEN DO: 
                         find first b-ped-venda where b-ped-venda.nr-pedido =  if-ped-venda.nr-pedido no-lock no-error.
                        
-                        if avail if-ped-venda and avail b-ped-venda and b-ped-venda.cod-estabel = "422" then run pi-replica-data-tipo-filho.
+                        if avail if-ped-venda and avail b-ped-venda and (b-ped-venda.cod-estabel = "422" OR b-ped-venda.cod-estabel = "412") then run pi-replica-data-tipo-filho. /*solic-318*/ 
                                     
                    END.
                    else do:
@@ -847,7 +841,7 @@ IF  p-ind-event   = "choose"                     AND
                         fIND FIRST if-ped-venda no-LOCK
                              WHERE if-ped-venda.nr-pedido = ped-venda.nr-pedido and if-ped-venda.nr-pedido-relac <> 0 NO-ERROR.
                         IF  AVAIL if-ped-venda THEN DO:
-                             if avail if-ped-venda and ped-venda.cod-estabel = "422" then run pi-replica-data-tipo.
+                             if avail if-ped-venda and (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412") then run pi-replica-data-tipo. /*solic-318*/ 
                 
                         end.
            
@@ -927,7 +921,7 @@ if valid-handle(wh-pd4000-cond-redesp)      then
 if p-ind-event = "pi-enable" and index(  program-name(4) + program-name(5) , "btupdate") > 0 then do:
     FIND FIRST b-ped-venda 
           WHERE ROWID(b-ped-venda) = r-rowid-pd4000 NO-LOCK NO-ERROR.
-    IF AVAIL b-ped-venda  and b-ped-venda.cod-estabel = "422"  THEN DO:
+    IF AVAIL b-ped-venda  and (b-ped-venda.cod-estabel = "422" OR b-ped-venda.cod-estabel = "412")  THEN DO: /*solic-318*/ 
          FIND FIRST b-if-ped-venda NO-LOCK
               WHERE b-if-ped-venda.nr-pedido = b-ped-venda.nr-pedido NO-ERROR.
          IF AVAIL b-if-ped-venda and  b-if-ped-venda.nr-pedido-relac <> 0 THEN
@@ -976,7 +970,7 @@ IF  p-ind-event   = "choose"                     AND
         fIND FIRST if-ped-venda no-LOCK
              WHERE if-ped-venda.nr-pedido = ped-venda.nr-pedido NO-ERROR.
         IF  AVAIL if-ped-venda THEN DO:
-             if avail if-ped-venda and ped-venda.cod-estabel = "422" then run pi-replica-data-tipo.
+             if avail if-ped-venda and (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412") then run pi-replica-data-tipo. /*solic-318*/ 
                          
         END.
         fIND FIRST if-ped-venda no-LOCK
@@ -984,7 +978,7 @@ IF  p-ind-event   = "choose"                     AND
         IF  AVAIL if-ped-venda THEN DO: 
              find first b-ped-venda where b-ped-venda.nr-pedido =  if-ped-venda.nr-pedido no-lock no-error.
             
-             if avail if-ped-venda and avail b-ped-venda and b-ped-venda.cod-estabel = "422" then run pi-replica-data-tipo-filho.
+             if avail if-ped-venda and avail b-ped-venda and (b-ped-venda.cod-estabel = "422" OR b-ped-venda.cod-estabel = "412")  then run pi-replica-data-tipo-filho. /*solic-318*/ 
                          
         END.
     END.
@@ -1095,7 +1089,7 @@ PROCEDURE pi-valid-campos :
     define var l-parcial as logical no-undo.
     
     
-     if wh-pd4000-cod-estabel:SCREEN-VALUE = "422" and wh-pd4000-c-unid-atend:SCREEN-VALUE = "" then do:
+     if (wh-pd4000-cod-estabel:SCREEN-VALUE = "422" OR wh-pd4000-cod-estabel:SCREEN-VALUE = "412") and wh-pd4000-c-unid-atend:SCREEN-VALUE = "" then do: /*solic-318*/ 
        FOR FIRST ped-venda EXCLUSIVE-LOCK
            WHERE ped-venda.nome-abrev = wh-pd4000-nome-abrev:SCREEN-VALUE
              AND ped-venda.nr-pedcli  = wh-pd4000-nr-pedcli:SCREEN-VALUE
@@ -1119,60 +1113,7 @@ PROCEDURE pi-valid-campos :
         end.
     end.
 
-
-
-
-
-
-   /* 
-    if wh-pd4000-cod-estabel:SCREEN-VALUE = "432" then do:
-       FOR FIRST ped-venda EXCLUSIVE-LOCK
-           WHERE ped-venda.nome-abrev = wh-pd4000-nome-abrev:SCREEN-VALUE
-             AND ped-venda.nr-pedcli  = wh-pd4000-nr-pedcli:SCREEN-VALUE
-             and ped-venda.cod-estabel = "432" ,
-           FIRST if-ped-venda NO-LOCK
-           WHERE if-ped-venda.nr-pedido-relac = ped-venda.nr-pedido  ,
-           first ped-item of ped-venda where ped-item.ind-componen < 3 and
-                ped-item.qt-atendida > 0:
-                
-                 l-parcial = yes.
-           
-           
-        end.
-    end.
-    
-    if wh-pd4000-cod-estabel:SCREEN-VALUE = "422" then do:
-       FOR FIRST ped-venda EXCLUSIVE-LOCK
-           WHERE ped-venda.nome-abrev = wh-pd4000-nome-abrev:SCREEN-VALUE
-             AND ped-venda.nr-pedcli  = wh-pd4000-nr-pedcli:SCREEN-VALUE
-             and ped-venda.cod-estabel = "422" ,
-           FIRST if-ped-venda NO-LOCK
-           WHERE if-ped-venda.nr-pedido = ped-venda.nr-pedido and
-                 if-ped-venda.cod-estab-atend = "432"  ,
-           first ped-item of ped-venda where ped-item.ind-componen < 3 and
-                ped-item.qt-atendida > 0:
-                
-                 l-parcial = yes.
-           
-           
-        end.
-    end.
-
-    if l-parcial then do:
-       RUN utp/ut-msgs.p (INPUT "show",
-                                   INPUT  15825,
-                                   INPUT "Pedido J† iniciou Atendimento ou transferàncias!!!~~Pedidos relacionados 422 x 432, se desejar alterar quantidade ajuste conforme necessidade em cada um dos pedidos (inicial e final)").
-             
-              return no-apply.
-    end.
-*/
-
-
-
-
-    
-
-    FOR FIRST ped-venda EXCLUSIVE-LOCK
+     FOR FIRST ped-venda EXCLUSIVE-LOCK
         WHERE ped-venda.nome-abrev = wh-pd4000-nome-abrev:SCREEN-VALUE
           AND ped-venda.nr-pedcli  = wh-pd4000-nr-pedcli:SCREEN-VALUE
          /* AND ped-venda.completo   = YES*/,
@@ -1184,7 +1125,7 @@ PROCEDURE pi-valid-campos :
 /*                 ped-venda.nat-operaca        " <> " wh-pd4000-nat-operacao:SCREEN-VALUE skip */
 /*             VIEW-AS ALERT-BOX INFO BUTTONS OK.                                               */
 
-        if ped-venda.cod-estabel = "422" then do:
+        if (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412") then do: /*solic-318*/ 
 
             IF if-ped-venda.cod-estab-atend <> wh-pd4000-c-unid-atend:SCREEN-VALUE and wh-pd4000-c-unid-atend:SCREEN-VALUE = "" THEN DO:
                 RUN utp/ut-msgs.p (INPUT "show",
@@ -1263,7 +1204,7 @@ PROCEDURE pi-valid-campos :
 
 
         END.*/
-        if ped-venda.cod-estabel = "422" then do:
+        if (ped-venda.cod-estabel = "422" OR ped-venda.cod-estabel = "412") then do: /*solic-318*/ 
             ASSIGN ped-venda.completo = NO.
 
             RUN utp/ut-msgs.p (INPUT "show",
@@ -1354,77 +1295,8 @@ END PROCEDURE.
 
 procedure pi-replica-data-tipo.
 
+/*eliminada*/
 
-/*
-define buffer b-ped-item for ped-item.
-define buffer b-ped-ent for ped-ent.
-define buffer bpai-ped-venda for ped-venda.
-
-   for each ped-item of ped-venda where ped-item.ind-componen < 3 no-lock,
-      first estabelec where estabelec.cod-estabel = ped-venda.cod-estabel no-lock,
-      first  b-ped-venda exclusive-lock where b-ped-venda.nr-pedido = if-ped-venda.nr-pedido-relac ,
-        each b-ped-item of b-ped-venda where b-ped-item.nr-sequencia = ped-item.nr-sequencia 
-                                             exclusive-lock.
-        
-       
-         
-         assign
-            b-ped-venda.dt-entrega  = ped-venda.dt-entrega            
-            b-ped-venda.tp-pedido   = ped-venda.tp-pedido
-            b-ped-item.dt-entrega   = ped-item.dt-entrega.
-                                          
-            find first bpai-ped-venda where rowid(bpai-ped-venda)  = rowid(ped-venda) exclusive-lock.
-           
-            if avail bpai-ped-venda then do:
-            
-                 if ped-venda.observacoes <> "" then 
-                    assign b-ped-venda.observacoes = ped-venda.observacoes
-                           bpai-ped-venda.observacoes = "".
-              
-                 if bpai-ped-venda.nome-tr-red <> "" then do:
-                     find first transporte where transporte.nome-abrev = bpai-ped-venda.nome-tr-red no-lock no-error.
-
-                     if avail transporte then 
-                       assign b-ped-venda.nome-tr-red = bpai-ped-venda.nome-tr-red
-                              bpai-ped-venda.nome-tr-red = "".
-                              
-                  end.
-                  
-                   if bpai-ped-venda.nome-transp <> "" and bpai-ped-venda.nome-transp <> "padr∆o" then do:
-                     find first transporte where transporte.nome-abrev = bpai-ped-venda.nome-transp no-lock no-error.
-
-                     if avail transporte then 
-                       assign b-ped-venda.nome-transp = bpai-ped-venda.nome-transp
-                              bpai-ped-venda.nome-transp = "".
-                              
-                  end.
-
-                              
-                 if bpai-ped-venda.cidade-cif <> "" then 
-                       assign b-ped-venda.cidade-cif = bpai-ped-venda.cidade-cif
-                              bpai-ped-venda.cidade-cif = "".
-              
-                         
-                                      
-                                      
-            end.
-        
-        for each b-ped-ent of b-ped-item exclusive-lock.
-             b-ped-ent.dt-entrega = b-ped-item.dt-entrega .
-        
-        end.
-        
-        for first pd-compl-pedido where 
-                        pd-compl-pedido.ep-codigo    = estabelec.ep-codigo and
-                        pd-compl-pedido.nr-pedido    = ped-venda.nr-pedido and
-                        pd-compl-pedido.nr-sequencia = ped-item.nr-sequencia   no-lock.
-   
-        
-            run pdp\upc\trw-pd-compl-pedido-manual (input rowid(pd-compl-pedido)).
-         
-         end.
-END.
-*/
 end procedure.
 
 
@@ -1444,42 +1316,6 @@ define buffer bfilho-ped-venda for ped-venda.
  END.
 
 
- /*rotina desativada daqui para baixo*/
- /*
-   for each ped-item of ped-venda where ped-item.ind-componen < 3 no-lock,
-      first estabelec where estabelec.cod-estabel = ped-venda.cod-estabel no-lock,
-      first  b-ped-venda exclusive-lock where b-ped-venda.nr-pedido = if-ped-venda.nr-pedido ,
-        each b-ped-item of b-ped-venda where b-ped-item.nr-sequencia = ped-item.nr-sequencia 
-                                             exclusive-lock.
-      
-        
-       
-         
-         assign
-            b-ped-venda.dt-entrega  = ped-venda.dt-entrega            
-            b-ped-venda.tp-pedido   = ped-venda.tp-pedido
-            b-ped-item.dt-entrega   = ped-item.dt-entrega.
-                                          
-            find first bfilho-ped-venda where rowid(bfilho-ped-venda)  = rowid(ped-venda) exclusive-lock.
-           
-             
-        
-        for each b-ped-ent of b-ped-item exclusive-lock.
-             b-ped-ent.dt-entrega = b-ped-item.dt-entrega .
-        
-        end.
-        
-        for first pd-compl-pedido where 
-                        pd-compl-pedido.ep-codigo    = estabelec.ep-codigo and
-                        pd-compl-pedido.nr-pedido    = ped-venda.nr-pedido and
-                        pd-compl-pedido.nr-sequencia = ped-item.nr-sequencia   no-lock.
-   
-        
-            run pdp\upc\trw-pd-compl-pedido-manual (input rowid(pd-compl-pedido)).
-         
-         end.
-END.
-*/
 end procedure.
 
 

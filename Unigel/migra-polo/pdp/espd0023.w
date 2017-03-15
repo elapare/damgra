@@ -228,7 +228,7 @@ def var v-num-reg-lidos    as int    no-undo.
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel     like ped-venda.cod-estabel   format "x(03)"    initial "422"   no-undo. /*solic-318*/ 
+def new shared var c-cod-estabel     like ped-venda.cod-estabel   format "x(03)"      no-undo. /*solic-318*/ 
 def new shared var c-it-codigo       AS CHAR                      format "x(16)"    initial ""      no-undo.
 def new shared var i-pd-origem       AS INT                       format ">>>>>>>>9"initial 0       no-undo.
 def new shared var i-sq-origem       AS INT                       format ">>>>9"    initial 0       no-undo.
@@ -1986,6 +1986,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+        c-cod-estabel =  STRING({cdp\poloestab.i 422}). /*solic-318*/ 
     RUN enable_UI.
 
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

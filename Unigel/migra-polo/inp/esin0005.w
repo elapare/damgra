@@ -100,7 +100,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 /****************** Defini‡ao de Parƒmetros do Relat¢rio *********************/ 
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
-def new shared var c-cod-estabel-ini      AS CHAR   FORMAT "x(3)"       initial "422"           NO-UNDO.  /*solic-318*/ 
+def new shared var c-cod-estabel-ini      AS CHAR   FORMAT "x(3)"                  NO-UNDO.  /*solic-318*/ 
 def new shared var i-num-projeto-ini      AS INT    FORMAT ">>>>>>>9"   INITIAL 0               NO-UNDO. 
 def new shared var i-num-projeto-fim      AS INT    FORMAT ">>>>>>>9"   INITIAL 99999999        NO-UNDO. 
 def new shared var i-num-ord-magnus-ini   AS INT    FORMAT ">>>>>>>9"   INITIAL 0               NO-UNDO.    
@@ -1090,6 +1090,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    c-cod-estabel-ini = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
     RUN enable_UI.
     
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

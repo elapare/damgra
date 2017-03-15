@@ -143,24 +143,7 @@ Procedure pi_colaborador_ccusto:
     Run pi_gera_historico_presente_cc.
 End Procedure.
 
-/*Procedure pi_gera_historico_passado:
-    FOR EACH func_ccusto NO-LOCK WHERE
-             func_ccusto.cdn_empresa >= tt-param.i-ep-ini  And 
-             func_ccusto.cdn_empresa <= tt-param.i-ep-fim  And   
-             func_ccusto.dat_fim_lotac_func >= tt-param.qt-dias And func_ccusto.dat_fim_lotac_func < 12/31/2999:
-        run pi-acompanhar in h-acomp(input "Exporta FuncCusto: " + String( func_ccusto.cdn_funcionario)).
-
-           PUT if func_ccusto.cdn_empresa = 420  /*solic-318*/ 
-           then 120 else func_ccusto.cdn_empresa     AT 1   FORM "9999"
-               1                                     AT 5   FORM "9"
-               func_ccusto.cdn_funcionario           AT 6   FORM "999999999"
-               func_ccusto.dat_fim_lotac_func        AT 15  FORM "99/99/9999"
-               func_ccusto.cod_rh_ccusto             AT 25  FORM "x(06)"
-               2                                     AT 31  FORM "9" SKIP.
-     END.         
-
-End Procedure.
-*/
+ 
 
 Procedure pi_gera_historico_presente_cc:
     FOR EACH func_ccusto NO-LOCK WHERE
@@ -285,51 +268,7 @@ Procedure pi_gera_historico_retorno_afastado:
             
 
      END.         
-/*  tentativa de fazer retornar for‡ado transferidos   
-     FOR EACH sit_afast NO-LOCK WHERE sit_afast.idi_signif_sit = 4,
-         EACH sit_afast_func NO-LOCK WHERE
-              sit_afast_func.cdn_sit_afast_func =  sit_afast.cdn_sit_afast_func AND
-              sit_afast_func.cdn_empresa  >= string(tt-param.i-ep-ini) And
-              sit_afast_func.cdn_empresa  <= string(tt-param.i-ep-fim) And 
-              sit_afast_func.dat_term_sit_afast >= TODAY - tt-param.qt-dias   AND
-              sit_afast_func.dat_ult_atualiz    >= TODAY - tt-param.qt-dias  AND
-              sit_afast_func.dat_inic_sit_afast <= TODAY:
-
-
-         FIND first bst-funcionario OF sit_afast_func where
-                            bst-funcionario.dat_desligto_func <> ?  NO-LOCK NO-ERROR.
-
-           IF AVAIL bst-funcionario  THEN DO:
-             FIND FIRST btr-funcionario WHERE 
-                 btr-funcionario.cod_id_feder      = bst-funcionario.cod_id_feder AND
-                 btr-funcionario.dat_desligto_func = ?  AND
-                 btr-funcionario.cdn_empresa       = bst-funcionario.cdn_empresa NO-LOCK USE-INDEX fncnr_idfdemp NO-ERROR.
-             IF NOT AVAIL btr-funcionario THEN NEXT.
-           END.
-
-          run pi-acompanhar in h-acomp(input "Exporta Historico Afastamento: " + String( sit_afast_func.cdn_funcionario)).
-         PUT /*1                                        AT 1   FORM "99"*/
-             if int(sit_afast_func.cdn_empresa) = 420 OR int(sit_afast_func.cdn_empresa) = 410  /*solic-318*/ 
-             then 120 else int(sit_afast_func.cdn_empresa)    AT 1   FORM "9999"
-             1                                           AT 5   FORM "9"
-             sit_afast_func.cdn_funcionario              AT 6   FORM "999999999"
-             DAY(sit_afast_func.dat_inic_sit_afast)      AT 15  FORM "99"
-             MONTH(sit_afast_func.dat_inic_sit_afast)    AT 17  FORM "99"
-             year(sit_afast_func.dat_inic_sit_afast)     AT 19  FORM "9999"
-             "00:00"                                     AT 23  FORM "X(05)"
-             DAY(sit_afast_func.dat_term_sit_afast)      AT 28  FORM "99"
-             MONTH(sit_afast_func.dat_term_sit_afast)    AT 30  FORM "99"
-             IF year(sit_afast_func.dat_term_sit_afast) > 2050 THEN 2050 ELSE
-                year(sit_afast_func.dat_term_sit_afast)AT 32  FORM "9999"
-             "00:00"                                     AT 36  FORM "X(05)"  
-             14                                          AT 41  FORM "999"
-             2                                           AT 44  FORM "999"
-             0                                           AT 47  FORM "9"        SKIP. /** Update ***/
-
-
-      END.         
-  */
-End Procedure.
+ End Procedure.
 
 Procedure pi_gera_historico_presente:
     DEFINE BUFFER bst-funcionario FOR funcionario.

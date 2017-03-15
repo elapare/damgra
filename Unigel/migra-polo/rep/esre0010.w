@@ -145,7 +145,7 @@ DEFINE VARIABLE c-arq-de-para-nat AS CHARACTER FORMAT "X(100)":U
      VIEW-AS FILL-IN 
      SIZE 53 BY .88 NO-UNDO.
 
-DEFINE VARIABLE c-cod-estabel-dest AS CHARACTER FORMAT "x(3)" INITIAL "{cdp\poloestab.i 432}"  /*solic-318*/ 
+DEFINE VARIABLE c-cod-estabel-dest AS CHARACTER FORMAT "x(3)" INITIAL "432" 
      LABEL "Estab. Destino":R18 
      VIEW-AS FILL-IN 
      SIZE 15 BY .88 NO-UNDO.

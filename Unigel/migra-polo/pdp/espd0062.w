@@ -1,5 +1,7 @@
 &Scoped-define WINDOW-NAME C-Win
-
+MESSAGE "programa espd0062 desativado, ver com a TI"
+    VIEW-AS ALERT-BOX INFO BUTTONS OK.
+IF TRUE THEN RETURN.
 /*------------------------------------------------------------------------
 File.............: espd0062.w
 Description......: Relacionamento de Nat.Opera‡äes entre Estabelecimentos
@@ -96,16 +98,17 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var i-ep-codigo-ini    AS INT         format ">>9"        initial 120      no-undo.
+def new shared var i-ep-codigo-ini    AS INT         format ">>9"           no-undo.
 
-def new shared var c-cod-estabel-prod AS CHAR        format "x(3)"       initial "422"    no-undo.
-def new shared var c-cod-estabel-fat  AS CHAR        format "x(3)"       initial "424"    no-undo.
+def new shared var c-cod-estabel-prod AS CHAR        format "x(3)"          no-undo.
+def new shared var c-cod-estabel-fat  AS CHAR        format "x(3)"          no-undo.
 
 def new shared var i-cod-emitente-ini AS INT         format ">>>>>>>>9"  initial 0        no-undo.
 def new shared var i-cod-emitente-fim AS INT         format ">>>>>>>>9"  initial 99999999 no-undo.
 
 def new shared var c-estado-ini       AS CHAR        format "x(2)"       initial ""       no-undo.
 def new shared var c-estado-fim       AS CHAR        format "x(2)"       initial "ZZ"     no-undo.
+
 
 
 /* ********************  Preprocessor Definitions  ******************** */ 
@@ -994,6 +997,11 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    i-ep-codigo-ini    = INT({cdp\poloestab.i 420}). /*solic-318*/
+    c-cod-estabel-prod = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
+    c-cod-estabel-fat  = STRING({cdp\poloestab.i 432}). /*solic-318*/ 
+
+
     RUN enable_UI.
 
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

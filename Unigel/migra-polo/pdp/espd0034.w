@@ -182,7 +182,7 @@ DEFINE RECTANGLE rtToolBar
      SIZE 90 BY 1.42
      BGCOLOR 7 .
 
-DEFINE VARIABLE fi-cod-estabel AS CHARACTER FORMAT "X(3)":U initial "422"  /*solic-318*/ 
+DEFINE VARIABLE fi-cod-estabel AS CHARACTER FORMAT "X(3)":U   /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 4.72 BY .88
@@ -794,6 +794,7 @@ END.
 
 
 /*:T--- L¢gica para inicializa‡Æo do programam ---*/
+   
 {report/mainblock.i}
 
 ON 'value-changed':U OF rsDestiny IN FRAME fPage6
@@ -863,7 +864,7 @@ PROCEDURE afterInitializeInterface :
   Notes:       
 ------------------------------------------------------------------------------*/
     FIND FIRST param-xtrim NO-LOCK NO-ERROR.
-
+    fi-cod-estabel =  STRING({cdp\poloestab.i 422}). /*solic-318*/ 
     IF AVAIL param-xtrim THEN DO:
         ASSIGN fi-cod-estabel = param-xtrim.cod-estabel.
         DISP fi-cod-estabel WITH FRAME fPage2.

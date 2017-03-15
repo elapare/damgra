@@ -384,7 +384,7 @@ PUT  UNFORMATTED
          movto_calcul_func.num_ano_refer_fp          = i-ano-ref AND
          movto_calcul_func.num_mes_refer_fp          = i-mes-ref NO-LOCK:
          Do idx = 1 To movto_calcul_func.qti_efp:
-            IF movto_calcul_func.cdn_event_fp[idx] = "423" or /*solic-318*/   
+            IF movto_calcul_func.cdn_event_fp[idx] = "423" or   
                movto_calcul_func.cdn_event_fp[idx] = "786" THEN
                ASSIGN valor-seguro = valor-seguro + movto_calcul_func.val_calcul_efp[idx].
          END.

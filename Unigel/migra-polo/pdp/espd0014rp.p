@@ -1132,7 +1132,7 @@ end procedure.
                            
                         
             END.
-            
+                     /* comentado para melhorar performance pois faz tempo que n∆o existe estabelecimetno 424, isso foi na virada da implantaá∆o de unigel comercial
                   if tt-nome-abrev = "" and (pallet.cod-estabel = "432" OR pallet.cod-estabel = "443") then do: /*solic-318*/ 
                      
                        FOR EACH movto-estoq WHERE
@@ -1157,6 +1157,7 @@ end procedure.
                        end.
                        
                    end.  
+                   */
                    
           END.
        END.

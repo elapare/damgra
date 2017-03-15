@@ -24,9 +24,15 @@ def buffer empresa for mgmulti.empresa.
 
 {adapters/xml/ep2/axsep017extradeclarations.i} /* defini‡Æo FUNCTION fn-tira-acento */
 
-
+ 
     /*customizacao lay-out*/
 DEFINE NEW GLOBAL SHARED VARIABLE c-empresa-layout AS CHARACTER   NO-UNDO.
+IF  c-empresa-layout = "420" THEN c-empresa-layout = "410". /*solic-318*/
+ELSE 
+IF  c-empresa-layout = "410" THEN c-empresa-layout = "410". /*solic-318*/
+else
+IF  c-empresa-layout = "440" THEN c-empresa-layout = "410". /*solic-318*/
+ELSE
 IF  c-empresa-layout <> "340" THEN
 c-empresa-layout = "430".  /*for‡ando para somente layoout unico 15/03/2016*/
 /***********************/

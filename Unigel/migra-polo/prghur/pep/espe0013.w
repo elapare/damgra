@@ -201,20 +201,20 @@ DEFINE VARIABLE c_ccusto_ini AS CHARACTER FORMAT "X(12)"
      VIEW-AS FILL-IN 
      SIZE 13 BY .88 TOOLTIP "Centro de custos inicial".
 
-DEFINE VARIABLE c_cdn_empresa_fim AS CHARACTER FORMAT "X(03)" INITIAL "{cdp\poloestab.i 420}"  /*solic-318*/ 
+DEFINE VARIABLE c_cdn_empresa_fim AS CHARACTER FORMAT "X(03)"    /*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 5 BY .88 TOOLTIP "C¢digo Final da Empresa do Participante".
 
-DEFINE VARIABLE c_cdn_empresa_ini AS CHARACTER FORMAT "X(3)" INITIAL "{cdp\poloestab.i 420}"  /*solic-318*/ 
+DEFINE VARIABLE c_cdn_empresa_ini AS CHARACTER FORMAT "X(3)"    /*solic-318*/ 
      LABEL "Empresa" 
      VIEW-AS FILL-IN 
      SIZE 5 BY .88 TOOLTIP "C¢digo Inicial da Empresa do Participante".
 
-DEFINE VARIABLE c_cdn_estab_fim AS CHARACTER FORMAT "X(05)" initial "422"  /*solic-318*/ 
+DEFINE VARIABLE c_cdn_estab_fim AS CHARACTER FORMAT "X(05)"    /*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 7 BY .88 TOOLTIP "C¢digo Final do Estabelecimento do Participante".
 
-DEFINE VARIABLE c_cdn_estab_ini AS CHARACTER FORMAT "X(05)" initial "422"  /*solic-318*/ 
+DEFINE VARIABLE c_cdn_estab_ini AS CHARACTER FORMAT "X(05)"    /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 7 BY .88 TOOLTIP "C¢digo Inicial do Estabelecimento do Participante".
@@ -913,6 +913,11 @@ PAUSE 0 BEFORE-HIDE.
 MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
+
+    c_cdn_empresa_ini = STRING({cdp\poloestab.i 420}). /*solic-318*/ 
+    c_cdn_empresa_fim = STRING({cdp\poloestab.i 420}). /*solic-318*/ 
+    c_cdn_estab_ini  = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
+    c_cdn_estab_fim  = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
 
     RUN enable_UI.
     

@@ -1355,7 +1355,7 @@ DO:
                i-nr-pedido-jr    = int(i-nr-pedido-gt:SCREEN-VALUE IN FRAME gt-frame-1)
                i-nr-sequencia-jr = int(i-nr-sequencia-gt:SCREEN-VALUE IN FRAME gt-frame-1).
 
-     RETURN.
+     IF TRUE THEN RETURN.
 
     END.
 
@@ -1446,7 +1446,7 @@ DO:
 
         END.
 
-     RETURN.
+     IF TRUE THEN RETURN.
 
     END.
 
@@ -1467,7 +1467,7 @@ DO:
      if l-pd4000 then DO:
            
            apply "close" to this-procedure.
-           RETURN.
+           IF TRUE THEN RETURN.
     END.
 
    FIND CURRENT pd-config-pedido NO-LOCK NO-ERROR.

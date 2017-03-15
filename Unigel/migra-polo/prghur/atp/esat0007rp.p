@@ -100,27 +100,7 @@ def input param table for tt-raw-digita.
 
 create tt-param.
 raw-transfer raw-param to tt-param.
- /*
-
-CREATE tt-param.
-ASSIGN 
-      /*  tt-param.cdn_curso_trein  = 51 
-        tt-param.cdn_turma_trein  = 1*/
-        tt-param.cod_emp          = "{cdp\poloestab.i 420}"    /*solic-318*/ 
-        tt-param.cdn_estab_ini    = STRING({cdp\poloestab.i 421})
-        tt-param.cdn_estab_fim    = "426"
-        tt-param.dt_periodo_ini   = 01/01/2013
-        tt-param.dt_periodo_fim   = 12/31/2013
-        tt-param.tg-pendente      = yes 
-        
-        tt-param.tg-confirmado    = yes 
-        
-        tt-param.tg-cursando      = yes 
-        tt-param.tg-habilitado    = yes 
-        tt-param.tg-desabilitado  = yes 
-        tt-param.tg-cancelado     = yes
-        .
-   */
+ 
 
 /****************** Defini‡ao de Vari veis de Processamento do Relat¢rio *********************/
 def var h-acomp              as handle no-undo.
