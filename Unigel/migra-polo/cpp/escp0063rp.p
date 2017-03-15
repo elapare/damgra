@@ -1286,14 +1286,14 @@ FOR EACH ITEM NO-LOCK WHERE
         
              IF ped-venda.tp-pedido <> "E" THEN DO:
         
-                IF saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 422}) THEN  /*solic-318*/ 
+                IF saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422" THEN  /*solic-318*/ 
                     ASSIGN tt-dados.est-prime-pedido-422_412 [1] = tt-dados.est-prime-pedido-422_412 [1] 
                            + saldo-atu-jr
                            tt-dados.est-prime-pedido-422_412 [2] = tt-dados.est-prime-pedido-422_412 [2] 
                            + saldo-atu-ontem.
             
                 ELSE
-                 IF saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 421}) THEN  /*solic-318*/ 
+                 IF saldo-estoq.cod-estabel = "411" OR saldo-estoq.cod-estabel = "421" THEN  /*solic-318*/ 
                      ASSIGN tt-dados.est-prime-pedido-421_411 [1] = tt-dados.est-prime-pedido-421_411 [1] 
                             + saldo-atu-jr
                             tt-dados.est-prime-pedido-421_411 [2] = tt-dados.est-prime-pedido-421_411 [2] 
@@ -1331,7 +1331,7 @@ FOR EACH ITEM NO-LOCK WHERE
         
              IF ped-venda.tp-pedido <> "E" THEN DO:
         
-                IF saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 422}) THEN  /*solic-318*/ 
+                IF  saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422" THEN  /*solic-318*/ 
                     ASSIGN tt-dados.est-offsp-pedido-422_412 [1] = tt-dados.est-offsp-pedido-422_412 [1] 
                            + saldo-atu-jr
                            tt-dados.est-offsp-pedido-422_412 [2] = tt-dados.est-offsp-pedido-422_412 [2] 
@@ -1339,7 +1339,7 @@ FOR EACH ITEM NO-LOCK WHERE
 
             
                 ELSE
-                 IF saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 421}) THEN  /*solic-318*/ 
+                 IF  saldo-estoq.cod-estabel = "411" OR saldo-estoq.cod-estabel = "421" THEN  /*solic-318*/ 
                      ASSIGN tt-dados.est-offsp-pedido-421_411 [1] = tt-dados.est-offsp-pedido-421_411 [1] 
                             + saldo-atu-jr
                             tt-dados.est-offsp-pedido-421_411 [2] = tt-dados.est-offsp-pedido-421_411 [2] 
@@ -1381,7 +1381,7 @@ FOR EACH ITEM NO-LOCK WHERE
 
           IF ITEM.ge-codigo = 46 AND INDEX(ITEM.it-codigo,"EP",1) = 0 THEN DO:  /* Prime */ 
         
-             IF saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 422}) THEN  /*solic-318*/ 
+             IF  saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422" THEN  /*solic-318*/ 
                  ASSIGN tt-dados.est-prime-sem-pd-422_412 [1] = tt-dados.est-prime-sem-pd-422_412 [1] 
                         + saldo-atu-jr
                         tt-dados.est-prime-sem-pd-422_412 [2] = tt-dados.est-prime-sem-pd-422_412 [2] 
@@ -1389,7 +1389,7 @@ FOR EACH ITEM NO-LOCK WHERE
                  
             
              ELSE
-              IF saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 421}) THEN  /*solic-318*/ 
+              IF  saldo-estoq.cod-estabel = "411" OR saldo-estoq.cod-estabel = "421" THEN  /*solic-318*/ 
                   ASSIGN tt-dados.est-prime-sem-pd-421_411 [1] = tt-dados.est-prime-sem-pd-421_411 [1] 
                          + saldo-atu-jr
                          tt-dados.est-prime-sem-pd-421_411 [2] = tt-dados.est-prime-sem-pd-421_411 [2] 
@@ -1424,7 +1424,7 @@ FOR EACH ITEM NO-LOCK WHERE
         
           IF ITEM.ge-codigo <> 46 AND INDEX(ITEM.it-codigo,"EP",1) = 0 THEN DO:  /* Off-Specs */
         
-            IF saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 422}) THEN  /*solic-318*/ 
+            IF  saldo-estoq.cod-estabel = "412" OR saldo-estoq.cod-estabel = "422" THEN  /*solic-318*/ 
                 ASSIGN tt-dados.est-offsp-sem-pd-422_412 [1] = tt-dados.est-offsp-sem-pd-422_412 [1] 
                        + saldo-atu-jr
                        tt-dados.est-offsp-sem-pd-422_412 [2] = tt-dados.est-offsp-sem-pd-422_412 [2] 
@@ -1432,7 +1432,7 @@ FOR EACH ITEM NO-LOCK WHERE
 
             
             ELSE
-             IF saldo-estoq.cod-estabel = STRING({cdp\poloestab.i 421}) THEN  /*solic-318*/ 
+             IF  saldo-estoq.cod-estabel = "411" OR saldo-estoq.cod-estabel = "421" THEN  /*solic-318*/ 
                  ASSIGN tt-dados.est-offsp-sem-pd-421_411 [1] = tt-dados.est-offsp-sem-pd-421_411 [1] 
                         + saldo-atu-jr
                         tt-dados.est-offsp-sem-pd-421_411 [2] = tt-dados.est-offsp-sem-pd-421_411 [2] 
@@ -1957,11 +1957,11 @@ for each nota-fiscal no-lock
 
         IF tp-produto-jr = "prime" THEN DO:
 
-           IF nota-fiscal.cod-estabel = STRING({cdp\poloestab.i 421}) THEN  /*solic-318*/ 
+           IF nota-fiscal.cod-estabel = "411" OR  nota-fiscal.cod-estabel = "421" THEN  /*solic-318*/ 
             ASSIGN tt-dados.fat-prime-int-421_411 [1] = tt-dados.fat-prime-int-421_411 [1] + qt-faturada-jr
                    tt-dados.fat-prime-int-421_411 [2] = tt-dados.fat-prime-int-421_411 [2] + var-vl-liq.
             ELSE
-               IF nota-fiscal.cod-estabel = STRING({cdp\poloestab.i 422}) THEN  /*solic-318*/ 
+               IF nota-fiscal.cod-estabel = "412" OR  nota-fiscal.cod-estabel = "422" THEN  /*solic-318*/ 
                 ASSIGN tt-dados.fat-prime-int-422_412 [1] = tt-dados.fat-prime-int-422_412 [1] + qt-faturada-jr
                        tt-dados.fat-prime-int-422_412 [2] = tt-dados.fat-prime-int-422_412 [2] + var-vl-liq.
                ELSE
@@ -1992,11 +1992,11 @@ for each nota-fiscal no-lock
 
         IF tp-produto-jr = "prime" THEN DO:
 
-           IF nota-fiscal.cod-estabel = STRING({cdp\poloestab.i 421}) THEN  /*solic-318*/ 
+           IF nota-fiscal.cod-estabel = "411" OR  nota-fiscal.cod-estabel = "421" THEN  /*solic-318*/ 
             ASSIGN tt-dados.fat-prime-ext-421_411 [1] = tt-dados.fat-prime-ext-421_411 [1] + qt-faturada-jr
                    tt-dados.fat-prime-ext-421_411 [2] = tt-dados.fat-prime-ext-421_411 [2] + var-vl-liq.
             ELSE
-               IF nota-fiscal.cod-estabel = STRING({cdp\poloestab.i 422}) THEN  /*solic-318*/ 
+               IF nota-fiscal.cod-estabel = "412" OR  nota-fiscal.cod-estabel = "422" THEN  /*solic-318*/ 
                 ASSIGN tt-dados.fat-prime-ext-422_412 [1] = tt-dados.fat-prime-ext-422_412 [1] + qt-faturada-jr
                        tt-dados.fat-prime-ext-422_412 [2] = tt-dados.fat-prime-ext-422_412 [2] + var-vl-liq.
                ELSE
@@ -2043,11 +2043,11 @@ for each nota-fiscal no-lock
 
         IF tp-produto-jr = "prime" THEN DO:
 
-           IF nota-fiscal.cod-estabel = STRING({cdp\poloestab.i 421}) THEN  /*solic-318*/ 
+           IF nota-fiscal.cod-estabel = "411" OR  nota-fiscal.cod-estabel = "421" THEN  /*solic-318*/ 
             ASSIGN tt-dados.fat-prime-int-421_411 [3] = tt-dados.fat-prime-int-421_411 [3] + qt-faturada-jr
                    tt-dados.fat-prime-int-421_411 [4] = tt-dados.fat-prime-int-421_411 [4] + var-vl-liq.
             ELSE
-               IF nota-fiscal.cod-estabel = STRING({cdp\poloestab.i 422}) THEN  /*solic-318*/ 
+               IF nota-fiscal.cod-estabel = "412" OR  nota-fiscal.cod-estabel = "422" THEN  /*solic-318*/ 
                 ASSIGN tt-dados.fat-prime-int-422_412 [3] = tt-dados.fat-prime-int-422_412 [3] + qt-faturada-jr
                        tt-dados.fat-prime-int-422_412 [4] = tt-dados.fat-prime-int-422_412 [4] + var-vl-liq.
                ELSE
@@ -2078,11 +2078,11 @@ for each nota-fiscal no-lock
 
         IF tp-produto-jr = "prime" THEN DO:
 
-           IF nota-fiscal.cod-estabel = STRING({cdp\poloestab.i 421}) THEN  /*solic-318*/ 
+           IF nota-fiscal.cod-estabel = "411" OR  nota-fiscal.cod-estabel = "421" THEN  /*solic-318*/ 
             ASSIGN tt-dados.fat-prime-ext-421_411 [3] = tt-dados.fat-prime-ext-421_411 [3] + qt-faturada-jr
                    tt-dados.fat-prime-ext-421_411 [4] = tt-dados.fat-prime-ext-421_411 [4] + var-vl-liq.
             ELSE
-               IF nota-fiscal.cod-estabel = STRING({cdp\poloestab.i 422}) THEN  /*solic-318*/ 
+               IF nota-fiscal.cod-estabel = "412" OR  nota-fiscal.cod-estabel = "422" THEN  /*solic-318*/ 
                 ASSIGN tt-dados.fat-prime-ext-422_412 [3] = tt-dados.fat-prime-ext-422_412 [3] + qt-faturada-jr
                        tt-dados.fat-prime-ext-422_412 [4] = tt-dados.fat-prime-ext-422_412 [4] + var-vl-liq.
                ELSE

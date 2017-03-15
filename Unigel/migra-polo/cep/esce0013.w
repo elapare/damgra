@@ -111,7 +111,7 @@ DEFINE VARIABLE pesq-jr AS INTEGER INITIAL 1
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel        like movto-estoq.cod-estabel   format "x(3)" initial "412" no-undo.  /*solic-318*/ 
+def new shared var c-cod-estabel        like movto-estoq.cod-estabel   format "x(3)"  no-undo.  /*solic-318*/ 
 def new shared var c-ano-ini            AS INTEGER                     format 9999 INITIAL 2005. 
 def new shared var c-mes-ini            AS INTEGER                     format 99 INITIAL 1.
 def new shared var c-ano-fim            AS INTEGER                     format 9999 INITIAL 2005. 
@@ -1078,6 +1078,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    c-cod-estabel =  STRING({cdp\poloestab.i 422}).
     RUN enable_UI.
 
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

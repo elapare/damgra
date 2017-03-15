@@ -97,7 +97,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel        like movto-estoq.cod-estabel   format "x(3)" initial "413" no-undo. /*solic-318*/ 
+def new shared var c-cod-estabel        like movto-estoq.cod-estabel   format "x(3)" no-undo. /*solic-318*/ 
 def new shared var c-ano                AS INTEGER                     format 9999 INITIAL 2005. 
 def new shared var c-mes                AS INTEGER                     format 99 INITIAL 1.
 def new shared var c-fm-codigo-ini      LIKE item.fm-codigo            format "x(10)" INITIAL "" no-undo.
@@ -995,6 +995,8 @@ PAUSE 0 BEFORE-HIDE.
 MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
+
+    c-cod-estabel =  STRING({cdp\poloestab.i 423}).
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
     RUN enable_UI.

@@ -98,7 +98,7 @@ DEFINE VARIABLE dt-data-inicio        AS DATE       NO-UNDO.
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini  like nota-fiscal.cod-estabel     format "X(3)" initial "412" no-undo.
+def new shared var c-cod-estabel-ini  like nota-fiscal.cod-estabel     format "X(3)"   no-undo.
 def new shared var c-canal-venda-ini  like nota-fiscal.cod-canal-venda format ">>9" initial 0 no-undo.
 def new shared var dt-data-hoje       like nota-fiscal.dt-emis-nota    format "99/99/9999" initial today no-undo.
 def new shared var dt-data-ontem      like nota-fiscal.dt-emis-nota    format "99/99/9999" initial today no-undo.
@@ -1023,6 +1023,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    c-cod-estabel-ini = STRING({cdp\poloestab.i 422}).
     RUN enable_UI.
 
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

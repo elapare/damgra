@@ -103,7 +103,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini like ped-venda.cod-estabel format "x(3)" initial "422" no-undo.  /*solic-318*/ 
+def new shared var c-cod-estabel-ini like ped-venda.cod-estabel format "x(3)"  no-undo.  /*solic-318*/ 
 
 /* ********************  Preprocessor Definitions  ******************** */ 
 
@@ -1043,6 +1043,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    c-cod-estabel-ini = STRING({cdp\poloestab.i 422}).
     RUN enable_UI.
 
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

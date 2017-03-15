@@ -186,8 +186,8 @@ procedure pi-gera-planilha:
     DEF VAR i-esp-docto AS INT                     NO-UNDO.
     DEF VAR c-esp-docto AS CHAR EXTENT 38          NO-UNDO.
     
-    def var c-cod-estabel-ini    AS CHAR     FORMAT "x(3)"        INITIAL "412"          NO-UNDO. /*solic-318*/ 
-    def var c-cod-estabel-fim    AS CHAR     FORMAT "x(3)"        INITIAL "412"          NO-UNDO. /*solic-318*/ 
+     /*solic-318*/ 
+     /*solic-318*/ 
     def var c-ct-codigo-ini      AS CHAR     FORMAT "x(08)"       INITIAL ""             NO-UNDO.
     def var c-ct-codigo-fim      AS CHAR     FORMAT "x(08)"       INITIAL "ZZZZZZZZ"     NO-UNDO.
     def var c-sc-codigo-ini      AS CHAR     FORMAT "x(08)"       INITIAL ""             NO-UNDO.

@@ -107,7 +107,7 @@ def new shared var txtCliente as character format "X(15)" label "Nome Abrev. Cli
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini    like pallet.cod-estabel           format "X(3)"         initial "422"              no-undo.  /*solic-318*/ 
+def new shared var c-cod-estabel-ini    like pallet.cod-estabel           format "X(3)"                       no-undo.  /*solic-318*/ 
 def new shared var dt-producao-ini      like pallet.data-pallet           format "99/99/9999"   initial TODAY              no-undo.
 def new shared var dt-producao-fim      like pallet.data-pallet           format "99/99/9999"   initial TODAY              no-undo.
 def new shared var c-nr-lote-ini        like movto-estoq.lote             format "X(10)"        initial ""                 no-undo.
@@ -1103,6 +1103,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+        c-cod-estabel-ini = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
     RUN enable_UI.
 
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

@@ -85,7 +85,7 @@ def new global shared var rw-log-exec            as rowid                    no-
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel        like movto-estoq.cod-estabel   format "x(3)" initial "412" no-undo.  /*solic-318*/ 
+def new shared var c-cod-estabel        like movto-estoq.cod-estabel   format "x(3)" initial "" no-undo.  /*solic-318*/ 
 def new shared var c-ano-ini            AS INTEGER                     format 9999 INITIAL 2005. 
 def new shared var c-mes-ini            AS INTEGER                     format 99 INITIAL 1.
 def new shared var c-ano-fim            AS INTEGER                     format 9999 INITIAL 2005. 

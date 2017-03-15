@@ -254,7 +254,7 @@ DEFINE RECTANGLE RECT-21
      EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL 
      SIZE 49.29 BY 2.30.
 
-DEFINE VARIABLE c-cod-estabel-ini AS CHAR label "Estabelecimento" FORMAT "x(3)" initial "422":U  /*solic-318*/ 
+DEFINE VARIABLE c-cod-estabel-ini AS CHAR label "Estabelecimento" FORMAT "x(3)"  /*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 4 BY .88
      TOOLTIP "Informe C¢digo do Estabelecimento " NO-UNDO.
@@ -1126,6 +1126,7 @@ MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
+    c-cod-estabel-ini = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
     RUN enable_UI.
     
     

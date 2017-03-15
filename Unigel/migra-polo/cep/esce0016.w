@@ -167,7 +167,7 @@ DEFINE RECTANGLE rtToolBar
      SIZE 90 BY 1.42
      BGCOLOR 7 .
 
-DEFINE VARIABLE c-cod-estabel AS CHARACTER FORMAT "X(3)" INITIAL "412"  /*solic-318*/ 
+DEFINE VARIABLE c-cod-estabel AS CHARACTER FORMAT "X(3)"   /*solic-318*/ 
      LABEL "Estabelecimento":R18 
      VIEW-AS FILL-IN 
      SIZE 7.14 BY .88 NO-UNDO.
@@ -778,6 +778,7 @@ END.
 
 {utp/ut9000.i "OT0030" "2.06.00.001"}
 /*:T--- L¢gica para inicializa‡Æo do programam ---*/
+    c-cod-estabel =  STRING({cdp\poloestab.i 422}).
 {report/mainblock.i}
 
 /* _UIB-CODE-BLOCK-END */

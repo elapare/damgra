@@ -316,13 +316,13 @@ DEFINE VARIABLE c-vali-fim AS date FORMAT "99/99/9999"
      TOOLTIP "Informe a Data de Validade" NO-UNDO.  
 
 DEFINE VARIABLE c-cod-estabel-ini AS CHAR label "Estabelecimento" FORMAT "x(3)":U 
-     initial "422" /*solic-318*/ 
+      /*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 4 BY .88
      TOOLTIP "Informe C¢digo do Estabelecimento " NO-UNDO.
 
 DEFINE VARIABLE c-cod-estabel-fim AS char FORMAT "x(3)"
-     initial "422" /*solic-318*/ 
+      /*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 17 BY .88
      TOOLTIP "Informe o Cod. do Estabelecimento " NO-UNDO.
@@ -1384,6 +1384,8 @@ PAUSE 0 BEFORE-HIDE.
 MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
+    c-cod-estabel-ini = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
+    c-cod-estabel-fim = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
     
     RUN enable_UI.
     

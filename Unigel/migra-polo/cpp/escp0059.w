@@ -127,7 +127,7 @@ ASSIGN l-split = NO.
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini like movto-estoq.cod-estabel        format "x(03)"    initial "412"           no-undo. /*solic-318*/ 
+def new shared var c-cod-estabel-ini like movto-estoq.cod-estabel        format "x(03)"                            no-undo. /*solic-318*/ 
 def new shared var c-it-codigo-ini    AS CHAR                            format "x(16)"    initial ""              no-undo.
 def new shared var c-it-codigo-fim    AS CHAR                            format "x(16)"    initial "ZZZZZZZZZZZZ"  no-undo.
 def new shared var i-nr-ord-produ-ini AS INT                             format ">>>>>>>>9"initial 0               no-undo.
@@ -1683,6 +1683,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    c-cod-estabel-ini = STRING({cdp\poloestab.i 422}).
     RUN enable_UI.
 
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

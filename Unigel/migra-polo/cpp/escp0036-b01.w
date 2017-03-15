@@ -171,7 +171,7 @@ DEFINE VARIABLE c-cod-estabel-fim AS CHARACTER FORMAT "X(3)":U INITIAL "ZZZ"
      VIEW-AS FILL-IN 
      SIZE 10.14 BY .88 NO-UNDO.
 
-DEFINE VARIABLE c-cod-estabel-ini AS CHARACTER FORMAT "X(3)":U INITIAL "412"  /*solic-318*/ 
+DEFINE VARIABLE c-cod-estabel-ini AS CHARACTER FORMAT "X(3)":U   /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 10.14 BY .88 NO-UNDO.
@@ -437,7 +437,7 @@ END.
 
 
 /* ***************************  Main Block  *************************** */
-
+c-cod-estabel-ini = STRING({cdp\poloestab.i 422}).
 &IF DEFINED(UIB_IS_RUNNING) <> 0 &THEN          
 RUN dispatch IN THIS-PROCEDURE ('initialize':U).        
 &ENDIF

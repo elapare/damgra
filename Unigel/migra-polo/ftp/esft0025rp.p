@@ -110,7 +110,7 @@ def new global shared var rw-log-exec            as rowid                    no-
 /****************** FIM INCLUDE COM VARIµVEIS GLOBAIS *********************/
 /****************** Defini‡ao de Parƒmetros do Relat¢rio *********************/
 
-def new shared var c-cod-estabel        like nota-fiscal.cod-estabel    FORMAT "x(3)"       initial "422"      NO-UNDO.  /*solic-318*/ 
+def new shared var c-cod-estabel        like nota-fiscal.cod-estabel    FORMAT "x(3)"             NO-UNDO.  /*solic-318*/ 
 def new shared var dt-emis-nota-ini     like nota-fiscal.dt-emis-nota   FORMAT "99/99/9999" INITIAL today      NO-UNDO. 
 def new shared var dt-emis-nota-fim     like nota-fiscal.dt-emis-nota   FORMAT "99/99/9999" INITIAL today      NO-UNDO. 
 def new shared var c-nr-nota-fis-ini    like nota-fiscal.nr-nota-fis    FORMAT "x(10)"      INITIAL ""         NO-UNDO. 

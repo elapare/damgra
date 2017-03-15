@@ -77,7 +77,7 @@ def var v-cod-prog-gerado    as char    no-undo.
 DEFINE VARIABLE dir-jr               AS CHARACTER  NO-UNDO.
 def new Global shared var c-seg-usuario        as char format "x(12)" no-undo.
 
-def new  shared var c-cod-estabel   like contrato-for.cod-estabel   format "x(03)"    initial "412"   no-undo. /*solic-318*/ 
+def new  shared var c-cod-estabel   like contrato-for.cod-estabel   format "x(03)"       no-undo. /*solic-318*/ 
 def new  shared var c-cod-emitente  like contrato-for.cod-emitente  format ">>>>>>>9" initial 0       no-undo.
 def new  shared var i-nr-contrato  like contrato-for.nr-contrato  format ">>>>>>>9" initial 0       no-undo.
 def new  shared var c-arquivo-import as char       no-undo.
@@ -653,7 +653,7 @@ MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
-
+c-cod-estabel =  STRING({cdp\poloestab.i 422}).
 assign v-cod-prog-gerado = "escn0003".
 
 

@@ -1052,7 +1052,7 @@ end procedure.
 
 PROCEDURE agrupa-defeitos.
 
-  IF c-cod-estabel-ini = "423" AND tt-param.c-pesq1 = 1 THEN DO:
+  IF ( c-cod-estabel-ini = "413" OR c-cod-estabel-ini = "423") AND tt-param.c-pesq1 = 1 THEN DO:
 
     IF (c-def-jr = 7 OR c-def-jr = 83) THEN  
         ASSIGN c-def-jr = 1.

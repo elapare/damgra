@@ -1829,9 +1829,8 @@ PROCEDURE pi-verifica-qtd-emb-transf :
     END.
 
     /* Quantidade ja transferida */
-    FOR FIRST wt-docto WHERE (wt-docto.cod-estabel  = "434" OR wt-docto.cod-estabel  = "442")  and /*solic-318*/ 
-             wt-docto.cod-emitente  = 432 and
-             INDEX (wt-docto.observ-nota,STRING(nota-fiscal.cdd-embarq)) > 0 NO-LOCK,
+    FOR FIRST wt-docto WHERE ((wt-docto.cod-estabel  = "434"  AND wt-docto.cod-emitente  = 432) OR (wt-docto.cod-estabel  = "442" AND wt-docto.cod-emitente  = 443 )) AND   /*solic-318*/ 
+             INDEX (wt-docto.observ-nota,STRING(nota-fiscal.cdd-embarq)) > 0 NO-LOCK,    
         EACH  wt-it-docto OF wt-docto NO-LOCK.
       
         ASSIGN de-qt-aloc-ungcom = de-qt-aloc-ungcom + wt-it-docto.quantidade[2].

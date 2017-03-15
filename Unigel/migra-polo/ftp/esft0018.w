@@ -367,7 +367,7 @@ RADIO-BUTTONS
 SIZE 25 BY 1 NO-UNDO. 
 
 DEFINE VARIABLE c-cod-estabel-ini AS CHAR label "Estab." FORMAT "x(3)"
-     initial "422":U  /*solic-318*/ 
+       /*solic-318*/ 
      VIEW-AS FILL-IN 
      SIZE 4 BY .66
      TOOLTIP "Informe C¢digo do Estabelecimento " NO-UNDO.
@@ -1668,6 +1668,7 @@ MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
+        c-cod-estabel-ini = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
     RUN enable_UI.
     
     

@@ -90,7 +90,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var da-cod-estabel  like nota-fiscal.cod-estabel  format "999" initial "422" no-undo.  /*solic-318*/ 
+def new shared var da-cod-estabel  like nota-fiscal.cod-estabel  format "999"  no-undo.  /*solic-318*/ 
 def new shared var da-dt-emis-nota like nota-fiscal.dt-emis-nota format 99/99/9999 INITIAL TODAY no-undo.
 
 /* ********************  Preprocessor Definitions  ******************** */ 
@@ -893,6 +893,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    da-cod-estabel =  STRING({cdp\poloestab.i 422}).
     RUN enable_UI.
 
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

@@ -230,7 +230,7 @@ def var l-req as logical no-undo.
  DEFINE BUFFER bo-lote-rastreab FOR lote-rastreab.
  DEFINE VARIABLE l-log AS LOGICAL     NO-UNDO.
 
- DEFINE VARIABLE c-cod-estabel-fim like movto-estoq.cod-estabel INITIAL 412. /*solic-318*/ 
+ DEFINE VARIABLE c-cod-estabel-fim like movto-estoq.cod-estabel . /*solic-318*/ 
  DEFINE VARIABLE da-dt-trans-ini   like movto-estoq.dt-trans      INITIAL 04/01/2007.
  DEFINE VARIABLE da-dt-trans-fim   like movto-estoq.dt-trans      INITIAL 04/30/2007.
  DEFINE VARIABLE i-linha-ini AS INTEGER    NO-UNDO.
@@ -1213,6 +1213,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    c-cod-estabel-fim = STRING({cdp\poloestab.i 422}).
     RUN enable_UI.
     
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

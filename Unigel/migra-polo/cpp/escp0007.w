@@ -102,8 +102,8 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini like movto-estoq.cod-estabel format "x(3)" initial "412" no-undo. /*solic-318*/ 
-def new shared var c-cod-estabel-fim like movto-estoq.cod-estabel format "x(3)" initial "412" no-undo. /*solic-318*/ 
+def new shared var c-cod-estabel-ini like movto-estoq.cod-estabel format "x(3)" initial "" no-undo. /*solic-318*/ 
+def new shared var c-cod-estabel-fim like movto-estoq.cod-estabel format "x(3)" initial "" no-undo. /*solic-318*/ 
 def new shared var da-dt-trans-ini like movto-estoq.dt-trans format "99/99/9999" initial today no-undo.
 def new shared var da-dt-trans-fim like movto-estoq.dt-trans format "99/99/9999" initial today no-undo.
 def new shared var da-cod-maquina-ini AS INT format ">>9" initial 0 no-undo.
@@ -980,6 +980,8 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+    c-cod-estabel-ini = STRING({cdp\poloestab.i 422}).
+    c-cod-estabel-fim = STRING({cdp\poloestab.i 422}).
     RUN enable_UI.
 
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

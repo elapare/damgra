@@ -303,7 +303,7 @@ DO:
    
    IF sai-laudo-jr = no THEN DO:
    
-       IF am-cq-result-laudo.cod-estabel:SCREEN-VALUE IN FRAME {&FRAME-NAME} = STRING({cdp\poloestab.i 421}) THEN  /*solic-318*/ 
+       IF am-cq-result-laudo.cod-estabel:SCREEN-VALUE IN FRAME {&FRAME-NAME} = "421" OR am-cq-result-laudo.cod-estabel:SCREEN-VALUE IN FRAME {&FRAME-NAME} = "411" THEN  /*solic-318*/ 
            ASSIGN nome-abrev-jr = "POLO MG".
          ELSE
            ASSIGN nome-abrev-jr = "POLO RS".
@@ -530,7 +530,7 @@ PROCEDURE local-assign-record :
      
      IF sai-laudo-jr = no THEN DO:
      
-         IF am-cq-result-laudo.cod-estabel:SCREEN-VALUE IN FRAME {&FRAME-NAME} = STRING({cdp\poloestab.i 421}) THEN /*solic-318*/ 
+         IF am-cq-result-laudo.cod-estabel:SCREEN-VALUE IN FRAME {&FRAME-NAME} = "421" OR am-cq-result-laudo.cod-estabel:SCREEN-VALUE IN FRAME {&FRAME-NAME} = "411" THEN /*solic-318*/ 
              ASSIGN nome-abrev-jr = "POLO MG".
            ELSE
              ASSIGN nome-abrev-jr = "POLO RS".

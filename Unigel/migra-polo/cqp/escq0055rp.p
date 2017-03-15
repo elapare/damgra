@@ -99,7 +99,7 @@ def new global shared var rw-log-exec            as rowid                    no-
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini    like pallet.cod-estabel           format "X(3)"         initial "422"              no-undo.  /*solic-318*/ 
+def new shared var c-cod-estabel-ini    like pallet.cod-estabel           format "X(3)"                      no-undo.  /*solic-318*/ 
 def new shared var dt-producao-ini      like pallet.data-pallet           format "99/99/9999"   initial TODAY              no-undo.
 def new shared var dt-producao-fim      like pallet.data-pallet           format "99/99/9999"   initial TODAY              no-undo.
 def new shared var c-nr-lote-ini        like movto-estoq.lote             format "X(10)"        initial ""                 no-undo.

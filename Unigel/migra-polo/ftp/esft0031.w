@@ -1295,10 +1295,9 @@ run GetEnv in h-prog(input "CLIENTNAME", output c-clientname).
 DELETE PROCEDURE h-prog.
 
 
-ASSIGN c-cod-estabel = "424"
+ASSIGN c-cod-estabel = STRING({cdp\poloestab.i 432})
        c-serie       = "20".
-
-
+   
 
 /* Set CURRENT-WINDOW: this will parent dialog-boxes and frames.        */
 ASSIGN CURRENT-WINDOW                = {&WINDOW-NAME} 

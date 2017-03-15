@@ -96,7 +96,7 @@ def var v-cod-extens-arq     as char    no-undo initial "lst".
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel        like nota-fiscal.cod-estabel    FORMAT "x(3)"       initial "422"      NO-UNDO.  /*solic-318*/ 
+def new shared var c-cod-estabel        like nota-fiscal.cod-estabel    FORMAT "x(3)"             NO-UNDO.  /*solic-318*/ 
 def new shared var dt-emis-nota-ini     like nota-fiscal.dt-emis-nota   FORMAT "99/99/9999" INITIAL today      NO-UNDO. 
 def new shared var dt-emis-nota-fim     like nota-fiscal.dt-emis-nota   FORMAT "99/99/9999" INITIAL today      NO-UNDO. 
 def new shared var c-nr-nota-fis-ini    like nota-fiscal.nr-nota-fis    FORMAT "x(07)"      INITIAL ""         NO-UNDO. 
@@ -1044,6 +1044,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
+        c-cod-estabel = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
     RUN enable_UI.
     
     ASSIGN text-destino:screen-value   IN FRAME f-pg-imp = "Destino".

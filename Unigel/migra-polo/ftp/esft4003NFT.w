@@ -1685,7 +1685,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
       ASSIGN 
           c-serie-nf     = "20"
           c-cod-estabel-nf  = STRING({cdp\poloestab.i 434}) /*solic-318*/ 
-          i-cod-emitente = 432 
+          i-cod-emitente = {cdp\poloestab.i 432}
           c-nome-transp = "" 
           c-natur-oper   = ""
           c-nome-abrev-nf   = ""

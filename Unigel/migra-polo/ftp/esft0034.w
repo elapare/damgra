@@ -194,7 +194,7 @@ DEFINE VARIABLE tg-imprime AS LOGICAL INITIAL no
      VIEW-AS TOGGLE-BOX
      SIZE 54 BY .83 NO-UNDO.
 
-DEFINE VARIABLE c-cod-estabel-ini AS CHARACTER FORMAT "X(03)":U initial "422"  /*solic-318*/ 
+DEFINE VARIABLE c-cod-estabel-ini AS CHARACTER FORMAT "X(03)":U /*solic-318*/ 
      LABEL "Estabelecimento" 
      VIEW-AS FILL-IN 
      SIZE 5 BY .88 NO-UNDO.
@@ -708,6 +708,8 @@ MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
 
+    c-cod-estabel-ini = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
+    
     RUN enable_UI.
   
     {include/i-rpmbl.i}
