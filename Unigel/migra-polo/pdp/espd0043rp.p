@@ -98,7 +98,7 @@ DEFINE VARIABLE c-nome-abrev-ini  AS CHARACTER initial ""  NO-UNDO.
 DEFINE VARIABLE c-nome-abrev-fim  AS CHARACTER initial "zzzz"  NO-UNDO.
 DEFINE VARIABLE c-it-codigo-ini   AS CHARACTER initial ""  NO-UNDO.
 DEFINE VARIABLE c-it-codigo-fim   AS CHARACTER initial "zzzz"  NO-UNDO.
-DEFINE VARIABLE i-ge-codigo-ini   AS INTEGER   initial   NO-UNDO.
+DEFINE VARIABLE i-ge-codigo-ini   AS INTEGER   initial 0  NO-UNDO.
 DEFINE VARIABLE i-ge-codigo-fim   AS INTEGER   initial 99  NO-UNDO.
 DEFINE VARIABLE p-perc-ini        AS DECIMAL  FORMAT "->>>,>>9.9999" initial 10 NO-UNDO.
 DEFINE VARIABLE p-perc-fim        AS DECIMAL  FORMAT "->>>,>>9.9999" initial 13  NO-UNDO.
