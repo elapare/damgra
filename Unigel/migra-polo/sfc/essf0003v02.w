@@ -7333,8 +7333,8 @@ PROCEDURE pi-transf-pallet :
        /*Saida*/
        create tt-movto.
        assign tt-movto.cod-versao-integracao  = 1
-              tt-movto.ct-codigo              = conta-contab.ct-codigo
-              tt-movto.sc-codigo              = conta-contab.sc-codigo
+              tt-movto.ct-codigo              = param-estoq.ct-tr-transf
+              tt-movto.sc-codigo              = param-estoq.sc-tr-transf
               tt-movto.cod-prog-orig          = "essf0003"
               tt-movto.tipo-trans             = 2
               tt-movto.esp-docto              = 33
@@ -7356,8 +7356,8 @@ PROCEDURE pi-transf-pallet :
        /*Entrada*/
        create tt-movto.
        assign tt-movto.cod-versao-integracao  = 1
-              tt-movto.ct-codigo              = conta-contab.ct-codigo
-              tt-movto.sc-codigo              = conta-contab.sc-codigo
+              tt-movto.ct-codigo              = param-estoq.ct-tr-transf
+              tt-movto.sc-codigo              = param-estoq.sc-tr-transf
               tt-movto.cod-prog-orig          = "essf0003"
               tt-movto.tipo-trans             = 1
               tt-movto.esp-docto              = 33
