@@ -31,10 +31,14 @@ DEF BUFFER bf-saldo-estoq FOR saldo-estoq.
 DEF BUFFER bf1-saldo-estoq FOR saldo-estoq.
 def buffer bf-ped-venda for ped-venda.
 def buffer bf-ped-item  for ped-item.
+DEFINE VARIABLE dt-atu AS DATE        NO-UNDO.
+DEFINE VARIABLE dt-ini AS DATE        NO-UNDO.
+DEFINE VARIABLE dt-fim AS DATE        NO-UNDO.
 
 def temp-table tt-raw-digita
     field raw-digita as raw.
 
+   
 
 define temp-table tt-param
     field destino              as integer
@@ -67,7 +71,9 @@ define temp-table tt-param
     FIELD c-perc-atend           AS DEC
     field l-unig-com             as logical
     field l-simula-embarque      as logical
+    field l-simula-multiplos     as logical
     field dt-embarque            AS DATE
+    field dt-embarque-final      AS DATE
 .
 
 
@@ -289,7 +295,8 @@ define temp-table tt-fat NO-UNDO
     FIELD perc-desc        AS DEC
     FIELD preco-sem-desc   AS DEC
     FIELD embarque         AS CHAR
-    FIELD desc-embarque    AS CHAR.
+    FIELD desc-embarque    AS CHAR
+    FIELD dt-simula-embarque AS DATE.
     
 
 /****************** Defini‡ao de Forms do Relat¢rio 132 Colunas ***************************************/ 
@@ -531,7 +538,7 @@ end.
 /*cria saldo de terceiros em lote*/
     EMPTY TEMP-TABLE tt-lotes.
     EMPTY TEMP-TABLE tt-notas.
-  do i-estab = 1 to 6.
+  do i-estab = 1 to 5.
 
     for each   saldo-terc WHERE /*saldo-terc.cod-emitente = 17261 and*/
      saldo-terc.cod-estabel = entry(i-estab,c-est) and
@@ -541,7 +548,7 @@ end.
         saldo-terc.it-codigo <= c-it-codigo-fim
 
         NO-LOCK.
-        
+              
           FIND natur-oper NO-LOCK WHERE 
                          natur-oper.nat-operacao = saldo-terc.nat-operacao.
 
@@ -1176,45 +1183,66 @@ for each ped-item where
             END.   
 
 
+    
+            
+        tt-fat.dt-simula-embarque = ?.
 
+        DO dt-atu = tt-param.dt-embarque TO tt-param.dt-embarque-final.
 
-
-
+ 
 
             IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat = "sim" AND  /*solic-318*/ 
-               tt-fat.dt-entrega <= tt-param.dt-embarque AND
-                 tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque  THEN
+               tt-fat.dt-entrega <= dt-atu AND
+                 tt-fat.dt-entrega + (IF weekday(dt-atu) = 2 THEN 3 ELSE 1) <= dt-atu  THEN
 
+               IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
                 ASSIGN tt-fat.embarque = "OK"
-                       tt-fat.desc-embarque = "TROCA NOTA".  
+                       tt-fat.desc-embarque = (IF tt-param.l-simula-embarque THEN "FAT" ELSE "FAT ATRASO")
+                       tt-fat.dt-simula-embarque = dt-atu. 
+
+
+            IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat = "sim" AND  /*solic-318*/ 
+               tt-fat.dt-entrega <= dt-atu AND
+                 tt-fat.dt-entrega + (IF weekday(dt-atu) = 2 THEN 3 ELSE 1) <> dt-atu  THEN
+
+               IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
+                ASSIGN tt-fat.embarque = "OK"
+                       tt-fat.desc-embarque = "TROCA NOTA"
+                       tt-fat.dt-simula-embarque = dt-atu.  
 
 
 
             IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat = "sim" AND  /*solic-318*/ 
-                tt-fat.dt-entrega <= tt-param.dt-embarque AND 
-                tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque AND
+                tt-fat.dt-entrega <= dt-atu AND 
+                tt-fat.dt-entrega + (IF weekday(dt-atu) = 2 THEN 3 ELSE 1) <> dt-atu AND
                ( tt-fat.var-ung-sbc + tt-fat.var-sbc + d-saldo-terc-sp) > 0 THEN
 
-                ASSIGN tt-fat.embarque = "OK"
-                       tt-fat.desc-embarque = "FAT".  
+                IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
+                    ASSIGN tt-fat.embarque = "OK"
+                           tt-fat.desc-embarque = "FAT"
+                           tt-fat.dt-simula-embarque = dt-atu.  
 
             IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat = "sim" AND  /*solic-318*/ 
-                tt-fat.dt-entrega <= tt-param.dt-embarque AND 
-                tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque AND
+                tt-fat.dt-entrega <= dt-atu AND 
+                tt-fat.dt-entrega + (IF weekday(dt-atu) = 2 THEN 3 ELSE 1) <> dt-atu AND
                 d-saldo-terc-rs > 0 THEN
 
-                ASSIGN tt-fat.embarque = "OK"
-                       tt-fat.desc-embarque = "TROCA NOTA". 
+                IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
+                    ASSIGN tt-fat.embarque = "OK"
+                           tt-fat.desc-embarque = "TROCA NOTA"
+                           tt-fat.dt-simula-embarque = dt-atu. 
 
 
 
             IF  (tt-fat.cod-estabel-fat = "434" OR tt-fat.cod-estabel-fat = "442") AND   /*solic-318*/ 
                 tt-fat.liber-fat = "sim"       AND
-                tt-fat.dt-entrega <= tt-param.dt-embarque  AND 
-                tt-fat.dt-entrega + (IF weekday(tt-param.dt-embarque) = 2 THEN 3 ELSE 1) <> tt-param.dt-embarque  THEN
+                tt-fat.dt-entrega <= dt-atu  AND 
+                tt-fat.dt-entrega + (IF weekday(dt-atu) = 2 THEN 3 ELSE 1) <> dt-atu  THEN
 
-                ASSIGN tt-fat.embarque = "OK"
-                       tt-fat.desc-embarque = "FAT". 
+                IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
+                    ASSIGN tt-fat.embarque = "OK"
+                           tt-fat.desc-embarque = "FAT"
+                           tt-fat.dt-simula-embarque = dt-atu. 
 
 
             d-perc-atend = (( tt-fat.qt-atendida + d-saldo-terc-sp) / tt-fat.qt-pedida ) * 100.
@@ -1223,37 +1251,46 @@ for each ped-item where
             IF ((tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422") OR (tt-fat.cod-estabel-fat = "443" AND tt-fat.cod-estabel = "412")) AND  /*solic-318*/ 
                tt-fat.tp-pedido = "E" AND d-saldo-terc-rs > 0 THEN
 
-                ASSIGN tt-fat.embarque = "OK"
-                       tt-fat.desc-embarque = "ARMAZENA CD". 
+                IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
+                    ASSIGN tt-fat.embarque = "OK"
+                           tt-fat.desc-embarque = "ARMAZENA CD"
+                           tt-fat.dt-simula-embarque = dt-atu. 
 
              IF ((tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422") OR (tt-fat.cod-estabel-fat = "443" AND tt-fat.cod-estabel = "412")) AND  /*solic-318*/ 
                tt-fat.liber-fat <> "sim" AND d-saldo-terc-rs > 0 AND d-perc-atend <= 90 THEN
 
-                ASSIGN tt-fat.embarque = "OK"
-                       tt-fat.desc-embarque = "ARMAZENA CD". 
+                IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
+                    ASSIGN tt-fat.embarque = "OK"
+                           tt-fat.desc-embarque = "ARMAZENA CD"
+                           tt-fat.dt-simula-embarque = dt-atu. 
 
 
              IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat <> "sim" AND d-perc-atend <= 90 AND  /*solic-318*/ 
-                tt-fat.dt-entrega = tt-param.dt-embarque  AND d-saldo-terc-rs = 0 and
+                tt-fat.dt-entrega = dt-atu  AND d-saldo-terc-rs = 0 and
                 (d-saldo-terc-sp / (tt-fat.qt-pedida - tt-fat.qt-atendida)) * 100 < 90 
                  THEN
-                 ASSIGN tt-fat.embarque = "OK"
-                        tt-fat.desc-embarque = "ARMAZENA CD".  
+                 IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
+                     ASSIGN tt-fat.embarque = "OK"
+                            tt-fat.desc-embarque = "ARMAZENA CD"
+                            tt-fat.dt-simula-embarque = dt-atu.  
 
 
               IF ((tt-fat.cod-estabel-fat = "432" AND tt-fat.cod-estabel = "422") OR (tt-fat.cod-estabel-fat = "443" AND tt-fat.cod-estabel = "412")) AND d-perc-atend <= 90 AND  /*solic-318*/ 
                tt-fat.liber-fat = "sim" AND d-saldo-terc-rs > 0 and
-                  tt-fat.dt-entrega >=  tt-param.dt-embarque  + 9 - WEEKDAY(tt-param.dt-embarque)THEN
-
-                ASSIGN tt-fat.embarque = "OK"
-                       tt-fat.desc-embarque = "ARMAZENA CD". 
+                  tt-fat.dt-entrega >=  dt-atu  + 9 - WEEKDAY(dt-atu)THEN
+                IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
+                    ASSIGN tt-fat.embarque = "OK"
+                           tt-fat.desc-embarque = "ARMAZENA CD"
+                           tt-fat.dt-simula-embarque = dt-atu. 
 
 
               IF  tt-fat.desc-embarque = "ARMAZENA CD" AND d-saldo-terc-rs = 0 AND tt-fat.var-transito > 0 THEN
-                  ASSIGN tt-fat.desc-embarque = ""
-                         tt-fat.embarque = "".
+                  IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
+                      ASSIGN tt-fat.desc-embarque = ""
+                             tt-fat.embarque = ""
+                             tt-fat.dt-simula-embarque = dt-atu.
 
-
+        END.
     END. /* else do */
 
 END.
@@ -1322,7 +1359,17 @@ IF tt-param.destino = 4 THEN DO:
     IF  tt-param.l-simula-embarque THEN DO:
          ASSIGN c-relatorio:Columns("AR:AS"):Hidden = TRUE
                 c-relatorio:Columns("AX:BD"):Hidden = TRUE
-                c-relatorio:Columns("Z:AC"):Hidden = True.
+                c-relatorio:range("J6"):VALUE = "Data Simula"
+                c-relatorio:range("J7"):VALUE = "Embarque"
+                c-relatorio:Columns("j:j"):ColumnWidth = 10
+                c-relatorio:Columns("R:R"):Hidden = True.
+                c-relatorio:Columns("U:V"):Hidden = True.
+                c-relatorio:Columns("A:A"):Hidden = True.
+                c-relatorio:Columns("Z:AD"):Hidden = True.
+
+                IF NOT tt-param.l-simula-multiplos THEN
+                     c-relatorio:Columns("j:j"):Hidden = True.
+
              IF var-outros-TOT = 0 THEN
                   ASSIGN c-relatorio:Columns("AP:AP"):Hidden = True.
     END.
@@ -1337,7 +1384,7 @@ ASSIGN i-linhax = 7.
 
 v-num-reg-lidos = 0.
 
-for each tt-fat no-lock
+for each tt-fat WHERE (IF tt-param.l-simula-multiplos AND tt-fat.tp-pedido = "E" THEN FALSE ELSE TRUE) no-lock
     break by tt-fat.cod-estabel
           by tt-fat.dt-entrega
           BY tt-fat.nome-merc
@@ -1430,8 +1477,8 @@ for each tt-fat no-lock
                 STRING(tt-fat.tp-pedido     )                 + chr(160) +
                STRING(tt-fat.nr-pedido     )                 + chr(160) +
                STRING(tt-fat.nr-sequencia  )                 + chr(160) +
-               STRING(tt-fat.nr-pedcli     )                 + chr(160) +
-               STRING(tt-fat.unigel-com    )                 + chr(160) +
+               STRING(tt-fat.nr-pedcli     )                 + chr(160) +                         
+               STRING(IF tt-param.l-simula-multiplos THEN (IF tt-fat.dt-simula-embarque = ? THEN "" ELSE string(tt-fat.dt-simula-embarque,"99/99/9999")) ELSE string(tt-fat.unigel-com)    )                 + chr(160) +
                STRING(tt-fat.liber-fat     )                 + chr(160) +
 
             
@@ -1537,8 +1584,8 @@ for each tt-fat no-lock
 
         END.
  
-        ASSIGN c-relatorio:range("A" + STRING(i-linhax)):VALUE = string(linha-jr).     
-
+        ASSIGN c-relatorio:range("A" + STRING(i-linhax)):value = string(linha-jr).  
+         
      END.
 
 

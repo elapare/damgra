@@ -31,7 +31,8 @@ define buffer tab-generica   FOR mgemp.tab-generica.
 DEFINE TEMP-TABLE tt-tab-generica NO-UNDO LIKE mgemp.tab-generica
    field r-rowid as rowid.
 
-DEFINE TEMP-TABLE tt-despreza NO-UNDO LIKE tt-aloc-man.
+DEFINE TEMP-TABLE tt-despreza NO-UNDO LIKE tt-aloc-man
+    FIELD nr-seq-fat-ori AS INTEGER.
 
 DEF INPUT PARAM p-ind-event AS CHAR NO-UNDO.
 DEF INPUT-OUTPUT PARAM TABLE FOR tt-epc.
@@ -1766,7 +1767,7 @@ PROCEDURE pi-gera-embarque-polo :
                     WHERE tt-alocar.qt-atender > 0) THEN DO:
 
         /*RUN pi-gera-erro(INPUT 17006,                                
-                         INPUT "ERROR":U,                            
+                          INPUT "ERROR":U,                            
                          INPUT "NÆo h  embarques para serem gerados",
                          INPUT "").*/
         
@@ -1922,11 +1923,11 @@ PROCEDURE pi-gera-embarque-polo :
                     IF l-erro THEN
                         UNDO gera-embarque, LEAVE.
                 END.
-
+ 
                 IF CAN-FIND(FIRST pre-fatur
                             WHERE pre-fatur.cdd-embarq = tt-embarque.cdd-embarq) THEN DO:
 
-
+ 
                     RUN pi-recebe-tt-embarque IN h-eqapi300 (INPUT TABLE tt-embarque).
                     RUN pi-encerra-embarque   IN h-eqapi300 (INPUT YES).
 
@@ -2087,7 +2088,8 @@ PROCEDURE pi-gera-embarque :
                            tt-despreza.nr-resumo    = nota-fiscal.nr-resumo
                            tt-despreza.nome-abrev   = tt-alocar.nome-abrev
                            tt-despreza.nr-pedcli    = b5-ped-venda.nr-pedcli /*b3-it-nota-fisc.nr-pedcli */
-                           tt-despreza.nr-sequencia = b3-it-nota-fisc.nr-seq-ped
+                           tt-despreza.nr-sequencia   = b3-it-nota-fisc.nr-seq-ped
+                           tt-despreza.nr-seq-fat-ori = b3-it-nota-fisc.nr-seq-fat
                            tt-despreza.it-codigo    = b3-it-nota-fisc.it-codigo 
                            tt-despreza.cod-estabel  = tt-alocar.cod-estabel
                            tt-despreza.cod-depos    = fat-ser-lote.cod-depos
@@ -2119,7 +2121,6 @@ PROCEDURE pi-gera-embarque :
             END.
 
             IF LAST-OF(tt-alocar.nome-abrev) THEN DO:
-
                 RUN pi-recebe-tt-embarque  IN h-eqapi300 (INPUT TABLE tt-embarque).
                 RUN pi-trata-tt-embarque   IN h-eqapi300 (INPUT 'msg', INPUT YES).
 
@@ -2127,8 +2128,8 @@ PROCEDURE pi-gera-embarque :
                 RUN pi-recebe-tt-ped-venda IN h-eqapi300 (INPUT TABLE tt-ped-venda-aux).
                 RUN pi-trata-tt-ped-venda  IN h-eqapi300 (INPUT NO).
 
-                RUN pi-despreza-itens.
 
+                RUN pi-despreza-itens.
                 run pi-recebe-tt-aloc-man  IN h-eqapi300 (INPUT TABLE tt-aloc-man).
                 run pi-trata-tt-aloc-man   IN h-eqapi300 (INPUT YES).
 /*
@@ -2163,10 +2164,8 @@ PROCEDURE pi-gera-embarque :
                     IF l-erro THEN
                         UNDO gera-embarque, LEAVE.
                 END.
-
                 IF CAN-FIND(FIRST pre-fatur
                             WHERE pre-fatur.cdd-embarq = tt-embarque.cdd-embarq) THEN DO:
-
 
                     RUN pi-recebe-tt-embarque IN h-eqapi300 (INPUT TABLE tt-embarque).
                     RUN pi-encerra-embarque   IN h-eqapi300 (INPUT YES).
@@ -2426,7 +2425,9 @@ PROCEDURE pi-verifica-qtd-emb :
     /* Quantidade Unigel Origem */
     FOR EACH embarque NO-LOCK
        WHERE embarque.cdd-embarq = nota-fiscal.cdd-embarq,
-        EACH pre-fatur  OF embarque  NO-LOCK,
+        EACH pre-fatur  OF embarque  WHERE
+         can-find(FIRST if-ped-venda WHERE
+            if-ped-venda.nr-pedcli  = pre-fatur.nr-pedcli ) NO-LOCK,       
         EACH it-pre-fat OF pre-fatur NO-LOCK:
         ASSIGN de-qt-aloc-origem = de-qt-aloc-origem + it-pre-fat.qt-alocada.
     END.
@@ -4808,7 +4809,8 @@ PROCEDURE pi-despreza-itens:
                  AND it-dep-fat.nome-abrev   = it-pre-fat.nome-abrev
                  AND it-dep-fat.nr-pedcli    = it-pre-fat.nr-pedcli
                  AND it-dep-fat.nr-sequencia = it-pre-fat.nr-sequencia
-                 AND it-dep-fat.it-codigo    = it-pre-fat.it-codigo :
+                 AND it-dep-fat.it-codigo    = it-pre-fat.it-codigo :         
+
 
                 ASSIGN i-seq-aloc-man = i-seq-aloc-man + 1.
  
@@ -4817,7 +4819,7 @@ PROCEDURE pi-despreza-itens:
                        tt-aloc-man.nr-resumo    = it-pre-fat.nr-resumo    
                        tt-aloc-man.nome-abrev   = it-pre-fat.nome-abrev
                        tt-aloc-man.nr-pedcli    = it-pre-fat.nr-pedcli                     
-                       tt-aloc-man.nr-sequencia = it-pre-fat.nr-sequencia           
+                       tt-aloc-man.nr-sequencia =  it-pre-fat.nr-sequencia           
                        tt-aloc-man.it-codigo    = it-pre-fat.it-codigo
                        tt-aloc-man.cod-estabel  = it-dep-fat.cod-estabel         
                        tt-aloc-man.cod-depos    = it-dep-fat.cod-depos           
@@ -4827,23 +4829,23 @@ PROCEDURE pi-despreza-itens:
                        tt-aloc-man.qt-a-alocar  = it-dep-fat.qt-alocada * -1
                        tt-aloc-man.i-sequen     = i-seq-aloc-man
                        tt-aloc-man.nr-entrega   = it-pre-fat.nr-entrega.
-                       
             END.
 
             FOR EACH   tt-despreza
                  WHERE tt-despreza.cdd-embarq   = it-pre-fat.cdd-embarq  
-                   AND tt-despreza.nr-resumo    = it-pre-fat.nr-resumo   
+                  /* AND tt-despreza.nr-resumo    = it-pre-fat.nr-resumo   */
                    AND tt-despreza.nome-abrev   = it-pre-fat.nome-abrev  
                    AND tt-despreza.nr-pedcli    = it-pre-fat.nr-pedcli   
                    AND tt-despreza.nr-sequencia = it-pre-fat.nr-sequencia
                    AND tt-despreza.it-codigo    = it-pre-fat.it-codigo     EXCLUSIVE-LOCK .  
 
+                  
                  FIND FIRST tt-aloc-man WHERE 
                      tt-aloc-man.cdd-embarq    =  tt-despreza.cdd-embarq      and
-                     tt-aloc-man.nr-resumo     =  tt-despreza.nr-resumo       and
+                     tt-aloc-man.nr-resumo     =  it-pre-fat.nr-resumo       and
                      tt-aloc-man.nome-abrev    =  tt-despreza.nome-abrev      and
                      tt-aloc-man.nr-pedcli     =  tt-despreza.nr-pedcli       and
-                     tt-aloc-man.nr-sequencia  =  tt-despreza.nr-sequencia    and
+                     tt-aloc-man.nr-sequencia  =  tt-despreza.nr-sequencia and
                      tt-aloc-man.it-codigo     =  tt-despreza.it-codigo       and
                      tt-aloc-man.cod-estabel   =  tt-despreza.cod-estabel     and
                      tt-aloc-man.cod-depos     =  tt-despreza.cod-depos       and
@@ -4854,10 +4856,10 @@ PROCEDURE pi-despreza-itens:
                  IF NOT AVAIL tt-aloc-man THEN DO:
                      CREATE tt-aloc-man.
                      ASSIGN  tt-aloc-man.cdd-embarq    =  tt-despreza.cdd-embarq    
-                             tt-aloc-man.nr-resumo     =  tt-despreza.nr-resumo     
+                             tt-aloc-man.nr-resumo     =  it-pre-fat.nr-resumo   
                              tt-aloc-man.nome-abrev    =  tt-despreza.nome-abrev    
                              tt-aloc-man.nr-pedcli     =  tt-despreza.nr-pedcli     
-                             tt-aloc-man.nr-sequencia  =  tt-despreza.nr-sequencia  
+                             tt-aloc-man.nr-sequencia  =  tt-despreza.nr-sequencia 
                              tt-aloc-man.it-codigo     =  tt-despreza.it-codigo     
                              tt-aloc-man.cod-estabel   =  tt-despreza.cod-estabel   
                              tt-aloc-man.cod-depos     =  tt-despreza.cod-depos     

@@ -25,7 +25,7 @@ CREATE WIDGET-POOL.
 /* Preprocessadores do Template de Relat¢rio                            */
 
 &GLOBAL-DEFINE PGSEL f-pg-sel 
-&GLOBAL-DEFINE PGPAR f-pg-par 
+/*&GLOBAL-DEFINE PGPAR f-pg-par */
 &GLOBAL-DEFINE PGIMP f-pg-imp 
 
 /* Include Com as Vari veis Globais */
@@ -46,7 +46,30 @@ def new global shared var v_cod_grp_usuar_lst    as char                     no-
 def new global shared var v_num_tip_aces_usuar   as int                      no-undo.
 def new global shared var rw-log-exec            as rowid                    no-undo.
 
+DEFINE NEW GLOBAL  shared TEMP-TABLE tt-arq NO-UNDO 
+            FIELD nomeArq AS CHAR
+            FIELD dtArq   AS DATE.
 
+
+DEFINE NEW GLOBAL SHARED TEMP-TABLE tt-lotes NO-UNDO
+    FIELD nro-docto    LIKE saldo-terc.nro-docto
+    FIELD serie        LIKE saldo-terc.serie
+    FIELD sequencia    LIKE saldo-terc.sequencia
+    FIELD lote         LIKE saldo-terc.lote
+    FIELD remessa      LIKE saldo-terc.quantidade
+    FIELD retorno      LIKE saldo-terc.quantidade
+    FIELD saldo        LIKE saldo-terc.quantidade
+    FIELD cod-estabel  LIKE saldo-terc.cod-estabel
+    FIELD cod-emitente LIKE saldo-terc.cod-emitente
+    FIELD it-codigo    LIKE saldo-terc.it-codigo
+    INDEX chave-lotes IS PRIMARY UNIQUE    it-codigo
+                    lote
+                    nro-docto
+                    sequencia
+                    cod-emitente
+                    cod-estabel
+                    serie
+                     .
 /* Parameters Definitions ---                                           */ 
 
 def new global shared var c-cod-estabel-ini-20   AS CHARACTER NO-UNDO.
@@ -108,7 +131,9 @@ define temp-table tt-param
     FIELD c-perc-atend           AS DEC
     field l-unig-com             as logical
     field l-simula-embarque      as logical
+    field l-simula-multiplos     as logical
     field dt-embarque            AS DATE
+    field dt-embarque-final      AS DATE
 .
 
 /* Transfer Definitions */
@@ -116,6 +141,14 @@ define temp-table tt-param
 def var raw-param        as raw no-undo.
 
 /* Local Variable Definitions ---                                       */ 
+        DEFINE VARIABLE chExcel      AS COM-HANDLE NO-UNDO.
+        DEFINE VARIABLE chWorksheet1 AS COM-HANDLE NO-UNDO.
+        DEFINE VARIABLE chWorksheet2 AS COM-HANDLE NO-UNDO.
+        DEFINE VARIABLE chWorkbook1  AS COM-HANDLE NO-UNDO.
+        DEFINE VARIABLE chWorkbook2  AS COM-HANDLE NO-UNDO.
+        DEFINE VARIABLE iQtArq       AS INTEGER     NO-UNDO.
+        DEFINE VARIABLE iPos         AS INTEGER     NO-UNDO.
+        DEFINE VARIABLE idx          AS INTEGER     NO-UNDO.
 
 def var l-ok                 as logical no-undo. 
 def var c-arq-digita         as char    no-undo. 
@@ -134,8 +167,8 @@ def new global shared var c-excel            as com-handle                  NO-U
 
 /****************** Defini‡ao de Vari veis de Sele‡Æo do Relat¢rio *********************/ 
 
-def new shared var c-cod-estabel-ini like ped-venda.cod-estabel format "x(3)"  no-undo. /*solic-318*/ 
-def new shared var c-cod-estabel-fim like ped-venda.cod-estabel format "x(3)"  no-undo. /*solic-318*/ 
+def new shared var c-cod-estabel-ini like ped-venda.cod-estabel format "x(3)" initial "" no-undo.
+def new shared var c-cod-estabel-fim like ped-venda.cod-estabel format "x(3)" initial "" no-undo.
 def new shared var da-dt-entorig-ini like ped-item.dt-entorig format "99/99/9999" initial TODAY no-undo.
 def new shared var da-dt-entorig-fim like ped-item.dt-entorig format "99/99/9999" initial TODAY no-undo.
 def new shared var c-tp-pedido-ini like ped-venda.tp-pedido format "x(2)" initial "" no-undo.
@@ -155,6 +188,7 @@ def new shared var da-canal-venda-fim like nota-fiscal.cod-canal-venda format ">
 def new shared var c-perc-atend       AS DEC FORMAT ">>9.99%" initial 0 no-undo.
 
 def var dt-embarque AS DATE format "99/99/9999" initial TODAY no-undo.
+def var dt-embarque-final AS DATE format "99/99/9999" initial TODAY no-undo.
 
 /* ********************  Preprocessor Definitions  ******************** */ 
 
@@ -248,7 +282,7 @@ SIZE 46.29 BY 2.92.
 
 DEFINE RECTANGLE RECT-77 
 EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL 
-SIZE 27 BY 2.32.
+SIZE 50 BY 2.32.
 
 DEFINE RECTANGLE RECT-9 
 EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL 
@@ -315,9 +349,9 @@ DEFINE FRAME f-relat
      bt-ajuda AT ROW 17.54 COL 70 HELP
 "Ajuda"
      im-pg-sel AT ROW 1.5 COL 2.14
-     im-pg-par AT ROW 1.5 COL 17.86
-     im-pg-imp AT ROW 1.5 COL 33.58
-     "Polo "AT ROW 1.8 COL 66.00
+    /* im-pg-par AT ROW 1.5 COL 17.86*/
+     im-pg-imp AT ROW 1.5 COL 17.58
+     " "AT ROW 1.8 COL 66.00
      rt-folder AT ROW 2.5 COL 2
      rt-folder-top AT ROW 2.54 COL 2.14
      rt-folder-left AT ROW 2.54 COL 2.14
@@ -339,9 +373,17 @@ DEFINE FRAME f-relat
      DEFINE VARIABLE l-simula-embarque AS LOGICAL INITIAL no 
         LABEL "Simula Embarque"
         VIEW-AS TOGGLE-BOX 
-        SIZE 20 BY .83 
+        SIZE 15 BY .83 
         NO-UNDO.
 
+     DEFINE VARIABLE l-simula-multiplos AS LOGICAL INITIAL no 
+        LABEL "Faixa de Datas"
+        VIEW-AS TOGGLE-BOX 
+        SIZE 15 BY .83 
+        NO-UNDO.
+
+
+     
 DEFINE FRAME f-pg-imp
     text-destino AT ROW 1.62 COL 3.86 NO-LABEL
     rs-destino AT ROW 2.38 COL 3.29 HELP
@@ -476,24 +518,32 @@ DEFINE FRAME f-pg-sel
       size 4 by .88
       font 1
 
-    l-unig-com AT ROW 11 COL 07.95
+    l-unig-com AT ROW 10 COL 21.95
+    c-perc-atend LABEL "NÆo Mostra Pedidos c/Saldo a Faturar Inferior a "
+     at row 11 col 47 colon-aligned
+     view-as fill-in 
+     size 8 by .88
+     font 1
+
     
-    l-simula-embarque AT ROW 11 COL 47
+    l-simula-embarque AT ROW 12.4 COL 27
+    l-simula-multiplos AT ROW 12.4 COL 44
     
     dt-embarque label "Dt Embarque"
-      at row 12 col 55 colon-aligned
+      at row 13.5 col 25 colon-aligned
+      view-as fill-in 
+      size 11 by .88
+      font 1
+
+     dt-embarque-final label "Dt.FINAL"
+      at row 13.5 col 45 colon-aligned
       view-as fill-in 
       size 11 by .88
       font 1
 
 
-    c-perc-atend LABEL "NÆo Mostra Pedidos c/Saldo a Faturar Inferior a "
-      at row 13.5 col 45 colon-aligned
-      view-as fill-in 
-      size 8 by .88
-      font 1
-
-    RECT-77 AT ROW 10.80 COL 45
+   
+    RECT-77 AT ROW 12.3 COL 15
 
 
    IMAGE-1 AT ROW 01.00 COL 40
@@ -649,14 +699,32 @@ end.
 
 /* ************************  Control Triggers  ************************ */
 
+on LEAVE OF dt-embarque in frame f-pg-sel do:
+    
+             dt-embarque-final:SCREEN-VALUE IN FRAME f-pg-sel =  dt-embarque:SCREEN-VALUE IN FRAME f-pg-sel.
+END.
 
 on VALUE-CHANGED OF l-simula-embarque in frame f-pg-sel do:
 
     IF INPUT FRAME f-pg-sel l-simula-embarque = YES THEN 
-       ASSIGN dt-embarque:SENSITIVE IN FRAME f-pg-sel = YES.
+       ASSIGN dt-embarque:SENSITIVE IN FRAME f-pg-sel = YES
+              l-simula-multiplos:SENSITIVE IN FRAME f-pg-sel = YES
+              dt-embarque-final:SENSITIVE IN FRAME f-pg-sel = l-simula-multiplos:CHECKED IN FRAME f-pg-sel.
     ELSE
-       ASSIGN dt-embarque:SENSITIVE IN FRAME f-pg-sel = NO.
+       ASSIGN dt-embarque:SENSITIVE IN FRAME f-pg-sel = NO
+             dt-embarque-final:SENSITIVE IN FRAME f-pg-sel = NO
+             l-simula-multiplos:SENSITIVE IN FRAME f-pg-sel = NO
+             l-simula-multiplos:CHECKED IN FRAME f-pg-sel = NO.
 
+             dt-embarque-final:SCREEN-VALUE IN FRAME f-pg-sel =  dt-embarque:SCREEN-VALUE IN FRAME f-pg-sel.
+
+
+END.
+
+on VALUE-CHANGED OF l-simula-multiplos in frame f-pg-sel do:
+ 
+             dt-embarque-final:SENSITIVE IN FRAME f-pg-sel = l-simula-multiplos:CHECKED IN FRAME f-pg-sel.   
+             dt-embarque-final:SCREEN-VALUE IN FRAME f-pg-sel =  dt-embarque:SCREEN-VALUE IN FRAME f-pg-sel.
 
 END.
 
@@ -720,10 +788,6 @@ DO:
    run pi-troca-pagina.
 END.
 
-ON MOUSE-SELECT-CLICK OF im-pg-par IN FRAME f-relat
-DO:
-   run pi-troca-pagina.
-END.
 
 ON MOUSE-SELECT-CLICK OF im-pg-sel IN FRAME f-relat
 DO:
@@ -937,19 +1001,6 @@ create text wh-label-sel
 /********************************************************** 
 ** Tradu‡Æo p gina parƒmetros - frame f-pg-par
 **********************************************************/
-create text wh-label-par
-    assign frame        = frame f-relat:handle
-           format       = "x(10)"
-           font         = 1
-           screen-value = "Parƒmetros"
-           width        = 11
-           row          = 1.8
-           col          = im-pg-par:col in frame f-relat + 1.7
-           visible      = yes
-     triggers:
-         on mouse-select-click
-            apply "mouse-select-click" to im-pg-par in frame f-relat.           
-     end triggers.
 /********************************************************** 
 ** Tradu‡Æo p gina impressÆo - frame f-pg-imp
 **********************************************************/
@@ -1109,10 +1160,10 @@ PAUSE 0 BEFORE-HIDE.
 MAIN-BLOCK:
 DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     ON END-KEY UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK:
+     c-cod-estabel-ini = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
+    c-cod-estabel-fim = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
 
     IF SESSION:SET-WAIT-STATE("":U) THEN.
-    c-cod-estabel-ini = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
-    c-cod-estabel-fim = STRING({cdp\poloestab.i 422}). /*solic-318*/ 
     RUN enable_UI.
     
     if c-cod-estabel-ini-20 <> "" then
@@ -1149,9 +1200,6 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
     then
         apply "mouse-select-click" to im-pg-sel in frame f-relat.
 
-    if v-cod-pg-mouse-selec = "im-pg-par"
-    then
-        apply "mouse-select-click" to im-pg-par in frame f-relat.
 
     if v-cod-pg-mouse-selec = "im-pg-imp"
     then
@@ -1166,10 +1214,7 @@ DO  ON ERROR   UNDO MAIN-BLOCK, LEAVE MAIN-BLOCK
 
     end.
 
-    if  im-pg-par:sensitive in frame f-relat = no then do:
-        run pi-muda-cor-label-folder(input "Parƒmetros").
 
-    end.
 
    IF  NOT THIS-PROCEDURE:PERSISTENT THEN
       WAIT-FOR CLOSE OF THIS-PROCEDURE.
@@ -1206,7 +1251,9 @@ PROCEDURE enable_UI :
    c-perc-atend
    l-unig-com
    l-simula-embarque
+   l-simula-multiplos
    dt-embarque
+   dt-embarque-final
    WITH FRAME f-pg-sel IN WINDOW C-Win.
 
    ENABLE IMAGE-1 IMAGE-2  
@@ -1222,10 +1269,15 @@ PROCEDURE enable_UI :
    c-perc-atend
    l-unig-com
    l-simula-embarque
+   l-simula-multiplos
    dt-embarque
+   dt-embarque-final
    WITH FRAME f-pg-sel IN WINDOW C-Win.
    
-   ASSIGN dt-embarque:SENSITIVE IN FRAME f-pg-sel = NO.
+   ASSIGN dt-embarque:SENSITIVE IN FRAME f-pg-sel = NO
+       dt-embarque-final:SENSITIVE IN FRAME f-pg-sel = NO
+       l-simula-multiplos:SENSITIVE IN FRAME f-pg-sel = NO
+       l-simula-multiplos:checked IN FRAME f-pg-sel = NO.
 
    DISPLAY rs-destino c-arquivo rs-execucao tb-parametro rs-formato
    WITH FRAME f-pg-imp IN WINDOW C-Win.
@@ -1247,27 +1299,38 @@ PROCEDURE local-exit :
 END PROCEDURE.
 
 PROCEDURE pi-executar :
-   do  on error undo, return error
+DEFINE VARIABLE dt-ini AS DATE        NO-UNDO.
+DEFINE VARIABLE dt-fim AS DATE        NO-UNDO.
+
+EMPTY TEMP-TABLE tt-lotes.
+
+    FOR EACH tt-arq.
+        IF SEARCH(tt-arq.nomeArq) <> ? THEN DO:
+            OS-DELETE VALUE(tt-arq.nomeArq).
+        END.
+        DELETE tt-arq.
+    END.
+
+do  on error undo, return error
    on stop  undo, return error:
 
+    run grapi/gr2006.p (input input frame f-pg-imp rs-destino,
+                        input input frame f-pg-imp rs-execucao,
+                        input c-arquivo:screen-value in frame f-pg-imp).
 
-run grapi/gr2006.p (input input frame f-pg-imp rs-destino,
-                    input input frame f-pg-imp rs-execucao,
-                    input c-arquivo:screen-value in frame f-pg-imp).
-
-if return-value = "NOK" then do:
-  apply 'mouse-select-click' to im-pg-imp in frame f-relat.
-  apply 'entry' to c-arquivo in frame f-pg-imp.                   
-  return error.
-end.
+    if return-value = "NOK" then do:
+      apply 'mouse-select-click' to im-pg-imp in frame f-relat.
+      apply 'entry' to c-arquivo in frame f-pg-imp.                   
+      return error.
+    end.
 
     /* Coloque aqui as valida‡äes das outras p ginas, lembrando que elas
        devem apresentar uma mensagem de erro cadastrada, posicionar na p gina
        com problemas e colocar o focus no campo com problemas             */ 
 
-   if  v_cdn_empres_usuar <> ?
-   then
-       assign i-ep-codigo-usuario = v_cdn_empres_usuar.
+    if  v_cdn_empres_usuar <> ?
+       then
+           assign i-ep-codigo-usuario = v_cdn_empres_usuar.
 
    create tt-param.
    assign tt-param.usuario              = c-seg-usuario
@@ -1278,82 +1341,160 @@ end.
           tt-param.formato              = if input frame f-pg-imp rs-formato   = "1" then 1 else 2
           tt-param.v_num_tip_aces_usuar = v_num_tip_aces_usuar
           tt-param.ep-codigo            = i-ep-codigo-usuario.
-   if  tt-param.destino = 1 then
+    if  tt-param.destino = 1 then
        assign tt-param.arquivo = "".
-   else
-   if  tt-param.destino = 2 then
+    else
+    if  tt-param.destino = 2 then
        assign tt-param.arquivo = input frame f-pg-imp c-arquivo.
-   else
+    else
        assign tt-param.arquivo = session:temp-directory + "espd0020" + ".tmp".
-
-    assign tt-param.c-cod-estabel-ini = input frame f-pg-sel c-cod-estabel-ini
-           tt-param.c-cod-estabel-fim = input frame f-pg-sel c-cod-estabel-fim
-           tt-param.c-cod-estabel-fim = input frame f-pg-sel c-cod-estabel-fim
-           tt-param.da-dt-entorig-ini = input frame f-pg-sel da-dt-entorig-ini
-           tt-param.da-dt-entorig-fim = input frame f-pg-sel da-dt-entorig-fim
-           tt-param.c-tp-pedido-ini = input frame f-pg-sel c-tp-pedido-ini
-           tt-param.c-tp-pedido-fim = input frame f-pg-sel c-tp-pedido-fim
-           tt-param.c-nome-abrev-ini = input frame f-pg-sel c-nome-abrev-ini
-           tt-param.c-nome-abrev-fim = input frame f-pg-sel c-nome-abrev-fim
+    
+    assign tt-param.c-cod-estabel-ini  = input frame f-pg-sel c-cod-estabel-ini
+           tt-param.c-cod-estabel-fim  = input frame f-pg-sel c-cod-estabel-fim
+           tt-param.c-cod-estabel-fim  = input frame f-pg-sel c-cod-estabel-fim
+           tt-param.da-dt-entorig-ini  = input frame f-pg-sel da-dt-entorig-ini
+           tt-param.da-dt-entorig-fim  = input frame f-pg-sel da-dt-entorig-fim
+           tt-param.c-tp-pedido-ini    = input frame f-pg-sel c-tp-pedido-ini
+           tt-param.c-tp-pedido-fim    = input frame f-pg-sel c-tp-pedido-fim
+           tt-param.c-nome-abrev-ini   = input frame f-pg-sel c-nome-abrev-ini
+           tt-param.c-nome-abrev-fim   = input frame f-pg-sel c-nome-abrev-fim
            tt-param.i-cod-emitente-ini = input frame f-pg-sel i-cod-emitente-ini
            tt-param.i-cod-emitente-fim = input frame f-pg-sel i-cod-emitente-fim
-           tt-param.c-it-codigo-ini = input frame f-pg-sel c-it-codigo-ini
-           tt-param.c-it-codigo-fim = input frame f-pg-sel c-it-codigo-fim
-           tt-param.da-codrep-ini  = INPUT FRAME f-pg-sel da-codrep-ini
-           tt-param.da-codrep-fim  = INPUT FRAME f-pg-sel da-codrep-fim
-           tt-param.da-mercado-ini  = INPUT FRAME f-pg-sel da-mercado-ini
-           tt-param.da-mercado-fim  = INPUT FRAME f-pg-sel da-mercado-fim
+           tt-param.c-it-codigo-ini    = input frame f-pg-sel c-it-codigo-ini
+           tt-param.c-it-codigo-fim    = input frame f-pg-sel c-it-codigo-fim
+           tt-param.da-codrep-ini      = INPUT FRAME f-pg-sel da-codrep-ini
+           tt-param.da-codrep-fim      = INPUT FRAME f-pg-sel da-codrep-fim
+           tt-param.da-mercado-ini     = INPUT FRAME f-pg-sel da-mercado-ini
+           tt-param.da-mercado-fim     = INPUT FRAME f-pg-sel da-mercado-fim
            tt-param.da-canal-venda-ini = input frame f-pg-sel da-canal-venda-ini
            tt-param.da-canal-venda-fim = input frame f-pg-sel da-canal-venda-fim
            tt-param.c-perc-atend       = input frame f-pg-sel c-perc-atend
            tt-param.l-unig-com         = input frame f-pg-sel l-unig-com
            tt-param.l-simula-embarque  = input frame f-pg-sel l-simula-embarque
+           tt-param.l-simula-multiplos = input frame f-pg-sel l-simula-multiplos
            tt-param.dt-embarque        = input frame f-pg-sel dt-embarque
-.
+           tt-param.dt-embarque-final  = input frame f-pg-sel dt-embarque-final
+    .
+    
+    
+        run grapi/gr2013b.p (input input frame f-pg-imp rs-destino, input input frame f-pg-imp c-arquivo).
+        
+        if return-value = "NOK" then return error.
+        else if input frame f-pg-imp rs-destino = 1 then
+                assign tt-param.arquivo = input frame f-pg-imp c-arquivo.
+        
+        if  session:set-wait-state("general") then.
+    
+        assign v-cod-prog-i-rprun = "pdp/espd0020rp.p".
+        
+        raw-transfer tt-param    to raw-param.
+        
+        if valid-handle(c-excel) then 
+            RELEASE OBJECT c-excel.
+        
+        run grapi/gr2010.p (input input frame f-pg-imp rs-execucao,
+                            input v-cod-prog-i-rprun,
+                            input input frame f-pg-imp c-arquivo,
+                            input input frame f-pg-imp rs-destino,
+                            input raw-param).        
+   
 
-
-run grapi/gr2013b.p (input input frame f-pg-imp rs-destino, input input frame f-pg-imp c-arquivo).
-
-if return-value = "NOK" then return error.
-else if input frame f-pg-imp rs-destino = 1 then
-        assign tt-param.arquivo = input frame f-pg-imp c-arquivo.
-
-   if  session:set-wait-state("general") then.
-    assign v-cod-prog-i-rprun = "pdp/espd0020rp.p".
-
-raw-transfer tt-param    to raw-param.
-
-if valid-handle(c-excel) then 
-    RELEASE OBJECT c-excel.
-
-run grapi/gr2010.p (input input frame f-pg-imp rs-execucao,
-                    input v-cod-prog-i-rprun,
-                    input input frame f-pg-imp c-arquivo,
-                    input input frame f-pg-imp rs-destino,
-                    input raw-param).
-
- if valid-handle(c-excel) then 
-    RELEASE OBJECT c-excel.
-
-
-   if  session:set-wait-state("") then.
+    if valid-handle(c-excel) then 
+        RELEASE OBJECT c-excel.
+/*
+    
+    IF tt-param.l-simula-multiplos THEN DO:
+    
+        iQtArq = 0.
+        
+        FOR EACH tt-arq.
+            iQtArq = iQtArq + 1.
+        END.
+            
+        CREATE "excel.application" chExcel.
+        
+        iQtArq = 0.
+        
+        FOR EACH tt-arq.
+        
+            IF SEARCH(tt-arq.nomeArq) = ? THEN NEXT.
+        
+            iQtArq = iQtArq + 1.    
+        
+            IF iQtArq = 1 THEN DO:    
+                chWorkbook1=chExcel:Workbooks:Open(tt-arq.nomeArq).
+                c-arquivo = tt-arq.nomeArq.
+                chWorksheet1=chWorkbook1:Worksheets(1).      
+                chWorksheet1:NAME = string(IF tt-arq.dtArq = ? THEN TODAY ELSE tt-arq.dtArq,"99-99-9999") + "_" + STRING(iQtArq).
+                NEXT.
+            END.
+        
+            iPos = chWorkbook1:sheets:COUNT .
+        
+            chWorkbook2=chExcel:Workbooks:Open(tt-arq.nomeArq).
+        
+            DO idx = 1 TO (chWorkbook2:sheets:COUNT):
+                iPos = iPos + 1.
+                chWorksheet2=chWorkbook2:Worksheets(idx).
+                chWorksheet2:NAME = string(IF tt-arq.dtArq = ? THEN TODAY ELSE tt-arq.dtArq,"99-99-9999") + "_" + STRING(iPos).
+            END.
+        
+            chWorksheet2=chWorkbook2:Worksheets(1).
+            chWorksheet1=chWorkbook1:Worksheets(chWorkbook1:sheets:COUNT).
+            chWorksheet1:Activate.
+            chWorkbook2:Sheets:move(,chWorksheet1).    
+        END.
+        IF valid-handle(chWorksheet1) THEN DO:
+             chWorksheet1=chWorkbook1:Worksheets(1).
+             chWorksheet1:Activate.    
+             chWorkbook1:SAVE().
+            
+            chExcel:visible=true.
+        
+        END.
+    
+    
+    
+        IF valid-handle(chWorksheet1) THEN RELEASE OBJECT chWorksheet1.
+        IF valid-handle(chWorksheet2) THEN RELEASE OBJECT chWorksheet2.
+        IF valid-handle(chWorkbook1 ) THEN RELEASE OBJECT chWorkbook1 .
+        IF valid-handle(chWorkbook2 ) THEN RELEASE OBJECT chWorkbook2 .
+        IF valid-handle(chExcel )     THEN RELEASE OBJECT chExcel.
+        OS-COPY VALUE(c-arquivo) V:\TEMP.
+    
+     
+        FOR EACH tt-arq.
+    
+            IF SEARCH(tt-arq.nomeArq) <> ? THEN DO:
+                OS-DELETE VALUE(tt-arq.nomeArq).
+        
+            END.
+            DELETE tt-arq.
+        END.
+        
+    
+    END.
+    
+    */
+    if  session:set-wait-state("") then.
     def var c-key-value as char no-undo.
-
+    
     if  tt-param.destino = 3 then do:
-
-get-key-value section "Datasul_EMS2":U key "Show-Report-Program":U value c-key-value.
     
-if c-key-value = "":U or c-key-value = ?  then do:
-    assign c-key-value = "Notepad.exe":U.
-    put-key-value section "Datasul_EMS2":U key "Show-Report-Program":U value c-key-value no-error.
-end.
+        get-key-value section "Datasul_EMS2":U key "Show-Report-Program":U value c-key-value.
+            
+        if c-key-value = "":U or c-key-value = ?  then do:
+            assign c-key-value = "Notepad.exe":U.
+            put-key-value section "Datasul_EMS2":U key "Show-Report-Program":U value c-key-value no-error.
+        end.
+            
+        run winexec (input c-key-value + chr(32) + tt-param.arquivo, input 1).
     
-run winexec (input c-key-value + chr(32) + tt-param.arquivo, input 1).
-
-
+    
     end.
 
- end.
+end.
+
 END PROCEDURE.
 PROCEDURE pi-troca-pagina:
 
