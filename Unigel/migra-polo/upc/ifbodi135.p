@@ -4797,11 +4797,14 @@ PROCEDURE pi-despreza-itens:
 ------------------------------------------------------------------------------*/
     DEFINE VARIABLE ict AS INTEGER     NO-UNDO.
     DEFINE VARIABLE d-qt-aloc AS DECIMAL     NO-UNDO.
-    FOR EACH tt-ped-venda-aux,
-        EACH it-pre-fat NO-LOCK
+    DEFINE VARIABLE i-nr-resumo AS INTEGER     NO-UNDO.
+    i-nr-resumo = 1.
+    FOR EACH tt-ped-venda-aux.
+      FOR EACH it-pre-fat NO-LOCK
        WHERE it-pre-fat.cdd-embarq = i-embarque
          AND it-pre-fat.nome-abrev = tt-ped-venda-aux.nome-abrev
          AND it-pre-fat.nr-pedcli  = tt-ped-venda-aux.nr-pedcli:    
+          i-nr-resumo = it-pre-fat.nr-resumo.
 
             FOR EACH it-dep-fat
                WHERE it-dep-fat.cdd-embarq   = it-pre-fat.cdd-embarq
@@ -4830,19 +4833,18 @@ PROCEDURE pi-despreza-itens:
                        tt-aloc-man.i-sequen     = i-seq-aloc-man
                        tt-aloc-man.nr-entrega   = it-pre-fat.nr-entrega.
             END.
+      END.
 
-            FOR EACH   tt-despreza
-                 WHERE tt-despreza.cdd-embarq   = it-pre-fat.cdd-embarq  
+      FOR EACH   tt-despreza
+                 WHERE tt-despreza.cdd-embarq   = i-embarque                  
                   /* AND tt-despreza.nr-resumo    = it-pre-fat.nr-resumo   */
-                   AND tt-despreza.nome-abrev   = it-pre-fat.nome-abrev  
-                   AND tt-despreza.nr-pedcli    = it-pre-fat.nr-pedcli   
-                   AND tt-despreza.nr-sequencia = it-pre-fat.nr-sequencia
-                   AND tt-despreza.it-codigo    = it-pre-fat.it-codigo     EXCLUSIVE-LOCK .  
+                   AND tt-despreza.nome-abrev   = tt-ped-venda-aux.nome-abrev
+                   AND tt-despreza.nr-pedcli    = tt-ped-venda-aux.nr-pedcli   EXCLUSIVE-LOCK .  
 
                   
                  FIND FIRST tt-aloc-man WHERE 
                      tt-aloc-man.cdd-embarq    =  tt-despreza.cdd-embarq      and
-                     tt-aloc-man.nr-resumo     =  it-pre-fat.nr-resumo       and
+                     tt-aloc-man.nr-resumo     =  i-nr-resumo       and
                      tt-aloc-man.nome-abrev    =  tt-despreza.nome-abrev      and
                      tt-aloc-man.nr-pedcli     =  tt-despreza.nr-pedcli       and
                      tt-aloc-man.nr-sequencia  =  tt-despreza.nr-sequencia and
@@ -4856,7 +4858,7 @@ PROCEDURE pi-despreza-itens:
                  IF NOT AVAIL tt-aloc-man THEN DO:
                      CREATE tt-aloc-man.
                      ASSIGN  tt-aloc-man.cdd-embarq    =  tt-despreza.cdd-embarq    
-                             tt-aloc-man.nr-resumo     =  it-pre-fat.nr-resumo   
+                             tt-aloc-man.nr-resumo     =  i-nr-resumo  
                              tt-aloc-man.nome-abrev    =  tt-despreza.nome-abrev    
                              tt-aloc-man.nr-pedcli     =  tt-despreza.nr-pedcli     
                              tt-aloc-man.nr-sequencia  =  tt-despreza.nr-sequencia 
