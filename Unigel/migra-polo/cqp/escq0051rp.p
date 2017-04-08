@@ -190,7 +190,18 @@ DEFINE TEMP-TABLE tt-am-cq-result-laudo LIKE am-cq-result-laudo
     /*---------------------------------------*/
 
 
+FUNCTION fi-unid-medida RETURNS char (INPUT p-valor AS INTEGER, INPUT p-medida AS INTEGER):
+DEFINE VARIABLE c-valor AS CHARACTER   NO-UNDO.
 
+    c-valor = STRING(p-valor).
+           
+        IF p-medida = 2 THEN
+            c-valor = trim(STRING(p-valor / 25.4,">>>>>>9.99")).
+        IF p-medida = 3 THEN
+            c-valor = c-valor + " / " + trim(STRING(p-valor / 25.4,">>>>>>9.99")). 
+
+    RETURN c-valor.
+END FUNCTION.
 
 /****************** INCLUDE COM VARIµVEIS GLOBAIS *********************/
 
@@ -337,6 +348,7 @@ DEFINE VARIABLE pallet-x11    AS CHARACTER  FORMAT "x(180)" NO-UNDO.
 DEFINE VARIABLE pallet-x12    AS CHARACTER  FORMAT "x(180)" NO-UNDO.
 DEFINE VARIABLE pallet-x13    AS CHARACTER  FORMAT "x(180)" NO-UNDO.
 
+DEFINE VARIABLE i-medida        AS INTEGER                 NO-UNDO.
 DEFINE VARIABLE conta-ped       AS INTEGER                 NO-UNDO.
 DEFINE VARIABLE nome-estabel-jr AS CHARACTER               NO-UNDO.
 DEFINE VARIABLE sai-laudo       AS logical                 NO-UNDO.
@@ -1908,11 +1920,15 @@ PROCEDURE pi-gera-laudo:
              polo-laudo-cliente.nome-abrev = nome-abrev-jr
              NO-LOCK NO-ERROR.
 
+         i-medida = 0 .
          IF AVAIL polo-laudo-cliente THEN 
              ASSIGN tt-am-cq-laudo.tipo-envio-email = 
-                 int(substring(polo-laudo-cliente.char-1,1,1)) NO-ERROR.
+                 int(substring(polo-laudo-cliente.char-1,1,1))
+                    i-medida = int(substring(polo-laudo-cliente.char-1,101,1))  NO-ERROR.
          ELSE
              ASSIGN tt-am-cq-laudo.tipo-envio-email = 3.
+         IF i-medida = 0 THEN
+                 i-medida = 1.
 
          IF tt-am-cq-laudo.tipo-envio-email < 1 OR
             tt-am-cq-laudo.tipo-envio-email > 3 THEN
@@ -1943,16 +1959,16 @@ PROCEDURE pi-gera-laudo:
              ASSIGN pedido-x1 = (TRIM (pedido-x1) + " " + STRING (ttped-nr-pedido) + "(" + STRING(ttped-ems-pedcli) + ")").
     
              IF conta-ped < 12 THEN
-                 ASSIGN larg-x1 = (TRIM (larg-x1) + " " + STRING (ttped-larg))
-                        diin-x1 = (TRIM (diin-x1) + " " + STRING (ttped-diin))
-                        diex-x1 = (TRIM (diex-x1) + " " + STRING (ttped-diex))
+                 ASSIGN larg-x1 = (TRIM (larg-x1) + " " + STRING (fi-unid-medida(INPUT ttped-larg, INPUT i-medida)))
+                        diin-x1 = (TRIM (diin-x1) + " " + STRING (fi-unid-medida(INPUT ttped-diin, INPUT i-medida)))
+                        diex-x1 = (TRIM (diex-x1) + " " + STRING (fi-unid-medida(INPUT ttped-diex, INPUT i-medida)))
                         zint-jr = (TRIM (zint-jr) + " " + STRING (ttped-zint))
                         prodclie-jrx = (TRIM (prodclie-jrx) + " " + STRING (ttped-prodclie))
                         qtdbob-x1 = (TRIM (qtdbob-x1) + " " + STRING (ttped-qtdbob)).
                   ELSE
-                      ASSIGN larg-x2 = (TRIM (larg-x2) + " " + STRING (ttped-larg))
-                             diin-x2 = (TRIM (diin-x2) + " " + STRING (ttped-diin))
-                             diex-x2 = (TRIM (diex-x2) + " " + STRING (ttped-diex))
+                      ASSIGN larg-x2 = (TRIM (larg-x2) + " " + STRING (fi-unid-medida(INPUT ttped-larg, INPUT i-medida)))
+                             diin-x2 = (TRIM (diin-x2) + " " + STRING (fi-unid-medida(INPUT ttped-diin, INPUT i-medida)))
+                             diex-x2 = (TRIM (diex-x2) + " " + STRING (fi-unid-medida(INPUT ttped-diex, INPUT i-medida)))
                              zint-jr = (TRIM (zint-jr) + " " + STRING (ttped-zint))
                              prodclie-jrx = (TRIM (prodclie-jrx) + " " + STRING (ttped-prodclie))
                              qtdbob-x2 = (TRIM (qtdbob-x2) + " " + STRING (ttped-qtdbob)).
