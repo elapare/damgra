@@ -251,6 +251,8 @@ define temp-table tt-fat NO-UNDO
     FIELD var-outros      AS DECIMAL FORMAT "->>>>,>>9.99"  LABEL "Embal.Out"
     FIELD var-terc        AS DECIMAL FORMAT "->>>>,>>9.99"  LABEL "Embal.Terc"
     FIELD var-transito    AS DECIMAL FORMAT "->>>>,>>9.99"  LABEL "Embal.Trans"
+    field var-srg-rs      AS DECIMAL FORMAT "->>>>,>>9.99"  LABEL "Embal.SRGRS"  
+    field var-srg-aru     AS DECIMAL FORMAT "->>>>,>>9.99"  LABEL "Embal.SRGARU" 
     FIELD nome-merc       AS CHARACTER FORMAT "X(7)"        LABEL "Mercado"
     FIELD dep-terceiro    AS CHAR FORMAT "x12)"
     field tem-transf      AS CHAR FORMAT "x(3)"
@@ -296,7 +298,8 @@ define temp-table tt-fat NO-UNDO
     FIELD preco-sem-desc   AS DEC
     FIELD embarque         AS CHAR
     FIELD desc-embarque    AS CHAR
-    FIELD dt-simula-embarque AS DATE.
+    FIELD dt-simula-embarque AS DATE
+    FIELD ord-prod         AS CHAR.
     
 
 /****************** Defini‡ao de Forms do Relat¢rio 132 Colunas ***************************************/ 
@@ -505,6 +508,8 @@ DEFINE VARIABLE var-diex     LIKE tt-fat.var-diex.
 DEFINE VARIABLE var-ung-rs   LIKE tt-fat.var-ung-rs    .
 DEFINE VARIABLE var-mtn      LIKE tt-fat.var-mtn    .
 DEFINE VARIABLE var-ung-sbc  LIKE tt-fat.var-ung-sbc    .
+DEFINE VARIABLE var-srg-rs   LIKE tt-fat.var-srg-rs    .
+DEFINE VARIABLE var-srg-aru  LIKE tt-fat.var-srg-aru    .
 DEFINE VARIABLE var-sbc      LIKE tt-fat.var-sbc    .
 DEFINE VARIABLE var-outros   LIKE tt-fat.var-outros .
 DEFINE VARIABLE var-outros-TOT   LIKE tt-fat.var-outros .
@@ -855,6 +860,8 @@ for each ped-item where
      var-ung-rs   = 0
      var-mtn      = 0
      var-ung-sbc  = 0
+     var-srg-rs   = 0
+     var-srg-aru  = 0
      var-sbc      = 0
      var-outros   = 0
      var-terc     = 0
@@ -987,6 +994,8 @@ for each ped-item where
         tt-fat.var-pedcli      = var-pedcli
         tt-fat.nr-ext          = ext-jr
         tt-fat.var-ung-rs      = var-ung-rs
+        tt-fat.var-srg-rs      = var-srg-rs
+        tt-fat.var-srg-aru     = var-srg-aru
         tt-fat.var-mtn         = var-mtn
         tt-fat.var-ung-sbc     = var-ung-sbc
         tt-fat.var-sbc         = var-sbc
@@ -1025,6 +1034,7 @@ for each ped-item where
         tt-fat.desc-embarque   = ""
         tt-fat.perc-desc       = 0
         tt-fat.preco-sem-desc  = 0.
+        RUN pi-acha-ord-prod (INPUT-OUTPUT tt-fat.ord-prod).
 
     FIND FIRST am-pd-prod-cliente WHERE
          am-pd-prod-cliente.cod-emitente  = (IF AVAIL if-ped-venda and AVAIL bf-ped-venda then bf-ped-venda.cod-emitente else ped-venda.cod-emitente) AND 
@@ -1148,8 +1158,8 @@ for each ped-item where
 
     ELSE DO:
 
-        ASSIGN saldo-pedido = (tt-fat.var-ung-rs + tt-fat.var-mtn + tt-fat.var-ung-sbc +
-                               tt-fat.var-sbc + tt-fat.var-outros + tt-fat.var-terc + 
+        ASSIGN saldo-pedido = (tt-fat.var-ung-rs + tt-fat.var-mtn + tt-fat.var-ung-sbc + tt-fat.var-srg-aru +
+                               tt-fat.var-sbc + tt-fat.var-outros + tt-fat.var-terc +    tt-fat.var-srg-rs + 
                                tt-fat.var-transito).  
 
           /*  IF NOT AVAIL if-ped-venda AND tt-fat.liber-fat = "sim" AND tt-fat.tp-pedido <> "E" AND
@@ -1159,8 +1169,8 @@ for each ped-item where
                        tt-fat.desc-embarque = "FAT". 
             */
             ASSIGN i-idx   = 1 
-                   d-saldo-terc-sp = tt-fat.var-ung-sbc + tt-fat.var-sbc
-                   d-saldo-terc-rs = tt-fat.var-ung-rs + tt-fat.var-mtn.
+                   d-saldo-terc-sp = tt-fat.var-ung-sbc + tt-fat.var-sbc + tt-fat.var-srg-aru
+                   d-saldo-terc-rs = tt-fat.var-ung-rs + tt-fat.var-mtn + tt-fat.var-srg-rs.
 
             DO WHILE i-idx < 10.
 
@@ -1197,7 +1207,7 @@ for each ped-item where
 
                IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
                 ASSIGN tt-fat.embarque = "OK"
-                       tt-fat.desc-embarque = (IF tt-param.l-simula-embarque THEN "FAT" ELSE "FAT ATRASO")
+                       tt-fat.desc-embarque = (IF tt-param.l-simula-embarque THEN "" ELSE "FAT" /*"FAT ATRASO"*/ )
                        tt-fat.dt-simula-embarque = dt-atu. 
 
 
@@ -1215,7 +1225,7 @@ for each ped-item where
             IF (tt-fat.cod-estabel-fat = "432" OR tt-fat.cod-estabel-fat = "443") AND tt-fat.liber-fat = "sim" AND  /*solic-318*/ 
                 tt-fat.dt-entrega <= dt-atu AND 
                 tt-fat.dt-entrega + (IF weekday(dt-atu) = 2 THEN 3 ELSE 1) <> dt-atu AND
-               ( tt-fat.var-ung-sbc + tt-fat.var-sbc + d-saldo-terc-sp) > 0 THEN
+               ( tt-fat.var-srg-aru + tt-fat.var-ung-sbc + tt-fat.var-sbc + d-saldo-terc-sp) > 0 THEN
 
                 IF NOT tt-param.l-simula-multiplos OR tt-fat.dt-simula-embarque = ? OR tt-fat.dt-simula-embarque = dt-atu THEN
                     ASSIGN tt-fat.embarque = "OK"
@@ -1290,6 +1300,10 @@ for each ped-item where
                              tt-fat.embarque = ""
                              tt-fat.dt-simula-embarque = dt-atu.
 
+               IF tt-fat.embarque = "OK" AND tt-fat.dt-entrega = TODAY AND tt-param.l-simula-multiplos THEN
+                      ASSIGN tt-fat.desc-embarque = ""
+                             tt-fat.embarque = "".
+                  
         END.
     END. /* else do */
 
@@ -1316,23 +1330,23 @@ IF tt-param.destino = 4 THEN DO:
             
             IF AVAIL emitente THEN DO:
 
-                IF i-idx = 1 THEN ASSIGN c-relatorio:range("AI" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 2 THEN ASSIGN c-relatorio:range("AJ" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 3 THEN ASSIGN c-relatorio:range("AK" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 4 THEN ASSIGN c-relatorio:range("AL" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 5 THEN ASSIGN c-relatorio:range("AM" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 6 THEN ASSIGN c-relatorio:range("AN" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 7 THEN ASSIGN c-relatorio:range("AO" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 1 THEN ASSIGN c-relatorio:range("AK" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 2 THEN ASSIGN c-relatorio:range("AL" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 3 THEN ASSIGN c-relatorio:range("AM" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 4 THEN ASSIGN c-relatorio:range("AN" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 5 THEN ASSIGN c-relatorio:range("AO" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 6 THEN ASSIGN c-relatorio:range("AP" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 7 THEN ASSIGN c-relatorio:range("AQ" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
 
                 ASSIGN i-linhax = 7.
 
-                IF i-idx = 1 THEN ASSIGN c-relatorio:range("AI" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 2 THEN ASSIGN c-relatorio:range("AJ" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 3 THEN ASSIGN c-relatorio:range("AK" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 4 THEN ASSIGN c-relatorio:range("AL" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 5 THEN ASSIGN c-relatorio:range("AM" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 6 THEN ASSIGN c-relatorio:range("AN" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
-                IF i-idx = 7 THEN ASSIGN c-relatorio:range("AO" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 1 THEN ASSIGN c-relatorio:range("AK" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 2 THEN ASSIGN c-relatorio:range("AL" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 3 THEN ASSIGN c-relatorio:range("AM" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 4 THEN ASSIGN c-relatorio:range("AN" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 5 THEN ASSIGN c-relatorio:range("AO" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 6 THEN ASSIGN c-relatorio:range("AP" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
+                IF i-idx = 7 THEN ASSIGN c-relatorio:range("AQ" + STRING(i-linhax)):VALUE = cod-estabel-terc[i-idx] + "-" + string(trim(emitente.nome-abrev) + "-" + emitente.estado).     
 
 
                 ASSIGN i-linhax = 4.
@@ -1343,13 +1357,13 @@ IF tt-param.destino = 4 THEN DO:
         ELSE DO:
         
         
-             IF i-idx = 1 THEN ASSIGN c-relatorio:Columns("AI:AI"):Hidden = True.
-             IF i-idx = 2 THEN ASSIGN c-relatorio:Columns("AJ:AJ"):Hidden = True.
-             IF i-idx = 3 THEN ASSIGN c-relatorio:Columns("AK:AK"):Hidden = True.
-             IF i-idx = 4 THEN ASSIGN c-relatorio:Columns("AL:AL"):Hidden = True.
-             IF i-idx = 5 THEN ASSIGN c-relatorio:Columns("AM:AM"):Hidden = True.
-             IF i-idx = 6 THEN ASSIGN c-relatorio:Columns("AN:AN"):Hidden = True.
-             IF i-idx = 7 THEN ASSIGN c-relatorio:Columns("AO:AO"):Hidden = True.            
+             IF i-idx = 1 THEN ASSIGN c-relatorio:Columns("AK:AK"):Hidden = True.
+             IF i-idx = 2 THEN ASSIGN c-relatorio:Columns("AL:AL"):Hidden = True.
+             IF i-idx = 3 THEN ASSIGN c-relatorio:Columns("AM:AM"):Hidden = True.
+             IF i-idx = 4 THEN ASSIGN c-relatorio:Columns("AN:AN"):Hidden = True.
+             IF i-idx = 5 THEN ASSIGN c-relatorio:Columns("AO:AO"):Hidden = True.
+             IF i-idx = 6 THEN ASSIGN c-relatorio:Columns("AP:AP"):Hidden = True.
+             IF i-idx = 7 THEN ASSIGN c-relatorio:Columns("AQ:AQ"):Hidden = True.            
          END.
 
         ASSIGN i-idx = i-idx + 1.
@@ -1357,8 +1371,8 @@ IF tt-param.destino = 4 THEN DO:
     END.
 
     IF  tt-param.l-simula-embarque THEN DO:
-         ASSIGN c-relatorio:Columns("AR:AS"):Hidden = TRUE
-                c-relatorio:Columns("AX:BD"):Hidden = TRUE
+         ASSIGN c-relatorio:Columns("AT:AU"):Hidden = TRUE
+                c-relatorio:Columns("AZ:BF"):Hidden = TRUE
                 c-relatorio:range("J6"):VALUE = "Data Simula"
                 c-relatorio:range("J7"):VALUE = "Embarque"
                 c-relatorio:Columns("j:j"):ColumnWidth = 10
@@ -1367,11 +1381,11 @@ IF tt-param.destino = 4 THEN DO:
                 c-relatorio:Columns("A:A"):Hidden = True.
                 c-relatorio:Columns("Z:AD"):Hidden = True.
 
-                IF NOT tt-param.l-simula-multiplos THEN
+                IF NOT tt-param.l-simula-multiplos OR TRUE THEN
                      c-relatorio:Columns("j:j"):Hidden = True.
 
              IF var-outros-TOT = 0 THEN
-                  ASSIGN c-relatorio:Columns("AP:AP"):Hidden = True.
+                  ASSIGN c-relatorio:Columns("AR:AR"):Hidden = True.
     END.
     ELSE DO:
        ASSIGN c-relatorio:Columns("O:P"):Hidden = True.
@@ -1503,14 +1517,17 @@ for each tt-fat WHERE (IF tt-param.l-simula-multiplos AND tt-fat.tp-pedido = "E"
                STRING(tt-fat.preco-ex-imp )                  + chr(160) +
                STRING(tt-fat.preco-icms   )                  + chr(160) +
                STRING(tt-fat.total-ped * 
-                      (tt-fat.var-ung-rs + tt-fat.var-mtn + tt-fat.var-ung-sbc +
-                       tt-fat.var-sbc + tt-fat.var-outros + tt-fat.var-terc + 
+                      (tt-fat.var-ung-rs + tt-fat.var-mtn + tt-fat.var-ung-sbc +  tt-fat.var-srg-aru +
+                       tt-fat.var-sbc + tt-fat.var-outros + tt-fat.var-terc +     tt-fat.var-srg-rs  +
                        tt-fat.var-transito))                 + chr(160) +
 
                STRING(tt-fat.var-mtn      )                 + chr(160) +
                STRING(tt-fat.var-transito )                 + chr(160) +
                STRING(tt-fat.var-ung-rs   )                 + chr(160) +
                STRING(tt-fat.var-ung-sbc  )                 + chr(160) +
+               STRING(tt-fat.var-srg-rs   )                 + chr(160) +
+               STRING(tt-fat.var-srg-aru  )                 + chr(160) +
+
 
                STRING(IF tt-fat.sld-emitente [1] <> 0 THEN tt-fat.sld-emitente [1] ELSE 0)                 + chr(160) +
                STRING(IF tt-fat.sld-emitente [2] <> 0 THEN tt-fat.sld-emitente [2] ELSE 0)                 + chr(160) +
@@ -1522,8 +1539,8 @@ for each tt-fat WHERE (IF tt-param.l-simula-multiplos AND tt-fat.tp-pedido = "E"
 
                STRING(tt-fat.var-outros)                 + chr(160) +
 
-               STRING((tt-fat.var-ung-rs + tt-fat.var-mtn + tt-fat.var-ung-sbc +                
-                      tt-fat.var-sbc + tt-fat.var-outros + tt-fat.var-terc +      
+               STRING((tt-fat.var-ung-rs + tt-fat.var-mtn + tt-fat.var-ung-sbc +  tt-fat.var-srg-aru +
+                      tt-fat.var-sbc + tt-fat.var-outros + tt-fat.var-terc     +  tt-fat.var-srg-rs  +
                       tt-fat.var-transito))               + chr(160) +
 
 
@@ -1549,10 +1566,13 @@ for each tt-fat WHERE (IF tt-param.l-simula-multiplos AND tt-fat.tp-pedido = "E"
                STRING(tt-fat.dt-implant      )                 + chr(160) +
 
           
-               STRING(tt-fat.cod-prod-cliente)                /* + chr(160)*/ .
+               STRING(tt-fat.cod-prod-cliente)                 + chr(160) +
+               STRING(tt-fat.ord-prod   )                /* + chr(160) +*/ .                                                                                 
+
 
                       ASSIGN var-outros-TOT = var-outros-TOT + tt-fat.var-outros.
 
+                      /*
         FIND FIRST if-ped-venda WHERE
             if-ped-venda.nr-pedido = tt-fat.nr-pedido
             NO-LOCK NO-ERROR.
@@ -1583,6 +1603,7 @@ for each tt-fat WHERE (IF tt-param.l-simula-multiplos AND tt-fat.tp-pedido = "E"
             END.
 
         END.
+        */
  
         ASSIGN c-relatorio:range("A" + STRING(i-linhax)):value = string(linha-jr).  
          
@@ -1668,8 +1689,10 @@ for each tt-fat WHERE (IF tt-param.l-simula-multiplos AND tt-fat.tp-pedido = "E"
     END.
 
     ASSIGN var-mtn      = 0
-           var-ung-rs      = 0
-           var-ung-sbc      = 0
+           var-ung-rs   = 0
+           var-ung-sbc  = 0
+           var-srg-rs   = 0
+           var-srg-aru  = 0
            var-sbc      = 0
            var-outros   = 0
            var-transito = 0
@@ -1923,11 +1946,17 @@ PROCEDURE pi-saldo-pallet.
              IF (saldo-estoq.cod-estabel = "422" OR saldo-estoq.cod-estabel = "412") THEN /*solic-318*/ 
                  ASSIGN var-mtn = var-mtn + saldo-estoq.qtidade-atu.
              ELSE
-              IF saldo-estoq.cod-estabel = "432" OR saldo-estoq.cod-estabel = "443" THEN  /*solic-318*/ 
+              IF saldo-estoq.cod-estabel = "432"  THEN  /*solic-318*/ 
                  ASSIGN var-ung-sbc = var-ung-sbc + saldo-estoq.qtidade-atu.
               ELSE
-              IF saldo-estoq.cod-estabel = "434" OR saldo-estoq.cod-estabel = "442" THEN  /*solic-318*/ 
+              IF saldo-estoq.cod-estabel = "434"  THEN  /*solic-318*/ 
                  ASSIGN var-ung-rs = var-ung-rs + saldo-estoq.qtidade-atu.
+              ELSE
+              IF saldo-estoq.cod-estabel = "443" THEN  /*solic-318*/ 
+                 ASSIGN var-srg-aru = var-srg-aru + saldo-estoq.qtidade-atu.
+              ELSE
+              IF saldo-estoq.cod-estabel = "442" THEN  /*solic-318*/ 
+                 ASSIGN var-srg-rs = var-srg-rs + saldo-estoq.qtidade-atu.
               ELSE
               IF saldo-estoq.cod-estabel = "421" OR saldo-estoq.cod-estabel = "411" THEN  /*solic-318*/ 
                   ASSIGN var-outros = var-outros + saldo-estoq.qtidade-atu.
@@ -1936,6 +1965,10 @@ PROCEDURE pi-saldo-pallet.
                    ASSIGN var-sbc = var-sbc + saldo-estoq.qtidade-atu.
                ELSE
                  ASSIGN var-outros = var-outros + saldo-estoq.qtidade-atu.
+
+                  
+                  
+
 
           ASSIGN qtde-jr = qtde-jr + saldo-estoq.qtidade-atu.
           
@@ -2076,3 +2109,20 @@ return 'OK'.
 
 
 
+PROCEDURE pi-acha-ord-prod.
+   DEFINE BUFFER bop-ped-venda    FOR ped-venda.
+   DEFINE BUFFER bop-if-ped-venda FOR if-ped-venda.
+   
+   DEFINE INPUT-OUTPUT PARAM c-ord-prod AS CHARACTER   NO-UNDO.
+
+   c-ord-prod = "".
+   FOR EACH  bop-ped-venda   WHERE bop-ped-venda.nr-pedcli = ped-venda.nr-pedcli NO-LOCK,
+       EACH ord-prod WHERE ord-prod.nome-abrev = bop-ped-venda.nome-abrev AND
+                            ord-prod.nr-pedido = bop-ped-venda.nr-pedcli AND
+                            ord-prod.nr-sequencia = ped-item.nr-sequencia  and
+                            ord-prod.it-codigo = ped-item.it-codigo NO-LOCK.
+       c-ord-prod = c-ord-prod + (IF c-ord-prod = "" THEN "" ELSE "/ ") + STRING(ord-prod.nr-ord-produ).
+       
+   END.
+
+END PROCEDURE.

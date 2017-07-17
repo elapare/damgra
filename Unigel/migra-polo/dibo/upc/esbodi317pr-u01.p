@@ -63,7 +63,7 @@ IF AVAIL tt-epc THEN DO:
 
         FIND FIRST estabelec WHERE estabelec.cod-estabel = wt-docto.cod-estabel NO-LOCK NO-ERROR.
     
-        IF AVAIL estabelec AND (estabelec.ep-codigo <> "420" and estabelec.ep-codigo <> "410" and estabelec.ep-codigo <> "700" and estabelec.ep-codigo <> "430") THEN DO: /*solic-318*/ 
+        IF AVAIL estabelec AND (estabelec.ep-codigo <> "420" and estabelec.ep-codigo <> "410" and estabelec.ep-codigo <> "700"  and estabelec.ep-codigo <> "430" and estabelec.ep-codigo <> "440") THEN DO: /*solic-318*/ 
             RUN limpa-handle.
             RETURN.
         END.

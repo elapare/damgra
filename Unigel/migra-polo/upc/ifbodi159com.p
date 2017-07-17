@@ -311,7 +311,14 @@ IF p-ind-event = "beforeCompleteOrder" THEN DO:
         
                             /* Altera cliente pedido origem */
                             IF if-estabelec.cod-estab-inter = "" THEN DO:
-                                c-cod-estab-dest = if if-estabelec.cod-estab-orig = "412" then "442" else if if-estabelec.cod-estab-orig = "422" then "434" else  if-estabelec.cod-estab-dest.  /*solic-318*/  /* regra fixa porque para 422 TUDO tem de passar pela UNG-RS */
+                                 c-cod-estab-dest = if-estabelec.cod-estab-dest.  /*solic-318*/  /* regra fixa porque para 422 TUDO tem de passar pela UNG-RS */
+
+                                IF if-estabelec.cod-estab-dest = "432" THEN
+                                    c-cod-estab-dest = "434".
+                                IF if-estabelec.cod-estab-dest = "443" THEN
+                                    c-cod-estab-dest = "442".
+
+                               
                                 
                                 RUN pi-alt-cliente (INPUT c-cod-estab-dest, INPUT NO).
                             END.

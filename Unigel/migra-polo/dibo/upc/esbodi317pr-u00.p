@@ -50,7 +50,7 @@ IF  AVAIL tt-epc AND  p-ind-event = "afterGeraWtItDoctoComItensDoEmbarque" THEN 
 
            FIND FIRST estabelec WHERE estabelec.cod-estabel = wt-docto.cod-estabel NO-LOCK NO-ERROR.
 
-        IF AVAIL estabelec AND (estabelec.ep-codigo = "420" or estabelec.ep-codigo = "410" or estabelec.ep-codigo = "700" or estabelec.cod-estabel = "432" or estabelec.cod-estabel = "443") THEN DO:  /*solic-318*/ 
+        IF AVAIL estabelec AND (estabelec.ep-codigo = "420" or estabelec.ep-codigo = "410" or estabelec.ep-codigo = "700" or estabelec.cod-estabel = "442" or estabelec.cod-estabel = "434" or estabelec.cod-estabel = "432" or estabelec.cod-estabel = "443") THEN DO:  /*solic-318*/ 
 
         
              

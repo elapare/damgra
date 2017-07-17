@@ -115,7 +115,8 @@ CREATE WIDGET-POOL.
 **                da API ceapi001.p
 **
 **************************************************************************/
-
+{cep/ceapi001k.i}
+    /*
 def temp-table tt-movto  
     field cod-versao-integracao as integer format "999"
     field cod-prog-orig         like movto-estoq.cod-prog-orig
@@ -193,7 +194,8 @@ def temp-table tt-movto
     field i-sequen              as integer
     field gera-saldo            as logical init no
     field qt-alocada            as decimal.    
-     
+      */
+
 /* Fim Include ceapi001.i */
      /* Definicao de temp-table do movto-estoq */
 /*******************************************************************
@@ -7258,7 +7260,7 @@ PROCEDURE pi-transf-pallet :
   Parameters:  <none>
   Notes:       
 ------------------------------------------------------------------------------*/
-              
+DEF VAR h-ceapi001k                          AS HANDLE              NO-UNDO.              
    if TODAY > pol-param-estab.data-palete  then 
        ASSIGN da-transf = pol-param-estab.data-palete.
    ELSE assign da-transf = TODAY.
@@ -7338,7 +7340,7 @@ PROCEDURE pi-transf-pallet :
               tt-movto.cod-prog-orig          = "essf0003"
               tt-movto.tipo-trans             = 2
               tt-movto.esp-docto              = 33
-              tt-movto.conta-contabil         = param-estoq.conta-transf
+              /*tt-movto.conta-contabil         = param-estoq.conta-transf*/
               tt-movto.dt-trans               = da-transf
               tt-movto.dt-vali-lote           = pallet.data-pallet
               tt-movto.nro-docto              = pallet.nro-docto
@@ -7361,7 +7363,7 @@ PROCEDURE pi-transf-pallet :
               tt-movto.cod-prog-orig          = "essf0003"
               tt-movto.tipo-trans             = 1
               tt-movto.esp-docto              = 33
-              tt-movto.conta-contabil         = param-estoq.conta-transf
+              /*tt-movto.conta-contabil         = param-estoq.conta-transf*/
               tt-movto.dt-trans               = da-transf
               tt-movto.dt-vali-lote           = pallet.data-pallet 
               tt-movto.nro-docto              = pallet.nro-docto
@@ -7377,10 +7379,20 @@ PROCEDURE pi-transf-pallet :
               tt-movto.usuario                = c-seg-usuario.
        
        run pi-acompanhar in h-acomp (input "Efetivando Transa‡Æo...Aguarde...").
-
+      /*
        run cep/ceapi001.p (input-output table tt-movto,
                            input-output table tt-erro,
                            input yes).     
+        */
+
+        RUN cep/ceapi001k.p PERSISTENT SET h-ceapi001k.
+
+        RUN pi-execute IN h-ceapi001k (INPUT-OUTPUT TABLE tt-movto,
+                                       INPUT-OUTPUT TABLE tt-erro,
+                                       INPUT yes).
+        
+        DELETE PROCEDURE h-ceapi001k.
+        ASSIGN h-ceapi001k = ?.
     
        FIND FIRST tt-erro NO-LOCK NO-ERROR.
        IF AVAIL tt-erro or return-value = "NOK":U THEN DO:

@@ -920,6 +920,8 @@ FOR EACH tt-notas
 
     IF  tt-param.l-nota AND tt-param.l-consig THEN
         RUN pi-consignacao.
+
+     
    
     /*IF  FIRST(IF s-desc THEN item.desc-item
             ELSE IF rs-classif = 14 THEN ITEM.it-codigo
@@ -1015,6 +1017,7 @@ FOR EACH tt-notas
                 AND   devol-cli.nr-sequencia = it-nota-fisc.nr-seq-fat  
                 AND   devol-cli.cod-emitente = nota-fiscal.cod-emitente NO-LOCK .
 
+                 
                 IF  t-devoluc = NO OR (devol-cli.dt-devol   >= dt-emis-nota-ini and devol-cli.dt-devol    <= dt-emis-nota-fim) THEN DO:
         
                     ASSIGN aux-qt-faturada-dev  = -1 * (devol-cli.qt-devolvida)
@@ -1113,19 +1116,22 @@ FOR EACH tt-notas
                     
                             hExcel:Range(trim(entry(iColimp + 2,aCel) + string(ilin))):value = nota-fiscal.cod-estabel. 
                             hExcel:Range(trim(entry(iColimp + 3,aCel) + string(ilin))):value = it-nota-fisc.nr-pedcli.
-                            hExcel:Range(trim(entry(iColimp + 4,aCel) + string(ilin))):value = item.fm-codigo   + (IF AVAIL familia THEN "/" + familia.descricao ELSE "") .
-                            hExcel:Range(trim(entry(iColimp + 5,aCel) + string(ilin))):value = item.fm-cod-com  + (IF AVAIL fam-comerc THEN "/" + fam-comerc.descricao ELSE "").
+                            hExcel:Range(trim(entry(iColimp + 4,aCel) + string(ilin))):value = item.fm-codigo   .
+                            hExcel:Range(trim(entry(iColimp + 5,aCel) + string(ilin))):value = (IF AVAIL familia THEN familia.descricao ELSE "") .
+
+                            hExcel:Range(trim(entry(iColimp + 6,aCel) + string(ilin))):value = item.fm-cod-com  .
+                            hExcel:Range(trim(entry(iColimp + 7,aCel) + string(ilin))):value = (IF AVAIL fam-comerc THEN fam-comerc.descricao ELSE "").
                             
-                            hExcel:Range(trim(entry(iColimp + 6,aCel) + string(ilin))):value = it-nota-fisc.nr-nota-fis. 
-                            hExcel:Range(trim(entry(iColimp + 7,aCel) + string(ilin))):value = IF nota-fiscal.cidade-cif <> "" THEN "CIF" ELSE "FOB". 
-                            hExcel:Range(trim(entry(iColimp + 8,aCel) + string(ilin))):value = nota-fiscal.nome-transp. 
-                            hExcel:Range(trim(entry(iColimp + 9,aCel) + string(ilin))):value = nota-fiscal.cidade. 
-                            hExcel:Range(trim(entry(iColimp + 10,aCel) + string(ilin))):value = nota-fiscal.estado.
+                            hExcel:Range(trim(entry(iColimp + 8,aCel) + string(ilin))):value = it-nota-fisc.nr-nota-fis. 
+                            hExcel:Range(trim(entry(iColimp + 9,aCel) + string(ilin))):value = IF nota-fiscal.cidade-cif <> "" THEN "CIF" ELSE "FOB". 
+                            hExcel:Range(trim(entry(iColimp + 10,aCel) + string(ilin))):value = nota-fiscal.nome-transp. 
+                            hExcel:Range(trim(entry(iColimp + 11,aCel) + string(ilin))):value = nota-fiscal.cidade. 
+                            hExcel:Range(trim(entry(iColimp + 12,aCel) + string(ilin))):value = nota-fiscal.estado.
                           /*hExcel:Range(trim(entry(iColimp + 11,aCel) + string(ilin))):value = VENCTO
                             hExcel:Range(trim(entry(iColimp + 12,aCel) + string(ilin))):value = VENCTO MêDIO */
-                            hExcel:Range(trim(entry(iColimp + 13,aCel) + string(ilin))):value = nota-fiscal.cdd-embarq.
-                            hExcel:Range(trim(entry(iColimp + 14,aCel) + string(ilin))):value = nota-fiscal.cod-emitente.
-                            hExcel:Range(trim(entry(iColimp + 15,aCel) + string(ilin))):value = aux-campo1.
+                            hExcel:Range(trim(entry(iColimp + 15,aCel) + string(ilin))):value = nota-fiscal.cdd-embarq.
+                            hExcel:Range(trim(entry(iColimp + 16,aCel) + string(ilin))):value = nota-fiscal.cod-emitente.
+                            hExcel:Range(trim(entry(iColimp + 17,aCel) + string(ilin))):value = aux-campo1.
             
                             FIND FIRST movto-estoq WHERE 
                                     movto-estoq.serie-docto  = it-nota-fisc.serie        AND
@@ -1143,29 +1149,29 @@ FOR EACH tt-notas
                                 b-movto-estoq.cod-emitente = devol-cli.cod-emitente  NO-LOCK NO-ERROR.
                  
                                                   
-                            ASSIGN hExcel:Range(trim(entry(iColimp + 16,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
+                            ASSIGN hExcel:Range(trim(entry(iColimp + 18,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
                                                      (aux-qt-dev * (movto-estoq.valor-mat-m[1] + movto-estoq.valor-ggf-m[1] + movto-estoq.valor-MOB-m[1]) / movto-estoq.quantidade) * -1.  /* edson 26/7/2012 custo para Polo*/
-                            ASSIGN hExcel:Range(trim(entry(iColimp + 17,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
+                            ASSIGN hExcel:Range(trim(entry(iColimp + 19,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
                                                      ((aux-qt-dev * movto-estoq.valor-mat-m[1]) / movto-estoq.quantidade) * -1.  /* edson 04/7/2013 custo para Polo*/
 
-                            ASSIGN hExcel:Range(trim(entry(iColimp + 18,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
+                            ASSIGN hExcel:Range(trim(entry(iColimp + 20,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
                                                      ((aux-qt-dev * movto-estoq.valor-MOB-m[1]) / movto-estoq.quantidade) * -1.  /* edson 04/7/2013 custo para Polo*/
-                            ASSIGN hExcel:Range(trim(entry(iColimp + 19,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
+                            ASSIGN hExcel:Range(trim(entry(iColimp + 21,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
                                                      ((aux-qt-dev * movto-estoq.valor-GGF-m[1]) / movto-estoq.quantidade) * -1.  /* edson 04/7/2013 custo para Polo*/
 
-                            ASSIGN hExcel:Range(trim(entry(iColimp + 20,aCel) + string(ilin))):value =  ITEM.class-fiscal
-                                   hExcel:Range(trim(entry(iColimp + 21,aCel) + string(ilin))):value =  IF AVAIL classif-fisc THEN classif-fisc.descricao ELSE "".  /* rodrigo 03/10/2013 marco longue*/
+                            ASSIGN hExcel:Range(trim(entry(iColimp + 22,aCel) + string(ilin))):value =  ITEM.class-fiscal
+                                   hExcel:Range(trim(entry(iColimp + 23,aCel) + string(ilin))):value =  IF AVAIL classif-fisc THEN classif-fisc.descricao ELSE "".  /* rodrigo 03/10/2013 marco longue*/
 
-                            ASSIGN hExcel:Range(trim(entry(iColimp + 22,aCel) + string(ilin))):value =  IF AVAIL b-movto-estoq THEN b-movto-estoq.ct-codigo ELSE IF AVAIL movto-estoq THEN movto-estoq.ct-codigo ELSE "". /* rodrigo 09/10/13 - Ricardo */
-                            ASSIGN hExcel:Range(trim(entry(iColimp + 23,aCel) + string(ilin))):value =  IF AVAIL b-movto-estoq THEN b-movto-estoq.sc-codigo ELSE IF AVAIL movto-estoq THEN movto-estoq.sc-codigo ELSE "". /* rodrigo 09/10/13 - Ricardo */
+                            ASSIGN hExcel:Range(trim(entry(iColimp + 24,aCel) + string(ilin))):value =  IF AVAIL b-movto-estoq THEN b-movto-estoq.ct-codigo ELSE IF AVAIL movto-estoq THEN movto-estoq.ct-codigo ELSE "". /* rodrigo 09/10/13 - Ricardo */
+                            ASSIGN hExcel:Range(trim(entry(iColimp + 26,aCel) + string(ilin))):value =  IF AVAIL b-movto-estoq THEN b-movto-estoq.sc-codigo ELSE IF AVAIL movto-estoq THEN movto-estoq.sc-codigo ELSE "". /* rodrigo 09/10/13 - Ricardo */
                             c-conta-receita = "".
                             
                             RUN pi-conta-receita-DEV .
-                            ASSIGN hExcel:Range(trim(entry(iColimp + 24,aCel) + string(ilin))):value =  c-conta-receita. /* edson 21/03/2014 - Ricardo */
-                            ASSIGN hExcel:Range(trim(entry(iColimp + 25,aCel) + string(ilin))):value =  c-sc-receita. /* edson 21/03/2014 - Ricardo */
+                            ASSIGN hExcel:Range(trim(entry(iColimp + 26,aCel) + string(ilin))):value =  c-conta-receita. /* edson 21/03/2014 - Ricardo */
+                            ASSIGN hExcel:Range(trim(entry(iColimp + 27,aCel) + string(ilin))):value =  c-sc-receita. /* edson 21/03/2014 - Ricardo */
 
                             /*CNPJ Cliente - 31/05/2016*/
-                            ASSIGN hExcel:Range(trim(entry(iColimp + 26,aCel) + string(ilin))):value = IF emitente.natureza = 1 THEN string(emitente.cgc,param-global.formato-id-pessoal)
+                            ASSIGN hExcel:Range(trim(entry(iColimp + 28,aCel) + string(ilin))):value = IF emitente.natureza = 1 THEN string(emitente.cgc,param-global.formato-id-pessoal)
                                                                                                        ELSE IF emitente.natureza = 2 THEN string(emitente.cgc,param-global.formato-id-federal)
                                                                                                        ELSE emitente.cgc.
 
@@ -1306,6 +1312,9 @@ FOR EACH tt-notas
 
             assign aux-vl-ipi-it-jr  = IF it-nota-fisc.vl-ipiit-e[3]  <> 0 THEN it-nota-fisc.vl-ipiit-e[3]  ELSE 0.
             assign aux-vl-icms-it-jr = IF it-nota-fisc.vl-icmsit-e[3] <> 0 THEN it-nota-fisc.vl-icmsit-e[3] ELSE 0.
+
+           IF  it-nota-fisc.cd-trib-icm = 2  THEN
+               aux-vl-icms-it-jr = 0.
           
             ASSIGN aux-qt-faturada   = it-nota-fisc.qt-faturada[1] /*IF it-nota-fisc.baixa-estoq = TRUE THEN it-nota-fisc.qt-faturada[1] ELSE 0*/
                    aux-peso-liq-fat  =  auxpeso /* IF it-nota-fisc.baixa-estoq = TRUE THEN auxpeso ELSE 0*/
@@ -1508,23 +1517,25 @@ FOR EACH tt-notas
                         WHERE fam-comerc.fm-cod-com = ITEM.fm-cod-com NO-ERROR.
                     ASSIGN hExcel:Range(trim(entry(iColimp + 2,aCel) + string(ilin))):value = nota-fiscal.cod-estabel
                            hExcel:Range(trim(entry(iColimp + 3,aCel) + string(ilin))):value = it-nota-fisc.nr-pedcli
-                           hExcel:Range(trim(entry(iColimp + 4,aCel) + string(ilin))):value = item.fm-codigo   + (IF AVAIL familia THEN "/" + familia.descricao ELSE "") 
-                           hExcel:Range(trim(entry(iColimp + 5,aCel) + string(ilin))):value = item.fm-cod-com  + (IF AVAIL fam-comerc THEN "/" + fam-comerc.descricao ELSE "") 
+                           hExcel:Range(trim(entry(iColimp + 4,aCel) + string(ilin))):value = item.fm-codigo    
+                           hExcel:Range(trim(entry(iColimp + 5,aCel) + string(ilin))):value = (IF AVAIL familia THEN familia.descricao ELSE "") 
+                           hExcel:Range(trim(entry(iColimp + 6,aCel) + string(ilin))):value = item.fm-cod-com   
+                           hExcel:Range(trim(entry(iColimp + 7,aCel) + string(ilin))):value = (IF AVAIL fam-comerc THEN fam-comerc.descricao ELSE "") 
                            
-                           hExcel:Range(trim(entry(iColimp + 6,aCel) + string(ilin))):value = it-nota-fisc.nr-docum
-                           hExcel:Range(trim(entry(iColimp + 7,aCel) + string(ilin))):value = IF nota-fiscal.cidade-cif <> "" THEN "CIF" 
+                           hExcel:Range(trim(entry(iColimp + 8,aCel) + string(ilin))):value = it-nota-fisc.nr-docum
+                           hExcel:Range(trim(entry(iColimp + 9,aCel) + string(ilin))):value = IF nota-fiscal.cidade-cif <> "" THEN "CIF" 
                                                                                              ELSE "FOB"
-                           hExcel:Range(trim(entry(iColimp + 8,aCel) + string(ilin))):value = nota-fiscal.nome-transp
-                           hExcel:Range(trim(entry(iColimp + 9,aCel) + string(ilin))):value = nota-fiscal.cidade
-                           hExcel:Range(trim(entry(iColimp + 10,aCel) + string(ilin))):value = nota-fiscal.estado.
+                           hExcel:Range(trim(entry(iColimp + 10,aCel) + string(ilin))):value = nota-fiscal.nome-transp
+                           hExcel:Range(trim(entry(iColimp + 11,aCel) + string(ilin))):value = nota-fiscal.cidade
+                           hExcel:Range(trim(entry(iColimp + 12,aCel) + string(ilin))):value = nota-fiscal.estado.
                     
                     IF  AVAIL fat-duplic THEN 
-                        ASSIGN hExcel:Range(trim(entry(iColimp + 11,aCel) + string(ilin))):value = fat-duplic.dt-venciment.
+                        ASSIGN hExcel:Range(trim(entry(iColimp + 13,aCel) + string(ilin))):value = fat-duplic.dt-venciment.
 
-                    assign hExcel:Range(trim(entry(iColimp + 12,aCel) + string(ilin))):value = dt-vencto-medio
-                           hExcel:Range(trim(entry(iColimp + 13,aCel) + string(ilin))):value = nota-fiscal.cdd-embarq
-                           hExcel:Range(trim(entry(iColimp + 14,aCel) + string(ilin))):value = nota-fiscal.cod-emitente
-                           hExcel:Range(trim(entry(iColimp + 15,aCel) + string(ilin))):value = aux-campo1.
+                    assign hExcel:Range(trim(entry(iColimp + 14,aCel) + string(ilin))):value = dt-vencto-medio
+                           hExcel:Range(trim(entry(iColimp + 15,aCel) + string(ilin))):value = nota-fiscal.cdd-embarq
+                           hExcel:Range(trim(entry(iColimp + 16,aCel) + string(ilin))):value = nota-fiscal.cod-emitente
+                           hExcel:Range(trim(entry(iColimp + 17,aCel) + string(ilin))):value = aux-campo1.
                           
                     FIND FIRST movto-estoq WHERE 
                          movto-estoq.serie-docto =  it-nota-fisc.serie AND
@@ -1537,28 +1548,28 @@ FOR EACH tt-notas
                      
 
 
-                     ASSIGN hExcel:Range(trim(entry(iColimp + 16,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
+                     ASSIGN hExcel:Range(trim(entry(iColimp + 18,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
                                               it-nota-fisc.qt-faturada[1] * (movto-estoq.valor-mat-m[1] + movto-estoq.valor-ggf-m[1] + movto-estoq.valor-MOB-m[1]) / movto-estoq.quantidade.  /* edson 26/7/2012 custo para Polo*/
-                     ASSIGN hExcel:Range(trim(entry(iColimp + 17,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
+                     ASSIGN hExcel:Range(trim(entry(iColimp + 19,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
                                               (it-nota-fisc.qt-faturada[1] * movto-estoq.valor-mat-m[1]) / movto-estoq.quantidade.  /* edson 04/7/2013 custo para Polo*/
 
-                     ASSIGN hExcel:Range(trim(entry(iColimp + 18,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
+                     ASSIGN hExcel:Range(trim(entry(iColimp + 20,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
                                               (it-nota-fisc.qt-faturada[1] * movto-estoq.valor-MOB-m[1]) / movto-estoq.quantidade.  /* edson 04/7/2013 custo para Polo*/
-                     ASSIGN hExcel:Range(trim(entry(iColimp + 19,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
+                     ASSIGN hExcel:Range(trim(entry(iColimp + 21,aCel) + string(ilin))):value =  IF NOT AVAIL movto-estoq THEN 0 ELSE
                                               (it-nota-fisc.qt-faturada[1] * movto-estoq.valor-GGF-m[1]) / movto-estoq.quantidade.  /* edson 04/7/2013 custo para Polo*/
 
-                     ASSIGN hExcel:Range(trim(entry(iColimp + 20,aCel) + string(ilin))):value =  ITEM.class-fiscal
-                            hExcel:Range(trim(entry(iColimp + 21,aCel) + string(ilin))):value =  IF AVAIL classif-fisc THEN classif-fisc.descricao ELSE "".  /* rodrigo 03/10/2013 marco longue*/
+                     ASSIGN hExcel:Range(trim(entry(iColimp + 22,aCel) + string(ilin))):value =  ITEM.class-fiscal
+                            hExcel:Range(trim(entry(iColimp + 23,aCel) + string(ilin))):value =  IF AVAIL classif-fisc THEN classif-fisc.descricao ELSE "".  /* rodrigo 03/10/2013 marco longue*/
 
-                     ASSIGN hExcel:Range(trim(entry(iColimp + 22,aCel) + string(ilin))):value =  IF AVAIL movto-estoq THEN movto-estoq.ct-codigo ELSE "". /* rodrigo 09/10/13 - Ricardo */
-                     ASSIGN hExcel:Range(trim(entry(iColimp + 23,aCel) + string(ilin))):value =  IF AVAIL movto-estoq THEN movto-estoq.sc-codigo ELSE "". /* rodrigo 09/10/13 - Ricardo */
+                     ASSIGN hExcel:Range(trim(entry(iColimp + 24,aCel) + string(ilin))):value =  IF AVAIL movto-estoq THEN movto-estoq.ct-codigo ELSE "". /* rodrigo 09/10/13 - Ricardo */
+                     ASSIGN hExcel:Range(trim(entry(iColimp + 25,aCel) + string(ilin))):value =  IF AVAIL movto-estoq THEN movto-estoq.sc-codigo ELSE "". /* rodrigo 09/10/13 - Ricardo */
                      c-conta-receita = "".
                      RUN pi-conta-receita .
-                     ASSIGN hExcel:Range(trim(entry(iColimp + 24,aCel) + string(ilin))):value =  c-conta-receita. /* edson 21/03/2014 - Ricardo */
-                     ASSIGN hExcel:Range(trim(entry(iColimp + 25,aCel) + string(ilin))):value =  c-sc-receita. /* edson 21/03/2014 - Ricardo */
+                     ASSIGN hExcel:Range(trim(entry(iColimp + 26,aCel) + string(ilin))):value =  c-conta-receita. /* edson 21/03/2014 - Ricardo */
+                     ASSIGN hExcel:Range(trim(entry(iColimp + 27,aCel) + string(ilin))):value =  c-sc-receita. /* edson 21/03/2014 - Ricardo */
 
                     /*CNPJ Cliente - 31/05/2016*/
-                    ASSIGN hExcel:Range(trim(entry(iColimp + 26,aCel) + string(ilin))):value = IF emitente.natureza = 1 THEN string(emitente.cgc,param-global.formato-id-pessoal)
+                    ASSIGN hExcel:Range(trim(entry(iColimp + 28,aCel) + string(ilin))):value = IF emitente.natureza = 1 THEN string(emitente.cgc,param-global.formato-id-pessoal)
                                                                                                ELSE IF emitente.natureza = 2 THEN string(emitente.cgc,param-global.formato-id-federal)
                                                                                                ELSE emitente.cgc.
 

@@ -128,6 +128,10 @@ Output Close.
 Output To  value(arq-entrada + "\colaborador_turno.txt.") No-echo.
        Run pi_gera_turno.
 Output Close.
+Output To  value(arq-entrada + "\func_escala.txt.") No-echo.
+       Run pi_gera_escala.
+Output Close.
+
 
 
 run pi-finalizar in h-acomp.
@@ -484,3 +488,46 @@ DEFINE BUFFER btr-funcionario FOR funcionario.
      END.         
 
 End Procedure.
+
+PROCEDURE pi_gera_escala.
+
+      FOR EACH func_turno_trab NO-LOCK WHERE
+                 func_turno_trab.cdn_empresa            >= string(tt-param.i-ep-ini ) And 
+                 func_turno_trab.cdn_empresa            <= string(tt-param.i-ep-fim ) AND    
+                 func_turno_trab.dat_term_lotac_func    >= 12/31/2999 AND /*Lima*/
+                 func_turno_trab.dat_inic_lotac_func    >= TODAY - tt-param.qt-dias AND
+                 func_turno_trab.dat_inic_lotac_func        <= TODAY ,
+             first funcionario OF func_turno_trab where
+                            funcionario.dat_desligto_func = ?  NO-LOCK. 
+               
+            run pi-acompanhar in h-acomp(input "Exporta Funcionario Turno: " + String( func_turno_trab.cdn_funcionario)).
+    
+    
+    /*Solicita‡Æo 403 - Incremento de Arquivo de escala no ESFP0007
+    1 4   NUMEMP N£mero da Empresa Sim 9999 - Exce‡Æo Polo = 120, outras iguais
+    5 1   TIPCOL Tipo de Colaborador Sim LTipCol 9 - Sempre 1
+    6 9   NUMCAD Cadastro do Colaborador Sim 999999999 - Igual
+    22 10 DATALT Data da Altera‡Æo da Escala Sim DD/MM/YYYY - func_turno_trab.dat_inic_lotac_func_turno_trab
+    32 4  CODESC C¢digo da Nova Escala Sim 9999 - "0003", Se funcion rio.cod_pais_localid = 351, senÆo "0001"
+    36 1  CODTMA C¢digo da Nova Turma da Escala NÆo 9 =  "1"
+    37 3  TURINT C¢digo da Turma de Intervalo NÆo 999 - "000"
+    40 1  STAACC Status da Atualiza‡Æo na Tabela CONTROLE (Acesso OnN-ÆLoine) LStaAcc 9 = "1"
+    41 1  STAHIS Status do Hist¢rico NÆo LStaHis 9 = "1"
+    */
+    
+         PUT 
+        /*NUMEMP*/  (IF (INT(funcionario.cdn_empresa) = 420 OR INT(funcionario.cdn_empresa) = 410) THEN 120 ELSE INT(funcionario.cdn_empresa)) at 1   form "9999" 
+        /*TIPCOL*/  1 at 5   form "9"
+        /*NUMCAD*/  INT(funcionario.cdn_funcionario) at 6   form "999999999"
+        /*DATALT*/  (func_turno_trab.dat_inic_lotac_func_turno_trab) + 0 at 15  form "99/99/9999"
+        /*CODESC*/  (IF funcionario.cod_pais_localid = "351" THEN 1 ELSE 3) at 25  form "9999"
+        /*CODTMA*/  1 at 29  form "9"
+        /*TURINT*/  0 at 30  form "999"
+        /*STAACC*/  1 at 33  form "9"
+        /*STAHIS*/  1 at 34  form "9" SKIP.
+    
+    END.
+
+
+END PROCEDURE.
+
