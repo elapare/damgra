@@ -51,7 +51,7 @@ CREATE WIDGET-POOL.
 
 /* Temporary Table Definitions ---                                      */
 
-DEF TEMP-TABLE tt-param NO-UNDO
+DEF TEMP-TABLE tt-param NO-UNDO /*coment rio*/
     FIELD destino               AS INT
     FIELD execucao              AS INT
     FIELD arquivo               AS CHAR FORMAT "x(35)"
